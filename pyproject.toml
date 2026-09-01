@@ -9,11 +9,13 @@ description = "Bootstrap architecture for Arabic Sign Language digital-twin rese
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Graduation-Project-Simulation Team" }]
-dependencies = []
+dependencies = [
+    "numpy>=1.24",
+]
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*"]
+include = ["pose*", "evaluation*"]
