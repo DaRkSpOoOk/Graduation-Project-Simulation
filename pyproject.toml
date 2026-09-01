@@ -9,11 +9,15 @@ description = "Bootstrap architecture for Arabic Sign Language digital-twin rese
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Graduation-Project-Simulation Team" }]
-dependencies = []
+dependencies = [
+    "mediapipe==1.0.1",
+    "numpy==2.5.2",
+    "opencv-contrib-python==5.0.0.93",
+]
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*"]
+include = ["pose*", "video_io*", "evaluation*", "visualization*"]
