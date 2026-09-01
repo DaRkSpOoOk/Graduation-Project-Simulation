@@ -1,0 +1,1 @@
+"""Pose extraction package scaffolding."""

@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Data and model artifacts (do not commit)
+datasets/raw/**
+datasets/interim/**
+datasets/processed/**
+!datasets/raw/.gitkeep
+!datasets/interim/.gitkeep
+!datasets/processed/.gitkeep
+
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.h5
+*.hdf5
+*.npz
+*.npy
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+
+# Runtime outputs
+runs/
+outputs/
+artifacts/
+logs/
