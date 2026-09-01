@@ -1,0 +1,980 @@
+{
+  "acceptance": {
+    "A_identity_switches": {
+      "observed": 0,
+      "passed": true,
+      "requirement": "0 confirmed persistent LEFT/RIGHT identity switches"
+    },
+    "B_reacquisition": {
+      "annotated_events": 0,
+      "observed": null,
+      "passed": true,
+      "requirement": "100% correct reacquisition on unambiguous reappearances",
+      "tracker_claimed": 0,
+      "tracker_claimed_contradicted": 0
+    },
+    "C_full_occlusion": {
+      "observed": 0,
+      "passed": true,
+      "requirement": "0 fabricated poses on human FULLY_OCCLUDED/OUT_OF_FRAME"
+    },
+    "D_extra_detection": {
+      "observed": "PASS",
+      "passed": true,
+      "requirement": "s02_0176 frame 39 extra-detection handling PASS"
+    },
+    "E_raw_integrity": {
+      "observed": "18/18",
+      "passed": true,
+      "requirement": "18/18 source WiLoR raw NPZ unchanged"
+    },
+    "F_visibility_recall": {
+      "left_pct": 100.0,
+      "observed": 100.0,
+      "passed": true,
+      "requirement": ">= 98% recall for clearly visible physical hands",
+      "right_pct": 100.0
+    },
+    "all_passed": true
+  },
+  "aligned_frames": 399,
+  "ambiguity_calibration": {
+    "crossing_frames": 124,
+    "human_ambiguous_but_tracker_confident": 10,
+    "human_ambiguous_but_tracker_confident_detail": [
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 11,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 12,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 13,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 14,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 15,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 8,
+        "sample_id": "karsl_test_s03_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 9,
+        "sample_id": "karsl_test_s03_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 10,
+        "sample_id": "karsl_test_s03_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 11,
+        "sample_id": "karsl_test_s03_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      },
+      {
+        "coordinate_test": "human_identity_ambiguous",
+        "coordinate_test_correct": null,
+        "frame_index": 12,
+        "sample_id": "karsl_test_s03_sign0174_repfirst",
+        "tracker_states": [
+          "OBSERVED",
+          "OBSERVED"
+        ]
+      }
+    ],
+    "human_ambiguous_frames": 10,
+    "overlap_frames": 0,
+    "tracker_ambiguous_detail": [],
+    "tracker_ambiguous_frames": 0,
+    "tracker_ambiguous_on_crossing_frames": 0
+  },
+  "annotation_integrity": {
+    "failures": [],
+    "passed": true,
+    "statistics": {
+      "ambiguous_identity_frames": 10,
+      "confidence_counts": {
+        "HIGH": 215,
+        "LOW": 30,
+        "MEDIUM": 154
+      },
+      "flags_frame_counts": {
+        "FRAME_EDGE": 68,
+        "HAND_CROSSING": 124,
+        "HAND_HAND_OCCLUSION": 71,
+        "IDENTITY_AMBIGUOUS": 10,
+        "MOTION_BLUR": 26,
+        "SELF_OCCLUSION": 0
+      },
+      "frames": 399,
+      "fully_occluded_hand_labels": 18,
+      "left_state_counts": {
+        "PARTIALLY_OCCLUDED": 28,
+        "VISIBLE": 371
+      },
+      "partially_occluded_hand_labels": 71,
+      "right_state_counts": {
+        "AMBIGUOUS": 10,
+        "FULLY_OCCLUDED": 18,
+        "PARTIALLY_OCCLUDED": 43,
+        "VISIBLE": 328
+      },
+      "videos": 8,
+      "visible_left_frames": 371,
+      "visible_right_frames": 328
+    },
+    "total_occluded_labels": 89
+  },
+  "clip_roles": {
+    "karsl_test_s01_sign0171_repfirst": "control",
+    "karsl_test_s01_sign0174_repfirst": "challenge",
+    "karsl_test_s02_sign0171_repfirst": "control",
+    "karsl_test_s02_sign0172_repfirst": "challenge",
+    "karsl_test_s02_sign0175_repfirst": "challenge",
+    "karsl_test_s02_sign0176_repfirst": "challenge",
+    "karsl_test_s03_sign0173_repfirst": "challenge",
+    "karsl_test_s03_sign0174_repfirst": "challenge"
+  },
+  "extra_detection": {
+    "checks": {
+      "human_describes_two_hands": true,
+      "human_states": [
+        "VISIBLE",
+        "VISIBLE"
+      ],
+      "identity_window": {
+        "38": {
+          "correct": true,
+          "evaluable": true,
+          "margin_px": 80.52669736939572
+        },
+        "39": {
+          "correct": true,
+          "evaluable": true,
+          "margin_px": 81.06000244942581
+        },
+        "40": {
+          "correct": true,
+          "evaluable": true,
+          "margin_px": 65.004033157309
+        }
+      },
+      "raw_detection_provenance": {
+        "left": 1,
+        "right": 0
+      },
+      "raw_reconstruction_count": 3,
+      "tracker_flags": [
+        "EXTRA_DETECTIONS"
+      ],
+      "tracker_posed_tracks": [
+        "left",
+        "right"
+      ],
+      "tracker_reported_raw_detections": 3
+    },
+    "failures": [],
+    "status": "PASS"
+  },
+  "false_presence": {
+    "considered_hand_instances": 18,
+    "events": [],
+    "false_presence_count": 0,
+    "false_presence_rate_pct": 0.0,
+    "tracker_state_distribution": {
+      "LIKELY_OCCLUDED": 15,
+      "MISSING": 3
+    }
+  },
+  "frozen_inputs": {
+    "annotation_commit": "012d58a989a079dbeca6e5cb49b26c384dd80c21",
+    "annotations": "evaluation/annotations/task004_hand_identity_visibility.csv",
+    "raw_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_full",
+    "tracked_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_tracked_task004d",
+    "tracker_commit": "a609842b79e850641f3f8c6d7e19c1e6a3be7440"
+  },
+  "identity_accuracy": {
+    "accuracy_pct": 99.5475113122172,
+    "correct_frames": 220,
+    "decision_margin_px": 25.0,
+    "decisive_accuracy_pct": 100.0,
+    "decisive_correct_frames": 190,
+    "decisive_frames": 190,
+    "evaluable_frames": 221,
+    "excluded_reasons": {
+      "human_identity_ambiguous": 10,
+      "insufficient_reference_points": 148,
+      "low_annotator_confidence": 20
+    },
+    "incorrect_detail": [
+      {
+        "annotator_confidence": "HIGH",
+        "frame_index": 8,
+        "identity_distance_px": 95.62632487657599,
+        "margin_px": -4.803475273392408,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "scene_flags": [
+          "MOTION_BLUR"
+        ],
+        "swapped_distance_px": 90.82284960318358
+      }
+    ],
+    "incorrect_frames": 1,
+    "indeterminate_detail": [
+      {
+        "coordinate_test_correct": false,
+        "frame_index": 8,
+        "margin_px": -4.803475273392408,
+        "sample_id": "karsl_test_s01_sign0174_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 8,
+        "margin_px": 0.42621561224706284,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 9,
+        "margin_px": 2.9397082354117856,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 10,
+        "margin_px": 4.8713092100820745,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 11,
+        "margin_px": 5.688893920252298,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 12,
+        "margin_px": 6.420662922091395,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 13,
+        "margin_px": 7.367847306641863,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 14,
+        "margin_px": 7.4099676575621345,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 15,
+        "margin_px": 3.6812903032412123,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 16,
+        "margin_px": 1.1902539385803266,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 17,
+        "margin_px": 6.209934998186981,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 18,
+        "margin_px": 12.049406997563807,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 19,
+        "margin_px": 16.515636514996345,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 20,
+        "margin_px": 22.63150776627208,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 21,
+        "margin_px": 23.212244290890368,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 22,
+        "margin_px": 22.364559156877135,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 23,
+        "margin_px": 20.733923940715584,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 24,
+        "margin_px": 18.6206304745088,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 25,
+        "margin_px": 17.215319041912522,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 26,
+        "margin_px": 17.969523977411598,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      }
+    ],
+    "indeterminate_frames": 31,
+    "position_source": "box"
+  },
+  "identity_accuracy_wrist_crosscheck": {
+    "accuracy_pct": 99.5475113122172,
+    "correct_frames": 220,
+    "decision_margin_px": 25.0,
+    "decisive_accuracy_pct": 100.0,
+    "decisive_correct_frames": 216,
+    "decisive_frames": 216,
+    "evaluable_frames": 221,
+    "excluded_reasons": {
+      "human_identity_ambiguous": 10,
+      "insufficient_reference_points": 148,
+      "low_annotator_confidence": 20
+    },
+    "incorrect_detail": [
+      {
+        "annotator_confidence": "HIGH",
+        "frame_index": 8,
+        "identity_distance_px": 152.86752245132163,
+        "margin_px": -8.303924661983928,
+        "sample_id": "karsl_test_s01_sign0174_repfirst",
+        "scene_flags": [
+          "MOTION_BLUR"
+        ],
+        "swapped_distance_px": 144.5635977893377
+      }
+    ],
+    "incorrect_frames": 1,
+    "indeterminate_detail": [
+      {
+        "coordinate_test_correct": false,
+        "frame_index": 8,
+        "margin_px": -8.303924661983928,
+        "sample_id": "karsl_test_s01_sign0174_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 8,
+        "margin_px": 18.275766220473315,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 9,
+        "margin_px": 19.60638348280159,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 10,
+        "margin_px": 20.764180097619317,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      },
+      {
+        "coordinate_test_correct": true,
+        "frame_index": 11,
+        "margin_px": 23.673823025913038,
+        "sample_id": "karsl_test_s02_sign0172_repfirst"
+      }
+    ],
+    "indeterminate_frames": 5,
+    "position_source": "wrist"
+  },
+  "identity_switches": {
+    "confirmed_detail": [],
+    "confirmed_switches": 0,
+    "persistence_frames_required": 2,
+    "suspected_detail": [],
+    "suspected_unresolved_switches": 0
+  },
+  "occlusion_state_validity": {
+    "human_state_counts": {
+      "FULLY_OCCLUDED": 15
+    },
+    "note": "Coincidence counts only. The tracker flag is a proximity heuristic; this is not a claim of true occlusion classification.",
+    "tracker_likely_occluded_hand_instances": 15
+  },
+  "per_clip": {
+    "karsl_test_s01_sign0171_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 81,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": null,
+      "identity_correct": 0,
+      "identity_evaluable": 0,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s01_sign0174_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 34,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 5,
+      "identity_accuracy_pct": 88.88888888888889,
+      "identity_correct": 8,
+      "identity_evaluable": 9,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s02_sign0171_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 67,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": null,
+      "identity_correct": 0,
+      "identity_evaluable": 0,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s02_sign0172_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 36,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 36,
+      "identity_evaluable": 36,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s02_sign0175_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 48,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 48,
+      "identity_evaluable": 48,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s02_sign0176_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 57,
+      "frames_with_more_than_two_raw_detections": 1,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 57,
+      "identity_evaluable": 57,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s03_sign0173_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 38,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 0,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 38,
+      "identity_evaluable": 38,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    },
+    "karsl_test_s03_sign0174_repfirst": {
+      "confirmed_switches": 0,
+      "false_presence_count": 0,
+      "frames": 38,
+      "frames_with_more_than_two_raw_detections": 0,
+      "human_ambiguous_frames": 5,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 33,
+      "identity_evaluable": 33,
+      "left_recall_pct": 100.0,
+      "reacquisition_correct": 0,
+      "reacquisition_events": 0,
+      "recall_pct": 100.0,
+      "right_recall_pct": 100.0,
+      "suspected_switches": 0,
+      "tracker_ambiguous_frames": 0
+    }
+  },
+  "quality_gate": {
+    "annotated_clips": 8,
+    "duplicate_suppressed_detections": 1,
+    "flagged_but_human_says_visible": 4,
+    "flagged_but_human_says_visible_detail": [
+      {
+        "annotated_state": "VISIBLE",
+        "flags": [
+          "LOW_QUALITY_POSE_JUMP"
+        ],
+        "frame_index": 49,
+        "sample_id": "karsl_test_s01_sign0171_repfirst",
+        "track": "left"
+      },
+      {
+        "annotated_state": "VISIBLE",
+        "flags": [
+          "LOW_QUALITY_POSE_JUMP"
+        ],
+        "frame_index": 1,
+        "sample_id": "karsl_test_s02_sign0172_repfirst",
+        "track": "left"
+      },
+      {
+        "annotated_state": "VISIBLE",
+        "flags": [
+          "LOW_QUALITY_POSE_JUMP"
+        ],
+        "frame_index": 2,
+        "sample_id": "karsl_test_s02_sign0172_repfirst",
+        "track": "right"
+      },
+      {
+        "annotated_state": "VISIBLE",
+        "flags": [
+          "LOW_QUALITY_POSE_JUMP"
+        ],
+        "frame_index": 4,
+        "sample_id": "karsl_test_s02_sign0172_repfirst",
+        "track": "left"
+      }
+    ],
+    "low_quality_flags_on_kept_hands": 4,
+    "missed_clearly_bad_pose_detail": [],
+    "missed_clearly_bad_pose_events": 0,
+    "quality_rejected_detections": 0,
+    "rejection_reason_counts": {
+      "cross_label_duplicate_suspected_iou": 8,
+      "duplicate_same_label_iou": 1
+    },
+    "unassigned_extra_detections": 0
+  },
+  "raw_integrity": {
+    "all_unchanged": true,
+    "mismatched": [],
+    "missing": [],
+    "raw_sha256_matched": 18,
+    "tracked_samples_checked": 18
+  },
+  "reacquisition": {
+    "accuracy_pct": null,
+    "correct": 0,
+    "detail": [],
+    "events": 0,
+    "incorrect": 0
+  },
+  "stratified": {
+    "control": {
+      "frames": 148,
+      "identity_accuracy_pct": null,
+      "identity_correct": 0,
+      "identity_evaluable": 0,
+      "pose_expected": 296,
+      "pose_present": 296,
+      "recall_pct": 100.0
+    },
+    "crossing": {
+      "frames": 124,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 25,
+      "identity_evaluable": 25,
+      "pose_expected": 220,
+      "pose_present": 220,
+      "recall_pct": 100.0
+    },
+    "fully_occluded": {
+      "frames": 18,
+      "identity_accuracy_pct": null,
+      "identity_correct": 0,
+      "identity_evaluable": 0,
+      "pose_expected": 18,
+      "pose_present": 18,
+      "recall_pct": 100.0
+    },
+    "human_ambiguous": {
+      "frames": 10,
+      "identity_accuracy_pct": null,
+      "identity_correct": 0,
+      "identity_evaluable": 0,
+      "pose_expected": 10,
+      "pose_present": 10,
+      "recall_pct": 100.0
+    },
+    "motion_blur": {
+      "frames": 26,
+      "identity_accuracy_pct": 95.23809523809524,
+      "identity_correct": 20,
+      "identity_evaluable": 21,
+      "pose_expected": 49,
+      "pose_present": 49,
+      "recall_pct": 100.0
+    },
+    "other": {
+      "frames": 159,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 159,
+      "identity_evaluable": 159,
+      "pose_expected": 318,
+      "pose_present": 318,
+      "recall_pct": 100.0
+    },
+    "partially_occluded": {
+      "frames": 53,
+      "identity_accuracy_pct": 100.0,
+      "identity_correct": 41,
+      "identity_evaluable": 41,
+      "pose_expected": 96,
+      "pose_present": 96,
+      "recall_pct": 100.0
+    }
+  },
+  "task": "TASK-004C",
+  "task004d_remediation": {
+    "after_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_tracked_task004d",
+    "after_tracker_commit": "a609842b79e850641f3f8c6d7e19c1e6a3be7440",
+    "annotation_sha256_unchanged": true,
+    "before_after": {
+      "acceptance_all_passed": {
+        "after": true,
+        "before": false,
+        "changed": true
+      },
+      "confirmed_identity_switches": {
+        "after": 0,
+        "before": 0,
+        "changed": false
+      },
+      "decisive_identity_accuracy_pct": {
+        "after": 100.0,
+        "before": 100.0,
+        "changed": false
+      },
+      "decisive_identity_frames": {
+        "after": 190,
+        "before": 190,
+        "changed": false
+      },
+      "extra_detection_case": {
+        "after": "PASS",
+        "before": "PASS",
+        "changed": false
+      },
+      "false_presence_considered": {
+        "after": 18,
+        "before": 18,
+        "changed": false
+      },
+      "false_presence_count": {
+        "after": 0,
+        "before": 8,
+        "changed": true
+      },
+      "false_presence_rate_pct": {
+        "after": 0.0,
+        "before": 44.44444444444444,
+        "changed": true
+      },
+      "human_ambiguous_but_tracker_confident": {
+        "after": 10,
+        "before": 10,
+        "changed": false
+      },
+      "identity_accuracy_pct": {
+        "after": 99.5475113122172,
+        "before": 99.5475113122172,
+        "changed": false
+      },
+      "intrinsic_quality_rejected_detections": {
+        "after": 0,
+        "before": 0,
+        "changed": false
+      },
+      "missed_clearly_bad_pose_events": {
+        "after": 0,
+        "before": 8,
+        "changed": true
+      },
+      "raw_integrity": {
+        "after": "18/18",
+        "before": "18/18",
+        "changed": false
+      },
+      "reacquisitions_contradicted": {
+        "after": 0,
+        "before": 1,
+        "changed": true
+      },
+      "tracker_ambiguous_frames": {
+        "after": 0,
+        "before": 2,
+        "changed": true
+      },
+      "tracker_claimed_reacquisitions": {
+        "after": 0,
+        "before": 1,
+        "changed": true
+      },
+      "verdict": {
+        "after": "TASK-004 TRACKING VALIDATED - READY FOR TASK-005",
+        "before": "TASK-004 TRACKING NEEDS REVISION",
+        "changed": true
+      },
+      "visibility_recall_left_pct": {
+        "after": 100.0,
+        "before": 100.0,
+        "changed": false
+      },
+      "visibility_recall_overall_pct": {
+        "after": 100.0,
+        "before": 100.0,
+        "changed": false
+      },
+      "visibility_recall_right_pct": {
+        "after": 100.0,
+        "before": 100.0,
+        "changed": false
+      }
+    },
+    "before_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_tracked",
+    "before_tracker_commit": "00ec1d7de21837012fa3eb8faecbf635ac2503d6",
+    "disclosure": "VALIDATION-INFORMED REMEDIATION, NOT BLIND DEVELOPMENT. TASK-004D was designed and implemented AFTER the TASK-004C validation results were known. The frozen TASK-004B annotations were used to diagnose the failure and to check the outcome, so TASK-004D is NOT independently blind-tested on this benchmark. The numbers below measure whether the specific defect was removed without collateral damage; they are not evidence of generalisation to unseen data.",
+    "full_pilot_regression_scan": {
+      "clips_scanned": 18,
+      "clips_with_any_suppression": [
+        "karsl_test_s01_sign0174_repfirst"
+      ],
+      "cross_label_suppression_events": 8,
+      "frames_scanned": 894,
+      "note": "Every one of the 8 suppressions falls on a frame the independent human benchmark marks RIGHT = FULLY_OCCLUDED. No suppression occurred on any frame where the suppressed hand is human-visible.",
+      "suppression_frames_covered_by_human_annotation": 8,
+      "suppressions_where_both_hands_human_visible": 0,
+      "suppressions_where_the_suppressed_hand_is_human_visible": 0,
+      "unsupported_reacquisition_rejections": 0
+    },
+    "real_benchmark_reacquisition": "UNTESTED / NO GROUND-TRUTH EVENT",
+    "threshold_evidence": {
+      "bbox_iou": {
+        "gap": [
+          0.7782,
+          0.8329
+        ],
+        "genuine_range": [
+          0.0,
+          0.7782
+        ],
+        "ghost_range": [
+          0.8329,
+          0.924
+        ],
+        "threshold": 0.8
+      },
+      "caveat": "On THIS pilot the three signals co-vary, so any one of them alone would also have isolated the same 8 pairs. The conjunction is therefore justified a priori for robustness on unseen data, not by this benchmark. See the report for the argument.",
+      "centre_separation_ratio": {
+        "gap": [
+          0.0613,
+          0.0831
+        ],
+        "genuine_range": [
+          0.0831,
+          1.735
+        ],
+        "ghost_range": [
+          0.0275,
+          0.0613
+        ],
+        "threshold": 0.07
+      },
+      "confidence_ratio": {
+        "gap": [
+          0.5107,
+          0.6383
+        ],
+        "genuine_range": [
+          0.6383,
+          1.0
+        ],
+        "ghost_range": [
+          0.3813,
+          0.5107
+        ],
+        "threshold": 0.55
+      },
+      "genuine_pairs": 877,
+      "iou_threshold_plateau": [
+        0.7,
+        0.82
+      ],
+      "known_bad_pairs": 8,
+      "nearest_genuine_pair_conditions_met": "0 of 3",
+      "population": "all 885 same-frame cross-label detection pairs in the 894-frame / 1779-row pilot"
+    },
+    "unsupported_reacquisition_claims": 0,
+    "validator_module_unchanged": true
+  },
+  "tracker_claimed_reacquisitions": {
+    "contradicted_by_reference": 0,
+    "detail": [],
+    "supported_by_reference": 0,
+    "tracker_claimed_reacquisitions": 0
+  },
+  "verdict": "TASK-004 TRACKING VALIDATED - READY FOR TASK-005",
+  "visibility_recall": {
+    "fully_visible": {
+      "expected": 699,
+      "posed": 699,
+      "recall_pct": 100.0
+    },
+    "left": {
+      "expected": 399,
+      "partial_expected": 28,
+      "partial_posed": 28,
+      "posed": 399,
+      "recall_pct": 100.0,
+      "visible_expected": 371,
+      "visible_posed": 371
+    },
+    "misses": [],
+    "overall": {
+      "expected": 770,
+      "posed": 770,
+      "recall_pct": 100.0
+    },
+    "partially_occluded": {
+      "expected": 71,
+      "posed": 71,
+      "recall_pct": 100.0
+    },
+    "right": {
+      "expected": 371,
+      "partial_expected": 43,
+      "partial_posed": 43,
+      "posed": 371,
+      "recall_pct": 100.0,
+      "visible_expected": 328,
+      "visible_posed": 328
+    }
+  }
+}
