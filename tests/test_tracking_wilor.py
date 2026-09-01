@@ -22,7 +22,13 @@ from tracking.wilor import (
     save_tracked_sequence,
     track_sequence,
 )
-from tracking.wilor.association import bbox_iou, suppress_same_label_duplicates
+from tracking.wilor.association import (
+    bbox_iou,
+    centre_separation_ratio,
+    is_cross_label_ghost,
+    suppress_cross_label_ghosts,
+    suppress_same_label_duplicates,
+)
 from tracking.wilor.quality import assess_detection
 from tracking.wilor.schema import RawDetection, TrackState
 from tracking.wilor.source import RawInputError, RawSequence
@@ -491,6 +497,147 @@ class TestRoundTripAndProvenance(unittest.TestCase):
         self.assertEqual(totals["total_frames"], 12)
         self.assertEqual(totals["frames_with_both_tracks"], 12)
         self.assertAlmostEqual(totals["rates_pct"]["both_tracks"], 100.0)
+
+
+class TestCrossLabelGhostSuppression(unittest.TestCase):
+    """TASK-004D. A weak opposite-label duplicate must not become a hand.
+
+    The fixtures below are written in terms of the three measured signals, not
+    in terms of any pilot frame, so they exercise the general rule rather than
+    the sample that exposed it.
+    """
+
+    @staticmethod
+    def _pair(*, offset_px: float, weak_confidence: float, box: float = 400.0):
+        return [
+            make_detection(0, 0, "left", (1000.0, 500.0), confidence=0.90, box_size=box),
+            make_detection(
+                0, 1, "right", (1000.0 + offset_px, 500.0),
+                confidence=weak_confidence, box_size=box,
+            ),
+        ]
+
+    def test_weak_opposite_label_duplicate_is_suppressed(self) -> None:
+        detections = self._pair(offset_px=12.0, weak_confidence=0.35)
+        self.assertGreaterEqual(bbox_iou(*detections), 0.80)
+        self.assertLessEqual(centre_separation_ratio(*detections), 0.07)
+        kept, suppressed = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0])
+        self.assertIn(1, suppressed)
+        self.assertTrue(suppressed[1].startswith("cross_label_duplicate_suspected"))
+
+    def test_the_confident_detection_of_the_pair_survives(self) -> None:
+        """Input order must not decide which detection is kept."""
+
+        detections = self._pair(offset_px=12.0, weak_confidence=0.35)
+        reversed_order = [detections[1], detections[0]]
+        kept, _ = suppress_cross_label_ghosts(reversed_order, TrackerConfig())
+        self.assertEqual(kept, [1])
+        self.assertAlmostEqual(reversed_order[kept[0]].detector_confidence, 0.90)
+
+    def test_two_genuine_hands_at_high_overlap_are_kept(self) -> None:
+        """Overlap alone must never suppress: separated centres, equal trust."""
+
+        detections = self._pair(offset_px=60.0, weak_confidence=0.86)
+        self.assertGreater(bbox_iou(*detections), 0.5)
+        kept, suppressed = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0, 1])
+        self.assertEqual(suppressed, {})
+
+    def test_near_coincident_but_equally_confident_pair_is_kept(self) -> None:
+        """Confidence agreement alone is enough to protect a real hand."""
+
+        detections = self._pair(offset_px=12.0, weak_confidence=0.88)
+        self.assertGreaterEqual(bbox_iou(*detections), 0.80)
+        kept, _ = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0, 1])
+
+    def test_weak_but_well_separated_pair_is_kept(self) -> None:
+        """A faint far hand is a faint hand, not a duplicate."""
+
+        detections = self._pair(offset_px=150.0, weak_confidence=0.35)
+        kept, _ = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0, 1])
+
+    def test_same_label_pairs_are_left_to_the_same_label_rule(self) -> None:
+        detections = self._pair(offset_px=12.0, weak_confidence=0.35)
+        detections[1] = make_detection(0, 1, "left", (1012.0, 500.0), confidence=0.35)
+        kept, suppressed = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0, 1])
+        self.assertEqual(suppressed, {})
+
+    def test_unlabelled_detections_are_never_ghost_suppressed(self) -> None:
+        detections = self._pair(offset_px=12.0, weak_confidence=0.35)
+        detections[1] = make_detection(0, 1, None, (1012.0, 500.0), confidence=0.35)
+        kept, _ = suppress_cross_label_ghosts(detections, TrackerConfig())
+        self.assertEqual(kept, [0, 1])
+
+    def test_confidence_ratio_sweep_is_monotone(self) -> None:
+        """The decision moves once, at the configured ratio, and stays put."""
+
+        config = TrackerConfig()
+        outcomes = []
+        for weak in (0.30, 0.40, 0.45, 0.50, 0.55, 0.60, 0.70, 0.85):
+            detections = self._pair(offset_px=12.0, weak_confidence=weak)
+            outcomes.append(is_cross_label_ghost(detections[1], detections[0], config))
+        self.assertEqual(outcomes, [True, True, True, False, False, False, False, False])
+
+    def test_ghost_does_not_produce_a_second_tracked_hand(self) -> None:
+        """End to end: the occluded track stays absent instead of reappearing."""
+
+        frames = []
+        for i in range(8):
+            row = [make_detection(i, 0, "left", (900.0, 500.0), confidence=0.90)]
+            if i < 2:
+                row.append(make_detection(i, 1, "right", (1500.0, 500.0), confidence=0.88))
+            elif i >= 5:
+                # weak opposite-label blob sitting on the visible left hand
+                row.append(make_detection(i, 1, "right", (912.0, 505.0), confidence=0.34))
+            frames.append(row)
+        tracked = track_sequence(make_sequence(frames))
+        right_states = states(tracked, "right")
+        self.assertEqual(right_states[0], TrackState.OBSERVED)
+        for state in right_states[5:]:
+            self.assertNotIn(state, (TrackState.OBSERVED, TrackState.AMBIGUOUS))
+        for frame in tracked.frames[5:]:
+            self.assertIn(1, frame.rejected_detection_indices)
+            self.assertIn(
+                "cross_label_duplicate_suspected", frame.rejection_reasons[1]
+            )
+            self.assertIn("CROSS_LABEL_DUPLICATE_SUPPRESSED", frame.tracking_flags)
+        # the raw record still carries both detections
+        self.assertEqual(tracked.frames[5].number_of_raw_detections, 2)
+
+    def test_genuine_return_after_absence_is_still_reacquired(self) -> None:
+        """The guard must not block a real hand coming back."""
+
+        frames = []
+        for i in range(9):
+            row = [make_detection(i, 0, "left", (900.0, 500.0), confidence=0.90)]
+            if i < 2 or i >= 6:
+                row.append(make_detection(i, 1, "right", (1500.0, 500.0), confidence=0.87))
+            frames.append(row)
+        tracked = track_sequence(make_sequence(frames))
+        right_states = states(tracked, "right")
+        self.assertEqual(right_states[3], TrackState.MISSING)
+        self.assertEqual(right_states[6], TrackState.OBSERVED)
+        self.assertAlmostEqual(tracked.frames[6].right.box_center_xy[0], 1500.0, places=6)
+
+    def test_suppression_is_deterministic_across_repeated_runs(self) -> None:
+        frames = [
+            [
+                make_detection(i, 0, "left", (900.0, 500.0), confidence=0.90),
+                make_detection(i, 1, "right", (911.0, 503.0), confidence=0.36),
+            ]
+            for i in range(5)
+        ]
+        first = track_sequence(make_sequence(frames))
+        second = track_sequence(make_sequence(frames))
+        self.assertEqual(states(first, "right"), states(second, "right"))
+        self.assertEqual(
+            [f.rejection_reasons for f in first.frames],
+            [f.rejection_reasons for f in second.frames],
+        )
 
 
 class TestConfigValidation(unittest.TestCase):

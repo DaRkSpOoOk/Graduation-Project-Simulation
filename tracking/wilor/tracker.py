@@ -24,7 +24,9 @@ import numpy as np
 from .association import (
     AssignmentResult,
     TrackPrior,
+    is_cross_label_ghost,
     solve_assignment,
+    suppress_cross_label_ghosts,
     suppress_same_label_duplicates,
 )
 from .config import DEFAULT_CONFIG, TrackerConfig
@@ -48,6 +50,8 @@ FLAG_BOTH_LABELS_SWAPPED = "BOTH_LABELS_SWAPPED"
 FLAG_REASSOCIATION = "REASSOCIATION"
 FLAG_QUALITY_REJECTION = "QUALITY_REJECTION"
 FLAG_SEEDED = "TRACKS_SEEDED"
+FLAG_CROSS_LABEL_DUPLICATE = "CROSS_LABEL_DUPLICATE_SUPPRESSED"
+FLAG_UNSUPPORTED_REACQUISITION = "UNSUPPORTED_REACQUISITION_REJECTED"
 
 
 @dataclass(slots=True)
@@ -165,6 +169,16 @@ def track_sequence(
             rejection_reasons[usable[position].raw_detection_index] = reason
         candidates = [usable[position] for position in kept_positions]
 
+        # 2b. cross-label ghost suppression (TASK-004D) ---------------------
+        # A weak detection can sit on top of an already-detected hand while
+        # carrying the opposite handedness label, so step 2 cannot see it.
+        ghost_kept, ghost_suppressed = suppress_cross_label_ghosts(candidates, config)
+        for position, reason in ghost_suppressed.items():
+            rejection_reasons[candidates[position].raw_detection_index] = reason
+        if ghost_suppressed:
+            flags.append(FLAG_CROSS_LABEL_DUPLICATE)
+        candidates = [candidates[position] for position in ghost_kept]
+
         # 3. seeding + assignment ------------------------------------------
         seed_events = _seed_priors(memories, candidates, config)
         if seed_events:
@@ -178,6 +192,35 @@ def track_sequence(
             flags.append(FLAG_NO_DETECTIONS)
 
         # 4. bind results ---------------------------------------------------
+        # Reacquisition guard (TASK-004D): a track returning from absence may
+        # only be bound to a candidate that is physically distinct from the
+        # other track's detection this frame. Ghost candidates are normally
+        # removed in step 2b; this is an independent second line of defence
+        # so an unsupported reacquisition can never be reported.
+        if config.require_distinct_candidate_for_reacquisition:
+            for track in TRACK_NAMES:
+                other = "right" if track == "left" else "left"
+                if track not in assignment.mapping or other not in assignment.mapping:
+                    continue
+                memory = memories[track]
+                if not (memory.observed_once and memory.frames_since_observed > 0):
+                    continue
+                returning = candidates[assignment.mapping[track]]
+                established = candidates[assignment.mapping[other]]
+                if is_cross_label_ghost(returning, established, config):
+                    rejection_reasons[returning.raw_detection_index] = (
+                        "unsupported_reacquisition_cross_label_duplicate"
+                    )
+                    flags.append(FLAG_UNSUPPORTED_REACQUISITION)
+                    assignment = AssignmentResult(
+                        mapping={k: v for k, v in assignment.mapping.items() if k != track},
+                        costs={k: v for k, v in assignment.costs.items() if k != track},
+                        total_cost=assignment.total_cost,
+                        runner_up_total_cost=assignment.runner_up_total_cost,
+                        margin=assignment.margin,
+                        ambiguous=assignment.ambiguous,
+                    )
+
         bound: dict[str, TrackedHand] = {}
         for track in TRACK_NAMES:
             memory = memories[track]
