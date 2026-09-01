@@ -20,4 +20,4 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*", "video_io*", "evaluation*", "visualization*"]
+include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*"]
