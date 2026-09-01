@@ -1,0 +1,400 @@
+sample_id,frame_index,left_visibility,left_x,left_y,right_visibility,right_x,right_y,scene_flags,annotator_confidence,notes
+karsl_test_s01_sign0174_repfirst,0,VISIBLE,0.660,0.680,VISIBLE,0.380,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,1,VISIBLE,0.642,0.680,VISIBLE,0.398,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,2,VISIBLE,0.624,0.680,VISIBLE,0.416,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,3,VISIBLE,0.606,0.680,VISIBLE,0.434,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,4,VISIBLE,0.588,0.680,VISIBLE,0.452,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,5,VISIBLE,0.570,0.680,VISIBLE,0.470,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,6,VISIBLE,0.552,0.680,VISIBLE,0.488,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,7,VISIBLE,0.534,0.680,VISIBLE,0.506,0.690,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,8,VISIBLE,0.516,0.680,VISIBLE,0.524,0.690,MOTION_BLUR,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s01_sign0174_repfirst,9,PARTIALLY_OCCLUDED,0.540,0.650,PARTIALLY_OCCLUDED,0.490,0.660,HAND_CROSSING;HAND_HAND_OCCLUSION;MOTION_BLUR,LOW,Hands converge over the chest; anatomical side is inferred from continuous forearms.
+karsl_test_s01_sign0174_repfirst,10,PARTIALLY_OCCLUDED,0.540,0.650,PARTIALLY_OCCLUDED,0.490,0.660,HAND_CROSSING;HAND_HAND_OCCLUSION;MOTION_BLUR,LOW,Hands converge over the chest; anatomical side is inferred from continuous forearms.
+karsl_test_s01_sign0174_repfirst,11,PARTIALLY_OCCLUDED,0.530,0.640,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,The foreground hand is identifiable as subject LEFT; the covered hand boundary/identity is not fully supported by this RGB frame.
+karsl_test_s01_sign0174_repfirst,12,PARTIALLY_OCCLUDED,0.530,0.640,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,The foreground hand is identifiable as subject LEFT; the covered hand boundary/identity is not fully supported by this RGB frame.
+karsl_test_s01_sign0174_repfirst,13,PARTIALLY_OCCLUDED,0.530,0.640,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,The foreground hand is identifiable as subject LEFT; the covered hand boundary/identity is not fully supported by this RGB frame.
+karsl_test_s01_sign0174_repfirst,14,PARTIALLY_OCCLUDED,0.530,0.640,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,The foreground hand is identifiable as subject LEFT; the covered hand boundary/identity is not fully supported by this RGB frame.
+karsl_test_s01_sign0174_repfirst,15,PARTIALLY_OCCLUDED,0.530,0.640,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,The foreground hand is identifiable as subject LEFT; the covered hand boundary/identity is not fully supported by this RGB frame.
+karsl_test_s01_sign0174_repfirst,16,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,17,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,18,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,19,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,20,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,21,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,22,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,23,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,24,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,25,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,26,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,27,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,28,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,29,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,30,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,31,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,32,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s01_sign0174_repfirst,33,VISIBLE,0.520,0.630,FULLY_OCCLUDED,,,HAND_CROSSING;HAND_HAND_OCCLUSION,LOW,"Subject LEFT remains visible via the viewer-right forearm; subject RIGHT is fully hidden behind the foreground hand, with continuity but no visible hand pixels."
+karsl_test_s02_sign0172_repfirst,0,VISIBLE,0.700,0.660,VISIBLE,0.340,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,1,VISIBLE,0.682,0.660,VISIBLE,0.358,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,2,VISIBLE,0.664,0.660,VISIBLE,0.376,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,3,VISIBLE,0.646,0.660,VISIBLE,0.394,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,4,VISIBLE,0.628,0.660,VISIBLE,0.412,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,5,VISIBLE,0.610,0.660,VISIBLE,0.430,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,6,VISIBLE,0.592,0.660,VISIBLE,0.448,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,7,VISIBLE,0.574,0.660,VISIBLE,0.466,0.680,MOTION_BLUR,MEDIUM,Both hands are visible while moving toward the centre; slight motion blur is present.
+karsl_test_s02_sign0172_repfirst,8,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,9,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,10,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,11,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,12,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,13,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,14,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,15,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,16,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,17,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,18,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,19,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,20,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,21,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,22,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,23,PARTIALLY_OCCLUDED,0.550,0.650,PARTIALLY_OCCLUDED,0.460,0.660,HAND_HAND_OCCLUSION,MEDIUM,Both hands remain identifiable during close hand-to-hand contact; some contours overlap.
+karsl_test_s02_sign0172_repfirst,24,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,25,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,26,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,27,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,28,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,29,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,30,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,31,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,32,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,33,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,34,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0172_repfirst,35,VISIBLE,0.550,0.650,VISIBLE,0.460,0.660,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s02_sign0175_repfirst,0,VISIBLE,0.700,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,1,VISIBLE,0.700,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,2,VISIBLE,0.700,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,3,VISIBLE,0.700,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,4,VISIBLE,0.660,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,5,VISIBLE,0.660,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,6,VISIBLE,0.660,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,7,VISIBLE,0.660,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,8,VISIBLE,0.630,0.540,VISIBLE,0.460,0.900,FRAME_EDGE;MOTION_BLUR,MEDIUM,Active subject LEFT hand is motion-blurred; subject RIGHT hand remains visible near the lower frame edge.
+karsl_test_s02_sign0175_repfirst,9,VISIBLE,0.630,0.540,VISIBLE,0.460,0.900,FRAME_EDGE;MOTION_BLUR,MEDIUM,Active subject LEFT hand is motion-blurred; subject RIGHT hand remains visible near the lower frame edge.
+karsl_test_s02_sign0175_repfirst,10,VISIBLE,0.630,0.540,VISIBLE,0.460,0.900,FRAME_EDGE;MOTION_BLUR,MEDIUM,Active subject LEFT hand is motion-blurred; subject RIGHT hand remains visible near the lower frame edge.
+karsl_test_s02_sign0175_repfirst,11,VISIBLE,0.630,0.540,VISIBLE,0.460,0.900,FRAME_EDGE;MOTION_BLUR,MEDIUM,Active subject LEFT hand is motion-blurred; subject RIGHT hand remains visible near the lower frame edge.
+karsl_test_s02_sign0175_repfirst,12,VISIBLE,0.680,0.550,VISIBLE,0.460,0.900,FRAME_EDGE;MOTION_BLUR,MEDIUM,Active subject LEFT hand is motion-blurred; subject RIGHT hand remains visible near the lower frame edge.
+karsl_test_s02_sign0175_repfirst,13,VISIBLE,0.680,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,14,VISIBLE,0.680,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,15,VISIBLE,0.680,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,16,VISIBLE,0.780,0.580,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,17,VISIBLE,0.780,0.580,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,18,VISIBLE,0.780,0.580,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,19,VISIBLE,0.780,0.580,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,20,VISIBLE,0.840,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,21,VISIBLE,0.840,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,22,VISIBLE,0.840,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,23,VISIBLE,0.840,0.550,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,24,VISIBLE,0.880,0.530,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,25,VISIBLE,0.880,0.530,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,26,VISIBLE,0.880,0.530,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,27,VISIBLE,0.880,0.530,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,28,VISIBLE,0.910,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,29,VISIBLE,0.910,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,30,VISIBLE,0.910,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,31,VISIBLE,0.910,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,32,VISIBLE,0.940,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,33,VISIBLE,0.940,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,34,VISIBLE,0.940,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,35,VISIBLE,0.940,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,36,VISIBLE,0.950,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,37,VISIBLE,0.950,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,38,VISIBLE,0.950,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,39,VISIBLE,0.950,0.520,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,40,VISIBLE,0.950,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,41,VISIBLE,0.950,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,42,VISIBLE,0.950,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,43,VISIBLE,0.950,0.510,VISIBLE,0.460,0.900,FRAME_EDGE,HIGH,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,44,VISIBLE,0.950,0.500,VISIBLE,0.460,0.900,FRAME_EDGE,MEDIUM,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,45,VISIBLE,0.950,0.500,VISIBLE,0.460,0.900,FRAME_EDGE,MEDIUM,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,46,VISIBLE,0.950,0.500,VISIBLE,0.460,0.900,FRAME_EDGE,MEDIUM,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0175_repfirst,47,VISIBLE,0.950,0.500,VISIBLE,0.460,0.900,FRAME_EDGE,MEDIUM,Two physical hands are visible; subject RIGHT rests near the lower frame edge while subject LEFT signs.
+karsl_test_s02_sign0176_repfirst,0,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,1,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,2,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,3,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,4,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,5,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,6,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,7,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,8,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,9,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,10,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,11,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,12,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,13,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,14,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,15,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,16,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,17,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,18,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,19,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,20,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,21,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,22,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,23,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,24,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,25,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,26,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,27,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,28,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,29,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,30,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,31,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,32,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,33,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,34,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,35,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,36,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,37,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,38,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,39,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,MOTION_BLUR,MEDIUM,Exactly two physical hands are visible; the upper subject LEFT hand is motion-blurred and no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,40,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,MOTION_BLUR,MEDIUM,Exactly two physical hands are visible; the upper subject LEFT hand is motion-blurred and no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,41,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,MOTION_BLUR,MEDIUM,Exactly two physical hands are visible; the upper subject LEFT hand is motion-blurred and no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,42,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,43,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,44,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,45,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible in the stacked upper/lower configuration; no third physical hand is present.
+karsl_test_s02_sign0176_repfirst,46,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,47,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,48,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,49,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,50,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,51,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,52,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,53,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,54,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,55,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s02_sign0176_repfirst,56,VISIBLE,0.430,0.480,VISIBLE,0.350,0.610,,HIGH,Two physical hands are visible; no extra physical hand is present.
+karsl_test_s03_sign0173_repfirst,0,VISIBLE,0.650,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,1,VISIBLE,0.659,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,2,VISIBLE,0.668,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,3,VISIBLE,0.677,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,4,VISIBLE,0.686,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,5,VISIBLE,0.695,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,6,VISIBLE,0.704,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,7,VISIBLE,0.713,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,8,VISIBLE,0.722,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,9,VISIBLE,0.731,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,10,VISIBLE,0.740,0.480,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,11,VISIBLE,0.749,0.480,VISIBLE,0.470,0.830,MOTION_BLUR,MEDIUM,Both hands are visible; the active subject LEFT hand has motion blur.
+karsl_test_s03_sign0173_repfirst,12,VISIBLE,0.758,0.460,VISIBLE,0.470,0.830,MOTION_BLUR,MEDIUM,Both hands are visible; the active subject LEFT hand has motion blur.
+karsl_test_s03_sign0173_repfirst,13,VISIBLE,0.767,0.460,VISIBLE,0.470,0.830,MOTION_BLUR,MEDIUM,Both hands are visible; the active subject LEFT hand has motion blur.
+karsl_test_s03_sign0173_repfirst,14,VISIBLE,0.776,0.460,VISIBLE,0.470,0.830,MOTION_BLUR,MEDIUM,Both hands are visible; the active subject LEFT hand has motion blur.
+karsl_test_s03_sign0173_repfirst,15,VISIBLE,0.785,0.460,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,16,VISIBLE,0.794,0.460,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,17,VISIBLE,0.803,0.460,VISIBLE,0.470,0.830,,HIGH,Both physical hands are visible and separately identifiable.
+karsl_test_s03_sign0173_repfirst,18,VISIBLE,0.812,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,19,VISIBLE,0.821,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,20,VISIBLE,0.830,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,21,VISIBLE,0.839,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,22,VISIBLE,0.848,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,23,VISIBLE,0.857,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,24,VISIBLE,0.866,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,25,VISIBLE,0.875,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,26,VISIBLE,0.884,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,27,VISIBLE,0.893,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,28,VISIBLE,0.902,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,29,VISIBLE,0.911,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,30,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,31,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,32,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,33,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,34,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,35,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,36,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0173_repfirst,37,VISIBLE,0.920,0.460,VISIBLE,0.470,0.830,FRAME_EDGE,MEDIUM,Both hands remain visible; subject LEFT is extended toward the right image edge but not out of frame.
+karsl_test_s03_sign0174_repfirst,0,VISIBLE,0.630,0.550,VISIBLE,0.380,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,1,VISIBLE,0.618,0.550,VISIBLE,0.392,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,2,VISIBLE,0.606,0.550,VISIBLE,0.404,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,3,VISIBLE,0.594,0.550,VISIBLE,0.416,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,4,VISIBLE,0.582,0.550,VISIBLE,0.428,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,5,VISIBLE,0.570,0.550,VISIBLE,0.440,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,6,VISIBLE,0.558,0.550,VISIBLE,0.452,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,7,VISIBLE,0.546,0.550,VISIBLE,0.464,0.570,,HIGH,Both physical hands are visible in the source RGB frame.
+karsl_test_s03_sign0174_repfirst,8,PARTIALLY_OCCLUDED,0.540,0.560,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS;MOTION_BLUR,LOW,Hands converge over the chest; subject LEFT is partly visible and subject RIGHT identity is ambiguous in the overlap.
+karsl_test_s03_sign0174_repfirst,9,PARTIALLY_OCCLUDED,0.540,0.560,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS;MOTION_BLUR,LOW,Hands converge over the chest; subject LEFT is partly visible and subject RIGHT identity is ambiguous in the overlap.
+karsl_test_s03_sign0174_repfirst,10,PARTIALLY_OCCLUDED,0.540,0.560,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS;MOTION_BLUR,LOW,Hands converge over the chest; subject LEFT is partly visible and subject RIGHT identity is ambiguous in the overlap.
+karsl_test_s03_sign0174_repfirst,11,PARTIALLY_OCCLUDED,0.540,0.560,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,Hands converge over the chest; subject LEFT is partly visible and subject RIGHT identity is ambiguous in the overlap.
+karsl_test_s03_sign0174_repfirst,12,PARTIALLY_OCCLUDED,0.540,0.560,AMBIGUOUS,,,HAND_CROSSING;HAND_HAND_OCCLUSION;IDENTITY_AMBIGUOUS,LOW,Hands converge over the chest; subject LEFT is partly visible and subject RIGHT identity is ambiguous in the overlap.
+karsl_test_s03_sign0174_repfirst,13,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,14,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,15,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,16,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,17,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,18,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,19,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,20,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,21,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,22,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,23,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,24,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,25,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,26,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,27,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,28,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,29,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,30,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,31,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,32,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,33,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,34,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,35,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,36,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s03_sign0174_repfirst,37,VISIBLE,0.550,0.550,PARTIALLY_OCCLUDED,0.470,0.580,HAND_CROSSING;HAND_HAND_OCCLUSION,MEDIUM,Subject LEFT foreground hand is visible; subject RIGHT remains partly visible beneath/behind it.
+karsl_test_s02_sign0171_repfirst,0,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,1,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,2,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,3,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,4,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,5,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,6,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,7,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,8,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,9,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,10,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,11,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,12,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,13,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,14,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,15,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,16,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,17,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,18,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,19,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,20,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,21,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,22,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,23,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,24,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,25,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,26,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,27,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,28,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,29,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,30,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,31,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,32,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,33,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,34,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,35,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,36,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,37,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,38,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,39,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,40,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,41,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,42,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,43,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,44,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,45,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,46,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,47,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,48,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,49,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,50,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,51,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,52,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,53,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,54,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,55,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,56,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,57,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,58,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,59,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,60,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,61,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,62,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,63,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,64,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,65,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s02_sign0171_repfirst,66,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible in the source frame.
+karsl_test_s01_sign0171_repfirst,0,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,1,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,2,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,3,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,4,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,5,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,6,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,7,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,8,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,9,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,10,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,11,VISIBLE,,,VISIBLE,,,,HIGH,Preselected bilateral control; both physical hands are visible.
+karsl_test_s01_sign0171_repfirst,12,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,13,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,14,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,15,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,16,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,17,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,18,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,19,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,20,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,21,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,22,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,23,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,24,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,25,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,26,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,27,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,28,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,29,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,30,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,31,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,32,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,33,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,34,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,35,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,36,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,37,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,38,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,39,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,40,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,41,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,42,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,43,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,44,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,45,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,46,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,47,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,48,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,49,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,50,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,51,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,52,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,53,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,54,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,55,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,56,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,57,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,58,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,59,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,60,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,61,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,62,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,63,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,64,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,65,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,66,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,67,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,68,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,69,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,70,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,71,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,72,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,73,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,74,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,75,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,76,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,77,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,78,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,79,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
+karsl_test_s01_sign0171_repfirst,80,VISIBLE,,,VISIBLE,,,HAND_CROSSING,MEDIUM,Preselected bilateral control; both hands remain visible during stable hand contact.
