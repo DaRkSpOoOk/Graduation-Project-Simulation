@@ -1,0 +1,22 @@
+{
+  "ambiguity_margin": 0.1,
+  "base_gate_radius": 0.08,
+  "duplicate_iou_threshold": 0.5,
+  "gate_growth_per_missing_frame": 0.5,
+  "max_gate_radius": 0.3,
+  "max_projection_centre_offset": 0.35,
+  "max_span_palm_ratio": 3.0,
+  "min_detection_confidence": 0.3,
+  "min_span_palm_ratio": 1.0,
+  "occlusion_max_age_frames": 15,
+  "occlusion_proximity_radius": 0.1,
+  "orientation_jump_warn_degrees": 60.0,
+  "proximity_ambiguity_radius": 0.02,
+  "scale_log_reference": 0.6931471805599453,
+  "schema_version": "wilor_tracked_v1",
+  "seed_right_hand_at_smaller_x": true,
+  "weight_confidence": 0.1,
+  "weight_label": 0.25,
+  "weight_position": 0.55,
+  "weight_scale": 0.1
+}
