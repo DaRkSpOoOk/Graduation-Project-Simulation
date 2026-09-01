@@ -20,7 +20,32 @@ non-commercial research use with clear attribution.
 
 from __future__ import annotations
 
+import numpy as np
 import torch
+
+
+def project_points_full_img(
+    points_3d: np.ndarray,
+    camera_translation: np.ndarray,
+    focal_length: float,
+    img_size_wh: tuple[float, float],
+) -> np.ndarray:
+    """Project camera-space 3D points to full-image 2D pixel coordinates
+    with a simple pinhole model. Reproduces (unchanged, numpy port)
+    ``project_full_img`` in the official WiLoR ``demo.py``, commit
+    fcb911312a38fa8badd30d9656a167485d61b8f9:
+    https://github.com/rolpotamias/WiLoR/blob/main/demo.py
+    See pose/wilor/geometry.py module docstring for why this is vendored
+    locally instead of imported from the upstream renderer module."""
+    camera_center = (img_size_wh[0] / 2.0, img_size_wh[1] / 2.0)
+    k = np.eye(3)
+    k[0, 0] = focal_length
+    k[1, 1] = focal_length
+    k[0, 2] = camera_center[0]
+    k[1, 2] = camera_center[1]
+    points = points_3d + camera_translation
+    points = points / points[..., -1:]
+    return (k @ points.T).T[..., :2]
 
 
 def cam_crop_to_full(

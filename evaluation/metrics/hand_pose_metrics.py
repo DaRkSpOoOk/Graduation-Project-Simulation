@@ -104,10 +104,25 @@ def _euclidean(a: tuple[float, float, float], b: tuple[float, float, float]) -> 
 
 
 def _reference_position(frame: HandPoseFrame) -> tuple[float, float, float] | None:
-    """3D wrist joint when available (full/MANO mode); otherwise the 2D
-    detector bbox centroid as a position proxy with z=0 (detector_only
-    mode). Units/scale therefore differ by mode -- callers should not mix
-    jitter values from different extraction modes."""
+    """Best available proxy for "where is this hand", in priority order:
+
+    1. ``mano_references['camera_translation_xyz']`` (full/MANO mode): the
+       hand root's position in camera/world space. This is the right signal
+       for *global* wrist displacement/jumps, since MANO's ``landmarks_3d``
+       (and therefore ``wrist_position``, joint 0) are root-relative by
+       construction -- the wrist joint sits near the local origin almost by
+       definition, so its own frame-to-frame delta measures pose-model
+       reconstruction noise around ~0, not the hand's real motion through
+       the scene.
+    2. ``wrist_position`` (full mode, if camera_translation is absent for
+       some reason): root-relative 3D wrist joint.
+    3. 2D detector bbox centroid, z=0 (detector_only mode).
+
+    Units/scale differ across these three cases -- callers must not mix
+    jitter values from different extraction modes or reference types."""
+    if frame.mano_references and frame.mano_references.get("camera_translation_xyz"):
+        x, y, z = frame.mano_references["camera_translation_xyz"]
+        return (float(x), float(y), float(z))
     if frame.wrist_position is not None:
         return (frame.wrist_position.x, frame.wrist_position.y, frame.wrist_position.z)
     if frame.landmarks_2d:
@@ -161,6 +176,94 @@ def compute_bone_length_variation(frames: list[HandPoseFrame]) -> dict[str, Jitt
         deltas: list[float] = []
         for i in range(1, len(sequences)):
             deltas.extend(abs(a - b) for a, b in zip(sequences[i], sequences[i - 1]))
+        result[label] = _distribution(deltas)
+    return result
+
+
+def compute_bone_length_cv(frames: list[HandPoseFrame]) -> dict[str, JitterStats]:
+    """Per-handedness coefficient of variation (std/mean, as a percentage)
+    of each bone's length across the whole video -- a second, scale-free
+    view of reconstruction stability complementing
+    :func:`compute_bone_length_variation`'s frame-to-frame deltas. Requires
+    ``landmarks_3d`` (full/MANO mode only)."""
+    by_hand: dict[str, list[list[float]]] = defaultdict(list)
+    for f in frames:
+        if f.hand_present and f.handedness_label:
+            lengths = compute_bone_lengths(f)
+            if lengths:
+                by_hand[f.handedness_label].append(lengths)
+
+    result: dict[str, JitterStats] = {}
+    for label, sequences in by_hand.items():
+        if len(sequences) < 2:
+            continue
+        n_bones = len(sequences[0])
+        cvs: list[float] = []
+        for bone_idx in range(n_bones):
+            values = [seq[bone_idx] for seq in sequences]
+            mean = sum(values) / len(values)
+            if mean <= 0:
+                continue
+            variance = sum((v - mean) ** 2 for v in values) / len(values)
+            cvs.append(100.0 * math.sqrt(variance) / mean)
+        result[label] = _distribution(cvs)
+    return result
+
+
+def _rotmat_geodesic_angle_deg(r1: list[list[float]], r2: list[list[float]]) -> float:
+    """Angle (degrees) of the relative rotation R1^T @ R2, via the standard
+    trace formula: angle = arccos((trace(R1^T R2) - 1) / 2)."""
+    rel = [[sum(r1[k][i] * r2[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+    trace = rel[0][0] + rel[1][1] + rel[2][2]
+    cos_angle = max(-1.0, min(1.0, (trace - 1.0) / 2.0))
+    return math.degrees(math.acos(cos_angle))
+
+
+def compute_global_orientation_stability(frames: list[HandPoseFrame]) -> dict[str, JitterStats]:
+    """Per-handedness frame-to-frame geodesic rotation distance (degrees)
+    between consecutive MANO ``global_orient_rotmat`` values -- the
+    rotation-distance metric requested in place of naive matrix-element
+    subtraction. Requires ``mano_params['global_orient_rotmat']``
+    (full/MANO mode only)."""
+    by_hand: dict[str, list[tuple[int, list[list[float]]]]] = defaultdict(list)
+    for f in frames:
+        if not f.hand_present or not f.handedness_label or not f.mano_params:
+            continue
+        go = f.mano_params.get("global_orient_rotmat")
+        if go:
+            by_hand[f.handedness_label].append((f.frame_index, go[0]))
+
+    result: dict[str, JitterStats] = {}
+    for label, entries in by_hand.items():
+        entries.sort(key=lambda e: e[0])
+        angles = [
+            _rotmat_geodesic_angle_deg(entries[i - 1][1], entries[i][1]) for i in range(1, len(entries))
+        ]
+        result[label] = _distribution(angles)
+    return result
+
+
+def compute_betas_stability(frames: list[HandPoseFrame]) -> dict[str, JitterStats]:
+    """Per-handedness frame-to-frame L2 change in MANO shape coefficients
+    (``betas``). Shape should represent fixed hand anatomy, not gesture
+    motion, so a well-behaved video should show low betas drift relative to
+    its own pose-parameter motion. Requires ``mano_params['betas']``
+    (full/MANO mode only)."""
+    by_hand: dict[str, list[tuple[int, list[float]]]] = defaultdict(list)
+    for f in frames:
+        if not f.hand_present or not f.handedness_label or not f.mano_params:
+            continue
+        betas = f.mano_params.get("betas")
+        if betas:
+            by_hand[f.handedness_label].append((f.frame_index, betas))
+
+    result: dict[str, JitterStats] = {}
+    for label, entries in by_hand.items():
+        entries.sort(key=lambda e: e[0])
+        deltas = [
+            math.sqrt(sum((a - b) ** 2 for a, b in zip(entries[i][1], entries[i - 1][1])))
+            for i in range(1, len(entries))
+        ]
         result[label] = _distribution(deltas)
     return result
 
@@ -244,6 +347,9 @@ class VideoEvaluation:
     detection: DetectionStats
     wrist_jitter: dict[str, JitterStats]
     bone_length_variation: dict[str, JitterStats]
+    bone_length_cv: dict[str, JitterStats]
+    global_orientation_stability: dict[str, JitterStats]
+    betas_stability: dict[str, JitterStats]
     hand_count_changes: list[HandCountChange]
     handedness_swap_candidates: list[HandednessSwapCandidate]
     frame_error_count: int
@@ -257,6 +363,9 @@ def evaluate_video(sample_id: str, frames: list[HandPoseFrame]) -> VideoEvaluati
         detection=compute_detection_stats(frames),
         wrist_jitter=compute_wrist_jitter(frames),
         bone_length_variation=compute_bone_length_variation(frames),
+        bone_length_cv=compute_bone_length_cv(frames),
+        global_orientation_stability=compute_global_orientation_stability(frames),
+        betas_stability=compute_betas_stability(frames),
         hand_count_changes=compute_hand_count_changes(frames),
         handedness_swap_candidates=compute_potential_handedness_swaps(frames),
         frame_error_count=frame_errors,

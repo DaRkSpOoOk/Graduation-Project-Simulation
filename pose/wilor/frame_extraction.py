@@ -126,11 +126,15 @@ def extract_frame_full(
     device = pipeline.device
 
     detections = detector(frame_bgr, conf=runtime_confidence, verbose=False)[0]
-    bboxes, is_right_list = [], []
+    bboxes, is_right_list, confidences = [], [], []
     for det in detections:
         box = det.boxes.data.cpu().detach().squeeze().numpy()
         is_right_list.append(det.boxes.cls.cpu().detach().squeeze().item())
         bboxes.append(box[:4].tolist())
+        # box columns are [x1, y1, x2, y2, conf, cls] (ultralytics convention);
+        # kept separate from `bboxes` since ViTDetDataset below expects
+        # exactly [x1,y1,x2,y2].
+        confidences.append(float(box[4]) if box.shape[-1] > 4 else None)
 
     if not bboxes:
         return (
@@ -153,7 +157,9 @@ def extract_frame_full(
 
     boxes = np.stack(bboxes)
     right = np.stack(is_right_list)
-    dataset = ViTDetDataset(model_cfg, frame_bgr, boxes, right, rescale_factor=rescale_factor)
+    dataset = ViTDetDataset(
+        model_cfg, frame_bgr, boxes, right, rescale_factor=rescale_factor, fp16=bool(pipeline.fast_mode)
+    )
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=len(boxes), shuffle=False, num_workers=0)
 
     frames: list[HandPoseFrame] = []
@@ -197,7 +203,7 @@ def extract_frame_full(
             landmarks_3d = [Landmark3D(x=float(j[0]), y=float(j[1]), z=float(j[2])) for j in joints]
             wrist = landmarks_3d[0] if landmarks_3d else None
 
-            det_conf = float(boxes[n][4]) if boxes.shape[1] > 4 else None
+            det_conf = confidences[n] if n < len(confidences) else None
 
             frames.append(
                 HandPoseFrame(

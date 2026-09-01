@@ -62,9 +62,14 @@ def main() -> int:
     parser.add_argument("--out-dir", type=Path, default=ROOT / "runs/wilor_karsl_pilot")
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument("--fast", action="store_true", help="Use WiLoR's official --fast (FP16 + backbone layer-skip) mode")
+    parser.add_argument("--sample-ids", nargs="*", default=None, help="Restrict to these sample_id values")
     args = parser.parse_args()
+    args.out_dir = args.out_dir.resolve()
+    args.manifest = args.manifest.resolve()
 
     from evaluation.metrics.hand_pose_metrics import evaluate_video
+    from pose.wilor.config import WilorRuntimeConfig
     from pose.wilor.model_loader import (
         WilorAssetPaths,
         check_assets,
@@ -76,22 +81,26 @@ def main() -> int:
     from pose.wilor.video_processing import process_video_detector_only, process_video_full
 
     assets = WilorAssetPaths.resolve()
-    mode = "full"
+    mode = "full_fast" if args.fast else "full"
     blocker: str | None = None
     try:
         check_assets(assets)
-        pipeline = load_pipeline(assets)
+        pipeline = load_pipeline(assets, WilorRuntimeConfig(device=args.device, fast_mode=args.fast))
     except WilorAssetMissingError as exc:
         mode = "detector_only"
         blocker = str(exc)
         pipeline = None
 
-    if mode == "full":
+    is_full = mode in ("full", "full_fast")
+    if is_full:
         detector_for_mode = None
     else:
         detector_for_mode = load_detector_only(assets, device=args.device)
 
     rows = _read_manifest(args.manifest)
+    if args.sample_ids:
+        wanted = set(args.sample_ids)
+        rows = [r for r in rows if r["sample_id"] in wanted]
     if args.limit:
         rows = rows[: args.limit]
 
@@ -106,7 +115,7 @@ def main() -> int:
             per_video.append({"sample_id": sample_id, "error": f"video not found: {video_path}"})
             continue
 
-        if mode == "full":
+        if is_full:
             result = process_video_full(
                 video_path,
                 sample_id,
@@ -153,6 +162,9 @@ def main() -> int:
                 "detection": dataclasses.asdict(video_eval.detection),
                 "wrist_jitter": _asdict_jitter(video_eval.wrist_jitter),
                 "bone_length_variation": _asdict_jitter(video_eval.bone_length_variation),
+                "bone_length_cv_pct": _asdict_jitter(video_eval.bone_length_cv),
+                "global_orientation_stability_deg": _asdict_jitter(video_eval.global_orientation_stability),
+                "betas_stability": _asdict_jitter(video_eval.betas_stability),
                 "hand_count_changes": [dataclasses.asdict(c) for c in video_eval.hand_count_changes],
                 "handedness_swap_candidates": [
                     dataclasses.asdict(c) for c in video_eval.handedness_swap_candidates
