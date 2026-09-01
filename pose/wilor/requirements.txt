@@ -1,0 +1,39 @@
+# WiLoR extractor dependencies (pose/wilor/). Not added to the repository's
+# root pyproject.toml so the base install stays lightweight (AGENTS.md /
+# README: base tests must not require heavy ML deps). Install with:
+#   pip install -r pose/wilor/requirements.txt
+#   pip install --no-build-isolation "chumpy @ git+https://github.com/mattloper/chumpy"
+#
+# Versions below are what was actually verified working in this environment
+# (Python 3.14.4, CUDA runtime 13.0, RTX 3050 Laptop 4GB) -- see
+# reports/pose/wilor/TASK-002-wilor-karsl-pilot.md "Installation" and
+# "Exact environment" for the full trace, including two required
+# compatibility workarounds (xtcocotools/pyrender build issues avoided;
+# ultralytics 8.1.34 + torch>=2.6 weights_only default handled in
+# pose/wilor/model_loader.py).
+#
+# torch is intentionally unpinned here: install the CUDA build matching your
+# machine from https://pytorch.org/get-started/locally/ first, then run this
+# file. In this environment, plain `pip install torch` resolved to
+# torch==2.13.0+cu130 with a working CUDA 13.0 build.
+numpy
+opencv-python
+scikit-image
+pytorch-lightning
+yacs
+timm
+einops
+pandas
+smplx==0.1.28
+ultralytics==8.1.34
+pyrender
+dill
+# chumpy must be installed separately with --no-build-isolation (its setup.py
+# does `import pip`, incompatible with isolated build environments):
+#   pip install --no-build-isolation "chumpy @ git+https://github.com/mattloper/chumpy"
+#
+# NOT installed / not required for inference (training-only in upstream
+# WiLoR, or replaced by a local reimplementation -- see
+# pose/wilor/geometry.py and reports/pose/wilor/TASK-002-wilor-karsl-pilot.md):
+#   xtcocotools, hydra-core, hydra-submitit-launcher, hydra-colorlog,
+#   pyrootutils, rich, webdataset, gradio
