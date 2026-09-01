@@ -60,6 +60,23 @@ class TrackerConfig:
     # exactly once (frame 39 of karsl_test_s02_sign0176_repfirst, IoU 0.747).
     duplicate_iou_threshold: float = 0.5
 
+    # --- cross-label duplicate ("ghost") suppression ------------------------
+    # TASK-004D. A weak detection can land on top of an already-detected hand
+    # while carrying the OPPOSITE handedness label, so same-label suppression
+    # cannot see it. Validated across all 885 same-frame cross-label detection
+    # pairs in the 894-frame pilot: the ghost pairs occupy IoU 0.833-0.924,
+    # centre-separation/box 0.0275-0.0613 and confidence ratio 0.381-0.511,
+    # while every genuine two-hand pair stays at IoU <= 0.778,
+    # separation/box >= 0.0831 and confidence ratio >= 0.638. All three
+    # conditions must hold together, and each threshold sits inside the gap
+    # between those two populations rather than on either boundary.
+    cross_label_duplicate_iou: float = 0.80
+    cross_label_duplicate_separation_ratio: float = 0.07
+    cross_label_duplicate_confidence_ratio: float = 0.55
+    # A track returning from absence must not be bound to a candidate that is
+    # ghost-suspect against the other track's detection in the same frame.
+    require_distinct_candidate_for_reacquisition: bool = True
+
     # --- quality gate (conservative; marks rather than fabricates) ----------
     # Detector operating point is fixed by TASK-002/003B and is NOT retuned
     # here; this floor only rejects rows below the detector's own threshold.
@@ -125,6 +142,18 @@ class TrackerConfig:
             raise ValueError("duplicate_iou_threshold must be within [0, 1]")
         if self.min_span_palm_ratio >= self.max_span_palm_ratio:
             raise ValueError("span/palm ratio bounds are inverted")
+        if not 0 <= self.cross_label_duplicate_iou <= 1:
+            raise ValueError("cross_label_duplicate_iou must be within [0, 1]")
+        if self.cross_label_duplicate_iou < self.duplicate_iou_threshold:
+            raise ValueError(
+                "cross_label_duplicate_iou must be at least as strict as "
+                "duplicate_iou_threshold: suppressing an opposite-label "
+                "detection needs more evidence, not less"
+            )
+        if self.cross_label_duplicate_separation_ratio <= 0:
+            raise ValueError("cross_label_duplicate_separation_ratio must be positive")
+        if not 0 < self.cross_label_duplicate_confidence_ratio <= 1:
+            raise ValueError("cross_label_duplicate_confidence_ratio must be within (0, 1]")
 
 
 DEFAULT_CONFIG = TrackerConfig()

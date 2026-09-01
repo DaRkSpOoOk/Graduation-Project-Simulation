@@ -238,3 +238,104 @@ def solve_assignment(
     mapping = {track: index for track, index in best_pairs}
     costs = {track: cost_table[(track, index)] for track, index in best_pairs}
     return AssignmentResult(mapping, costs, best_total, runner_up, margin, ambiguous)
+
+
+# --------------------------------------------------------------------------
+# TASK-004D: cross-label duplicate ("ghost") suppression.
+# --------------------------------------------------------------------------
+
+CROSS_LABEL_DUPLICATE_REASON = "cross_label_duplicate_suspected"
+
+
+def centre_separation_ratio(first: RawDetection, second: RawDetection) -> float:
+    """Centre distance expressed in units of the pair's mean box size.
+
+    Scale-relative on purpose: a fixed normalized-image distance means very
+    different things for a hand near the camera and one far away.
+    """
+
+    mean_box = (first.box_size + second.box_size) / 2.0
+    if mean_box <= 0:
+        return float("inf")
+    distance = math.hypot(
+        first.box_center_xy[0] - second.box_center_xy[0],
+        first.box_center_xy[1] - second.box_center_xy[1],
+    )
+    return distance / mean_box
+
+
+def confidence_ratio(weaker: RawDetection, stronger: RawDetection) -> float:
+    """weak/strong detector-confidence ratio; 1.0 when it cannot be computed."""
+
+    strong = stronger.detector_confidence
+    weak = weaker.detector_confidence
+    if not strong or weak is None:
+        return 1.0
+    return weak / strong
+
+
+def is_cross_label_ghost(
+    candidate: RawDetection, established: RawDetection, config: TrackerConfig
+) -> bool:
+    """Is ``candidate`` a weak duplicate of ``established`` wearing the
+    opposite handedness label?
+
+    All four conditions must hold at once. Any single one of them is met
+    routinely by genuine two-hand frames in this dataset, so none of them is
+    used alone:
+
+    * opposite (and known) detector labels -- same-label duplicates are
+      already handled by :func:`suppress_same_label_duplicates`;
+    * bbox IoU at or above ``cross_label_duplicate_iou``;
+    * centre separation, relative to hand size, at or below
+      ``cross_label_duplicate_separation_ratio``;
+    * detector confidence at or below ``cross_label_duplicate_confidence_ratio``
+      of the established detection's confidence.
+    """
+
+    if candidate.detector_label is None or established.detector_label is None:
+        return False
+    if candidate.detector_label == established.detector_label:
+        return False
+    if bbox_iou(candidate, established) < config.cross_label_duplicate_iou:
+        return False
+    if centre_separation_ratio(candidate, established) > config.cross_label_duplicate_separation_ratio:
+        return False
+    return confidence_ratio(candidate, established) <= config.cross_label_duplicate_confidence_ratio
+
+
+def suppress_cross_label_ghosts(
+    detections: list[RawDetection], config: TrackerConfig
+) -> tuple[list[int], dict[int, str]]:
+    """Drop weak opposite-label duplicates of a stronger detection.
+
+    Detections are considered strongest-first, so the surviving detection of
+    a ghost pair is always the confident one. Returns surviving indices in
+    input order plus a reason per suppressed index.
+    """
+
+    order = sorted(
+        range(len(detections)),
+        key=lambda i: (
+            -(detections[i].detector_confidence or 0.0),
+            detections[i].raw_detection_index,
+        ),
+    )
+    suppressed: dict[int, str] = {}
+    kept: list[int] = []
+    for index in order:
+        candidate = detections[index]
+        for keeper in kept:
+            established = detections[keeper]
+            if is_cross_label_ghost(candidate, established, config):
+                suppressed[index] = (
+                    f"{CROSS_LABEL_DUPLICATE_REASON}"
+                    f"_iou={bbox_iou(candidate, established):.3f}"
+                    f"_sep_over_box={centre_separation_ratio(candidate, established):.4f}"
+                    f"_conf_ratio={confidence_ratio(candidate, established):.3f}"
+                    f"_of_detection_{established.raw_detection_index}"
+                )
+                break
+        else:
+            kept.append(index)
+    return sorted(kept), suppressed
