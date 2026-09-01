@@ -43,6 +43,9 @@ datasets/processed/**
 *.onnx
 *.ckpt
 *.safetensors
+*.7z
+*.zip
+*.task
 
 # Runtime outputs
 runs/
