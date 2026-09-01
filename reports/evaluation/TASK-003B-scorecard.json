@@ -1,0 +1,242 @@
+{
+  "task": "TASK-003B",
+  "title": "Final controlled MediaPipe vs WiLoR pose-pipeline comparison",
+  "run_date": "2026-09-02",
+  "source_commits": {
+    "mediapipe_frozen": "ed25d9f2814493f02e16848d23c3466b54f06d6e",
+    "wilor_frozen": "20e83afd7a54493523389fe02ca7077b1afc5866",
+    "fairness_audit": "66192c015a6fcee20ad015727a5891810a028c10",
+    "fairness_remediation_base": "63c7e683eeab19624a00480b9e0525e25ca07c44",
+    "comparison_branch": "evaluation/mediapipe-vs-wilor"
+  },
+  "dataset": {
+    "manifest_sha256": "4a8e0d24f587d9c54ad87ebd896c6df0290b3ebc80885774100d71b29dbc3c0c",
+    "videos": 18,
+    "frames": 894,
+    "signs": [
+      "0171",
+      "0172",
+      "0173",
+      "0174",
+      "0175",
+      "0176"
+    ],
+    "signers": [
+      "01",
+      "02",
+      "03"
+    ]
+  },
+  "disclosures": {
+    "thresholds_not_normalized": "MediaPipe 0.5 detection/presence/tracking; WiLoR detector 0.3 (each model's validated default; not tuned).",
+    "compute_not_normalized": "MediaPipe CPU delegate; WiLoR CUDA GPU. Throughput is not hardware-normalized.",
+    "absolute_3d_not_compared": "MediaPipe metres vs WiLoR/MANO weak-perspective model units were never ranked.",
+    "no_ground_truth": "No visibility, identity, handedness or joint-angle annotations exist in this pilot."
+  },
+  "harmonized_headline": {
+    "both_hand_pct": {
+      "mediapipe": 84.00447427293065,
+      "wilor": 98.8814317673378
+    },
+    "left_inclusive_pct": {
+      "mediapipe": 89.82102908277405,
+      "wilor": 100.0
+    },
+    "right_inclusive_pct": {
+      "mediapipe": 93.51230425055928,
+      "wilor": 98.8814317673378
+    },
+    "frames_no_hand": {
+      "mediapipe": 6,
+      "wilor": 0
+    },
+    "longest_left_missing_streak": {
+      "mediapipe": 18,
+      "wilor": 0
+    },
+    "longest_right_missing_streak": {
+      "mediapipe": 27,
+      "wilor": 10
+    },
+    "longest_no_hand_streak": {
+      "mediapipe": 6,
+      "wilor": 0
+    },
+    "duplicate_left_events": {
+      "mediapipe": 9,
+      "wilor": 1
+    },
+    "duplicate_right_events": {
+      "mediapipe": 23,
+      "wilor": 0
+    },
+    "frames_with_more_than_2_hands": {
+      "mediapipe": 0,
+      "wilor": 1
+    },
+    "suspected_swap_events": {
+      "mediapipe": 0,
+      "wilor": 0
+    },
+    "common18_bone_length_cv": {
+      "mediapipe": 0.1871856973,
+      "wilor": 0.0058696355
+    },
+    "common18_bone_length_cv_per_hand_recheck": {
+      "mediapipe": 0.13473,
+      "wilor": 0.00434
+    },
+    "normalized_temporal_metric_mean": {
+      "mediapipe": 0.1092670726,
+      "wilor": 0.0759610925
+    },
+    "normalized_temporal_metric_p95": {
+      "mediapipe": 0.292910777,
+      "wilor": 0.259313444
+    },
+    "matched_fps": {
+      "mediapipe": 35.284282965,
+      "wilor": 3.321714156
+    },
+    "matched_seconds_894_frames": {
+      "mediapipe": 25.337060155,
+      "wilor": 269.138149174
+    },
+    "matched_hardware": {
+      "mediapipe": "CPU delegate (AMD Ryzen 7 6800HS)",
+      "wilor": "CUDA GPU (RTX 3050 Laptop 4GB), FP32"
+    }
+  },
+  "weights": {
+    "dual_hand_reconstruction_completeness": 0.25,
+    "geometric_anatomical_stability": 0.2,
+    "virtual_glove_kinematics_suitability": 0.2,
+    "temporal_continuity": 0.15,
+    "failure_robustness": 0.1,
+    "performance_compute_cost": 0.07,
+    "implementation_reproducibility_burden": 0.03
+  },
+  "scores": {
+    "mediapipe": {
+      "dual_hand_reconstruction_completeness": 6.0,
+      "geometric_anatomical_stability": 3.0,
+      "virtual_glove_kinematics_suitability": 5.0,
+      "temporal_continuity": 4.0,
+      "failure_robustness": 5.0,
+      "performance_compute_cost": 9.0,
+      "implementation_reproducibility_burden": 9.5
+    },
+    "wilor": {
+      "dual_hand_reconstruction_completeness": 9.5,
+      "geometric_anatomical_stability": 9.0,
+      "virtual_glove_kinematics_suitability": 9.0,
+      "temporal_continuity": 8.5,
+      "failure_robustness": 8.0,
+      "performance_compute_cost": 4.0,
+      "implementation_reproducibility_burden": 4.5
+    }
+  },
+  "justifications": {
+    "dual_hand_reconstruction_completeness": "84.004% vs 98.881% both-hand; 143 vs 10 frames lacking both hands; 8/18 vs 17/18 clips at 100%.",
+    "geometric_anatomical_stability": "Common 18-edge bone CV 0.1872 vs 0.0059 (31.9x); survives per-hand separation (0.1347 vs 0.0043); present in all 18 clips.",
+    "virtual_glove_kinematics_suitability": "WiLoR adds 15 joint rotations, global wrist orientation, 10 betas, camera translation, 778-vertex mesh on an explicit kinematic tree; MediaPipe supplies positions only and no wrist orientation.",
+    "temporal_continuity": "Worst channel gap 27 frames (0.90s) vs 10 frames (0.33s); no-hand streak 6 vs 0; normalized temporal 0.1093 vs 0.0760, WiLoR smoother in 15/18 clips (metric is coverage-biased toward MediaPipe).",
+    "failure_robustness": "MediaPipe 32 duplicate labels + label flicker + silent omissions; WiLoR 1 duplicate, 1 extra-hand frame, 0 no-hand frames, 0 suspected swaps, but emits degenerate geometry on poor crops.",
+    "performance_compute_cost": "35.284 FPS CPU vs 3.322 FPS GPU (~10.6x under validated configs, NOT hardware-normalized); 1h video = 51min vs 9.03h; WiLoR fits 4GB with 1191MiB headroom.",
+    "implementation_reproducibility_burden": "MediaPipe one pip package + 7.5MB CPU model, no license gate; WiLoR 2.56GB checkpoint + CUDA stack + 3 dependency workarounds + gated non-commercial MANO/CC-BY-NC-ND."
+  },
+  "weighted_values": {
+    "mediapipe": {
+      "dual_hand_reconstruction_completeness": 1.5,
+      "geometric_anatomical_stability": 0.6,
+      "virtual_glove_kinematics_suitability": 1.0,
+      "temporal_continuity": 0.6,
+      "failure_robustness": 0.5,
+      "performance_compute_cost": 0.63,
+      "implementation_reproducibility_burden": 0.285
+    },
+    "wilor": {
+      "dual_hand_reconstruction_completeness": 2.375,
+      "geometric_anatomical_stability": 1.8,
+      "virtual_glove_kinematics_suitability": 1.8,
+      "temporal_continuity": 1.275,
+      "failure_robustness": 0.8,
+      "performance_compute_cost": 0.28,
+      "implementation_reproducibility_burden": 0.135
+    }
+  },
+  "totals": {
+    "mediapipe": 5.115,
+    "wilor": 8.465,
+    "scale": "0-10"
+  },
+  "sensitivity": {
+    "baseline": {
+      "weights": {
+        "dual_hand_reconstruction_completeness": 0.25,
+        "geometric_anatomical_stability": 0.2,
+        "virtual_glove_kinematics_suitability": 0.2,
+        "temporal_continuity": 0.15,
+        "failure_robustness": 0.1,
+        "performance_compute_cost": 0.07,
+        "implementation_reproducibility_burden": 0.03
+      },
+      "mediapipe_total": 5.115,
+      "wilor_total": 8.465,
+      "winner": "wilor"
+    },
+    "A_performance_sensitive": {
+      "weights": {
+        "dual_hand_reconstruction_completeness": 0.2,
+        "geometric_anatomical_stability": 0.12,
+        "virtual_glove_kinematics_suitability": 0.12,
+        "temporal_continuity": 0.1,
+        "failure_robustness": 0.06,
+        "performance_compute_cost": 0.3,
+        "implementation_reproducibility_burden": 0.1
+      },
+      "mediapipe_total": 6.51,
+      "wilor_total": 7.04,
+      "winner": "wilor"
+    },
+    "B_reconstruction_quality_sensitive": {
+      "weights": {
+        "dual_hand_reconstruction_completeness": 0.3,
+        "geometric_anatomical_stability": 0.25,
+        "virtual_glove_kinematics_suitability": 0.25,
+        "temporal_continuity": 0.12,
+        "failure_robustness": 0.05,
+        "performance_compute_cost": 0.02,
+        "implementation_reproducibility_burden": 0.01
+      },
+      "mediapipe_total": 4.805,
+      "wilor_total": 8.895,
+      "winner": "wilor"
+    },
+    "C_equal_weights": {
+      "weights": {
+        "dual_hand_reconstruction_completeness": 0.14285714285714285,
+        "geometric_anatomical_stability": 0.14285714285714285,
+        "virtual_glove_kinematics_suitability": 0.14285714285714285,
+        "temporal_continuity": 0.14285714285714285,
+        "failure_robustness": 0.14285714285714285,
+        "performance_compute_cost": 0.14285714285714285,
+        "implementation_reproducibility_burden": 0.14285714285714285
+      },
+      "mediapipe_total": 5.928571,
+      "wilor_total": 7.5,
+      "winner": "wilor"
+    }
+  },
+  "sensitivity_break_even": {
+    "description": "Holding the five quality categories in fixed proportion, MediaPipe only overtakes WiLoR when the performance category alone reaches this weight.",
+    "performance_weight_required": 0.44
+  },
+  "decision": {
+    "primary_pose_pipeline": "WILOR",
+    "primary_offline_virtual_glove_data_extractor": "WiLoR + MANO (official implementation, normal FP32, commit 20e83afd7a54493523389fe02ca7077b1afc5866)",
+    "secondary_fast_debug_extractor": "MediaPipe Hand Landmarker (commit ed25d9f2814493f02e16848d23c3466b54f06d6e) - preview/smoke-test/visualizer/cross-check only; not in the virtual-glove data path",
+    "winner_robust_across_tested_weightings": true
+  },
+  "next_milestone": "TASK-004 - Temporal Dual-Hand Tracking / Stable Identity"
+}
