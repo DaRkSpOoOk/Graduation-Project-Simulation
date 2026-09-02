@@ -1,0 +1,583 @@
+{
+  "accelerometer": {
+    "implemented": false,
+    "reason": [
+      "TASK-005 has no metric translation output",
+      "available camera translation is uncalibrated weak-perspective scale",
+      "second differentiation would amplify reconstruction noise",
+      "no gravity/specific-force convention is frozen"
+    ],
+    "status": "DEFER ACCELEROMETER"
+  },
+  "acceptance": {
+    "A_architecture": true,
+    "B_sensor_independence": true,
+    "C_layout_visualization_contract": true,
+    "D_bend_normalization": true,
+    "E_spread_normalization": true,
+    "F_model_b_validity": true,
+    "G_orientation_passthrough": true,
+    "H_left_right_consistency": true,
+    "I_adc_compatibility": true,
+    "J_invalid_inputs": true,
+    "K_valid_fixtures": true,
+    "L_task005_alignment": true,
+    "M_rotation_quaternion": true,
+    "N_gyro_convention": true,
+    "O_accelerometer_decision": true,
+    "P_pilot_regression": true,
+    "Q_tests": true
+  },
+  "final_contract": "TASK-006-ideal-virtual-glove-v1",
+  "final_verdict": "TASK-006 VALIDATED \u2014 READY FOR TASK-008",
+  "frozen_inputs": {
+    "main_base": "bf3d678f734cdf3fb62c6acdaf1cd774083df159",
+    "task006a": {
+      "branch": "opus/task-006a-core-virtual-glove",
+      "commits": [
+        "c438fab3f81402b899e38d4990bb5f86973ae59d",
+        "8646ec03cd0a220a42f8e06db7d7b1f4d52cdea9",
+        "cf6fcb1e9568b215fe6c872d83b133bc27464eb6"
+      ],
+      "pr": 18
+    },
+    "task006b": {
+      "branch": "luna/task-006b-virtual-glove-benchmark",
+      "commit": "f0e1cb215f4881a84c528f885a3f5ada6f6c1026",
+      "pr": 19
+    },
+    "task006c": {
+      "branch": "opus/task-006c-virtual-glove-qa-tooling",
+      "commit": "f91361096e7e670fce6819599cc3be4ec3745f92",
+      "pr": 20
+    }
+  },
+  "gyro": {
+    "cases": [
+      {
+        "body_expected_rad_s": [
+          0.0,
+          0.0,
+          1.5707963267948966
+        ],
+        "case": "identity_to_z90",
+        "delta_seconds": 1.0,
+        "max_abs_error_rad_s": 0.0,
+        "passed": true,
+        "production_rad_s": [
+          0.0,
+          0.0,
+          1.5707963267948966
+        ],
+        "track": "LEFT",
+        "valid": true,
+        "world_frame_difference_norm": 0.0
+      },
+      {
+        "body_expected_rad_s": [
+          0.0,
+          1.0471975511965974,
+          0.0
+        ],
+        "case": "already_rotated_local_y30",
+        "delta_seconds": 0.5,
+        "max_abs_error_rad_s": 2.220446049250313e-16,
+        "passed": true,
+        "production_rad_s": [
+          2.948079920897832e-17,
+          1.0471975511965976,
+          9.40903528207011e-17
+        ],
+        "track": "RIGHT",
+        "valid": true,
+        "world_frame_difference_norm": 0.7544673288720086
+      },
+      {
+        "body_expected_rad_s": [
+          0.2646876839432862,
+          -0.07513545377245473,
+          0.2965935347333446
+        ],
+        "case": "noncommuting_composed_local",
+        "delta_seconds": 2.3,
+        "max_abs_error_rad_s": 5.551115123125783e-17,
+        "passed": true,
+        "production_rad_s": [
+          0.26468768394328623,
+          -0.07513545377245472,
+          0.29659353473334454
+        ],
+        "track": "LEFT",
+        "valid": true,
+        "world_frame_difference_norm": 0.34753201551137775
+      },
+      {
+        "body_expected_rad_s": [
+          -2.9506673486022588,
+          4.105714872760031,
+          2.279205593722786
+        ],
+        "case": "right_track_varying_dt",
+        "delta_seconds": 0.1,
+        "max_abs_error_rad_s": 0.0,
+        "passed": true,
+        "production_rad_s": [
+          -2.9506673486022588,
+          4.105714872760031,
+          2.279205593722786
+        ],
+        "track": "RIGHT",
+        "valid": true,
+        "world_frame_difference_norm": 3.2121990534589746
+      }
+    ],
+    "convention": "BODY-FRAME: R_previous.T @ R_current, expressed in the earlier palm body axes",
+    "noncommuting_world_body_difference_observed": true,
+    "passed": true
+  },
+  "integration": {
+    "benchmark_is_independent": true,
+    "production_math_modified": false,
+    "task004_or_task005_rerun": false
+  },
+  "pilot": {
+    "alignment_mismatch_count": 0,
+    "bend": {
+      "total": 26820,
+      "valid": 26550
+    },
+    "frames": 894,
+    "gyro_magnitude_deg_s": {
+      "count": 1734,
+      "max": 3064.7128746984313,
+      "p99": 1143.4739276801704
+    },
+    "gyro_magnitude_rad_s": {
+      "count": 1734,
+      "max": 53.48933029174805,
+      "p99": 19.9573849487305
+    },
+    "hand_instances": 1788,
+    "imu": {
+      "total": 1788,
+      "valid": 1770
+    },
+    "nan_accounting": {
+      "flexion": 270,
+      "no_pose_spread": 72,
+      "spread": 546,
+      "spread_conditioning_with_valid_palm": 474
+    },
+    "normalization_observed_max": {
+      "bend": 0.6313909888267517,
+      "spread": 0.5422463417053223
+    },
+    "qa_passed": true,
+    "retained_channels_on_strict_false": 3826,
+    "sample_ids": [
+      "karsl_test_s01_sign0171_repfirst",
+      "karsl_test_s01_sign0172_repfirst",
+      "karsl_test_s01_sign0173_repfirst",
+      "karsl_test_s01_sign0174_repfirst",
+      "karsl_test_s01_sign0175_repfirst",
+      "karsl_test_s01_sign0176_repfirst",
+      "karsl_test_s02_sign0171_repfirst",
+      "karsl_test_s02_sign0172_repfirst",
+      "karsl_test_s02_sign0173_repfirst",
+      "karsl_test_s02_sign0174_repfirst",
+      "karsl_test_s02_sign0175_repfirst",
+      "karsl_test_s02_sign0176_repfirst",
+      "karsl_test_s03_sign0171_repfirst",
+      "karsl_test_s03_sign0172_repfirst",
+      "karsl_test_s03_sign0173_repfirst",
+      "karsl_test_s03_sign0174_repfirst",
+      "karsl_test_s03_sign0175_repfirst",
+      "karsl_test_s03_sign0176_repfirst"
+    ],
+    "samples": 18,
+    "source_sha256_count": 18,
+    "spread": {
+      "total": 7152,
+      "valid": 6606
+    },
+    "strict_false_partial_instances": 215
+  },
+  "qa": {
+    "adc": {
+      "failures": [],
+      "passed": true,
+      "present": true,
+      "violation_count": 0
+    },
+    "alignment": {
+      "extra": [],
+      "mismatch_count": 0,
+      "missing": [],
+      "passed": true,
+      "samples_kinematics": 18,
+      "samples_virtual_glove": 18
+    },
+    "csv_path": "/home/hatim/graduation-project-runs/task006d_qa/final-distributions.csv",
+    "json_path": "/home/hatim/graduation-project-runs/task006d_qa/final-qa.json",
+    "model_b_validity": {
+      "partial_examples": 215,
+      "passed": true,
+      "violation_count": 0
+    },
+    "nan_propagation": {
+      "passed": true,
+      "violation_count": 0
+    },
+    "normalization": {
+      "metadata_failures": {},
+      "passed": true,
+      "violation_count": 0
+    },
+    "passed": true,
+    "provenance": {
+      "failure_count": 0,
+      "passed": true
+    },
+    "rotation": {
+      "determinant_abs_error_max": 9.239450315945419e-08,
+      "matrix_quaternion_angle_max_deg": 0.016093278183459556,
+      "matrix_quaternion_error_max": 8.165514298053012e-08,
+      "non_positive_determinants": 0,
+      "orthogonality_max": 8.761691461245391e-08,
+      "passed": true,
+      "quaternion_norm_error_max": 4.114059892756927e-08
+    },
+    "schema": {
+      "checked_samples": 18,
+      "passed": true
+    },
+    "sensor_layout": {
+      "expected": {
+        "per_hand": {
+          "bend_hall": 15,
+          "hall_total": 19,
+          "palm_imu": 1,
+          "spread_hall": 4,
+          "total": 20
+        },
+        "physical_template_per_hand": 20,
+        "run_total": {
+          "all_sensors": 40,
+          "hall": 38,
+          "palm_imu": 2
+        },
+        "runtime_identity_count": 40
+      },
+      "failure_count": 0,
+      "passed": true,
+      "representations": {
+        "karsl_test_s01_sign0171_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s01_sign0172_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s01_sign0173_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s01_sign0174_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s01_sign0175_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s01_sign0176_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0171_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0172_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0173_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0174_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0175_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s02_sign0176_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0171_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0172_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0173_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0174_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0175_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        },
+        "karsl_test_s03_sign0176_repfirst": {
+          "physical_template_count": 20,
+          "representation": "physical_template_expanded",
+          "runtime_identity_count": 40
+        }
+      }
+    },
+    "verdict": "VIRTUAL-GLOVE QA TOOLING READY"
+  },
+  "sensor_layout": {
+    "markers": {
+      "hall": [
+        "H"
+      ],
+      "imu": [
+        "IMU"
+      ]
+    },
+    "passed": true,
+    "physical_template_definitions_per_hand": 20,
+    "runtime_hall_count": 38,
+    "runtime_identity_count": 40,
+    "runtime_imu_count": 2,
+    "slot_bijection": true,
+    "unique_runtime_ids": 40
+  },
+  "synthetic": {
+    "invalid": {
+      "failed": 0,
+      "fixture_count": 12,
+      "passed": 12,
+      "production_directly_accepted": 6,
+      "production_directly_rejected": 6,
+      "rejected": 12,
+      "results": [
+        {
+          "boundary_error": "InputContractError:flexion_deg_outside_0_180",
+          "boundary_rejected": true,
+          "expected_error": "flexion_deg_outside_0_180",
+          "expected_error_present": true,
+          "fixture_id": "invalid_bend_below_zero",
+          "passed": true,
+          "production_direct_error": "SensorContractViolation:1 finite bend value(s) outside the frozen TASK-005 contract [0.0, 180.0] degrees; first offenders: [{'channel': 'bend', 'index': [0, 0, 0, 0], 'value_deg': -1.0}]",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:flexion_deg_outside_0_180",
+          "boundary_rejected": true,
+          "expected_error": "flexion_deg_outside_0_180",
+          "expected_error_present": true,
+          "fixture_id": "invalid_bend_above_180",
+          "passed": true,
+          "production_direct_error": "SensorContractViolation:1 finite bend value(s) outside the frozen TASK-005 contract [0.0, 180.0] degrees; first offenders: [{'channel': 'bend', 'index': [0, 1, 4, 2], 'value_deg': 181.0}]",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:adjacent_spread_deg_outside_0_180",
+          "boundary_rejected": true,
+          "expected_error": "adjacent_spread_deg_outside_0_180",
+          "expected_error_present": true,
+          "fixture_id": "invalid_spread_below_zero",
+          "passed": true,
+          "production_direct_error": "SensorContractViolation:1 finite spread value(s) outside the frozen TASK-005 contract [0.0, 180.0] degrees; first offenders: [{'channel': 'spread', 'index': [0, 0, 0], 'value_deg': -1.0}]",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:adjacent_spread_deg_outside_0_180",
+          "boundary_rejected": true,
+          "expected_error": "adjacent_spread_deg_outside_0_180",
+          "expected_error_present": true,
+          "fixture_id": "invalid_spread_above_180",
+          "passed": true,
+          "production_direct_error": "SensorContractViolation:1 finite spread value(s) outside the frozen TASK-005 contract [0.0, 180.0] degrees; first offenders: [{'channel': 'spread', 'index': [0, 1, 3], 'value_deg': 181.0}]",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:adjacent_spread_deg_shape=(1, 2, 3)",
+          "boundary_rejected": true,
+          "expected_error": "adjacent_spread_deg_shape",
+          "expected_error_present": true,
+          "fixture_id": "invalid_malformed_shape",
+          "passed": true,
+          "production_direct_error": "GloveInputError:synthetic-task006d: adjacent_spread_deg has shape (1, 2, 3), expected (1, 2, 4)",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:timestamps_non_monotonic",
+          "boundary_rejected": true,
+          "expected_error": "timestamps_non_monotonic",
+          "expected_error_present": true,
+          "fixture_id": "invalid_non_monotonic_timestamps",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        },
+        {
+          "boundary_error": "InputContractError:frame_index_duplicate",
+          "boundary_rejected": true,
+          "expected_error": "frame_index_duplicate",
+          "expected_error_present": true,
+          "fixture_id": "invalid_duplicate_frame_index",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        },
+        {
+          "boundary_error": "InputContractError:invalid_palm_rotation=0:0:rotation_non_finite",
+          "boundary_rejected": true,
+          "expected_error": "invalid_palm_rotation",
+          "expected_error_present": true,
+          "fixture_id": "invalid_nonfinite_valid_orientation",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        },
+        {
+          "boundary_error": "InputContractError:invalid_palm_quaternion=0:1:quaternion_norm_error=1.000e+00",
+          "boundary_rejected": true,
+          "expected_error": "invalid_palm_quaternion",
+          "expected_error_present": true,
+          "fixture_id": "invalid_quaternion_norm",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        },
+        {
+          "boundary_error": "InputContractError:wrong_track_order",
+          "boundary_rejected": true,
+          "expected_error": "wrong_track_order",
+          "expected_error_present": true,
+          "fixture_id": "invalid_track_order",
+          "passed": true,
+          "production_direct_error": "GloveInputError:synthetic-task006d: track order ('right', 'left') != frozen TASK-005 order ('left', 'right')",
+          "production_direct_rejected": true
+        },
+        {
+          "boundary_error": "InputContractError:missing_or_malformed_provenance",
+          "boundary_rejected": true,
+          "expected_error": "missing_or_malformed_provenance",
+          "expected_error_present": true,
+          "fixture_id": "invalid_missing_provenance",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        },
+        {
+          "boundary_error": "InputContractError:missing_pose_has_finite_derived=0:1; strict_validity_mismatch=0:0",
+          "boundary_rejected": true,
+          "expected_error": "missing_pose_has_finite_derived",
+          "expected_error_present": true,
+          "fixture_id": "invalid_missing_pose_with_finite_values",
+          "passed": true,
+          "production_direct_error": "accepted_without_neutral_boundary",
+          "production_direct_rejected": false
+        }
+      ]
+    },
+    "self_check": {
+      "failed_checks": [],
+      "fixture_count": 179,
+      "invalid_fixture_count": 12,
+      "passed": true,
+      "valid_fixture_count": 167
+    },
+    "valid": {
+      "category_counts": {
+        "mirror": {
+          "failed": 0,
+          "passed": 1,
+          "total": 1
+        },
+        "multi_channel": {
+          "failed": 0,
+          "passed": 2,
+          "total": 2
+        },
+        "neutral": {
+          "failed": 0,
+          "passed": 1,
+          "total": 1
+        },
+        "orientation": {
+          "failed": 0,
+          "passed": 8,
+          "total": 8
+        },
+        "single_bend": {
+          "failed": 0,
+          "passed": 120,
+          "total": 120
+        },
+        "single_spread": {
+          "failed": 0,
+          "passed": 32,
+          "total": 32
+        },
+        "validity": {
+          "failed": 0,
+          "passed": 3,
+          "total": 3
+        }
+      },
+      "coverage": {
+        "bend": {
+          "channel_instances": 240,
+          "fixture_count": 120,
+          "passed": true
+        },
+        "spread": {
+          "channel_instances": 64,
+          "fixture_count": 32,
+          "passed": true
+        }
+      },
+      "failed": 0,
+      "fixture_count": 167,
+      "float32_quantization_max_abs_error": 2.9468782192232368e-08,
+      "passed": 167,
+      "raw_float64_oracle_max_abs_error": 2.9468782192232368e-08,
+      "serialized_comparison_max_abs_error": 0.0
+    },
+    "valid_failure_fixture_ids": []
+  },
+  "task": "TASK-006D"
+}
