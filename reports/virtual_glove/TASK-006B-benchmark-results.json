@@ -1,0 +1,209 @@
+{
+  "catalog": {
+    "hall_count": 38,
+    "imu_count": 2,
+    "sensor_count": 40,
+    "sensors_per_hand": 20,
+    "validation": {
+      "errors": [],
+      "hall_count": 38,
+      "imu_count": 2,
+      "passed": true,
+      "sensor_count": 40,
+      "sensor_ids": [
+        "LEFT.bend.thumb.proximal",
+        "LEFT.bend.thumb.middle",
+        "LEFT.bend.thumb.distal",
+        "LEFT.bend.index.proximal",
+        "LEFT.bend.index.middle",
+        "LEFT.bend.index.distal",
+        "LEFT.bend.middle.proximal",
+        "LEFT.bend.middle.middle",
+        "LEFT.bend.middle.distal",
+        "LEFT.bend.ring.proximal",
+        "LEFT.bend.ring.middle",
+        "LEFT.bend.ring.distal",
+        "LEFT.bend.pinky.proximal",
+        "LEFT.bend.pinky.middle",
+        "LEFT.bend.pinky.distal",
+        "LEFT.spread.thumb-index",
+        "LEFT.spread.index-middle",
+        "LEFT.spread.middle-ring",
+        "LEFT.spread.ring-pinky",
+        "LEFT.palm_imu",
+        "RIGHT.bend.thumb.proximal",
+        "RIGHT.bend.thumb.middle",
+        "RIGHT.bend.thumb.distal",
+        "RIGHT.bend.index.proximal",
+        "RIGHT.bend.index.middle",
+        "RIGHT.bend.index.distal",
+        "RIGHT.bend.middle.proximal",
+        "RIGHT.bend.middle.middle",
+        "RIGHT.bend.middle.distal",
+        "RIGHT.bend.ring.proximal",
+        "RIGHT.bend.ring.middle",
+        "RIGHT.bend.ring.distal",
+        "RIGHT.bend.pinky.proximal",
+        "RIGHT.bend.pinky.middle",
+        "RIGHT.bend.pinky.distal",
+        "RIGHT.spread.thumb-index",
+        "RIGHT.spread.index-middle",
+        "RIGHT.spread.middle-ring",
+        "RIGHT.spread.ring-pinky",
+        "RIGHT.palm_imu"
+      ]
+    }
+  },
+  "category_counts": {
+    "invalid_input": 12,
+    "mirror": 1,
+    "multi_channel": 2,
+    "neutral": 1,
+    "orientation": 8,
+    "single_bend": 120,
+    "single_spread": 32,
+    "validity": 3
+  },
+  "checks": {
+    "all_invalid_fixtures_hard_fail": true,
+    "all_valid_fixture_outputs_are_deterministic": true,
+    "catalog_has_19_hall_and_1_imu_per_hand": true,
+    "every_bend_channel_has_all_known_values": true,
+    "every_spread_pair_has_all_known_values": true,
+    "fully_valid_has_19_finite_hall_channels_per_hand": true,
+    "imu_orientation_is_direct_passthrough": true,
+    "initial_velocity_row_is_missing": true,
+    "known_normalization_values": true,
+    "known_orientation_self_errors_within_tolerance": true,
+    "known_rotations_are_proper": true,
+    "missing_pose_has_no_fabricated_sensor_values": true,
+    "normalization_is_monotonic": true,
+    "normalization_uses_no_dataset_statistics": true,
+    "optional_adc_endpoints_and_rounding": true,
+    "optional_adc_is_monotonic": true,
+    "partial_spread_keeps_imu_valid": true,
+    "partial_spread_preserves_all_bends": true,
+    "q_and_negative_q_are_equivalent": true,
+    "sensor_catalog_valid": true,
+    "whole_palm_invalid_invalidates_only_imu": true,
+    "wxyz_round_trip_within_tolerance": true,
+    "zero_to_180_x_in_two_seconds": true,
+    "zero_to_90_z_in_one_second": true
+  },
+  "coverage": {
+    "bend_channels": 15,
+    "spread_pairs": 4,
+    "values_per_channel": 8
+  },
+  "fixture_count": 179,
+  "invalid_fixture_count": 12,
+  "invalid_fixture_results": [
+    {
+      "error": "flexion_deg_outside_0_180",
+      "expected_error": "flexion_deg_outside_0_180",
+      "fixture_id": "invalid_bend_below_zero",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "flexion_deg_outside_0_180",
+      "expected_error": "flexion_deg_outside_0_180",
+      "fixture_id": "invalid_bend_above_180",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "adjacent_spread_deg_outside_0_180",
+      "expected_error": "adjacent_spread_deg_outside_0_180",
+      "fixture_id": "invalid_spread_below_zero",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "adjacent_spread_deg_outside_0_180",
+      "expected_error": "adjacent_spread_deg_outside_0_180",
+      "fixture_id": "invalid_spread_above_180",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "adjacent_spread_deg_shape=(1, 2, 3)",
+      "expected_error": "adjacent_spread_deg_shape",
+      "fixture_id": "invalid_malformed_shape",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "timestamps_non_monotonic",
+      "expected_error": "timestamps_non_monotonic",
+      "fixture_id": "invalid_non_monotonic_timestamps",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "frame_index_duplicate",
+      "expected_error": "frame_index_duplicate",
+      "fixture_id": "invalid_duplicate_frame_index",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "invalid_palm_rotation=0:0:rotation_non_finite",
+      "expected_error": "invalid_palm_rotation",
+      "fixture_id": "invalid_nonfinite_valid_orientation",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "invalid_palm_quaternion=0:1:quaternion_norm_error=1.000e+00",
+      "expected_error": "invalid_palm_quaternion",
+      "fixture_id": "invalid_quaternion_norm",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "wrong_track_order",
+      "expected_error": "wrong_track_order",
+      "fixture_id": "invalid_track_order",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "missing_or_malformed_provenance",
+      "expected_error": "missing_or_malformed_provenance",
+      "fixture_id": "invalid_missing_provenance",
+      "matching_error": true,
+      "rejected": true
+    },
+    {
+      "error": "missing_pose_has_finite_derived=0:1; strict_validity_mismatch=0:0",
+      "expected_error": "missing_pose_has_finite_derived",
+      "fixture_id": "invalid_missing_pose_with_finite_values",
+      "matching_error": true,
+      "rejected": true
+    }
+  ],
+  "known_angle_values_deg": [
+    0.0,
+    1.0,
+    30.0,
+    45.0,
+    90.0,
+    135.0,
+    179.0,
+    180.0
+  ],
+  "passed": true,
+  "schema_version": "TASK-006-ideal-virtual-glove-v1",
+  "tolerances": {
+    "adc_count": 0,
+    "angle_absolute_deg": 1e-10,
+    "gyro_rad_per_second": 1e-10,
+    "matrix_quaternion": 1e-10,
+    "orientation_angular_deg": 1e-10,
+    "quaternion_norm": 1e-10,
+    "rotation_determinant": 1e-10,
+    "rotation_orthogonality": 1e-10
+  },
+  "valid_fixture_count": 167
+}
