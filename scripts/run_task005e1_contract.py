@@ -98,6 +98,9 @@ def _spread_summary(predicted: object, expected: object, tolerance: float) -> di
         "shape_match": True,
         "finite_mask_match": mask_match,
         "expected_finite_values": int(expected_finite.sum()),
+        "predicted_finite_at_expected_positions": int((expected_finite & predicted_finite).sum()),
+        "unexpected_nan_values": int((expected_finite & ~predicted_finite).sum()),
+        "unexpected_finite_values": int((~expected_finite & predicted_finite).sum()),
         "predicted_finite_values": int(predicted_finite.sum()),
         "expected_nan_values": int((~expected_finite).sum()),
         "predicted_nan_values": int((~predicted_finite).sum()),
@@ -470,6 +473,16 @@ def _aggregate_production(case_results: list[dict[str, Any]]) -> dict[str, Any]:
         "spread": {
             "case_pass_count": count_pass("spread"),
             "expected_nan_values": int(sum(record.get("spread", {}).get("expected_nan_values", 0) for record in valid)),
+            "numeric_defined_values": int(sum(record.get("spread", {}).get("expected_finite_values", 0) for record in valid)),
+            "numeric_pass_values": int(
+                sum(
+                    record.get("spread", {}).get("expected_finite_values", 0)
+                    for record in valid
+                    if record.get("spread", {}).get("pass")
+                )
+            ),
+            "unexpected_nan_values": int(sum(record.get("spread", {}).get("unexpected_nan_values", 0) for record in valid)),
+            "unexpected_finite_values": int(sum(record.get("spread", {}).get("unexpected_finite_values", 0) for record in valid)),
             "conditioning_case_count": sum(
                 bool(record.get("spread", {}).get("expected_nan_values", 0)) for record in valid
             ),

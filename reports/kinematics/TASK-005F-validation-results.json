@@ -1,0 +1,497 @@
+{
+  "acceptance_criteria": {
+    "A_final_analytic_flexion": true,
+    "B_final_analytic_spread": true,
+    "C_mirror_consistency": true,
+    "D_rigid_invariance": true,
+    "E_palm_orientation": true,
+    "F_rotation_quality": true,
+    "G_task004_alignment": true,
+    "H_missing_occlusion_policy": true,
+    "I_invalid_geometry": true,
+    "J_model_b_validity": true,
+    "K_pilot_regression": true,
+    "L_tests": true
+  },
+  "artifact_paths": {
+    "final_kinematics_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_kinematics_task005f",
+    "previous_kinematics_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_kinematics_task005a",
+    "qa_distributions_csv": "/home/hatim/graduation-project-runs/task005f_qa/final-distributions.csv",
+    "qa_json": "/home/hatim/graduation-project-runs/task005f_qa/final-qa.json",
+    "tracked_run": "/home/hatim/graduation-project-runs/wilor_karsl_pilot_tracked_task004d"
+  },
+  "final_contract_version": "TASK-005-final-v2",
+  "final_inputs": {
+    "task005d_commit": "b41bc1808d09b1987ebdcf417e1bdadc42962f6d",
+    "task005e1_contract_commit": "e6029e35e49516389356fdca159f6dddc1bcfda2",
+    "task005e2_integrated_cherry_pick": "248dcf5660fc2aa9237adf081a4b45ff5a021b5b",
+    "task005e2_production_commit": "3404a7af5d80110777ac61bc3076ef7ebada5dd6",
+    "task005f_integration_branch_base": "e6029e35e49516389356fdca159f6dddc1bcfda2"
+  },
+  "final_verdict": "TASK-005 VALIDATED \u2014 READY FOR TASK-006",
+  "no_model_or_tracking_rerun": true,
+  "pilot": {
+    "counts": {
+      "counts_match_expected": true,
+      "flexion_nan": 270,
+      "frames": 894,
+      "hand_instances": 1788,
+      "invalid_from_no_pose_or_invalid_palm": 18,
+      "new_real_palm_frames_rejected": 0,
+      "no_palm_all_derived_nan": true,
+      "partial_spread_instances": 215,
+      "previous_run_npz_arrays_exactly_equal": true,
+      "real_palm_frames_recovered": 0,
+      "samples": 18,
+      "spread_conditioning_nan": 474,
+      "spread_nan": 546,
+      "spread_nan_from_no_pose": 72,
+      "strict_valid_kinematics": 1555,
+      "valid_palm_frames": 1770
+    },
+    "input_contract": {
+      "frame_counts": {
+        "karsl_test_s01_sign0171_repfirst": 81,
+        "karsl_test_s01_sign0172_repfirst": 52,
+        "karsl_test_s01_sign0173_repfirst": 51,
+        "karsl_test_s01_sign0174_repfirst": 34,
+        "karsl_test_s01_sign0175_repfirst": 41,
+        "karsl_test_s01_sign0176_repfirst": 38,
+        "karsl_test_s02_sign0171_repfirst": 67,
+        "karsl_test_s02_sign0172_repfirst": 36,
+        "karsl_test_s02_sign0173_repfirst": 44,
+        "karsl_test_s02_sign0174_repfirst": 36,
+        "karsl_test_s02_sign0175_repfirst": 48,
+        "karsl_test_s02_sign0176_repfirst": 57,
+        "karsl_test_s03_sign0171_repfirst": 68,
+        "karsl_test_s03_sign0172_repfirst": 50,
+        "karsl_test_s03_sign0173_repfirst": 38,
+        "karsl_test_s03_sign0174_repfirst": 38,
+        "karsl_test_s03_sign0175_repfirst": 56,
+        "karsl_test_s03_sign0176_repfirst": 59
+      },
+      "implementation_commit": "3404a7af5d80110777ac61bc3076ef7ebada5dd6",
+      "kinematics_frames": 894,
+      "manifest": "/home/hatim/Graduation-Project-Simulation-task005f/datasets/manifests/karsl_milestone1_pilot.csv",
+      "passed": true,
+      "sample_count": 18,
+      "sample_ids": [
+        "karsl_test_s01_sign0171_repfirst",
+        "karsl_test_s01_sign0172_repfirst",
+        "karsl_test_s01_sign0173_repfirst",
+        "karsl_test_s01_sign0174_repfirst",
+        "karsl_test_s01_sign0175_repfirst",
+        "karsl_test_s01_sign0176_repfirst",
+        "karsl_test_s02_sign0171_repfirst",
+        "karsl_test_s02_sign0172_repfirst",
+        "karsl_test_s02_sign0173_repfirst",
+        "karsl_test_s02_sign0174_repfirst",
+        "karsl_test_s02_sign0175_repfirst",
+        "karsl_test_s02_sign0176_repfirst",
+        "karsl_test_s03_sign0171_repfirst",
+        "karsl_test_s03_sign0172_repfirst",
+        "karsl_test_s03_sign0173_repfirst",
+        "karsl_test_s03_sign0174_repfirst",
+        "karsl_test_s03_sign0175_repfirst",
+        "karsl_test_s03_sign0176_repfirst"
+      ],
+      "tracked_frames": 894
+    },
+    "previous_summary_implementation_commit": "564167420c7f5b4f12197fe36e7d2b59ae08ace0",
+    "source_summary": {
+      "frames": 894,
+      "nan_counts": {
+        "adjacent_spread_deg": 546,
+        "adjacent_spread_deg_total": 7152,
+        "flexion_deg": 270,
+        "flexion_deg_total": 26820
+      },
+      "valid_hand_instances": 1555,
+      "valid_palm_frame_instances": 1770,
+      "videos": 18
+    },
+    "source_summary_implementation_commit": "3404a7af5d80110777ac61bc3076ef7ebada5dd6",
+    "temporal": {
+      "flexion": {
+        "channel_count": 30,
+        "count": 26010,
+        "maximum": 74.95662307739258,
+        "maximum_event": {
+          "channel": "LEFT.ring.PIP",
+          "frame_index": 23,
+          "sample_id": "karsl_test_s03_sign0173_repfirst",
+          "value": 74.95662307739258
+        },
+        "p95": 8.893312358856202,
+        "p99": 22.087423429489125
+      },
+      "palm_orientation": {
+        "channel_count": 2,
+        "count": 1734,
+        "maximum": 102.15709270231368,
+        "maximum_event": {
+          "channel": "LEFT.palm_orientation",
+          "frame_index": 27,
+          "sample_id": "karsl_test_s01_sign0175_repfirst",
+          "value": 102.15709581399929
+        },
+        "p95": 16.52618053928328,
+        "p99": 38.11580903210431
+      },
+      "spread": {
+        "channel_count": 8,
+        "count": 6411,
+        "maximum": 57.286746978759766,
+        "maximum_event": {
+          "channel": "LEFT.middle_ring",
+          "frame_index": 39,
+          "sample_id": "karsl_test_s02_sign0173_repfirst",
+          "value": 57.286746978759766
+        },
+        "p95": 7.3956298828125,
+        "p99": 17.185358190536448
+      }
+    }
+  },
+  "qa": {
+    "alignment": {
+      "frame_index_mismatches": 0,
+      "mismatch_count": 0,
+      "passed": true,
+      "source_provenance_mismatches": 0,
+      "timestamp_mismatches": 0,
+      "tracking_state_mismatches": 0
+    },
+    "model_b": {
+      "invalid_mask_violations": 0,
+      "non_finite_violations": 0,
+      "partial_channel_instances": 215,
+      "passed": true
+    },
+    "passed": true,
+    "quaternion": {
+      "max_matrix_quaternion_angular_error_deg": 0.016093278183459556,
+      "max_matrix_quaternion_element_error": 8.165514298053012e-08,
+      "max_norm_error": 4.114059892756927e-08,
+      "pass": true
+    },
+    "rotation": {
+      "max_abs_det_minus_1": 9.239450315945419e-08,
+      "max_orthogonality_error": 8.761691461245391e-08,
+      "non_positive_determinants": 0,
+      "pass": true
+    },
+    "structural": {
+      "frames": 894,
+      "frames_exact": true,
+      "samples": 18,
+      "samples_exact": true
+    },
+    "suspicious_flexion_values": 0,
+    "validity_contract": {
+      "name": "channel_level_validity",
+      "semantics": "valid_palm_frame gates orientation; finite/NaN state is checked per channel",
+      "version": "TASK-005-final-v2-model-B"
+    }
+  },
+  "synthetic_benchmark": {
+    "catalog_count": 86,
+    "coincident_mcp_validation": {
+      "all_derived_floats_nan": true,
+      "case_id": "degenerate_coincident_mcp",
+      "coincident_flag_present": true,
+      "flag_names": [
+        "PALM_LANDMARKS_COINCIDENT_index_MCP_middle_MCP_sep_over_palm=0.000e+00"
+      ],
+      "pass": true,
+      "valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "valid_palm_frame": [
+        [
+          false,
+          false
+        ]
+      ]
+    },
+    "flexion": {
+      "case_pass_count": 80,
+      "value_count": 2400,
+      "worst_error_deg": 0.0
+    },
+    "invalid_case_count": 6,
+    "invalid_case_results": [
+      {
+        "case_id": "degenerate_zero_length_bone",
+        "expected_reasons": [
+          "LEFT:zero_or_tiny_bone",
+          "RIGHT:zero_or_tiny_bone"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "ZERO_LENGTH_BONE_index_distal",
+          "ZERO_LENGTH_BONE_index_middle"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_coincident_mcp",
+        "expected_reasons": [
+          "LEFT:collinear_or_coincident_palm",
+          "RIGHT:collinear_or_coincident_palm"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "PALM_LANDMARKS_COINCIDENT_index_MCP_middle_MCP_sep_over_palm=0.000e+00"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_collinear_palm",
+        "expected_reasons": [
+          "LEFT:collinear_or_coincident_palm",
+          "RIGHT:collinear_or_coincident_palm"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "PALM_AXIS_ZERO_LENGTH"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_nan_joint",
+        "expected_reasons": [
+          "LEFT:non_finite_joint",
+          "RIGHT:non_finite_joint"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "JOINTS_NON_FINITE"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_inf_joint",
+        "expected_reasons": [
+          "LEFT:non_finite_joint",
+          "RIGHT:non_finite_joint"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "JOINTS_NON_FINITE"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "adversarial_tiny_nonzero_bone",
+        "expected_reasons": [
+          "LEFT:zero_or_tiny_bone",
+          "RIGHT:zero_or_tiny_bone"
+        ],
+        "invalid_case_pass": true,
+        "production_flag_names": [
+          "SPREAD_DIRECTION_DEGENERATE_index",
+          "SPREAD_DIRECTION_DEGENERATE_middle",
+          "SPREAD_DIRECTION_DEGENERATE_pinky",
+          "SPREAD_DIRECTION_DEGENERATE_ring",
+          "SPREAD_DIRECTION_DEGENERATE_thumb",
+          "ZERO_LENGTH_BONE_index_middle",
+          "ZERO_LENGTH_BONE_index_proximal",
+          "ZERO_LENGTH_BONE_middle_middle",
+          "ZERO_LENGTH_BONE_middle_proximal",
+          "ZERO_LENGTH_BONE_pinky_middle",
+          "ZERO_LENGTH_BONE_pinky_proximal",
+          "ZERO_LENGTH_BONE_ring_middle",
+          "ZERO_LENGTH_BONE_ring_proximal",
+          "ZERO_LENGTH_BONE_thumb_middle",
+          "ZERO_LENGTH_BONE_thumb_proximal"
+        ],
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ]
+      }
+    ],
+    "invalid_geometry": {
+      "case_count": 6,
+      "case_pass_count": 6,
+      "failed_case_ids": []
+    },
+    "mirror_pass": true,
+    "orientation": {
+      "case_pass_count": 80,
+      "worst_error_deg": 0.0
+    },
+    "orientation_mappings": {
+      "LEFT": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "RIGHT": [
+        [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ]
+    },
+    "quaternion": {
+      "case_pass_count": 80,
+      "worst_error_deg": 0.0
+    },
+    "rigid_invariance_pass": true,
+    "self_check": {
+      "catalog_count": 86,
+      "checks": {
+        "all_valid_flexion_truth_is_finite": true,
+        "catalog_has_6_invalid_cases": true,
+        "catalog_has_80_valid_cases": true,
+        "catalog_has_86_cases": true,
+        "conditioning_truth_is_channel_level": true,
+        "invalid_catalog_expectations_preserved": true,
+        "left_right_mappings_are_documented_separately": true,
+        "mirror_local_truth_is_equivalent": true,
+        "near_180_spread_uses_actual_proximal_direction": true,
+        "neutral_proximal_truth_uses_wrist_to_base_geometry": true,
+        "orientation_mappings_are_fixed_proper_rotations": true,
+        "requested_middle_distal_turns_match_geometry": true,
+        "rigid_transform_local_truth_is_invariant": true,
+        "six_conditioning_cases_are_explicit": true,
+        "spread_nan_mask_matches_degenerate_directions": true,
+        "valid_palm_plane_is_geometry_derived": true
+      },
+      "conditioning_case_ids": [
+        "multi_curl_pinky",
+        "single_index_joint0_90deg",
+        "single_middle_joint0_90deg",
+        "single_pinky_joint0_90deg",
+        "single_ring_joint0_90deg",
+        "single_thumb_joint0_90deg"
+      ],
+      "conditioning_min_projected_angle_deg": 15.0,
+      "invalid_case_count": 6,
+      "passed": true,
+      "valid_case_count": 80
+    },
+    "spread": {
+      "case_pass_count": 80,
+      "conditioning_case_count": 6,
+      "expected_nan_values": 18,
+      "numeric_defined_values": 622,
+      "numeric_pass_values": 622,
+      "unexpected_finite_values": 0,
+      "unexpected_nan_values": 0,
+      "worst_finite_error_deg": 1.4210854715202004e-14
+    },
+    "valid_case_count": 80
+  },
+  "task": "TASK-005F",
+  "tests": {
+    "compileall_command": "python -m compileall -q evaluation tracking kinematics scripts tests",
+    "compileall_output": "",
+    "compileall_returncode": 0,
+    "passed": true,
+    "unit_test_command": "python -m unittest discover -s tests -p 'test_*.py'",
+    "unit_test_count": 275,
+    "unit_test_output_tail": "...................................................................................................................................................................................................................................................................................\n----------------------------------------------------------------------\nRan 275 tests in 1.062s\n\nOK",
+    "unit_test_returncode": 0
+  },
+  "tolerances": {
+    "known_flexion_abs_error_deg": 1.0,
+    "known_orientation_error_deg": 1.0,
+    "known_spread_abs_error_deg": 1.0,
+    "matrix_quaternion_consistency": 1e-05,
+    "quaternion_norm": 1e-05,
+    "rotation_matrix_determinant": 1e-05,
+    "rotation_matrix_orthogonality": 1e-05
+  }
+}

@@ -22,7 +22,11 @@ from evaluation.kinematics_qa.contract import (
 
 
 DEFAULT_MANIFEST = Path(__file__).resolve().parents[2] / "datasets" / "manifests" / "karsl_milestone1_pilot.csv"
-FROZEN_KINEMATICS_COMMIT = "564167420c7f5b4f12197fe36e7d2b59ae08ace0"
+# TASK-005F validates the final production implementation: TASK-005A plus
+# the general coincident-palm-landmark check from TASK-005E2.  The external
+# final pilot run is generated from this exact source commit and its metadata
+# is hard-pinned here before any metrics are accepted.
+FROZEN_KINEMATICS_COMMIT = "3404a7af5d80110777ac61bc3076ef7ebada5dd6"
 EXPECTED_SAMPLE_COUNT = 18
 EXPECTED_TOTAL_FRAMES = 894
 
