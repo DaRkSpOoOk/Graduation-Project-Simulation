@@ -1,4 +1,4 @@
-"""Independent synthetic fixtures and contract checks for TASK-005B."""
+"""Synthetic fixtures and versioned contract checks for TASK-005."""
 
 from .benchmark_contract import (
     CONTRACT_TOLERANCES,
@@ -19,6 +19,31 @@ from .pilot_contract import (
     validate_frozen_pilot_inputs,
 )
 from .production_adapter import ProductionSyntheticResult, extract_production_sequence
+from .final_contract import (
+    FINAL_CHAIN_ORDER,
+    FINAL_CONTRACT_TOLERANCES,
+    FINAL_CONTRACT_VERSION,
+    FINAL_FINGER_CHAINS,
+    FINAL_FINGER_ORDER,
+    FINAL_GEOMETRY_EPSILON,
+    FINAL_SPREAD_MIN_PROJECTED_ANGLE_DEG,
+    FINAL_SPREAD_MIN_PROJECTED_NORM,
+    FINAL_SPREAD_ORDER,
+    FINAL_SPREAD_PAIRS,
+    FINAL_SPREAD_SEGMENTS,
+    FINAL_TRACK_ORDER,
+    FIXTURE_BASIS_LEFT,
+    FIXTURE_BASIS_RIGHT,
+    FROZEN_SYNTHETIC_PRODUCTION_BASIS,
+    FinalSyntheticSequence,
+    SIDE_ORIENTATION_MAPPINGS,
+    build_final_catalog,
+    build_final_sequence,
+    map_production_rotation,
+    map_production_sequence_rotations,
+    mapped_quaternion_wxyz,
+    orientation_mapping_for_side,
+)
 from .synthetic_hand import (
     BENCHMARK_JOINT_NAMES,
     BenchmarkCase,
@@ -71,4 +96,27 @@ __all__ = [
     "ProductionSyntheticResult",
     "extract_production_sequence",
     "validate_frozen_pilot_inputs",
+    "FINAL_CHAIN_ORDER",
+    "FINAL_CONTRACT_TOLERANCES",
+    "FINAL_CONTRACT_VERSION",
+    "FINAL_FINGER_CHAINS",
+    "FINAL_FINGER_ORDER",
+    "FINAL_GEOMETRY_EPSILON",
+    "FINAL_SPREAD_MIN_PROJECTED_ANGLE_DEG",
+    "FINAL_SPREAD_MIN_PROJECTED_NORM",
+    "FINAL_SPREAD_ORDER",
+    "FINAL_SPREAD_PAIRS",
+    "FINAL_SPREAD_SEGMENTS",
+    "FINAL_TRACK_ORDER",
+    "FIXTURE_BASIS_LEFT",
+    "FIXTURE_BASIS_RIGHT",
+    "FROZEN_SYNTHETIC_PRODUCTION_BASIS",
+    "FinalSyntheticSequence",
+    "SIDE_ORIENTATION_MAPPINGS",
+    "build_final_catalog",
+    "build_final_sequence",
+    "map_production_rotation",
+    "map_production_sequence_rotations",
+    "mapped_quaternion_wxyz",
+    "orientation_mapping_for_side",
 ]

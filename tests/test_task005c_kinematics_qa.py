@@ -12,6 +12,7 @@ from pathlib import Path
 import numpy as np
 
 from evaluation.kinematics_qa.validator import validate_runs
+from evaluation.kinematics_qa.contract import VALIDITY_CONTRACT_NAME, VALIDITY_CONTRACT_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -131,6 +132,8 @@ class TestTask005CKinematicsQa(unittest.TestCase):
     def test_01_completely_valid_fixture(self) -> None:
         summary, rows = _run_validator()
         self.assertTrue(summary["passed"])
+        self.assertEqual(summary["validity_contract"]["name"], VALIDITY_CONTRACT_NAME)
+        self.assertEqual(summary["validity_contract"]["version"], VALIDITY_CONTRACT_VERSION)
         self.assertTrue(summary["contract_validation"]["passed"])
         self.assertTrue(summary["tracking_alignment"]["passed"])
         self.assertGreater(len(rows), 0)
@@ -223,6 +226,35 @@ class TestTask005CKinematicsQa(unittest.TestCase):
         self.assertTrue(summary["passed"])
         self.assertEqual(summary["invalid_mask_violations"]["count"], 0)
         self.assertEqual(len(summary["invalid_mask_violations"]["partial_channel_instances"]), 1)
+
+    def test_palm_valid_partial_flexion_is_rejected(self) -> None:
+        def mutate(kine, *_):
+            kine["valid_kinematics"][0, 0] = False
+            kine["valid_palm_frame"][0, 0] = True
+            kine["flexion_deg"][0, 0, 0, 0] = np.nan
+
+        summary, _ = _run_validator(mutate)
+        self.assertGreater(summary["invalid_mask_violations"]["count"], 0)
+        self.assertIn(
+            "palm_valid_requires_finite_flexion",
+            " ".join(
+                item.get("reason", "") for item in summary["invalid_mask_violations"]["violations"]
+            ),
+        )
+
+    def test_strict_false_with_all_finite_channels_is_rejected(self) -> None:
+        def mutate(kine, *_):
+            kine["valid_kinematics"][0, 0] = False
+            kine["valid_palm_frame"][0, 0] = True
+
+        summary, _ = _run_validator(mutate)
+        self.assertGreater(summary["invalid_mask_violations"]["count"], 0)
+        self.assertIn(
+            "strict_false_with_all_float_channels_finite",
+            " ".join(
+                item.get("reason", "") for item in summary["invalid_mask_violations"]["violations"]
+            ),
+        )
 
     def test_production_metadata_vocabulary_is_accepted(self) -> None:
         def mutate(_kine, _tracked, meta):

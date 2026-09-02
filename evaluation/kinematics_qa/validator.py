@@ -13,6 +13,8 @@ from .contract import (
     TRACKED_NPZ_NAME,
     ContractError,
     SampleKinematics,
+    VALIDITY_CONTRACT_NAME,
+    VALIDITY_CONTRACT_VERSION,
     list_sample_ids,
     load_kinematics_sample,
     validate_sample_contract,
@@ -107,17 +109,40 @@ def _state_nan_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any], 
                         {**reference, "field": "validity_flags", "reason": "strict_valid_without_palm_frame"}
                     )
                 if palm_valid[row, hand]:
+                    # Model B is intentionally channel-level, but its
+                    # permitted partial state is narrow: a valid palm frame
+                    # must still have finite flexion and finite orientation;
+                    # only geometrically undefined spread channels may be
+                    # NaN. This prevents an arbitrary partial pose from
+                    # being mistaken for the selected contract.
+                    if not finite_by_field["flexion_deg"]:
+                        invalid_mask_violations.append(
+                            {**reference, "field": "flexion_deg", "reason": "palm_valid_requires_finite_flexion"}
+                        )
                     for field in ("palm_rotation_matrix", "palm_quaternion_wxyz"):
                         if not finite_by_field[field]:
                             non_finite_violations.append({**reference, "field": field})
                     if not valid[row, hand]:
-                        partial_channel_instances.append(
-                            {
-                                **reference,
-                                "finite_fields": [field for field, finite in finite_by_field.items() if finite],
-                                "non_finite_fields": [field for field, finite in finite_by_field.items() if not finite],
-                            }
-                        )
+                        if all(finite_by_field.values()):
+                            invalid_mask_violations.append(
+                                {
+                                    **reference,
+                                    "field": "validity_flags",
+                                    "reason": "strict_false_with_all_float_channels_finite",
+                                }
+                            )
+                        elif (
+                            finite_by_field["flexion_deg"]
+                            and finite_by_field["palm_rotation_matrix"]
+                            and finite_by_field["palm_quaternion_wxyz"]
+                        ):
+                            partial_channel_instances.append(
+                                {
+                                    **reference,
+                                    "finite_fields": [field for field, finite in finite_by_field.items() if finite],
+                                    "non_finite_fields": [field for field, finite in finite_by_field.items() if not finite],
+                                }
+                            )
                 else:
                     # A missing/invalid palm frame has no trustworthy derived
                     # channel. This preserves the old strict rule for actual
@@ -558,6 +583,11 @@ def validate_runs(tracked_run: str | Path, kinematics_run: str | Path) -> tuple[
     contract_passed = not load_failures and not contract_failures
 
     summary = {
+        "validity_contract": {
+            "name": VALIDITY_CONTRACT_NAME,
+            "version": VALIDITY_CONTRACT_VERSION,
+            "semantics": "valid_palm_frame gates orientation; finite/NaN state is checked per channel",
+        },
         "contract_validation": {
             "passed": contract_passed,
             "load_failures": load_failures,

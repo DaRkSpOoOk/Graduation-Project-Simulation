@@ -17,6 +17,13 @@ TRACKED_META_NAME = "wilor_tracked_meta.json"
 TRACK_NAMES = ("LEFT", "RIGHT")
 FINGER_NAMES = ("thumb", "index", "middle", "ring", "pinky")
 
+# Superseding TASK-005E1 contract.  ``valid_kinematics`` is a strict summary
+# flag; it does not erase finite channels when a valid palm frame has only a
+# geometrically undefined spread channel.  The validator enforces this
+# channel-level (Model-B) rule in addition to the structural fields below.
+VALIDITY_CONTRACT_VERSION = "TASK-005-final-v2-model-B"
+VALIDITY_CONTRACT_NAME = "channel_level_validity"
+
 REQUIRED_ARRAYS: dict[str, tuple[int, ... | str]] = {
     "frame_index": ("F",),
     "timestamp_seconds": ("F",),

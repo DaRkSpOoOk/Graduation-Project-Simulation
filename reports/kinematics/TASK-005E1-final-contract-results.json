@@ -1,0 +1,6126 @@
+{
+  "case_results": [
+    {
+      "case_id": "neutral",
+      "category": "neutral",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint0_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint0_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint0_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 6,
+        "expected_nan_values": 2,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 6,
+        "predicted_nan_values": 2,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint1_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint1_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint1_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint2_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint2_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_thumb_joint2_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint0_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint0_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint0_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 4,
+        "expected_nan_values": 4,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 4,
+        "predicted_nan_values": 4,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint1_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint1_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint1_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint2_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint2_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_index_joint2_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint0_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint0_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint0_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 4,
+        "expected_nan_values": 4,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 4,
+        "predicted_nan_values": 4,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint1_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint1_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint1_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint2_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint2_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_middle_joint2_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint0_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint0_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint0_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 4,
+        "expected_nan_values": 4,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 4,
+        "predicted_nan_values": 4,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint1_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint1_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint1_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint2_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint2_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_ring_joint2_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint0_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint0_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint0_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 6,
+        "expected_nan_values": 2,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 6,
+        "predicted_nan_values": 2,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint1_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint1_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint1_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint2_30deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint2_60deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "single_pinky_joint2_90deg",
+      "category": "single_bend",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "multi_curl_index",
+      "category": "multi_joint_curl",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "multi_curl_ring",
+      "category": "multi_joint_curl",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "multi_curl_pinky",
+      "category": "multi_joint_curl",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 6,
+        "expected_nan_values": 2,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 6,
+        "predicted_nan_values": 2,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "independent_index_only",
+      "category": "independent_fingers",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "independent_ring_pinky",
+      "category": "independent_fingers",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "spread_5deg",
+      "category": "spread",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "spread_10deg",
+      "category": "spread",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "spread_20deg",
+      "category": "spread",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "spread_30deg",
+      "category": "spread",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "mirror_neutral",
+      "category": "mirror",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "mirror_curl",
+      "category": "mirror",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "mirror_rotated_curl",
+      "category": "mirror",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 2.220446049250313e-16,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 8.881784197001252e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "translation_1",
+      "category": "translation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "translation_2",
+      "category": "translation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "translation_3",
+      "category": "translation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "scale_0_5x",
+      "category": "scale",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "scale_1_0x",
+      "category": "scale",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "scale_2_0x",
+      "category": "scale",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "scale_5_0x",
+      "category": "scale",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_identity",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 3.552713678800501e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_x90",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 0.0,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 3.552713678800501e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_y90",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 6.123233995736767e-17,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_z90",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 6.123233995736766e-17,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 3.552713678800501e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_x180",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 9.957992501029599e-17,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 3.552713678800501e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_y180",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_z180",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "orientation_composed",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 3.7470027081099033e-16,
+        "maximum_orthogonality_error": 2.220446049250313e-16,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 8.881784197001252e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "degenerate_zero_length_bone",
+      "category": "degenerate",
+      "expected_valid": false,
+      "invalid_case_pass": true,
+      "invalid_reasons": [
+        "LEFT:zero_or_tiny_bone",
+        "RIGHT:zero_or_tiny_bone"
+      ],
+      "production_flag_names": [
+        "ZERO_LENGTH_BONE_index_distal",
+        "ZERO_LENGTH_BONE_index_middle"
+      ],
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "rejected_or_flagged": true
+    },
+    {
+      "case_id": "degenerate_coincident_mcp",
+      "category": "degenerate",
+      "expected_valid": false,
+      "invalid_case_pass": false,
+      "invalid_reasons": [
+        "LEFT:collinear_or_coincident_palm",
+        "RIGHT:collinear_or_coincident_palm"
+      ],
+      "production_flag_names": [],
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "rejected_or_flagged": false
+    },
+    {
+      "case_id": "degenerate_collinear_palm",
+      "category": "degenerate",
+      "expected_valid": false,
+      "invalid_case_pass": true,
+      "invalid_reasons": [
+        "LEFT:collinear_or_coincident_palm",
+        "RIGHT:collinear_or_coincident_palm"
+      ],
+      "production_flag_names": [
+        "PALM_AXIS_ZERO_LENGTH"
+      ],
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          false,
+          false
+        ]
+      ],
+      "rejected_or_flagged": true
+    },
+    {
+      "case_id": "degenerate_nan_joint",
+      "category": "degenerate",
+      "expected_valid": false,
+      "invalid_case_pass": true,
+      "invalid_reasons": [
+        "LEFT:non_finite_joint",
+        "RIGHT:non_finite_joint"
+      ],
+      "production_flag_names": [
+        "JOINTS_NON_FINITE"
+      ],
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          false,
+          false
+        ]
+      ],
+      "rejected_or_flagged": true
+    },
+    {
+      "case_id": "degenerate_inf_joint",
+      "category": "degenerate",
+      "expected_valid": false,
+      "invalid_case_pass": true,
+      "invalid_reasons": [
+        "LEFT:non_finite_joint",
+        "RIGHT:non_finite_joint"
+      ],
+      "production_flag_names": [
+        "JOINTS_NON_FINITE"
+      ],
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          false,
+          false
+        ]
+      ],
+      "rejected_or_flagged": true
+    },
+    {
+      "case_id": "adversarial_almost_straight",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.7763568394002505e-15,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_near_180",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_tiny_nonzero_bone",
+      "category": "adversarial",
+      "expected_valid": false,
+      "invalid_case_pass": true,
+      "invalid_reasons": [
+        "LEFT:zero_or_tiny_bone",
+        "RIGHT:zero_or_tiny_bone"
+      ],
+      "production_flag_names": [
+        "SPREAD_DIRECTION_DEGENERATE_index",
+        "SPREAD_DIRECTION_DEGENERATE_middle",
+        "SPREAD_DIRECTION_DEGENERATE_pinky",
+        "SPREAD_DIRECTION_DEGENERATE_ring",
+        "SPREAD_DIRECTION_DEGENERATE_thumb",
+        "ZERO_LENGTH_BONE_index_middle",
+        "ZERO_LENGTH_BONE_index_proximal",
+        "ZERO_LENGTH_BONE_middle_middle",
+        "ZERO_LENGTH_BONE_middle_proximal",
+        "ZERO_LENGTH_BONE_pinky_middle",
+        "ZERO_LENGTH_BONE_pinky_proximal",
+        "ZERO_LENGTH_BONE_ring_middle",
+        "ZERO_LENGTH_BONE_ring_proximal",
+        "ZERO_LENGTH_BONE_thumb_middle",
+        "ZERO_LENGTH_BONE_thumb_proximal"
+      ],
+      "production_valid_kinematics": [
+        [
+          false,
+          false
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "rejected_or_flagged": true
+    },
+    {
+      "case_id": "adversarial_mirrored_composed_rotation",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 2.220446049250313e-16,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 2.220446049250313e-16,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 1.4210854715202004e-14,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_facing_away",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 9.957992501029599e-17,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_palm_upside_down",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_finger_crossing",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    },
+    {
+      "case_id": "adversarial_thumb_opposition",
+      "category": "adversarial",
+      "expected_valid": true,
+      "flexion": {
+        "expected_finite_values": 30,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values_at_expected_positions": 30,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "full_case_pass": true,
+      "orientation": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "production_valid_kinematics": [
+        [
+          true,
+          true
+        ]
+      ],
+      "production_valid_palm_frame": [
+        [
+          true,
+          true
+        ]
+      ],
+      "quaternion": {
+        "max_error_deg": 0.0,
+        "pass": true
+      },
+      "rotation_quality": {
+        "checked_hand_instances": 2,
+        "maximum_determinant_abs_error": 0.0,
+        "maximum_matrix_quaternion_error": 2.220446049250313e-16,
+        "maximum_orthogonality_error": 0.0,
+        "maximum_quaternion_norm_error": 0.0,
+        "non_finite_instances": 0,
+        "non_positive_determinants": 0,
+        "pass": true
+      },
+      "spread": {
+        "expected_finite_values": 8,
+        "expected_nan_values": 0,
+        "finite_mask_match": true,
+        "max_error": 0.0,
+        "pass": true,
+        "predicted_finite_values": 8,
+        "predicted_nan_values": 0,
+        "shape_match": true,
+        "tolerance": 1.0
+      },
+      "validity": {
+        "expected_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "expected_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ],
+        "palm_frame_match": true,
+        "strict_validity_match": true
+      }
+    }
+  ],
+  "contract": {
+    "finger_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "pinky"
+    ],
+    "flexion": "unsigned geometric bend magnitude in degrees, range 0..180",
+    "orientation": "fixture convention scored using one fixed proper mapping per hand side; raw production frame is not overwritten",
+    "proximal": "angle(wrist -> finger base, finger base -> next joint); geometric proxy, not isolated clinical MCP flexion",
+    "quaternion_order": "wxyz",
+    "spread": "unsigned angle between actual proximal-phalanx directions projected into the output-geometry palm plane",
+    "spread_conditioning_angle_deg": 15.0,
+    "spread_order": [
+      "thumb-index",
+      "index-middle",
+      "middle-ring",
+      "ring-pinky"
+    ],
+    "track_order": [
+      "LEFT",
+      "RIGHT"
+    ],
+    "validity": "Model B channel-level validity"
+  },
+  "contract_version": "TASK-005-final-v2",
+  "final_readiness": "WAITING_FOR_TASK005E2",
+  "frozen_inputs": {
+    "task005a_implementation": "564167420c7f5b4f12197fe36e7d2b59ae08ace0",
+    "task005a_report": "60480a6",
+    "task005b_commit": "5f981d9f8c44408488f02b74f73a378197422830",
+    "task005d_commit": "b41bc1808d09b1987ebdcf417e1bdadc42962f6d",
+    "task005d_pr": 14
+  },
+  "orientation_mappings": {
+    "LEFT": [
+      [
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "RIGHT": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "production_compatibility": {
+    "final_valid_case_pass_count": 80,
+    "flexion": {
+      "case_pass_count": 80,
+      "value_count": 2400,
+      "worst_error_deg": 0.0
+    },
+    "invalid_case_count": 6,
+    "invalid_case_results": [
+      {
+        "case_id": "degenerate_zero_length_bone",
+        "expected_reasons": [
+          "LEFT:zero_or_tiny_bone",
+          "RIGHT:zero_or_tiny_bone"
+        ],
+        "invalid_case_pass": true,
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_coincident_mcp",
+        "expected_reasons": [
+          "LEFT:collinear_or_coincident_palm",
+          "RIGHT:collinear_or_coincident_palm"
+        ],
+        "invalid_case_pass": false,
+        "production_valid_kinematics": [
+          [
+            true,
+            true
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_collinear_palm",
+        "expected_reasons": [
+          "LEFT:collinear_or_coincident_palm",
+          "RIGHT:collinear_or_coincident_palm"
+        ],
+        "invalid_case_pass": true,
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_nan_joint",
+        "expected_reasons": [
+          "LEFT:non_finite_joint",
+          "RIGHT:non_finite_joint"
+        ],
+        "invalid_case_pass": true,
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "degenerate_inf_joint",
+        "expected_reasons": [
+          "LEFT:non_finite_joint",
+          "RIGHT:non_finite_joint"
+        ],
+        "invalid_case_pass": true,
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "case_id": "adversarial_tiny_nonzero_bone",
+        "expected_reasons": [
+          "LEFT:zero_or_tiny_bone",
+          "RIGHT:zero_or_tiny_bone"
+        ],
+        "invalid_case_pass": true,
+        "production_valid_kinematics": [
+          [
+            false,
+            false
+          ]
+        ],
+        "production_valid_palm_frame": [
+          [
+            true,
+            true
+          ]
+        ]
+      }
+    ],
+    "invalid_geometry": {
+      "case_count": 6,
+      "case_pass_count": 5,
+      "failed_case_ids": [
+        "degenerate_coincident_mcp"
+      ]
+    },
+    "orientation": {
+      "case_pass_count": 80,
+      "worst_error_deg": 0.0
+    },
+    "quaternion": {
+      "case_pass_count": 80,
+      "worst_error_deg": 0.0
+    },
+    "spread": {
+      "case_pass_count": 80,
+      "conditioning_case_count": 6,
+      "expected_nan_values": 18,
+      "worst_finite_error_deg": 1.4210854715202004e-14
+    },
+    "valid_case_count": 80
+  },
+  "qa_contract": {
+    "rule": "valid_palm_frame gates orientation; valid flexion/spread channels are evaluated independently and undefined channels are NaN",
+    "status": "SELECTED",
+    "version": "TASK-005-final-v2-model-B"
+  },
+  "remaining_production_defect": "OPUS CORE FIX \u2014 coincident-MCP invalid geometry",
+  "self_check": {
+    "catalog_count": 86,
+    "checks": {
+      "all_valid_flexion_truth_is_finite": true,
+      "catalog_has_6_invalid_cases": true,
+      "catalog_has_80_valid_cases": true,
+      "catalog_has_86_cases": true,
+      "conditioning_truth_is_channel_level": true,
+      "invalid_catalog_expectations_preserved": true,
+      "left_right_mappings_are_documented_separately": true,
+      "mirror_local_truth_is_equivalent": true,
+      "near_180_spread_uses_actual_proximal_direction": true,
+      "neutral_proximal_truth_uses_wrist_to_base_geometry": true,
+      "orientation_mappings_are_fixed_proper_rotations": true,
+      "requested_middle_distal_turns_match_geometry": true,
+      "rigid_transform_local_truth_is_invariant": true,
+      "six_conditioning_cases_are_explicit": true,
+      "spread_nan_mask_matches_degenerate_directions": true,
+      "valid_palm_plane_is_geometry_derived": true
+    },
+    "conditioning_case_ids": [
+      "multi_curl_pinky",
+      "single_index_joint0_90deg",
+      "single_middle_joint0_90deg",
+      "single_pinky_joint0_90deg",
+      "single_ring_joint0_90deg",
+      "single_thumb_joint0_90deg"
+    ],
+    "conditioning_min_projected_angle_deg": 15.0,
+    "invalid_case_count": 6,
+    "passed": true,
+    "valid_case_count": 80
+  },
+  "task": "TASK-005E1",
+  "tolerances": {
+    "known_flexion_abs_error_deg": 1.0,
+    "known_orientation_error_deg": 1.0,
+    "known_spread_abs_error_deg": 1.0,
+    "matrix_quaternion_consistency": 1e-05,
+    "quaternion_norm": 1e-05,
+    "rotation_matrix_determinant": 1e-05,
+    "rotation_matrix_orthogonality": 1e-05
+  }
+}
