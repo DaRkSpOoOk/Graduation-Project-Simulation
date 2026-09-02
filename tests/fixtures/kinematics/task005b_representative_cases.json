@@ -1,0 +1,107 @@
+{
+  "schema_version": "TASK-005B-v1",
+  "track_order": ["LEFT", "RIGHT"],
+  "finger_order": ["thumb", "index", "middle", "ring", "pinky"],
+  "cases": [
+    {
+      "case_id": "fixture_neutral",
+      "category": "neutral",
+      "expected_valid": true,
+      "parameters": {
+        "flexion_deg": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        "adjacent_spread_deg": [10, 10, 10, 10],
+        "global_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+        "translation": [0, 0, 0],
+        "scale": 1,
+        "geometry": {
+          "segment_lengths": [0.36, 0.3, 0.24],
+          "palm_depth": 0.85,
+          "coincident_mcp_points": false,
+          "zero_length_bone": null,
+          "invalid_joint": null,
+          "invalid_value": null
+        }
+      }
+    },
+    {
+      "case_id": "fixture_index_pip_60",
+      "category": "single_bend",
+      "expected_valid": true,
+      "parameters": {
+        "flexion_deg": [[0, 0, 0], [0, 60, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        "adjacent_spread_deg": [10, 10, 10, 10],
+        "global_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+        "translation": [0, 0, 0],
+        "scale": 1,
+        "geometry": {
+          "segment_lengths": [0.36, 0.3, 0.24],
+          "palm_depth": 0.85,
+          "coincident_mcp_points": false,
+          "zero_length_bone": null,
+          "invalid_joint": null,
+          "invalid_value": null
+        }
+      }
+    },
+    {
+      "case_id": "fixture_multi_curl",
+      "category": "multi_joint_curl",
+      "expected_valid": true,
+      "parameters": {
+        "flexion_deg": [[0, 0, 0], [30, 45, 60], [0, 0, 0], [60, 75, 90], [0, 0, 0]],
+        "adjacent_spread_deg": [20, 20, 20, 20],
+        "global_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+        "translation": [0, 0, 0],
+        "scale": 1,
+        "geometry": {
+          "segment_lengths": [0.36, 0.3, 0.24],
+          "palm_depth": 0.85,
+          "coincident_mcp_points": false,
+          "zero_length_bone": null,
+          "invalid_joint": null,
+          "invalid_value": null
+        }
+      }
+    },
+    {
+      "case_id": "fixture_spread_30",
+      "category": "spread",
+      "expected_valid": true,
+      "parameters": {
+        "flexion_deg": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        "adjacent_spread_deg": [30, 30, 30, 30],
+        "global_rotation": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+        "translation": [0, 0, 0],
+        "scale": 1,
+        "geometry": {
+          "segment_lengths": [0.36, 0.3, 0.24],
+          "palm_depth": 0.85,
+          "coincident_mcp_points": false,
+          "zero_length_bone": null,
+          "invalid_joint": null,
+          "invalid_value": null
+        }
+      }
+    },
+    {
+      "case_id": "fixture_composed_rotation",
+      "category": "quaternion_orientation",
+      "expected_valid": true,
+      "parameters": {
+        "flexion_deg": [[0, 0, 0], [20, 40, 60], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+        "adjacent_spread_deg": [15, 15, 15, 15],
+        "global_rotation": [[-0.3213938048432697, -0.7026554340298867, 0.6348081310416855], [0.8830222215594891, -0.4645104128405417, -0.06709569729017055], [0.3420201433256687, 0.5389855446957562, 0.7697511313200572]],
+        "translation": [4, -3, 8],
+        "scale": 2,
+        "geometry": {
+          "segment_lengths": [0.36, 0.3, 0.24],
+          "palm_depth": 0.85,
+          "coincident_mcp_points": false,
+          "zero_length_bone": null,
+          "invalid_joint": null,
+          "invalid_value": null
+        }
+      }
+    }
+  ]
+}

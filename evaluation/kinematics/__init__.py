@@ -1,0 +1,57 @@
+"""Independent synthetic fixtures and contract checks for TASK-005B."""
+
+from .benchmark_contract import (
+    CONTRACT_TOLERANCES,
+    FINGER_ORDER,
+    TRACK_ORDER,
+    ContractError,
+    KinematicsResult,
+    coerce_result,
+    validate_result,
+)
+from .metrics import evaluate_sequence, quaternion_angle_error_deg, rotation_angle_error_deg
+from .synthetic_hand import (
+    BENCHMARK_JOINT_NAMES,
+    BenchmarkCase,
+    FrameParameters,
+    GeometryOptions,
+    SyntheticHand,
+    SyntheticSequence,
+    build_benchmark_catalog,
+    generate_hand,
+    generate_sequence,
+    geometry_validity,
+    frame_parameters_from_dict,
+    frame_parameters_to_dict,
+    mirror_points,
+    rotation_matrix_axis,
+    rotation_matrix_xyz,
+)
+
+__all__ = [
+    "BENCHMARK_JOINT_NAMES",
+    "BenchmarkCase",
+    "CONTRACT_TOLERANCES",
+    "ContractError",
+    "FINGER_ORDER",
+    "FrameParameters",
+    "GeometryOptions",
+    "KinematicsResult",
+    "SyntheticHand",
+    "SyntheticSequence",
+    "TRACK_ORDER",
+    "build_benchmark_catalog",
+    "coerce_result",
+    "generate_hand",
+    "generate_sequence",
+    "geometry_validity",
+    "evaluate_sequence",
+    "frame_parameters_from_dict",
+    "frame_parameters_to_dict",
+    "mirror_points",
+    "quaternion_angle_error_deg",
+    "rotation_angle_error_deg",
+    "rotation_matrix_axis",
+    "rotation_matrix_xyz",
+    "validate_result",
+]
