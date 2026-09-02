@@ -285,6 +285,14 @@ def _frame_integrity(sample: VirtualGloveSample | KinematicsSample, label: str) 
 
 def _metadata_normalization_check(metadata: dict[str, Any]) -> dict[str, Any]:
     raw = metadata.get("normalization") or metadata.get("normalization_contract")
+    if raw is None:
+        # TASK-006A stores the authoritative fixed transfer under the
+        # representation catalogue rather than duplicating a top-level QA
+        # alias.  Accept that canonical production location without relaxing
+        # the required divisor/range/fitting checks below.
+        representations = metadata.get("representations")
+        if isinstance(representations, dict):
+            raw = representations.get("normalized_ideal_sensor")
     failures: list[str] = []
     evidence: list[str] = []
     if not isinstance(raw, dict):
@@ -463,6 +471,15 @@ def _provenance_check(
     if source_id != source.sample_id:
         failures.append(f"source sample_id must be {source.sample_id!r}, got {source_id!r}")
     task = source_value(("task", "source_task"))
+    # TASK-006A uses an explicit ``kinematics_*`` namespace and the frozen
+    # TASK-005 schema, but does not repeat a task label in this nested object.
+    # Infer TASK-005 only from that unambiguous pair; arbitrary missing labels
+    # must still fail provenance validation.
+    if task is None:
+        declared_schema = source_value(("kinematics_schema_version", "source_schema_version"))
+        declared_sample = source_value(("kinematics_sample_id", "source_sample_id"))
+        if declared_schema == source.metadata.get("schema_version") and declared_sample == source.sample_id:
+            task = "TASK-005 (inferred from explicit kinematics_* provenance)"
     if not isinstance(task, str) or not task.upper().startswith("TASK-005"):
         failures.append(f"source task must identify TASK-005, got {task!r}")
     stage = source_value(("stage", "source_stage"))
@@ -485,6 +502,15 @@ def _provenance_check(
                 failures.append(f"source run does not match --kinematics-run: {declared_run!r}")
         except OSError:
             failures.append(f"source run path is not usable: {declared_run!r}")
+
+    declared_sample_dir = source_value(("kinematics_dir", "source_sample_dir"))
+    if declared_sample_dir is not None:
+        try:
+            declared_path = Path(str(declared_sample_dir)).expanduser().resolve()
+            if declared_path != source.path.resolve() and declared_path.parent != kinematics_run.resolve():
+                failures.append(f"source sample directory does not match TASK-005 input: {declared_sample_dir!r}")
+        except OSError:
+            failures.append(f"source sample directory is not usable: {declared_sample_dir!r}")
 
     source_schema = source_value(("kinematics_schema_version", "source_schema_version"))
     actual_schema = source.metadata.get("schema_version")
@@ -623,6 +649,9 @@ def _layout_summary(
             "failures": list(layout.failures),
             "sensor_count": len(sensors),
             "sensor_ids": [sensor.sensor_id for sensor in sensors],
+            "representation": layout.representation,
+            "physical_template_count": layout.physical_template_count,
+            "runtime_identity_count": len(sensors),
         }
         failures.extend(f"{sample_id}: {failure}" for failure in layout.failures)
     if signatures:
@@ -633,6 +662,8 @@ def _layout_summary(
     section = {
         "passed": not failures,
         "expected": {
+            "physical_template_per_hand": 20,
+            "runtime_identity_count": 40,
             "per_hand": {
                 "bend_hall": BEND_SENSOR_COUNT,
                 "spread_hall": 4,
@@ -870,18 +901,30 @@ def _rotation_checks(samples: list[VirtualGloveSample]) -> dict[str, Any]:
 def _adc_transfer(metadata: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str]]:
     raw = metadata.get("adc_transfer", metadata.get("adc_contract"))
     if raw is None:
+        # TASK-006A declares the optional compatibility transfer beside the
+        # authoritative normalized representation.  Keep this fallback strict
+        # about bit depth, rails, mapping and invalid-channel semantics.
+        representations = metadata.get("representations")
+        if isinstance(representations, dict):
+            raw = representations.get("optional_adc")
+    if raw is None:
         return None, ["ADC output is present but metadata adc_transfer contract is missing"]
     if not isinstance(raw, dict):
         return None, ["metadata adc_transfer must be an object"]
     failures: list[str] = []
     bits = raw.get("bits", raw.get("bit_depth"))
-    minimum = raw.get("min_code", raw.get("minimum", 0))
-    maximum = raw.get("max_code", raw.get("maximum", 4095))
+    declared_range = raw.get("range")
+    range_min = declared_range[0] if isinstance(declared_range, (list, tuple)) and len(declared_range) == 2 else 0
+    range_max = declared_range[1] if isinstance(declared_range, (list, tuple)) and len(declared_range) == 2 else 4095
+    minimum = raw.get("min_code", raw.get("minimum", range_min))
+    maximum = raw.get("max_code", raw.get("maximum", range_max))
     if bits != 12:
         failures.append(f"ADC bits must be 12, got {bits!r}")
     if minimum != 0 or maximum != 4095:
         failures.append(f"ADC code range must be 0..4095, got {minimum!r}..{maximum!r}")
-    tolerance = raw.get("tolerance_codes", raw.get("tolerance", 1.0))
+    rounding = str(raw.get("rounding", "")).lower().replace("-", "_").replace(" ", "_")
+    default_tolerance = 0.0 if "half_up" in rounding or "floor(x_+_0.5)" in rounding else 1.0
+    tolerance = raw.get("tolerance_codes", raw.get("tolerance", default_tolerance))
     try:
         tolerance_float = float(tolerance)
     except (TypeError, ValueError):
@@ -897,7 +940,8 @@ def _adc_transfer(metadata: dict[str, Any]) -> tuple[dict[str, Any] | None, list
         "max_code": maximum,
         "tolerance_codes": tolerance_float,
         "mapping": mapping,
-        "invalid_value": raw.get("invalid_value"),
+        "invalid_value": raw.get("invalid_value", raw.get("invalid_sentinel")),
+        "rounding": rounding,
     }, sorted(set(failures))
 
 
@@ -959,6 +1003,8 @@ def _adc_checks(samples: list[VirtualGloveSample], sensor_map: dict[tuple[str, s
                                 violations.append({**ref, "reason": "adc_out_of_range", "value": _safe_number(code)})
                                 continue
                             expected = float(normalized[index]) * 4095.0
+                            if "half_up" in transfer["rounding"] or "floor(x_+_0.5)" in transfer["rounding"]:
+                                expected = float(np.floor(expected + 0.5))
                             if not np.isfinite(expected) or abs(float(code) - expected) > tolerance:
                                 violations.append({**ref, "reason": "adc_normalized_disagreement", "value": _safe_number(code), "expected": float(expected) if np.isfinite(expected) else None, "tolerance_codes": tolerance})
                         else:

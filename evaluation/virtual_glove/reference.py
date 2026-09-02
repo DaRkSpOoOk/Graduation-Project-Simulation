@@ -26,7 +26,7 @@ from .contract import (
     validate_kinematics_input,
 )
 from .orientation import (
-    angular_velocity_from_quaternions,
+    angular_velocity_body_frame_from_quaternions,
     quaternion_angular_distance_deg,
 )
 
@@ -273,7 +273,7 @@ def gyro_sequence_from_quaternions(
             raise InputContractError("gyro_timestamps_not_strictly_increasing")
         for hand in range(2):
             if valid[frame, hand] and valid[frame - 1, hand]:
-                result[frame, hand] = angular_velocity_from_quaternions(
+                result[frame, hand] = angular_velocity_body_frame_from_quaternions(
                     quaternions[frame - 1, hand],
                     quaternions[frame, hand],
                     delta_seconds,

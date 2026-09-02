@@ -231,11 +231,12 @@ def angular_velocity_from_quaternions(
     second: object,
     delta_seconds: float,
 ) -> np.ndarray:
-    """Compute body-independent rotation-vector velocity in rad/s.
+    """Compute the legacy WORLD-FRAME rotation-vector velocity in rad/s.
 
     The relative rotation is ``q_second * conjugate(q_first)``.  The returned
-    vector points along its right-handed axis and has magnitude equal to the
-    shortest rotation angle divided by ``delta_seconds``.
+    vector is the axis of ``R_second @ R_first.T`` in world/camera axes.  This
+    helper is retained for TASK-006B historical compatibility; the final
+    TASK-006 gyro contract uses :func:`angular_velocity_body_frame_from_quaternions`.
     """
 
     if not math.isfinite(float(delta_seconds)) or float(delta_seconds) <= 0.0:
@@ -260,6 +261,43 @@ def angular_velocity_from_quaternions(
     return vector / vector_norm * (angle / float(delta_seconds))
 
 
+def angular_velocity_body_frame_from_quaternions(
+    first: object,
+    second: object,
+    delta_seconds: float,
+) -> np.ndarray:
+    """Compute BODY-FRAME angular velocity in rad/s.
+
+    For column-vector rotation matrices, ``conjugate(q_first) * q_second``
+    represents ``R_first.T @ R_second``.  Its axis is expressed in the earlier
+    sample's body axes, matching a palm-mounted gyroscope and the final
+    TASK-006 contract.
+    """
+
+    if not math.isfinite(float(delta_seconds)) or float(delta_seconds) <= 0.0:
+        raise ValueError("delta_seconds must be finite and positive")
+    first_values = np.asarray(first, dtype=np.float64)
+    second_values = np.asarray(second, dtype=np.float64)
+    valid_first, reason_first = validate_quaternion(first_values)
+    valid_second, reason_second = validate_quaternion(second_values)
+    if not valid_first:
+        raise ValueError(reason_first)
+    if not valid_second:
+        raise ValueError(reason_second)
+    delta = quaternion_multiply_wxyz(
+        quaternion_conjugate_wxyz(first_values), second_values
+    )
+    delta /= np.linalg.norm(delta)
+    if delta[0] < 0.0:
+        delta *= -1.0
+    vector = delta[1:]
+    vector_norm = float(np.linalg.norm(vector))
+    angle = 2.0 * math.atan2(vector_norm, max(-1.0, min(1.0, float(delta[0]))))
+    if vector_norm <= 1e-14 or angle <= 1e-14:
+        return np.zeros(3, dtype=np.float64)
+    return vector / vector_norm * (angle / float(delta_seconds))
+
+
 __all__ = [
     "GYROSCOPE_TOLERANCE_RAD_PER_SECOND",
     "MATRIX_QUATERNION_TOLERANCE",
@@ -268,6 +306,7 @@ __all__ = [
     "ROTATION_DETERMINANT_TOLERANCE",
     "ROTATION_ORTHOGONALITY_TOLERANCE",
     "angular_velocity_from_quaternions",
+    "angular_velocity_body_frame_from_quaternions",
     "quaternion_angular_distance_deg",
     "quaternion_conjugate_wxyz",
     "quaternion_matrix_wxyz",

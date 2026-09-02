@@ -16,6 +16,7 @@ import numpy as np
 
 VIRTUAL_GLOVE_NPZ_NAME = "virtual_glove.npz"
 VIRTUAL_GLOVE_META_NAME = "virtual_glove_meta.json"
+SENSOR_LAYOUT_NAME = "sensor_layout.json"
 KINEMATICS_NPZ_NAME = "hand_kinematics.npz"
 KINEMATICS_META_NAME = "hand_kinematics_meta.json"
 
@@ -136,6 +137,8 @@ class LayoutResult:
     passed: bool
     failures: tuple[str, ...]
     sensors: tuple[SensorDescriptor, ...]
+    representation: str = "runtime_identities"
+    physical_template_count: int | None = None
 
     @property
     def by_key(self) -> dict[tuple[str, str, str, str], SensorDescriptor]:
@@ -191,10 +194,21 @@ def load_virtual_glove_sample(run_dir: str | Path, sample_id: str) -> VirtualGlo
         raise ContractError(f"{sample_id}: missing {VIRTUAL_GLOVE_NPZ_NAME}")
     if not meta_path.is_file():
         raise ContractError(f"{sample_id}: missing {VIRTUAL_GLOVE_META_NAME}")
+    metadata = _load_json(meta_path)
+    # TASK-006A writes the reusable physical layout beside each sample rather
+    # than duplicating it into every metadata document.  Read that companion
+    # artifact as part of the serialized contract; this is a read-only QA
+    # compatibility path, not a mutation of the production output.
+    if not any(key in metadata for key in ("sensor_layout", "sensorLayout", "layout")):
+        for layout_path in (sample_dir / SENSOR_LAYOUT_NAME, Path(run_dir) / SENSOR_LAYOUT_NAME):
+            if layout_path.is_file():
+                metadata["sensor_layout"] = _load_json(layout_path)
+                metadata["sensor_layout_source"] = str(layout_path)
+                break
     return VirtualGloveSample(
         sample_id=sample_id,
         arrays=_load_npz(npz_path),
-        metadata=_load_json(meta_path),
+        metadata=metadata,
         path=sample_dir,
     )
 
@@ -285,9 +299,12 @@ def _canonical_family(value: Any) -> str | None:
         "adjacent_spread": "spread",
         "spread_angle": "spread",
         "spread_hall": "spread",
+        "hall_bend_angular": "bend",
+        "hall_spread_angular": "spread",
         "imu": "imu",
         "palm_imu": "imu",
         "palm": "imu",
+        "imu_package": "imu",
     }
     return aliases.get(normalized)
 
@@ -412,12 +429,18 @@ def _descriptor_from_entry(
     if hand is None:
         failures.append(f"{sensor_id or '<missing-id>'}: logical hand must be LEFT or RIGHT")
 
+    sensor_type_value = _first(entry, ("sensor_type", "sensorType", "type"))
+    sensor_type = sensor_type_value.strip().lower() if isinstance(sensor_type_value, str) else ""
     family_value = _first(
         entry,
         ("sensor_group", "channel_group", "family", "kind", "role", "sensor_role"),
         _first(location_dict or {}, ("sensor_group", "channel_group", "family", "kind", "role", "type")),
     )
     family = _canonical_family(family_value)
+    if family is None:
+        # TASK-006A's physical template uses the production sensor_type names
+        # as the only type-level family hint for some entries.
+        family = _canonical_family(sensor_type_value)
     if family is None:
         for token in token_lower:
             family = _canonical_family(token)
@@ -426,12 +449,18 @@ def _descriptor_from_entry(
     if family is None:
         failures.append(f"{sensor_id or '<missing-id>'}: logical sensor family is missing or invalid")
 
-    sensor_type_value = _first(entry, ("sensor_type", "sensorType", "type"))
-    sensor_type = sensor_type_value.strip().lower() if isinstance(sensor_type_value, str) else ""
-    valid_hall_types = {"hall", "magnetic", "hall_effect", "hall-effect", "hall/magnetic"}
+    valid_hall_types = {
+        "hall",
+        "magnetic",
+        "hall_effect",
+        "hall-effect",
+        "hall/magnetic",
+        "hall_bend_angular",
+        "hall_spread_angular",
+    }
     if family in {"bend", "spread"} and sensor_type not in valid_hall_types:
         failures.append(f"{sensor_id or '<missing-id>'}: Hall sensor has invalid sensor_type {sensor_type_value!r}")
-    if family == "imu" and sensor_type != "imu":
+    if family == "imu" and sensor_type not in {"imu", "imu_package"}:
         failures.append(f"{sensor_id or '<missing-id>'}: palm sensor has invalid sensor_type {sensor_type_value!r}")
     if family not in {"bend", "spread", "imu"}:
         sensor_type = sensor_type or "invalid"
@@ -519,6 +548,34 @@ def parse_sensor_layout(metadata: dict[str, Any]) -> LayoutResult:
         return LayoutResult(False, ("metadata is missing sensor_layout",), ())
 
     entries = _layout_entries(raw_layout)
+    # TASK-006A's layout is one physical placement template (15 bend + 4
+    # spread + 1 IMU) reused by both canonical tracks.  Expand it only when it
+    # is genuinely hand-independent and has exactly the expected template
+    # cardinality.  Malformed or partially hand-labelled layouts continue
+    # through the normal 40-entry validation and fail rather than being
+    # repaired.
+    template_expanded = False
+    if len(entries) == SENSORS_PER_HAND and all(grouped_hand is None for _, grouped_hand in entries):
+        has_explicit_hand = False
+        for raw_entry, _ in entries:
+            location = _first(raw_entry, ("logical_location", "logicalLocation", "location"))
+            if any(key in raw_entry for key in ("hand", "track", "side")):
+                has_explicit_hand = True
+            if isinstance(location, dict) and any(key in location for key in ("hand", "track", "side")):
+                has_explicit_hand = True
+        if not has_explicit_hand:
+            expanded: list[tuple[dict[str, Any], str | None]] = []
+            for hand in TRACK_NAMES:
+                for raw_entry, _ in entries:
+                    entry = dict(raw_entry)
+                    template_id = entry.get("sensor_id", entry.get("sensorId", entry.get("id")))
+                    if isinstance(template_id, str) and template_id.strip():
+                        entry["template_sensor_id"] = template_id.strip()
+                        entry["sensor_id"] = f"{hand}.{template_id.strip()}"
+                    entry["hand"] = hand
+                    expanded.append((entry, None))
+            entries = expanded
+            template_expanded = True
     if not entries:
         failures.append("sensor_layout must contain a non-empty sensor list")
 
@@ -572,24 +629,37 @@ def parse_sensor_layout(metadata: dict[str, Any]) -> LayoutResult:
             )
 
     declared_counts = metadata.get("sensor_counts")
+    if declared_counts is None:
+        declared_counts = metadata.get("sensor_counts_per_hand")
+    if declared_counts is None and isinstance(raw_layout, dict):
+        declared_counts = raw_layout.get("per_hand_counts")
     if declared_counts is not None:
         if not isinstance(declared_counts, dict):
             failures.append("sensor_counts must be a JSON object when present")
         else:
             expected_counts = {
-                "bend_hall": BEND_SENSOR_COUNT,
-                "spread_hall": SPREAD_SENSOR_COUNT,
-                "hall_total": HALL_SENSOR_COUNT,
-                "palm_imu": PALM_IMU_COUNT,
+                "bend_hall": (BEND_SENSOR_COUNT, "bend_hall_sensors"),
+                "spread_hall": (SPREAD_SENSOR_COUNT, "spread_hall_sensors"),
+                "hall_total": (HALL_SENSOR_COUNT, "hall_sensors_total"),
+                "palm_imu": (PALM_IMU_COUNT, "imu_packages"),
             }
-            for key, expected in expected_counts.items():
-                if key in declared_counts and declared_counts[key] != expected:
+            for key, (expected, production_key) in expected_counts.items():
+                declared = declared_counts.get(key, declared_counts.get(production_key))
+                if declared is not None and declared != expected:
                     failures.append(
-                        f"sensor_counts.{key} must be {expected}, got {declared_counts[key]!r}"
+                        f"sensor_counts.{key} must be {expected}, got {declared!r}"
                     )
 
     sensors.sort(key=lambda sensor: sensor.key + (sensor.sensor_id,))
-    return LayoutResult(not failures, tuple(sorted(failures)), tuple(sensors))
+    return LayoutResult(
+        not failures,
+        tuple(sorted(failures)),
+        tuple(sensors),
+        representation=(
+            "physical_template_expanded" if template_expanded else "runtime_identities"
+        ),
+        physical_template_count=SENSORS_PER_HAND if template_expanded else None,
+    )
 
 
 def validate_sample_contract(sample: VirtualGloveSample) -> dict[str, Any]:
@@ -768,6 +838,7 @@ __all__ = [
     "VirtualGloveSample",
     "VIRTUAL_GLOVE_META_NAME",
     "VIRTUAL_GLOVE_NPZ_NAME",
+    "SENSOR_LAYOUT_NAME",
     "canonical_track_order",
     "list_sample_ids",
     "load_kinematics_sample",

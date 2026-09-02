@@ -23,6 +23,8 @@ from .orientation import (
     QUATERNION_NORM_TOLERANCE,
     ROTATION_DETERMINANT_TOLERANCE,
     ROTATION_ORTHOGONALITY_TOLERANCE,
+    angular_velocity_body_frame_from_quaternions,
+    angular_velocity_from_quaternions,
     quaternion_angular_distance_deg,
     quaternion_matrix_wxyz,
     quaternion_wxyz_from_matrix,
@@ -140,6 +142,17 @@ def _gyro_checks() -> dict[str, bool]:
         (0.0, 2.0),
     )
     expected_x = np.asarray([np.pi / 2.0, 0.0, 0.0])
+    initial_matrix = rotation_matrix_xyz(35.0, -20.0, 15.0)
+    local_matrix = rotation_matrix_axis("Y", 30.0)
+    initial_quaternion = quaternion_wxyz_from_matrix(initial_matrix)
+    current_quaternion = quaternion_wxyz_from_matrix(initial_matrix @ local_matrix)
+    body_expected = np.asarray([0.0, np.pi / 6.0 / 0.5, 0.0])
+    body_direct = angular_velocity_body_frame_from_quaternions(
+        initial_quaternion, current_quaternion, 0.5
+    )
+    legacy_world = angular_velocity_from_quaternions(
+        initial_quaternion, current_quaternion, 0.5
+    )
     return {
         "zero_to_90_z_in_one_second": bool(
             np.allclose(velocities[1, 0], expected_z, atol=GYROSCOPE_TOLERANCE_RAD_PER_SECOND, rtol=0.0)
@@ -148,6 +161,17 @@ def _gyro_checks() -> dict[str, bool]:
             np.allclose(direct_x[1, 0], expected_x, atol=GYROSCOPE_TOLERANCE_RAD_PER_SECOND, rtol=0.0)
         ),
         "initial_velocity_row_is_missing": bool(np.isnan(velocities[0]).all()),
+        "pre_rotated_body_frame_matches_local_delta": bool(
+            np.allclose(
+                body_direct,
+                body_expected,
+                atol=GYROSCOPE_TOLERANCE_RAD_PER_SECOND,
+                rtol=0.0,
+            )
+        ),
+        "legacy_world_helper_is_distinct_after_pre_rotation": bool(
+            np.linalg.norm(legacy_world - body_expected) > 1e-8
+        ),
     }
 
 
