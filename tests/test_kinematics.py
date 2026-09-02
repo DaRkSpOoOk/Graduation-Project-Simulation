@@ -36,6 +36,7 @@ from kinematics import (
 )
 from kinematics.extractor import POSE_BEARING_STATES
 from kinematics.geometry import (
+    MIN_PALM_LANDMARK_SEPARATION_RATIO,
     MIN_PROJECTED_NORM,
     MIN_SPREAD_PROJECTION_ANGLE_DEG,
     orthonormality_error,
@@ -826,6 +827,154 @@ class TestSpreadConditioning(unittest.TestCase):
             position = position + length * direction
             joints[chain[step + 2]] = position
         return joints
+
+
+class TestCoincidentPalmLandmarks(unittest.TestCase):
+    """TASK-005E2. Two palm landmarks at one point cannot define a palm.
+
+    The three-vector frame construction does not catch this on its own: with a
+    coincident index and middle MCP, ``middle_MCP - wrist`` and
+    ``index_MCP - pinky_MCP`` are both still non-zero and non-parallel, so a
+    fully finite orthonormal frame comes out of a collapsed palm. The
+    landmarks are therefore tested for distinctness directly.
+
+    The rule is a numerical-degeneracy bound (1e-3 of palm length, ~4200x the
+    float32 difference-rounding floor), not an anatomical one, and no fixture
+    identifier or coordinate appears in it.
+    """
+
+    @staticmethod
+    def _with_mcp_separation(ratio: float) -> np.ndarray:
+        """Flat hand whose index MCP sits ``ratio`` * palm length from middle."""
+
+        joints = flat_hand()
+        palm_length = float(np.linalg.norm(joints[9] - joints[0]))
+        joints[5] = joints[9] + np.array([-ratio * palm_length, 0.0, 0.0])
+        return joints
+
+    def test_exactly_coincident_mcps_are_rejected(self) -> None:
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        frame, flags = build_palm_frame(joints, "right")
+        self.assertIsNone(frame)
+        self.assertTrue(any(f.startswith("PALM_LANDMARKS_COINCIDENT") for f in flags))
+        self.assertIn("index_MCP_middle_MCP", flags[0])
+
+    def test_the_frame_would_otherwise_have_looked_valid(self) -> None:
+        """Guards the reason this check is needed at all.
+
+        With coincident MCPs the two axis-defining vectors stay non-zero and
+        non-parallel, so without the landmark test a finite frame is produced.
+        """
+
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        distal = joints[9] - joints[0]
+        lateral_raw = joints[5] - joints[17]
+        self.assertGreater(float(np.linalg.norm(distal)), 1e-6)
+        self.assertGreater(float(np.linalg.norm(lateral_raw)), 1e-6)
+        self.assertGreater(float(np.linalg.norm(np.cross(distal, lateral_raw))), 1e-6)
+
+    def test_every_landmark_pair_is_covered(self) -> None:
+        for coincide_with, moved in ((0, 5), (0, 9), (0, 17), (5, 9), (5, 17), (9, 17)):
+            joints = flat_hand()
+            joints[moved] = joints[coincide_with].copy()
+            frame, flags = build_palm_frame(joints, "right")
+            self.assertIsNone(frame, f"joint {moved} == joint {coincide_with} was accepted")
+            self.assertTrue(
+                any(
+                    f.startswith("PALM_LANDMARKS_COINCIDENT")
+                    or f in ("PALM_AXIS_ZERO_LENGTH", "PALM_POINTS_COLLINEAR")
+                    for f in flags
+                ),
+                flags,
+            )
+
+    def test_near_but_distinct_landmarks_are_accepted(self) -> None:
+        """A valid palm is not rejected merely for having close MCPs."""
+
+        joints = self._with_mcp_separation(0.01)  # 10x the threshold
+        frame, flags = build_palm_frame(joints, "right")
+        self.assertIsNotNone(frame)
+        self.assertEqual(flags, [])
+        kinematics = compute_hand_kinematics(joints, "right", "OBSERVED")
+        self.assertTrue(kinematics.palm_frame_valid)
+
+    def test_threshold_boundary_behaves_monotonically(self) -> None:
+        for ratio in (0.5, 0.1, 0.01, 0.002):
+            self.assertIsNotNone(
+                build_palm_frame(self._with_mcp_separation(ratio), "right")[0],
+                f"ratio {ratio} above the bound should be accepted",
+            )
+        for ratio in (0.0, 1e-5, 1e-4):
+            self.assertIsNone(
+                build_palm_frame(self._with_mcp_separation(ratio), "right")[0],
+                f"ratio {ratio} below the bound should be rejected",
+            )
+
+    def test_threshold_is_the_documented_numerical_bound(self) -> None:
+        self.assertAlmostEqual(MIN_PALM_LANDMARK_SEPARATION_RATIO, 1e-3, places=12)
+        # comfortably above the float32 difference-rounding floor
+        self.assertGreater(
+            MIN_PALM_LANDMARK_SEPARATION_RATIO, 1000.0 * float(np.finfo(np.float32).eps)
+        )
+
+    def test_rejection_is_translation_invariant(self) -> None:
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        for offset in ([3.7, -12.0, 0.85], [0.0, 0.0, 0.0], [-100.0, 55.0, 2.0]):
+            frame, flags = build_palm_frame(joints + np.array(offset), "right")
+            self.assertIsNone(frame)
+            self.assertTrue(flags[0].startswith("PALM_LANDMARKS_COINCIDENT"))
+
+    def test_rejection_is_scale_invariant(self) -> None:
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        for scale in (0.001, 0.5, 1.0, 7.25, 1000.0):
+            frame, _ = build_palm_frame(joints * scale, "right")
+            self.assertIsNone(frame)
+        # and acceptance is scale invariant too
+        valid = self._with_mcp_separation(0.01)
+        for scale in (0.001, 1.0, 1000.0):
+            self.assertIsNotNone(build_palm_frame(valid * scale, "right")[0])
+
+    def test_mirrored_left_hand_gives_the_same_verdict(self) -> None:
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        right_frame, right_flags = build_palm_frame(joints, "right")
+        left_frame, left_flags = build_palm_frame(joints @ MIRROR.T, "left")
+        self.assertIsNone(right_frame)
+        self.assertIsNone(left_frame)
+        self.assertEqual(right_flags, left_flags)
+
+    def test_mirrored_left_hand_accepts_what_right_accepts(self) -> None:
+        joints = self._with_mcp_separation(0.01)
+        self.assertIsNotNone(build_palm_frame(joints, "right")[0])
+        self.assertIsNotNone(build_palm_frame(joints @ MIRROR.T, "left")[0])
+
+    def test_normal_synthetic_hands_remain_valid(self) -> None:
+        for joints in (straight_hand(), flat_hand(), _bent_hand()):
+            for track, points in (("right", joints), ("left", joints @ MIRROR.T)):
+                frame, flags = build_palm_frame(points, track)
+                self.assertIsNotNone(frame)
+                self.assertEqual(flags, [])
+
+    def test_rejection_propagates_to_both_validity_flags_and_nan(self) -> None:
+        joints = flat_hand()
+        joints[5] = joints[9].copy()
+        kinematics = compute_hand_kinematics(joints, "right", "OBSERVED")
+        self.assertFalse(kinematics.valid)
+        self.assertFalse(kinematics.palm_frame_valid)
+        self.assertTrue(np.isnan(kinematics.flexion_deg).all())
+        self.assertTrue(np.isnan(kinematics.spread_deg).all())
+        self.assertTrue(np.isnan(kinematics.palm_rotation).all())
+        self.assertTrue(np.isnan(kinematics.palm_quaternion).all())
+        self.assertTrue(any(f.startswith("PALM_LANDMARKS_COINCIDENT") for f in kinematics.flags))
+
+    def test_real_pilot_geometry_has_two_orders_of_magnitude_clearance(self) -> None:
+        """The tightest real pair measured over the pilot is 0.2648."""
+
+        self.assertLess(MIN_PALM_LANDMARK_SEPARATION_RATIO, 0.2648 / 100.0)
 
 
 class TestValidityFlags(unittest.TestCase):

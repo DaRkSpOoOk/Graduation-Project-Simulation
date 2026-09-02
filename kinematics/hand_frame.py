@@ -71,6 +71,7 @@ import numpy as np
 from .geometry import (
     MIN_BONE_LENGTH,
     MIN_FRAME_CROSS_NORM,
+    MIN_PALM_LANDMARK_SEPARATION_RATIO,
     safe_normalize,
 )
 from .layout import PALM_INDEX_MCP, PALM_MIDDLE_MCP, PALM_PINKY_MCP, WRIST
@@ -78,6 +79,7 @@ from .layout import PALM_INDEX_MCP, PALM_MIDDLE_MCP, PALM_PINKY_MCP, WRIST
 FLAG_PALM_NON_FINITE = "PALM_POINTS_NON_FINITE"
 FLAG_PALM_ZERO_AXIS = "PALM_AXIS_ZERO_LENGTH"
 FLAG_PALM_COLLINEAR = "PALM_POINTS_COLLINEAR"
+FLAG_PALM_COINCIDENT = "PALM_LANDMARKS_COINCIDENT"
 
 
 @dataclass(slots=True)
@@ -111,9 +113,33 @@ def build_palm_frame(joints: np.ndarray, track: str) -> tuple[PalmFrame | None, 
     if not np.isfinite(np.stack([wrist, index_mcp, middle_mcp, pinky_mcp])).all():
         return None, [FLAG_PALM_NON_FINITE]
 
+    palm_length = float(np.linalg.norm(middle_mcp - wrist))
     distal = safe_normalize(middle_mcp - wrist)
     if distal is None:
         return None, [FLAG_PALM_ZERO_AXIS]
+
+    # The four landmarks must be mutually distinct for the frame they define to
+    # mean anything. Checked on the points themselves rather than on the axes:
+    # a collapsed palm can still yield two non-parallel, non-zero axis vectors
+    # and so would otherwise produce a perfectly finite frame for geometry that
+    # cannot be a hand.
+    landmarks = (
+        ("wrist", wrist),
+        ("index_MCP", index_mcp),
+        ("middle_MCP", middle_mcp),
+        ("pinky_MCP", pinky_mcp),
+    )
+    minimum_separation = MIN_PALM_LANDMARK_SEPARATION_RATIO * palm_length
+    for first in range(len(landmarks)):
+        for second in range(first + 1, len(landmarks)):
+            name_a, point_a = landmarks[first]
+            name_b, point_b = landmarks[second]
+            separation = float(np.linalg.norm(point_a - point_b))
+            if separation < minimum_separation:
+                return None, [
+                    f"{FLAG_PALM_COINCIDENT}_{name_a}_{name_b}"
+                    f"_sep_over_palm={separation / palm_length:.3e}"
+                ]
 
     if track == "left":
         lateral_raw = pinky_mcp - index_mcp

@@ -49,6 +49,24 @@ MIN_PROJECTED_NORM = float(np.sin(np.radians(MIN_SPREAD_PROJECTION_ANGLE_DEG)))
 # frame-defining vectors are treated as collinear.
 MIN_FRAME_CROSS_NORM = 1e-6
 
+# Minimum separation between any two palm-frame-defining landmarks, expressed
+# as a fraction of the palm length ||middle_MCP - wrist||.
+#
+# Two coincident landmarks cannot define a palm, but the three-vector frame
+# construction does not necessarily notice: if the index and middle MCPs are
+# the same point, ``middle_MCP - wrist`` and ``index_MCP - pinky_MCP`` are both
+# still non-zero and non-parallel, so a fully finite orthonormal frame comes
+# out of a palm that has collapsed. The landmarks are therefore checked for
+# distinctness directly, rather than inferred from the axes they produce.
+#
+# The bound is a numerical-degeneracy limit, not an anatomical one. Joints are
+# stored as float32, whose relative precision is ~1.2e-7, so a difference of
+# two coordinates carries rounding of order 2.4e-7 relative to their
+# magnitude. 1e-3 keeps roughly 4200x that noise floor, so a surviving
+# separation is real signal rather than storage error. It is scale-relative,
+# so it is unaffected by hand size or units.
+MIN_PALM_LANDMARK_SEPARATION_RATIO = 1e-3
+
 ORTHONORMAL_TOLERANCE = 1e-5
 
 
