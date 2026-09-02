@@ -34,6 +34,8 @@ datasets/processed/**
 # Task-008 acquisition caches, archives, extracted frames and local catalogs.
 /datasets/archives/
 /datasets/raw_frames/
+/datasets/frames/
+/datasets/videos/
 /datasets/acquisition/
 /datasets/skeleton/
 /datasets/depth/

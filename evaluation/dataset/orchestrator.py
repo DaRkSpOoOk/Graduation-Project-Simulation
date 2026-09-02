@@ -278,7 +278,13 @@ def validate_stage_artifact(
                 run_metadata = json.loads(str(data["run_metadata_json"]))
                 if run_metadata.get("mode") != "full" or len(data["frame_index"]) <= 0:
                     return None
-                frames = int(len(data["frame_index"]))
+                # The raw pose NPZ holds ONE ROW PER DETECTED HAND, so a
+                # two-hand video has twice as many rows as frames. The sidecar
+                # records video frames, so the comparison must be against the
+                # number of distinct frame indices. Comparing row counts made
+                # every already-complete POSE stage look stale, which silently
+                # defeated --resume for the most expensive stage in the run.
+                frames = int(np.unique(np.asarray(data["frame_index"])).size)
         elif stage == "TRACKING":
             artifact = directory / "wilor_tracked.npz"
             if not artifact.is_file():
@@ -335,7 +341,11 @@ def validate_stage_artifact(
                 return None
         if int(sidecar.get("frames", -1)) != frames:
             return None
-    except (OSError, ValueError, KeyError, json.JSONDecodeError):
+    except Exception:  # noqa: BLE001
+        # A truncated or otherwise unreadable artifact (an interrupted write
+        # raises zipfile.BadZipFile, which is not an OSError) means "not
+        # usable", so the stage is recomputed. It must never abort the sample:
+        # a long run has to survive whatever the last interruption left behind.
         return None
     return {"artifact": str(artifact), "frames": frames, "sidecar": sidecar}
 
@@ -666,12 +676,20 @@ def process_sample(
     entry["attempts"] = int(entry.get("attempts", 0)) + 1
     entry["last_error"] = None
     source_sha = ""
+    # Per-stage wall time, so a benchmark can attribute cost rather than treat
+    # model inference as the whole job. Skipped (resumed) stages are recorded
+    # as such and never counted as compute.
+    stage_seconds: dict[str, float] = {}
+    stage_skipped: list[str] = []
+    sample_started = time.perf_counter()
     state.persist()
     try:
         source_sha = _video_source_sha(row, data_root)
         for stage_index, stage in enumerate(STAGES[start_index:], start=start_index):
+            stage_started = time.perf_counter()
             existing = validate_stage_artifact(paths, stage, row, manifest_hash, source_sha256=source_sha) if resume else None
             if existing:
+                stage_skipped.append(stage)
                 final_payload["frames"] = existing["frames"]
                 entry["status"] = STAGE_STATUS[stage]
                 entry["frames_processed"] = existing["frames"]
@@ -688,12 +706,16 @@ def process_sample(
                 payload = _run_kinematics(row, paths, manifest_hash, source_sha)
             else:
                 payload = _run_virtual_glove(row, paths, manifest_hash, source_sha)
+            stage_seconds[stage] = time.perf_counter() - stage_started
             entry["status"] = STAGE_STATUS[stage]
             entry["current_stage"] = None
             entry["frames_processed"] = int(payload.get("frames", 0))
             final_payload["frames"] = int(payload.get("frames", 0))
             state.persist()
         final_payload["status"] = entry.get("status", "PENDING")
+        final_payload["stage_seconds"] = stage_seconds
+        final_payload["stages_skipped"] = stage_skipped
+        final_payload["sample_seconds"] = time.perf_counter() - sample_started
         return final_payload
     except Exception as error:  # one bad sample is recorded, not fatal to the shard
         entry["status"] = "FAILED"
@@ -720,6 +742,9 @@ def process_sample(
             "stage": entry.get("current_stage"),
             "frames": int(entry.get("frames_processed", 0)),
             "error": str(error),
+            "stage_seconds": stage_seconds,
+            "stages_skipped": stage_skipped,
+            "sample_seconds": time.perf_counter() - sample_started,
         }
 
 
@@ -904,7 +929,11 @@ def run_worker(
 
     assets = WilorAssetPaths.resolve()
     check_assets(assets)
+    # The model is constructed ONCE here and reused for every sample in the
+    # shard; it is never rebuilt per video.
+    model_load_started = time.perf_counter()
     pipeline = load_pipeline(assets, WilorRuntimeConfig(device=device, fast_mode=False, detector_confidence=0.3, rescale_factor=2.0))
+    model_load_seconds = time.perf_counter() - model_load_started
     progress = ProgressDisplay(shard_index, num_shards, len(selected))
     results = []
     for row in selected:
@@ -915,6 +944,14 @@ def run_worker(
         results.append(result)
         progress.update(result)
     state.persist()
+    peak_vram_bytes = None
+    try:
+        import torch
+
+        if device.startswith("cuda") and torch.cuda.is_available():
+            peak_vram_bytes = int(torch.cuda.max_memory_allocated())
+    except Exception:  # noqa: BLE001 - diagnostics must never fail the run
+        peak_vram_bytes = None
     return {
         "schema_version": RUN_SCHEMA_VERSION,
         "manifest_sha256": manifest_hash,
@@ -923,6 +960,10 @@ def run_worker(
         "results": results,
         "completed": sum(result.get("status") not in {"FAILED", "SKIPPED_FAILED"} for result in results),
         "failed": sum(result.get("status") in {"FAILED", "SKIPPED_FAILED"} for result in results),
+        "model_load_seconds": model_load_seconds,
+        "model_loads": 1,
+        "peak_vram_bytes": peak_vram_bytes,
+        "worker_wall_seconds": time.perf_counter() - model_load_started,
     }
 
 

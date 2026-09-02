@@ -71,13 +71,27 @@ class TestTask008ADatasetContracts(unittest.TestCase):
         committed = load_label_records(ROOT / "datasets/manifests/karsl_core28_labels.csv")
         self.assertEqual([record.sign_id for record in validate_core28_records(committed)], list(CORE28_SIGN_IDS))
 
-    def test_committed_manifest_is_schema_only_and_portable(self) -> None:
+    def test_committed_manifest_is_populated_and_portable(self) -> None:
+        """TASK-008B populated this manifest from the official local source.
+
+        It was schema-only while the source was unavailable; the schema and
+        path-portability guarantees still hold, but emptiness no longer does.
+        """
+
         manifest = ROOT / "datasets/manifests/karsl_core28.csv"
         with manifest.open(newline="", encoding="utf-8") as handle:
             reader = csv.DictReader(handle)
             self.assertEqual(tuple(reader.fieldnames or ()), CORE28_MANIFEST_FIELDS)
-            self.assertEqual(list(reader), [])
-        self.assertEqual(__import__("evaluation.dataset.manifest", fromlist=["load_manifest"]).load_manifest(manifest), [])
+            rows = list(reader)
+        self.assertGreater(len(rows), 4000)
+        for row in rows:
+            value = row["source_relative_path"]
+            self.assertFalse(value.startswith("/"), value)
+            self.assertNotIn("/home/", value)
+        loaded = __import__(
+            "evaluation.dataset.manifest", fromlist=["load_manifest"]
+        ).load_manifest(manifest)
+        self.assertEqual(len(loaded), len(rows))
 
     def test_discovery_is_deterministic_and_uses_relative_paths(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

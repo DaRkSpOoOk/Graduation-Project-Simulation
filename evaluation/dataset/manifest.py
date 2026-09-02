@@ -242,21 +242,41 @@ def _sign_id_from_token(token: str) -> int | None:
     return value if value in CORE28_SIGN_IDS else None
 
 
-def _locate_layout(relative: Path) -> tuple[str, str, int]:
+# The official KArSL-502 archives place an extra directory between the
+# partition and the class, e.g. ``01/train/videos/0041/<file>.mp4``. A layout
+# without it is also accepted so earlier flat fixtures keep working. At most one
+# intervening segment is tolerated, which keeps the match unambiguous.
+_MAX_INTERVENING_SEGMENTS = 1
+
+
+def _locate_layout(relative: Path) -> tuple[str, str, int] | None:
     parts = relative.parts
     candidates: list[tuple[str, str, int]] = []
     for index in range(len(parts) - 2):
         signer = _signer_from_token(parts[index])
         partition = parts[index + 1].lower()
-        sign_id = _sign_id_from_token(parts[index + 2])
-        if signer and partition in _PARTITIONS and sign_id is not None:
-            candidates.append((signer, partition, sign_id))
-    if len(candidates) != 1:
+        if not signer or partition not in _PARTITIONS:
+            continue
+        for skip in range(_MAX_INTERVENING_SEGMENTS + 1):
+            position = index + 2 + skip
+            if position >= len(parts) - 1:
+                break
+            sign_id = _sign_id_from_token(parts[position])
+            if sign_id is not None:
+                candidates.append((signer, partition, sign_id))
+                break
+    unique = sorted(set(candidates))
+    if len(unique) > 1:
         raise ValueError(
-            "Expected exactly one <signer>/<train|test>/<four-digit-sign>/video layout "
-            f"for {relative.as_posix()}, found {candidates}"
+            "Ambiguous <signer>/<train|test>[/<dir>]/<four-digit-sign>/video layout "
+            f"for {relative.as_posix()}, found {unique}"
         )
-    return candidates[0]
+    if not unique:
+        # No Core-28 class anchor in this path. The official root also holds the
+        # number and extended-letter chapters, so this is an ordinary skip, not
+        # a malformed layout. Genuine ambiguity still raises above.
+        return None
+    return unique[0]
 
 
 def build_manifest_from_video_root(
@@ -291,8 +311,11 @@ def build_manifest_from_video_root(
     for path in candidates:
         relative = path.relative_to(videos)
         key = _locate_layout(relative)
+        if key is None:
+            continue
         parsed[path] = key
         groups.setdefault(key, []).append(path)
+    candidates = [path for path in candidates if path in parsed]
 
     rows: list[dict[str, str]] = []
     for path in candidates:
