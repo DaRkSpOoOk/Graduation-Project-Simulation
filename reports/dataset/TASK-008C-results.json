@@ -1,0 +1,76 @@
+{
+  "not_done": [
+    "full 4222-sample extraction (handed to the user)",
+    "post-extraction QA/report/finalization (pending the user's run)",
+    "LSTM training",
+    "TASK-009",
+    "extended letters",
+    "numbers"
+  ],
+  "preflight": {
+    "absolute_paths": 0,
+    "all_checks": "18/18 PASS",
+    "checkpoint_present": true,
+    "classes": 28,
+    "dataset_root": "/home/hatim/datasets/KArSL-502",
+    "duplicate_sample_ids": 0,
+    "duplicate_source_paths": 0,
+    "frame_stats": {
+      "max": 70,
+      "mean": 19.8,
+      "median": 20,
+      "min": 9,
+      "p95": 29
+    },
+    "free_disk_gib": 868.5,
+    "git_commit": "642a560",
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "manifest_rows": 4222,
+    "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+    "source_bytes": 1794280889,
+    "source_files_present": "4222/4222",
+    "total_frames": 83659,
+    "vram_gib": 4.0,
+    "workbook_sha256": "c13717c549b8cb8cfa465237a3f7dfed73f84149ca5c448b2b253fd96321b14e",
+    "worktree": "clean"
+  },
+  "production_sanity_check": {
+    "bend_valid_fraction": 1.0,
+    "failures": 0,
+    "frames": 612,
+    "gpu_temp_c": 81,
+    "imu_valid_fraction": 1.0,
+    "note": "these 24 samples are durable and will be SKIPPED by --resume",
+    "output_equals_manifest_frames": true,
+    "peak_vram_observed_mib": 3090,
+    "per_sample_qa": "24/24 PASS",
+    "rolling_fps": 3.68,
+    "samples_processed": 24,
+    "spread_valid_fraction": 0.7843,
+    "tracking_states": {
+      "OBSERVED": 1224
+    }
+  },
+  "qa_defect_found_and_fixed": {
+    "defect": "compared raw pose frame_index rows directly to per-frame stages",
+    "file": "evaluation/dataset/qa.py",
+    "fix": "compare distinct pose frame indices and per-frame timestamps",
+    "impact": "raw pose stores one row per detected hand, so all 4222 samples would have failed QA",
+    "verified": "24/24 production samples pass; 8/8 sampled two-hand videos would have failed before"
+  },
+  "resume_fixes_verified_present": {
+    "corrupt_artifact_recompute": "orchestrator.py:~345",
+    "distinct_frame_indices": "orchestrator.py:287"
+  },
+  "stacked_history": [
+    "PR #22 TASK-008A a7d41b1e",
+    "PR #23 TASK-008B 642a560",
+    "TASK-008C"
+  ],
+  "status": "PREPARED — full extraction handed to the user",
+  "task": "TASK-008C",
+  "tests": {
+    "compileall": "0 errors",
+    "unit": "474 passed, 0 failed"
+  }
+}

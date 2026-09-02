@@ -98,8 +98,26 @@ def _validate_sample(
         raise DatasetQAError(
             f"{sample_id}: frame count {frames} != manifest {row['frame_count']}"
         )
-    _assert_equal("frame_index", np.asarray(pose["frame_index"]), frame_index, sample_id)
-    _assert_equal("timestamp_seconds", np.asarray(pose["timestamp_seconds"]), timestamps, sample_id)
+    # The raw pose NPZ holds ONE ROW PER DETECTED HAND, so a two-hand video has
+    # roughly twice as many rows as frames. Comparing its row vector directly
+    # against the per-frame vectors would reject every two-hand sample -- the
+    # same mistake TASK-008B fixed in the resume validator. The meaningful
+    # contract is that the DISTINCT pose frames, and the timestamp each frame
+    # carries, match the downstream per-frame stages exactly.
+    pose_frames = np.asarray(pose["frame_index"])
+    pose_times = np.asarray(pose["timestamp_seconds"])
+    distinct_pose_frames = np.unique(pose_frames)
+    _assert_equal("frame_index", distinct_pose_frames, frame_index, sample_id)
+    for value in distinct_pose_frames:
+        rows_for_frame = pose_times[pose_frames == value]
+        if rows_for_frame.size and not np.all(rows_for_frame == rows_for_frame[0]):
+            raise DatasetQAError(
+                f"{sample_id}: pose rows for frame {int(value)} disagree on timestamp"
+            )
+    pose_frame_times = np.array(
+        [pose_times[pose_frames == value][0] for value in distinct_pose_frames]
+    )
+    _assert_equal("timestamp_seconds", pose_frame_times, timestamps, sample_id)
     _assert_equal("frame_index", np.asarray(tracking["frame_index"]), frame_index, sample_id)
     _assert_equal("frame_index", np.asarray(glove["frame_index"]), frame_index, sample_id)
     _assert_equal("timestamp_seconds", np.asarray(tracking["timestamp_seconds"]), timestamps, sample_id)
