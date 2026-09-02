@@ -21,12 +21,22 @@ build/
 .DS_Store
 
 # Data and model artifacts (do not commit)
-datasets/raw/**
+/datasets/raw/
+/datasets/external/
+/datasets/downloads/
+/datasets/cache/
 datasets/interim/**
 datasets/processed/**
 !datasets/raw/.gitkeep
 !datasets/interim/.gitkeep
 !datasets/processed/.gitkeep
+
+# Task-008 acquisition caches, archives, extracted frames and local catalogs.
+/datasets/archives/
+/datasets/raw_frames/
+/datasets/acquisition/
+/datasets/skeleton/
+/datasets/depth/
 
 *.mp4
 *.avi
@@ -45,10 +55,16 @@ datasets/processed/**
 *.safetensors
 *.7z
 *.zip
+*.tar
+*.tar.gz
+*.tar.zst
+*.rar
 *.task
 
 # Runtime outputs
 runs/
 outputs/
-artifacts/
+/artifacts/generated/
 logs/
+/checkpoints/
+/models/generated/

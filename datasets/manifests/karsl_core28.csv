@@ -1,0 +1,1 @@
+sample_id,source_dataset,dataset_version,modality,sign_id,label_ar,label_en_if_available,label_index,signer_id,official_partition,repetition_id,source_relative_path,source_file_name,source_url,source_sha256,source_size_bytes,container,width,height,fps,frame_count,duration_seconds,skeleton_available

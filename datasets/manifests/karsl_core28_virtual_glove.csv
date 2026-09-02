@@ -1,0 +1,1 @@
+sample_id,sign_id,label_ar,label_index,signer_id,official_partition,source_relative_path,source_sha256,frame_count,pose_status,tracking_status,kinematics_status,virtual_glove_status,bend_valid_fraction,spread_valid_fraction,imu_valid_fraction
