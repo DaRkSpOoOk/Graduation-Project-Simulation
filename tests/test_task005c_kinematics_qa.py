@@ -55,6 +55,7 @@ def _build_base_arrays(frame_count: int = 4) -> tuple[dict[str, np.ndarray], dic
         "tracking_state_code": tracked_state.copy(),
         "source_raw_detection_index": tracked_source.copy(),
         "valid_kinematics": valid.copy(),
+        "valid_palm_frame": valid.copy(),
         "flexion_deg": flexion.copy(),
         "adjacent_spread_deg": spread.copy(),
         "palm_rotation_matrix": rotation.copy(),
@@ -211,6 +212,26 @@ class TestTask005CKinematicsQa(unittest.TestCase):
 
         summary, _ = _run_validator(mutate)
         self.assertGreater(summary["non_finite_violations"]["count"], 0)
+
+    def test_partial_channels_allowed_with_valid_palm_frame(self) -> None:
+        def mutate(kine, *_):
+            kine["valid_kinematics"][0, 0] = False
+            kine["valid_palm_frame"][0, 0] = True
+            kine["adjacent_spread_deg"][0, 0, 0] = np.nan
+
+        summary, _ = _run_validator(mutate)
+        self.assertTrue(summary["passed"])
+        self.assertEqual(summary["invalid_mask_violations"]["count"], 0)
+        self.assertEqual(len(summary["invalid_mask_violations"]["partial_channel_instances"]), 1)
+
+    def test_production_metadata_vocabulary_is_accepted(self) -> None:
+        def mutate(_kine, _tracked, meta):
+            meta["track_order"] = ["left", "right"]
+            meta["quaternion_convention"] = "normalized; sign fixed so w >= 0"
+            meta["quaternion_order"] = "wxyz"
+
+        summary, _ = _run_validator(mutate)
+        self.assertTrue(summary["contract_validation"]["passed"])
 
     def test_12_non_orthogonal_rotation_matrix(self) -> None:
         def mutate(kine, *_):

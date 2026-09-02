@@ -23,6 +23,7 @@ REQUIRED_ARRAYS: dict[str, tuple[int, ... | str]] = {
     "tracking_state_code": ("F", 2),
     "source_raw_detection_index": ("F", 2),
     "valid_kinematics": ("F", 2),
+    "valid_palm_frame": ("F", 2),
     "flexion_deg": ("F", 2, 5, 3),
     "adjacent_spread_deg": ("F", 2, 4),
     "palm_rotation_matrix": ("F", 2, 3, 3),
@@ -80,7 +81,9 @@ def _shape_matches(shape: tuple[int, ...], spec: tuple[int, ... | str], frame_co
 
 def _meta_track_order_ok(value: Any) -> bool:
     if isinstance(value, (list, tuple)):
-        return tuple(str(v) for v in value) == TRACK_NAMES
+        # TASK-004/TASK-005A store the same fixed order in lowercase, while
+        # the human-facing QA contract names the tracks in uppercase.
+        return tuple(str(v).upper() for v in value) == TRACK_NAMES
     return False
 
 
@@ -90,12 +93,17 @@ def _meta_finger_order_ok(value: Any) -> bool:
     return False
 
 
-def _meta_quaternion_ok(value: Any) -> bool:
+def _meta_quaternion_ok(value: Any, order: Any = None) -> bool:
     if isinstance(value, (list, tuple)):
-        return tuple(str(v) for v in value) == ("w", "x", "y", "z")
+        return tuple(str(v).lower() for v in value) == ("w", "x", "y", "z")
     if isinstance(value, str):
         normalized = value.replace(" ", "").lower()
-        return normalized in {"[w,x,y,z]", "wxyz", "(w,x,y,z)"}
+        if normalized in {"[w,x,y,z]", "wxyz", "(w,x,y,z)"}:
+            return True
+    # TASK-005A carries the order in a separate explicit field and uses the
+    # convention field for normalization/sign policy prose.
+    if isinstance(order, str):
+        return order.replace(" ", "").lower() in {"wxyz", "[w,x,y,z]", "(w,x,y,z)"}
     return False
 
 
@@ -121,9 +129,10 @@ def validate_sample_contract(sample: SampleKinematics) -> dict[str, Any]:
                 f"{name} shape mismatch: expected {spec} with F={frame_count}, got {shape}"
             )
 
-    valid_dtype = np.asarray(arrays["valid_kinematics"]).dtype
-    if valid_dtype != np.bool_:
-        failures.append(f"valid_kinematics must be bool, got {valid_dtype}")
+    for validity_name in ("valid_kinematics", "valid_palm_frame"):
+        validity_dtype = np.asarray(arrays[validity_name]).dtype
+        if validity_dtype != np.bool_:
+            failures.append(f"{validity_name} must be bool, got {validity_dtype}")
 
     if frame_count > 1:
         frame_diff = np.diff(frame_index.astype(np.int64, copy=False))
@@ -147,10 +156,14 @@ def validate_sample_contract(sample: SampleKinematics) -> dict[str, Any]:
         failures.append(
             f"metadata finger_order must be {list(FINGER_NAMES)}, got {sample.metadata.get('finger_order')!r}"
         )
-    if not _meta_quaternion_ok(sample.metadata.get("quaternion_convention")):
+    if not _meta_quaternion_ok(
+        sample.metadata.get("quaternion_convention"),
+        sample.metadata.get("quaternion_order"),
+    ):
         failures.append(
             "metadata quaternion_convention must encode [w, x, y, z], "
-            f"got {sample.metadata.get('quaternion_convention')!r}"
+            f"got convention={sample.metadata.get('quaternion_convention')!r}, "
+            f"order={sample.metadata.get('quaternion_order')!r}"
         )
 
     return {

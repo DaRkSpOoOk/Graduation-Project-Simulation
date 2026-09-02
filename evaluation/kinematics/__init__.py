@@ -10,6 +10,15 @@ from .benchmark_contract import (
     validate_result,
 )
 from .metrics import evaluate_sequence, quaternion_angle_error_deg, rotation_angle_error_deg
+from .pilot_contract import (
+    DEFAULT_MANIFEST,
+    EXPECTED_SAMPLE_COUNT,
+    EXPECTED_TOTAL_FRAMES,
+    FROZEN_KINEMATICS_COMMIT,
+    PilotInputError,
+    validate_frozen_pilot_inputs,
+)
+from .production_adapter import ProductionSyntheticResult, extract_production_sequence
 from .synthetic_hand import (
     BENCHMARK_JOINT_NAMES,
     BenchmarkCase,
@@ -54,4 +63,12 @@ __all__ = [
     "rotation_matrix_axis",
     "rotation_matrix_xyz",
     "validate_result",
+    "DEFAULT_MANIFEST",
+    "EXPECTED_SAMPLE_COUNT",
+    "EXPECTED_TOTAL_FRAMES",
+    "FROZEN_KINEMATICS_COMMIT",
+    "PilotInputError",
+    "ProductionSyntheticResult",
+    "extract_production_sequence",
+    "validate_frozen_pilot_inputs",
 ]

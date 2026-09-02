@@ -41,13 +41,41 @@ def _iter_valid_positions(sample: SampleKinematics):
                 yield row, hand, int(frames[row])
 
 
+def _iter_valid_palm_positions(sample: SampleKinematics):
+    """Yield rows with a valid canonical palm frame.
+
+    TASK-005A deliberately separates strict all-channel validity from the
+    orientation/palm-frame validity flag.  Rotation QA therefore includes
+    the 215 observed hand instances whose spread channels are undefined but
+    whose palm frame and quaternion remain finite.
+    """
+
+    valid = np.asarray(sample.arrays["valid_palm_frame"], dtype=bool)
+    frames = np.asarray(sample.arrays["frame_index"], dtype=np.int64)
+    for row in range(valid.shape[0]):
+        for hand in range(valid.shape[1]):
+            if valid[row, hand]:
+                yield row, hand, int(frames[row])
+
+
 def _hand_name(index: int) -> str:
     return HAND_NAMES[index]
 
 
 def _state_nan_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Check the TASK-005D channel-level validity contract.
+
+    ``valid_kinematics`` remains a strict convenience flag: it is true only
+    when every float channel is finite.  ``valid_palm_frame`` independently
+    certifies the rotation/quaternion channels.  A strict-false/palm-true
+    instance may therefore retain finite flexion and orientation while only
+    the geometrically undefined spread channels are NaN.  When the palm frame
+    is invalid, all derived float fields must be NaN.
+    """
+
     invalid_mask_violations: list[dict[str, Any]] = []
     non_finite_violations: list[dict[str, Any]] = []
+    partial_channel_instances: list[dict[str, Any]] = []
 
     fields = (
         "flexion_deg",
@@ -58,6 +86,7 @@ def _state_nan_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any], 
 
     for sample in samples:
         valid = np.asarray(sample.arrays["valid_kinematics"], dtype=bool)
+        palm_valid = np.asarray(sample.arrays["valid_palm_frame"], dtype=bool)
         frame_index = np.asarray(sample.arrays["frame_index"], dtype=np.int64)
         for row in range(valid.shape[0]):
             for hand in range(valid.shape[1]):
@@ -66,13 +95,37 @@ def _state_nan_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any], 
                     "frame_index": int(frame_index[row]),
                     "track": _hand_name(hand),
                 }
+                finite_by_field: dict[str, bool] = {}
                 for field in fields:
                     view = np.asarray(sample.arrays[field])[row, hand]
+                    finite_by_field[field] = bool(np.isfinite(view).all())
+                    if valid[row, hand] and not finite_by_field[field]:
+                        non_finite_violations.append({**reference, "field": field})
+
+                if valid[row, hand] and not palm_valid[row, hand]:
+                    invalid_mask_violations.append(
+                        {**reference, "field": "validity_flags", "reason": "strict_valid_without_palm_frame"}
+                    )
+                if palm_valid[row, hand]:
+                    for field in ("palm_rotation_matrix", "palm_quaternion_wxyz"):
+                        if not finite_by_field[field]:
+                            non_finite_violations.append({**reference, "field": field})
                     if not valid[row, hand]:
+                        partial_channel_instances.append(
+                            {
+                                **reference,
+                                "finite_fields": [field for field, finite in finite_by_field.items() if finite],
+                                "non_finite_fields": [field for field, finite in finite_by_field.items() if not finite],
+                            }
+                        )
+                else:
+                    # A missing/invalid palm frame has no trustworthy derived
+                    # channel. This preserves the old strict rule for actual
+                    # no-pose and frame-degenerate rows.
+                    for field in fields:
+                        view = np.asarray(sample.arrays[field])[row, hand]
                         if np.isfinite(view).any():
                             invalid_mask_violations.append({**reference, "field": field})
-                    elif not np.isfinite(view).all():
-                        non_finite_violations.append({**reference, "field": field})
 
     invalid_mask_violations.sort(key=lambda x: (x["sample_id"], x["frame_index"], x["track"], x["field"]))
     non_finite_violations.sort(key=lambda x: (x["sample_id"], x["frame_index"], x["track"], x["field"]))
@@ -81,6 +134,7 @@ def _state_nan_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any], 
         {
             "count": len(invalid_mask_violations),
             "violations": invalid_mask_violations,
+            "partial_channel_instances": partial_channel_instances,
         },
         {
             "count": len(non_finite_violations),
@@ -99,7 +153,7 @@ def _rotation_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
 
     for sample in samples:
         matrices = np.asarray(sample.arrays["palm_rotation_matrix"], dtype=np.float64)
-        for row, hand, frame in _iter_valid_positions(sample):
+        for row, hand, frame in _iter_valid_palm_positions(sample):
             matrix = matrices[row, hand]
             if not np.isfinite(matrix).all():
                 non_finite += 1
@@ -137,13 +191,14 @@ def _rotation_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
 def _quaternion_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
     norm_errors: list[float] = []
     angle_errors: list[float] = []
+    element_errors: list[float] = []
     non_finite = 0
     worst_angle: dict[str, Any] | None = None
 
     for sample in samples:
         quats = np.asarray(sample.arrays["palm_quaternion_wxyz"], dtype=np.float64)
         mats = np.asarray(sample.arrays["palm_rotation_matrix"], dtype=np.float64)
-        for row, hand, frame in _iter_valid_positions(sample):
+        for row, hand, frame in _iter_valid_palm_positions(sample):
             quat = quats[row, hand]
             matrix = mats[row, hand]
             if not np.isfinite(quat).all():
@@ -155,6 +210,7 @@ def _quaternion_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
             if norm == 0.0 or not np.isfinite(matrix).all():
                 continue
             q_matrix = quaternion_to_matrix_wxyz(quat / norm)
+            element_errors.append(float(np.max(np.abs(matrix - q_matrix))))
             angle = rotation_delta_degrees(q_matrix, matrix)
             angle_errors.append(angle)
             if worst_angle is None or angle > worst_angle["value_deg"]:
@@ -168,6 +224,7 @@ def _quaternion_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
     return {
         "norm_abs_error": percentile_summary(norm_errors),
         "non_finite_quaternions": non_finite,
+        "matrix_quaternion_element_abs_error": percentile_summary(element_errors),
         "matrix_quaternion_angular_disagreement_deg": percentile_summary(angle_errors),
         "worst_matrix_quaternion_disagreement": worst_angle,
     }
@@ -179,14 +236,11 @@ def _distribution_checks(samples: list[SampleKinematics]) -> tuple[dict[str, Any
     suspicious: list[dict[str, Any]] = []
 
     for sample in samples:
-        valid = np.asarray(sample.arrays["valid_kinematics"], dtype=bool)
         frames = np.asarray(sample.arrays["frame_index"], dtype=np.int64)
         flex = np.asarray(sample.arrays["flexion_deg"], dtype=np.float64)
         spread = np.asarray(sample.arrays["adjacent_spread_deg"], dtype=np.float64)
-        for row in range(valid.shape[0]):
+        for row in range(flex.shape[0]):
             for hand in range(2):
-                if not valid[row, hand]:
-                    continue
                 for finger in range(5):
                     for joint in range(3):
                         value = float(flex[row, hand, finger, joint])
@@ -243,16 +297,13 @@ def _temporal_checks(samples: list[SampleKinematics]) -> dict[str, Any]:
     orient_deltas: dict[int, list[tuple[float, str, int]]] = {0: [], 1: []}
 
     for sample in samples:
-        valid = np.asarray(sample.arrays["valid_kinematics"], dtype=bool)
         frames = np.asarray(sample.arrays["frame_index"], dtype=np.int64)
         flex = np.asarray(sample.arrays["flexion_deg"], dtype=np.float64)
         spread = np.asarray(sample.arrays["adjacent_spread_deg"], dtype=np.float64)
         rot = np.asarray(sample.arrays["palm_rotation_matrix"], dtype=np.float64)
 
-        for row in range(1, valid.shape[0]):
+        for row in range(1, flex.shape[0]):
             for hand in range(2):
-                if not (valid[row - 1, hand] and valid[row, hand]):
-                    continue
                 for finger in range(5):
                     for joint in range(3):
                         prev = flex[row - 1, hand, finger, joint]
