@@ -1,8 +1,8 @@
-"""Interactive playback foundation for one stored virtual-glove sequence.
+"""Core visualizer contracts plus non-graphical Core-28 queue components.
 
-The package deliberately keeps sequence loading/playback independent from any
-Arabic keyboard or recognizer.  Those later components can resolve a
-``sample_id`` and hand it to :func:`load_sequence`.
+Rendering/playback and keyboard/catalog/queue code remain separate subpackages.
+The package-level exports keep the TASK-007A renderer API available while the
+TASK-007B subpackages provide independent text-to-exemplar resolution.
 """
 
 from .contract import (
@@ -33,6 +33,10 @@ __all__ = [
     "SensorReading",
     "SensorSpec",
     "TRACK_ORDER",
+    "catalog",
+    "keyboard",
     "load_sequence",
+    "mapping",
+    "queue",
     "validate_sensor_layout",
 ]
