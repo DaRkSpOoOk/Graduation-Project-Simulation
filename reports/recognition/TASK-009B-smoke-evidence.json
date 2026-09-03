@@ -1,0 +1,101 @@
+{
+  "artifact_sizes_bytes": {
+    "best.pt": 6274048,
+    "history.json": 677,
+    "last.pt": 6283770,
+    "predictions.json": 455918,
+    "result.json": 72596
+  },
+  "duration_control_a": {
+    "chance_accuracy": 0.03571428571428571,
+    "note": "Control A is cheap and already complete: it is a closed-form classical baseline, not a long training run.",
+    "oracle_signer_from_length_all": 0.7806726669824727,
+    "per_fold_test": {
+      "01": {
+        "accuracy": 0.037089871611982884,
+        "in_sample_oracle_class_from_length": 0.10271041369472182,
+        "macro_f1": 0.009524553079396725
+      },
+      "02": {
+        "accuracy": 0.03568879371877231,
+        "in_sample_oracle_class_from_length": 0.08850820842255532,
+        "macro_f1": 0.0038344962463427654
+      },
+      "03": {
+        "accuracy": 0.042283298097251586,
+        "in_sample_oracle_class_from_length": 0.11346018322762509,
+        "macro_f1": 0.008823656166074603
+      }
+    }
+  },
+  "purpose": "evidence that the TASK-009B pipeline runs end to end. These are NOT scientific results: the smoke run is 2 epochs and the model has not converged. The user runs the real training.",
+  "schema_version": "task009b_smoke_evidence_v1",
+  "smoke_training_run": {
+    "command": "scripts/run_task009b_lstm_baseline.py --fold 01 --feature-set full --quaternion-policy absolute --pooling masked_mean --seed 1337 --epochs 2 --batch-size 32",
+    "environment": {
+      "device": "cuda",
+      "git_commit": "19972cc77ed7345b599c5881d010386c8191bea0",
+      "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+      "python": "3.14.4",
+      "torch": "2.13.0+cu130"
+    },
+    "experiment": {
+      "contract_version": "task009a_sequence_input_v1",
+      "feature_set": "full",
+      "fold": "01",
+      "input_policy": "values_and_feature_valid",
+      "pooling": "masked_mean",
+      "quaternion_policy": "absolute",
+      "seed": 1337
+    },
+    "history": [
+      {
+        "best_validation_macro_f1": 0.022753445792857912,
+        "epoch": 1,
+        "epoch_seconds": 4.915341432992136,
+        "train_accuracy": 0.06492411467116357,
+        "train_loss": 3.240433163023719,
+        "validation_accuracy": 0.09821428571428571,
+        "validation_loss": 2.9785153354917253,
+        "validation_macro_f1": 0.022753445792857912
+      },
+      {
+        "best_validation_macro_f1": 0.20255485423608938,
+        "epoch": 2,
+        "epoch_seconds": 4.192776459996821,
+        "train_accuracy": 0.15134907251264756,
+        "train_loss": 2.6530754932062623,
+        "validation_accuracy": 0.27901785714285715,
+        "validation_loss": 2.149990601199014,
+        "validation_macro_f1": 0.20255485423608938
+      }
+    ],
+    "model_config": {
+      "bidirectional": false,
+      "contract_version": "task009a_sequence_input_v1",
+      "dropout": 0.3,
+      "feature_set": "full",
+      "hidden_size": 192,
+      "input_policy": "values_and_feature_valid",
+      "input_projection": null,
+      "num_classes": 28,
+      "num_layers": 2,
+      "pooling": "masked_mean"
+    },
+    "parameter_count": 521500,
+    "peak_gpu_mib": 85.1669921875,
+    "scope": "full fold S01 (2372 train / 448 validation / 1402 test), 2 epochs",
+    "seconds_per_epoch": 4.581090896506794,
+    "verified": [
+      "CUDA forward/backward runs",
+      "loss is finite and decreases (3.2404 -> 2.6531)",
+      "validation macro F1 improves (0.0228 -> 0.2026)",
+      "best/last checkpoints written atomically",
+      "resume continues from the stored epoch with RNG restored",
+      "evaluate-only re-scores an existing checkpoint",
+      "status reports experiment state",
+      "a COMPLETE experiment is skipped rather than silently overwritten"
+    ],
+    "wall_seconds": 9.162181793013588
+  }
+}
