@@ -1,0 +1,1122 @@
+{
+  "aggregate": {
+    "by_class": {
+      "0032": {
+        "bend_total": 101430,
+        "bend_valid": 100890,
+        "bend_valid_fraction": 0.9946761313220941,
+        "frames": 3381,
+        "imu_total": 6762,
+        "imu_valid": 6726,
+        "imu_valid_fraction": 0.9946761313220941,
+        "label_ar": "ا",
+        "spread_total": 27048,
+        "spread_valid": 19520,
+        "spread_valid_fraction": 0.7216799763383615,
+        "videos": 150
+      },
+      "0033": {
+        "bend_total": 93360,
+        "bend_valid": 93315,
+        "bend_valid_fraction": 0.9995179948586118,
+        "frames": 3112,
+        "imu_total": 6224,
+        "imu_valid": 6221,
+        "imu_valid_fraction": 0.9995179948586118,
+        "label_ar": "ب",
+        "spread_total": 24896,
+        "spread_valid": 15954,
+        "spread_valid_fraction": 0.6408258354755784,
+        "videos": 152
+      },
+      "0034": {
+        "bend_total": 85740,
+        "bend_valid": 85740,
+        "bend_valid_fraction": 1.0,
+        "frames": 2858,
+        "imu_total": 5716,
+        "imu_valid": 5716,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ت",
+        "spread_total": 22864,
+        "spread_valid": 22734,
+        "spread_valid_fraction": 0.9943142057382786,
+        "videos": 150
+      },
+      "0035": {
+        "bend_total": 84930,
+        "bend_valid": 84885,
+        "bend_valid_fraction": 0.9994701518897916,
+        "frames": 2831,
+        "imu_total": 5662,
+        "imu_valid": 5659,
+        "imu_valid_fraction": 0.9994701518897916,
+        "label_ar": "ث",
+        "spread_total": 22648,
+        "spread_valid": 21783,
+        "spread_valid_fraction": 0.9618067820558107,
+        "videos": 150
+      },
+      "0036": {
+        "bend_total": 95910,
+        "bend_valid": 95715,
+        "bend_valid_fraction": 0.9979668439161714,
+        "frames": 3197,
+        "imu_total": 6394,
+        "imu_valid": 6381,
+        "imu_valid_fraction": 0.9979668439161714,
+        "label_ar": "ج",
+        "spread_total": 25576,
+        "spread_valid": 25342,
+        "spread_valid_fraction": 0.9908507976227714,
+        "videos": 158
+      },
+      "0037": {
+        "bend_total": 89130,
+        "bend_valid": 86460,
+        "bend_valid_fraction": 0.9700437563110064,
+        "frames": 2971,
+        "imu_total": 5942,
+        "imu_valid": 5764,
+        "imu_valid_fraction": 0.9700437563110064,
+        "label_ar": "ح",
+        "spread_total": 23768,
+        "spread_valid": 21034,
+        "spread_valid_fraction": 0.884971390104342,
+        "videos": 149
+      },
+      "0038": {
+        "bend_total": 88560,
+        "bend_valid": 88050,
+        "bend_valid_fraction": 0.9942411924119241,
+        "frames": 2952,
+        "imu_total": 5904,
+        "imu_valid": 5870,
+        "imu_valid_fraction": 0.9942411924119241,
+        "label_ar": "خ",
+        "spread_total": 23616,
+        "spread_valid": 15965,
+        "spread_valid_fraction": 0.6760247289972899,
+        "videos": 150
+      },
+      "0039": {
+        "bend_total": 87300,
+        "bend_valid": 87300,
+        "bend_valid_fraction": 1.0,
+        "frames": 2910,
+        "imu_total": 5820,
+        "imu_valid": 5820,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "د",
+        "spread_total": 23280,
+        "spread_valid": 14958,
+        "spread_valid_fraction": 0.6425257731958763,
+        "videos": 150
+      },
+      "0040": {
+        "bend_total": 84450,
+        "bend_valid": 82275,
+        "bend_valid_fraction": 0.9742451154529307,
+        "frames": 2815,
+        "imu_total": 5630,
+        "imu_valid": 5485,
+        "imu_valid_fraction": 0.9742451154529307,
+        "label_ar": "ذ",
+        "spread_total": 22520,
+        "spread_valid": 19556,
+        "spread_valid_fraction": 0.8683836589698046,
+        "videos": 150
+      },
+      "0041": {
+        "bend_total": 86880,
+        "bend_valid": 86460,
+        "bend_valid_fraction": 0.9951657458563536,
+        "frames": 2896,
+        "imu_total": 5792,
+        "imu_valid": 5764,
+        "imu_valid_fraction": 0.9951657458563536,
+        "label_ar": "ر",
+        "spread_total": 23168,
+        "spread_valid": 15349,
+        "spread_valid_fraction": 0.6625086325966851,
+        "videos": 150
+      },
+      "0042": {
+        "bend_total": 91110,
+        "bend_valid": 91110,
+        "bend_valid_fraction": 1.0,
+        "frames": 3037,
+        "imu_total": 6074,
+        "imu_valid": 6074,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ز",
+        "spread_total": 24296,
+        "spread_valid": 22524,
+        "spread_valid_fraction": 0.927066183733948,
+        "videos": 150
+      },
+      "0043": {
+        "bend_total": 87120,
+        "bend_valid": 87120,
+        "bend_valid_fraction": 1.0,
+        "frames": 2904,
+        "imu_total": 5808,
+        "imu_valid": 5808,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "س",
+        "spread_total": 23232,
+        "spread_valid": 23232,
+        "spread_valid_fraction": 1.0,
+        "videos": 150
+      },
+      "0044": {
+        "bend_total": 86490,
+        "bend_valid": 86490,
+        "bend_valid_fraction": 1.0,
+        "frames": 2883,
+        "imu_total": 5766,
+        "imu_valid": 5766,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ش",
+        "spread_total": 23064,
+        "spread_valid": 23050,
+        "spread_valid_fraction": 0.9993929934096427,
+        "videos": 150
+      },
+      "0045": {
+        "bend_total": 89220,
+        "bend_valid": 88485,
+        "bend_valid_fraction": 0.9917619367854741,
+        "frames": 2974,
+        "imu_total": 5948,
+        "imu_valid": 5899,
+        "imu_valid_fraction": 0.9917619367854741,
+        "label_ar": "ص",
+        "spread_total": 23792,
+        "spread_valid": 14069,
+        "spread_valid_fraction": 0.5913332212508406,
+        "videos": 150
+      },
+      "0046": {
+        "bend_total": 86550,
+        "bend_valid": 85995,
+        "bend_valid_fraction": 0.9935875216637782,
+        "frames": 2885,
+        "imu_total": 5770,
+        "imu_valid": 5733,
+        "imu_valid_fraction": 0.9935875216637782,
+        "label_ar": "ض",
+        "spread_total": 23080,
+        "spread_valid": 12792,
+        "spread_valid_fraction": 0.5542461005199307,
+        "videos": 150
+      },
+      "0047": {
+        "bend_total": 89580,
+        "bend_valid": 89580,
+        "bend_valid_fraction": 1.0,
+        "frames": 2986,
+        "imu_total": 5972,
+        "imu_valid": 5972,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ط",
+        "spread_total": 23888,
+        "spread_valid": 16992,
+        "spread_valid_fraction": 0.7113194909578031,
+        "videos": 151
+      },
+      "0048": {
+        "bend_total": 86160,
+        "bend_valid": 82740,
+        "bend_valid_fraction": 0.9603064066852368,
+        "frames": 2872,
+        "imu_total": 5744,
+        "imu_valid": 5516,
+        "imu_valid_fraction": 0.9603064066852368,
+        "label_ar": "ظ",
+        "spread_total": 22976,
+        "spread_valid": 14195,
+        "spread_valid_fraction": 0.6178185933147632,
+        "videos": 150
+      },
+      "0049": {
+        "bend_total": 87240,
+        "bend_valid": 80235,
+        "bend_valid_fraction": 0.9197042640990372,
+        "frames": 2908,
+        "imu_total": 5816,
+        "imu_valid": 5349,
+        "imu_valid_fraction": 0.9197042640990372,
+        "label_ar": "ع",
+        "spread_total": 23264,
+        "spread_valid": 18493,
+        "spread_valid_fraction": 0.7949191884456671,
+        "videos": 150
+      },
+      "0050": {
+        "bend_total": 88260,
+        "bend_valid": 88260,
+        "bend_valid_fraction": 1.0,
+        "frames": 2942,
+        "imu_total": 5884,
+        "imu_valid": 5884,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "غ",
+        "spread_total": 23536,
+        "spread_valid": 15463,
+        "spread_valid_fraction": 0.6569935418082937,
+        "videos": 150
+      },
+      "0051": {
+        "bend_total": 90720,
+        "bend_valid": 84135,
+        "bend_valid_fraction": 0.9274140211640212,
+        "frames": 3024,
+        "imu_total": 6048,
+        "imu_valid": 5609,
+        "imu_valid_fraction": 0.9274140211640212,
+        "label_ar": "ف",
+        "spread_total": 24192,
+        "spread_valid": 14600,
+        "spread_valid_fraction": 0.603505291005291,
+        "videos": 150
+      },
+      "0052": {
+        "bend_total": 89850,
+        "bend_valid": 89850,
+        "bend_valid_fraction": 1.0,
+        "frames": 2995,
+        "imu_total": 5990,
+        "imu_valid": 5990,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ق",
+        "spread_total": 23960,
+        "spread_valid": 18222,
+        "spread_valid_fraction": 0.760517529215359,
+        "videos": 150
+      },
+      "0053": {
+        "bend_total": 91920,
+        "bend_valid": 91845,
+        "bend_valid_fraction": 0.9991840731070496,
+        "frames": 3064,
+        "imu_total": 6128,
+        "imu_valid": 6123,
+        "imu_valid_fraction": 0.9991840731070496,
+        "label_ar": "ك",
+        "spread_total": 24512,
+        "spread_valid": 24299,
+        "spread_valid_fraction": 0.9913103785900783,
+        "videos": 150
+      },
+      "0054": {
+        "bend_total": 91890,
+        "bend_valid": 91725,
+        "bend_valid_fraction": 0.9982043747959517,
+        "frames": 3063,
+        "imu_total": 6126,
+        "imu_valid": 6115,
+        "imu_valid_fraction": 0.9982043747959517,
+        "label_ar": "ل",
+        "spread_total": 24504,
+        "spread_valid": 17372,
+        "spread_valid_fraction": 0.7089454782892589,
+        "videos": 151
+      },
+      "0055": {
+        "bend_total": 91980,
+        "bend_valid": 83970,
+        "bend_valid_fraction": 0.9129158512720157,
+        "frames": 3066,
+        "imu_total": 6132,
+        "imu_valid": 5598,
+        "imu_valid_fraction": 0.9129158512720157,
+        "label_ar": "م",
+        "spread_total": 24528,
+        "spread_valid": 20824,
+        "spread_valid_fraction": 0.8489889106327463,
+        "videos": 151
+      },
+      "0056": {
+        "bend_total": 90540,
+        "bend_valid": 90525,
+        "bend_valid_fraction": 0.9998343273691186,
+        "frames": 3018,
+        "imu_total": 6036,
+        "imu_valid": 6035,
+        "imu_valid_fraction": 0.9998343273691186,
+        "label_ar": "ن",
+        "spread_total": 24144,
+        "spread_valid": 16430,
+        "spread_valid_fraction": 0.6805003313452618,
+        "videos": 150
+      },
+      "0057": {
+        "bend_total": 90870,
+        "bend_valid": 90870,
+        "bend_valid_fraction": 1.0,
+        "frames": 3029,
+        "imu_total": 6058,
+        "imu_valid": 6058,
+        "imu_valid_fraction": 1.0,
+        "label_ar": "ه",
+        "spread_total": 24232,
+        "spread_valid": 24192,
+        "spread_valid_fraction": 0.9983492901947838,
+        "videos": 150
+      },
+      "0058": {
+        "bend_total": 87720,
+        "bend_valid": 78690,
+        "bend_valid_fraction": 0.8970588235294118,
+        "frames": 2924,
+        "imu_total": 5848,
+        "imu_valid": 5246,
+        "imu_valid_fraction": 0.8970588235294118,
+        "label_ar": "و",
+        "spread_total": 23392,
+        "spread_valid": 17720,
+        "spread_valid_fraction": 0.7575239398084815,
+        "videos": 150
+      },
+      "0059": {
+        "bend_total": 94860,
+        "bend_valid": 94800,
+        "bend_valid_fraction": 0.9993674889310563,
+        "frames": 3162,
+        "imu_total": 6324,
+        "imu_valid": 6320,
+        "imu_valid_fraction": 0.9993674889310563,
+        "label_ar": "ي",
+        "spread_total": 25296,
+        "spread_valid": 14310,
+        "spread_valid_fraction": 0.5657020872865275,
+        "videos": 160
+      }
+    },
+    "by_partition": {
+      "test": {
+        "bend_total": 402810,
+        "bend_valid": 393810,
+        "bend_valid_fraction": 0.9776569598570045,
+        "frames": 13427,
+        "imu_total": 26854,
+        "imu_valid": 26254,
+        "imu_valid_fraction": 0.9776569598570045,
+        "spread_total": 107416,
+        "spread_valid": 82662,
+        "spread_valid_fraction": 0.769550160125121,
+        "videos": 672
+      },
+      "train": {
+        "bend_total": 2106960,
+        "bend_valid": 2073705,
+        "bend_valid_fraction": 0.9842165964232829,
+        "frames": 70232,
+        "imu_total": 140464,
+        "imu_valid": 138247,
+        "imu_valid_fraction": 0.9842165964232829,
+        "spread_total": 561856,
+        "spread_valid": 438312,
+        "spread_valid_fraction": 0.7801144777309489,
+        "videos": 3550
+      }
+    },
+    "by_signer": {
+      "01": {
+        "bend_total": 898410,
+        "bend_valid": 895230,
+        "bend_valid_fraction": 0.9964604133970014,
+        "frames": 29947,
+        "imu_total": 59894,
+        "imu_valid": 59682,
+        "imu_valid_fraction": 0.9964604133970014,
+        "spread_total": 239576,
+        "spread_valid": 192226,
+        "spread_valid_fraction": 0.802359167863225,
+        "videos": 1402
+      },
+      "02": {
+        "bend_total": 577350,
+        "bend_valid": 576960,
+        "bend_valid_fraction": 0.9993244998700961,
+        "frames": 19245,
+        "imu_total": 38490,
+        "imu_valid": 38464,
+        "imu_valid_fraction": 0.9993244998700961,
+        "spread_total": 153960,
+        "spread_valid": 123516,
+        "spread_valid_fraction": 0.8022603273577552,
+        "videos": 1401
+      },
+      "03": {
+        "bend_total": 1034010,
+        "bend_valid": 995325,
+        "bend_valid_fraction": 0.9625874024429164,
+        "frames": 34467,
+        "imu_total": 68934,
+        "imu_valid": 66355,
+        "imu_valid_fraction": 0.9625874024429164,
+        "spread_total": 275736,
+        "spread_valid": 205232,
+        "spread_valid_fraction": 0.7443061479095947,
+        "videos": 1419
+      }
+    },
+    "hand_availability": {
+      "both_available": 80842,
+      "both_fraction": 0.9663275917713575,
+      "frames": 83659,
+      "left_available": 81574,
+      "left_fraction": 0.975077397530451,
+      "neither_available": 0,
+      "note": "availability counts frames whose tracking state carries a real reconstructed pose (OBSERVED or AMBIGUOUS). An absent hand is never inferred as a straight or neutral hand.",
+      "right_available": 82927,
+      "right_fraction": 0.9912501942409065
+    },
+    "manifest_frame_lengths": {
+      "count": 4222,
+      "max": 70,
+      "mean": 19.81501657981999,
+      "median": 20.0,
+      "min": 9,
+      "p1": 11.0,
+      "p95": 29.0,
+      "p99": 33.0,
+      "sum": 83659
+    },
+    "samples_aggregated": 4222,
+    "samples_missing_output": [],
+    "sensor_validity_totals": {
+      "bend_total": 2509770,
+      "bend_valid": 2467515,
+      "bend_valid_fraction": 0.9831637958856788,
+      "imu_total": 167318,
+      "imu_valid": 164501,
+      "imu_valid_fraction": 0.9831637958856788,
+      "spread_total": 669272,
+      "spread_valid": 520974,
+      "spread_valid_fraction": 0.7784189387872196
+    },
+    "sequence_lengths": {
+      "count": 4222,
+      "max": 70,
+      "mean": 19.81501657981999,
+      "median": 20.0,
+      "min": 9,
+      "p1": 11.0,
+      "p95": 29.0,
+      "p99": 33.0,
+      "sum": 83659
+    },
+    "temporal_integrity": {
+      "evidence": "every output sequence length equals its source video frame count from the frozen manifest, so no frame was added or removed",
+      "interpolation_performed": false,
+      "length_mismatch_count": 0,
+      "length_mismatches": [],
+      "output_equals_manifest_frames": true,
+      "padding_performed": false,
+      "resampling_performed": false,
+      "truncation_performed": false
+    },
+    "tracking_states": {
+      "combined": {
+        "MISSING": 2817,
+        "OBSERVED": 164501
+      },
+      "combined_fractions": {
+        "MISSING": 0.016836204114321233,
+        "OBSERVED": 0.9831637958856788
+      },
+      "hand_instances": 167318,
+      "per_track": {
+        "LEFT": {
+          "MISSING": 2085,
+          "OBSERVED": 81574
+        },
+        "RIGHT": {
+          "MISSING": 732,
+          "OBSERVED": 82927
+        }
+      }
+    },
+    "worst_classes_by_bend_validity": [
+      {
+        "bend_valid_fraction": 0.8970588235294118,
+        "label_ar": "و",
+        "sign_id": "0058"
+      },
+      {
+        "bend_valid_fraction": 0.9129158512720157,
+        "label_ar": "م",
+        "sign_id": "0055"
+      },
+      {
+        "bend_valid_fraction": 0.9197042640990372,
+        "label_ar": "ع",
+        "sign_id": "0049"
+      },
+      {
+        "bend_valid_fraction": 0.9274140211640212,
+        "label_ar": "ف",
+        "sign_id": "0051"
+      },
+      {
+        "bend_valid_fraction": 0.9603064066852368,
+        "label_ar": "ظ",
+        "sign_id": "0048"
+      }
+    ],
+    "worst_classes_by_spread_validity": [
+      {
+        "label_ar": "ض",
+        "sign_id": "0046",
+        "spread_valid_fraction": 0.5542461005199307
+      },
+      {
+        "label_ar": "ي",
+        "sign_id": "0059",
+        "spread_valid_fraction": 0.5657020872865275
+      },
+      {
+        "label_ar": "ص",
+        "sign_id": "0045",
+        "spread_valid_fraction": 0.5913332212508406
+      },
+      {
+        "label_ar": "ف",
+        "sign_id": "0051",
+        "spread_valid_fraction": 0.603505291005291
+      },
+      {
+        "label_ar": "ظ",
+        "sign_id": "0048",
+        "spread_valid_fraction": 0.6178185933147632
+      }
+    ]
+  },
+  "contract": {
+    "contract_intact": true,
+    "imputed_invalid_channels": 0,
+    "quaternion": {
+      "max_unit_norm_error": 4.715822465861663e-08,
+      "negative_w_count": 0,
+      "ordering": "WXYZ",
+      "sign_convention": "w >= 0"
+    },
+    "samples_checked": 4222,
+    "sensor_layout": {
+      "channel_order_identical_across_samples": true,
+      "contract_problems": [],
+      "distinct_layouts": 1,
+      "layout_version": "ideal_virtual_glove_v1",
+      "per_hand_counts": {
+        "bend_hall_sensors": 15,
+        "hall_sensors_total": 19,
+        "imu_packages": 1,
+        "logical_sensing_packages": 20,
+        "spread_hall_sensors": 4
+      },
+      "two_hand_hall_channels": 38,
+      "two_hand_imu_packages": 2
+    },
+    "temporal": {
+      "frame_index_strictly_increasing": true,
+      "non_contiguous_count": 0,
+      "samples_not_starting_at_frame_zero": [],
+      "samples_with_non_contiguous_frames": [],
+      "timestamp_strictly_increasing": true
+    },
+    "value_ranges": {
+      "bend_angle_deg_max": 118.07036590576172,
+      "bend_angle_deg_min": 0.01594357378780842,
+      "declared_ceiling_deg": 180.0,
+      "normalization": "bend_normalized = bend_angle_deg / 180.0 (fixed divisor, no dataset min/max)",
+      "spread_angle_deg_max": 137.74978637695312,
+      "spread_angle_deg_min": 0.00015932998212520033
+    },
+    "violation_count": 0,
+    "violations": []
+  },
+  "coverage": {
+    "all_accounted": true,
+    "extra_in_state_not_requested": [],
+    "failed": 0,
+    "in_state": 4222,
+    "incomplete_count": 0,
+    "incomplete_other_status": [],
+    "requested": 4222,
+    "status_counts": {
+      "VIRTUAL_GLOVE_DONE": 4222
+    },
+    "successful": 4222,
+    "unaccounted": [],
+    "unaccounted_count": 0
+  },
+  "data_root": "/home/hatim/datasets/KArSL-502",
+  "elapsed_seconds": 106.63468962900515,
+  "git_commit": "5c47de98771154d88ffa1896b96ae8933431ff42",
+  "labels": {
+    "class_count_correct": true,
+    "distinct_classes": 28,
+    "expected_classes": 28,
+    "label_index_contiguous": true,
+    "labels_intact": true,
+    "problem_count": 0,
+    "problems": [],
+    "samples_per_class": {
+      "0032": 150,
+      "0033": 152,
+      "0034": 150,
+      "0035": 150,
+      "0036": 158,
+      "0037": 149,
+      "0038": 150,
+      "0039": 150,
+      "0040": 150,
+      "0041": 150,
+      "0042": 150,
+      "0043": 150,
+      "0044": 150,
+      "0045": 150,
+      "0046": 150,
+      "0047": 151,
+      "0048": 150,
+      "0049": 150,
+      "0050": 150,
+      "0051": 150,
+      "0052": 150,
+      "0053": 150,
+      "0054": 151,
+      "0055": 151,
+      "0056": 150,
+      "0057": 150,
+      "0058": 150,
+      "0059": 160
+    },
+    "sign_id_range": [
+      "0032",
+      "0059"
+    ]
+  },
+  "loso": {
+    "fold_count": 3,
+    "folds": {
+      "01": {
+        "classes_per_role": {
+          "test": 28,
+          "train": 28,
+          "validation": 28
+        },
+        "counts": {
+          "test": 1402,
+          "train": 2372,
+          "validation": 448
+        },
+        "covers_manifest_exactly": true,
+        "held_out_signer_leakage": false,
+        "test_signers": [
+          "01"
+        ],
+        "total_rows": 4222,
+        "train_validation_signers": [
+          "02",
+          "03"
+        ],
+        "validator": "PASS"
+      },
+      "02": {
+        "classes_per_role": {
+          "test": 28,
+          "train": 28,
+          "validation": 28
+        },
+        "counts": {
+          "test": 1401,
+          "train": 2373,
+          "validation": 448
+        },
+        "covers_manifest_exactly": true,
+        "held_out_signer_leakage": false,
+        "test_signers": [
+          "02"
+        ],
+        "total_rows": 4222,
+        "train_validation_signers": [
+          "01",
+          "03"
+        ],
+        "validator": "PASS"
+      },
+      "03": {
+        "classes_per_role": {
+          "test": 28,
+          "train": 28,
+          "validation": 28
+        },
+        "counts": {
+          "test": 1419,
+          "train": 2355,
+          "validation": 448
+        },
+        "covers_manifest_exactly": true,
+        "held_out_signer_leakage": false,
+        "test_signers": [
+          "03"
+        ],
+        "total_rows": 4222,
+        "train_validation_signers": [
+          "01",
+          "02"
+        ],
+        "validator": "PASS"
+      }
+    },
+    "loso_intact": true
+  },
+  "manifest": "/home/hatim/Graduation-Project-Simulation-task008c/datasets/manifests/karsl_core28.csv",
+  "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+  "on_disk": {
+    "kinematics": {
+      "directories": 4222,
+      "duplicate_directory_names": 0,
+      "extra_not_in_manifest": [],
+      "missing_from_disk": []
+    },
+    "pose": {
+      "directories": 4222,
+      "duplicate_directory_names": 0,
+      "extra_not_in_manifest": [],
+      "missing_from_disk": []
+    },
+    "tracking": {
+      "directories": 4222,
+      "duplicate_directory_names": 0,
+      "extra_not_in_manifest": [],
+      "missing_from_disk": []
+    },
+    "virtual_glove": {
+      "directories": 4222,
+      "duplicate_directory_names": 0,
+      "extra_not_in_manifest": [],
+      "missing_from_disk": []
+    }
+  },
+  "per_sample_qa": {
+    "by_label": {
+      "ا": {
+        "frames": 3381,
+        "samples": 150
+      },
+      "ب": {
+        "frames": 3112,
+        "samples": 152
+      },
+      "ت": {
+        "frames": 2858,
+        "samples": 150
+      },
+      "ث": {
+        "frames": 2831,
+        "samples": 150
+      },
+      "ج": {
+        "frames": 3197,
+        "samples": 158
+      },
+      "ح": {
+        "frames": 2971,
+        "samples": 149
+      },
+      "خ": {
+        "frames": 2952,
+        "samples": 150
+      },
+      "د": {
+        "frames": 2910,
+        "samples": 150
+      },
+      "ذ": {
+        "frames": 2815,
+        "samples": 150
+      },
+      "ر": {
+        "frames": 2896,
+        "samples": 150
+      },
+      "ز": {
+        "frames": 3037,
+        "samples": 150
+      },
+      "س": {
+        "frames": 2904,
+        "samples": 150
+      },
+      "ش": {
+        "frames": 2883,
+        "samples": 150
+      },
+      "ص": {
+        "frames": 2974,
+        "samples": 150
+      },
+      "ض": {
+        "frames": 2885,
+        "samples": 150
+      },
+      "ط": {
+        "frames": 2986,
+        "samples": 151
+      },
+      "ظ": {
+        "frames": 2872,
+        "samples": 150
+      },
+      "ع": {
+        "frames": 2908,
+        "samples": 150
+      },
+      "غ": {
+        "frames": 2942,
+        "samples": 150
+      },
+      "ف": {
+        "frames": 3024,
+        "samples": 150
+      },
+      "ق": {
+        "frames": 2995,
+        "samples": 150
+      },
+      "ك": {
+        "frames": 3064,
+        "samples": 150
+      },
+      "ل": {
+        "frames": 3063,
+        "samples": 151
+      },
+      "م": {
+        "frames": 3066,
+        "samples": 151
+      },
+      "ن": {
+        "frames": 3018,
+        "samples": 150
+      },
+      "ه": {
+        "frames": 3029,
+        "samples": 150
+      },
+      "و": {
+        "frames": 2924,
+        "samples": 150
+      },
+      "ي": {
+        "frames": 3162,
+        "samples": 160
+      }
+    },
+    "by_signer": {
+      "01": {
+        "frames": 29947,
+        "samples": 1402
+      },
+      "02": {
+        "frames": 19245,
+        "samples": 1401
+      },
+      "03": {
+        "frames": 34467,
+        "samples": 1419
+      }
+    },
+    "contract_violations": 0,
+    "data_root": "/home/hatim/datasets/KArSL-502",
+    "failed_samples": 0,
+    "failures": [],
+    "frames": 83659,
+    "hand_instances": 167318,
+    "manifest": "/home/hatim/Graduation-Project-Simulation-task008c/datasets/manifests/karsl_core28.csv",
+    "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+    "provenance_mismatches": 0,
+    "requested_samples": 4222,
+    "run_root": "/home/hatim/graduation-project-runs/task008-core28-full",
+    "schema_version": "task008a_dataset_qa_v1",
+    "sequence_length": {
+      "max": 70,
+      "median": 20,
+      "min": 9,
+      "p1": 11,
+      "p95": 29,
+      "p99": 33
+    },
+    "stages": {
+      "kinematics": {
+        "failed": 0,
+        "success": 4222
+      },
+      "pose": {
+        "failed": 0,
+        "success": 4222
+      },
+      "tracking": {
+        "failed": 0,
+        "success": 4222
+      },
+      "virtual_glove": {
+        "failed": 0,
+        "success": 4222
+      }
+    },
+    "successful_samples": 4222,
+    "validity": {
+      "bend_total": 2509770,
+      "bend_valid": 2467515,
+      "imu_total": 167318,
+      "imu_valid": 164501,
+      "partial_instances": 53049,
+      "retained_channels_on_strict_invalid": 923950,
+      "spread_total": 669272,
+      "spread_valid": 520974
+    }
+  },
+  "requested_samples": 4222,
+  "run_provenance": {
+    "contracts": {
+      "task005": "TASK-005-final-v2",
+      "task006": "TASK-006-ideal-virtual-glove-v1"
+    },
+    "git_branch": "opus/task-008c-core28-full-extraction",
+    "git_commit": "5c47de98771154d88ffa1896b96ae8933431ff42",
+    "gpu": {
+      "nvidia_smi": "NVIDIA GeForce RTX 3050 Laptop GPU, 4096 MiB, 610.62",
+      "torch_cuda_available": true,
+      "torch_device_names": [
+        "NVIDIA GeForce RTX 3050 Laptop GPU"
+      ],
+      "visible_devices": null
+    },
+    "hardware": {
+      "cpu_model": "AMD Ryzen 7 6800HS with Radeon Graphics",
+      "execution_device_requested": "cuda"
+    },
+    "hostname": "DESKTOP-8Q333M0",
+    "manifest": {
+      "data_root": "/home/hatim/datasets/KArSL-502",
+      "path": "/home/hatim/Graduation-Project-Simulation-task008c/datasets/manifests/karsl_core28.csv",
+      "run_root": "/home/hatim/graduation-project-runs/task008-core28-full",
+      "sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1"
+    },
+    "memory": {
+      "ram_gb": 7.388
+    },
+    "packages": {
+      "cuda_runtime": "13.0",
+      "numpy": "2.5.2",
+      "tf32": {
+        "cudnn_allow_tf32": true,
+        "matmul_allow_tf32": false
+      },
+      "torch": "2.13.0+cu130"
+    },
+    "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "python": "3.14.4 (main, Jun 18 2026, 14:25:02) [GCC 15.2.0]",
+    "recorded_utc": "2026-09-03T09:36:13.684301Z",
+    "schema_version": "task008a_run_v1",
+    "shard": {
+      "count": 1,
+      "index": 0
+    },
+    "slurm": {
+      "CUDA_VISIBLE_DEVICES": null,
+      "SLURM_ARRAY_JOB_ID": null,
+      "SLURM_ARRAY_TASK_ID": null,
+      "SLURM_JOB_ACCOUNT": null,
+      "SLURM_JOB_ID": null,
+      "SLURM_JOB_PARTITION": null,
+      "SLURM_JOB_QOS": null
+    },
+    "wilor": {
+      "assets_dir": null,
+      "detector_confidence": 0.3,
+      "mode": "full FP32; fast/FP16 disabled",
+      "rescale_factor": 2.0,
+      "upstream_commit": "fcb911312a38fa8badd30d9656a167485d61b8f9"
+    }
+  },
+  "run_root": "/home/hatim/graduation-project-runs/task008-core28-full",
+  "schema_version": "task008c_final_qa_v1",
+  "sequence_length_statistics": {
+    "by_signer": {
+      "01": {
+        "count": 1402,
+        "max": 70,
+        "mean": 21.360199714693294,
+        "median": 21.0,
+        "min": 14,
+        "p25": 19.0,
+        "p5": 17.0,
+        "p75": 23.0,
+        "p95": 29.0,
+        "sum": 29947
+      },
+      "02": {
+        "count": 1401,
+        "max": 45,
+        "mean": 13.73661670235546,
+        "median": 13.0,
+        "min": 10,
+        "p25": 13.0,
+        "p5": 11.0,
+        "p75": 15.0,
+        "p95": 17.0,
+        "sum": 19245
+      },
+      "03": {
+        "count": 1419,
+        "max": 67,
+        "mean": 24.289640591966172,
+        "median": 24.0,
+        "min": 9,
+        "p25": 22.0,
+        "p5": 18.0,
+        "p75": 26.0,
+        "p95": 30.0,
+        "sum": 34467
+      }
+    },
+    "overall": {
+      "count": 4222,
+      "max": 70,
+      "mean": 19.81501657981999,
+      "median": 20.0,
+      "min": 9,
+      "p25": 15.0,
+      "p5": 12.0,
+      "p75": 24.0,
+      "p95": 29.0,
+      "sum": 83659
+    }
+  },
+  "storage": {
+    "by_stage_bytes": {
+      "kinematics": 58765164,
+      "pose": 1879676450,
+      "provenance": 1892,
+      "state": 936893,
+      "tracking": 175724711,
+      "virtual_glove": 140210394
+    },
+    "run_root_bytes": 2255316539,
+    "source_video_bytes": 1794280889
+  },
+  "worker_state": {
+    "attempts_greater_than_one": 25,
+    "frames_processed_total": 83659,
+    "manifest_hash_matches": true,
+    "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+    "path": "/home/hatim/graduation-project-runs/task008-core28-full/state/shard-00.json",
+    "updated_utc": "2026-09-03T18:11:10.122833Z"
+  }
+}

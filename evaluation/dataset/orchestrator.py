@@ -981,14 +981,24 @@ def write_index(
         raise ValueError("manifest_hash_value must be the SHA-256 of the source manifest")
     fields = (
         "sample_id", "sign_id", "label_ar", "label_index", "signer_id", "official_partition",
-        "source_relative_path", "source_sha256", "frame_count", "pose_status", "tracking_status",
+        "repetition_id", "source_relative_path", "source_sha256", "source_frame_count",
+        "sequence_length", "virtual_glove_relative_path", "pose_status", "tracking_status",
         "kinematics_status", "virtual_glove_status", "bend_valid_fraction", "spread_valid_fraction",
-        "imu_valid_fraction",
+        "imu_valid_fraction", "pose_bearing_hand_fraction", "manifest_sha256", "contract_version",
     )
     output: list[dict[str, object]] = []
     for row in validate_manifest_rows(rows):
         sample = row["sample_id"]
         values: dict[str, object] = {field: row.get(field, "") for field in fields}
+        # The manifest frame count is the SOURCE video length and must survive
+        # next to the produced sequence length, so a later reader can tell the
+        # two apart instead of inferring that they agree.
+        values["source_frame_count"] = row.get("frame_count", "")
+        values["sequence_length"] = ""
+        values["manifest_sha256"] = manifest_hash_value
+        values["contract_version"] = f"{TASK005_CONTRACT};{TASK006_CONTRACT}"
+        # Relative to the external run root, which is deliberately outside git.
+        values["virtual_glove_relative_path"] = f"virtual_glove/{sample}/virtual_glove.npz"
         for stage, status in (("POSE", "pose_status"), ("TRACKING", "tracking_status"), ("KINEMATICS", "kinematics_status"), ("VIRTUAL_GLOVE", "virtual_glove_status")):
             values[status] = (
                 STAGE_STATUS[stage]
@@ -1007,10 +1017,14 @@ def write_index(
                 import numpy as np
 
                 with np.load(glove, allow_pickle=False) as data:
-                    values["frame_count"] = int(len(data["frame_index"]))
+                    values["sequence_length"] = int(len(data["frame_index"]))
                     values["bend_valid_fraction"] = float(data["bend_valid"].mean())
                     values["spread_valid_fraction"] = float(data["spread_valid"].mean())
                     values["imu_valid_fraction"] = float(data["palm_imu_valid"].mean())
+                    state = np.asarray(data["tracking_state_code"])
+                    values["pose_bearing_hand_fraction"] = (
+                        float(np.isin(state, [1, 2]).mean()) if state.size else ""
+                    )
             except (OSError, KeyError, ValueError):
                 pass
         output.append(values)
