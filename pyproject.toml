@@ -15,9 +15,12 @@ dependencies = [
     "opencv-contrib-python==5.0.0.93",
 ]
 
+[project.optional-dependencies]
+visualizer = ["matplotlib>=3.8"]
+
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*"]
+include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*", "visualizer*"]
