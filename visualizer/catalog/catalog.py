@@ -13,7 +13,7 @@ from typing import Any, Iterable, Mapping
 
 from .descriptor import SequenceDescriptor
 
-CATALOG_VERSION = "task007b_core28_exemplars_v1"
+CATALOG_VERSION = "task007b_core28_exemplars_v2"
 _SIGNER_MODE = re.compile(r"^signer([0-9]{2})$")
 
 
@@ -324,7 +324,9 @@ def write_catalog_csv(path: str | Path, payload: Mapping[str, Any]) -> None:
         "character", "sign_id", "label_index", "sample_id", "signer_id",
         "official_partition", "repetition_id", "sequence_length", "selection_score",
         "bend_valid_fraction", "spread_valid_fraction", "imu_valid_fraction",
-        "tracking_quality_fraction", "geometry_available", "pose_relative_path",
+        "tracking_quality_fraction", "geometry_available",
+        "embedded_mano_vertices_available", "tracked_landmarks_3d_available",
+        "surface_triangle_topology_available", "pose_relative_path",
         "tracking_relative_path", "kinematics_relative_path", "virtual_glove_relative_path",
     )
     entries = sorted(payload.get("entries", ()), key=lambda entry: int(entry["label_index"]))
@@ -351,6 +353,15 @@ def write_catalog_csv(path: str | Path, payload: Mapping[str, Any]) -> None:
                 "imu_valid_fraction": metrics.get("imu_valid_fraction", ""),
                 "tracking_quality_fraction": metrics.get("tracking_quality_fraction", ""),
                 "geometry_available": metrics.get("geometry_available", ""),
+                "embedded_mano_vertices_available": metrics.get("artifact_flags", {}).get(
+                    "embedded_mano_vertices_available", ""
+                ),
+                "tracked_landmarks_3d_available": metrics.get("artifact_flags", {}).get(
+                    "tracked_landmarks_3d_available", ""
+                ),
+                "surface_triangle_topology_available": metrics.get("artifact_flags", {}).get(
+                    "surface_triangle_topology_available", ""
+                ),
                 "pose_relative_path": descriptor.get("pose_relative_path", ""),
                 "tracking_relative_path": descriptor.get("tracking_relative_path", ""),
                 "kinematics_relative_path": descriptor.get("kinematics_relative_path", ""),

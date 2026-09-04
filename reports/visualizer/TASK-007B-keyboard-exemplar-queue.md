@@ -131,9 +131,20 @@ Hall entry must have `display_marker="H"`; the palm IMU must have
 for selection.
 
 The generated production catalog audited 20 sensors per hand, with all 4,222
-candidate layouts passing. TASK-008 did not emit mesh files; this is recorded
-as `mesh_available=false` rather than being confused with the available pose,
-tracking, and kinematics geometry inputs.
+candidate layouts passing. The historical standalone-surface-file probe was
+too narrow: TASK-008 does not emit separate OBJ/PLY/GLB surface files, but its
+raw pose artifacts do contain embedded MANO vertex clouds. The corrected
+catalog terminology now keeps these facts separate:
+
+* `embedded_mano_vertices_available` — stored in
+  `pose/raw/<sample_id>/wilor_raw.npz`;
+* `tracked_landmarks_3d_available` — stored in the tracked pose artifact;
+* `surface_triangle_topology_available` — false for this TASK-008 run because
+  triangle faces are not serialized.
+
+The prior `mesh_available=false` wording therefore must not be read as
+geometry-unavailable; it described only the absence of a separate surface
+file.
 
 ## Normalization QA
 
@@ -194,39 +205,40 @@ deterministic IQR-scaled outlier penalty.
 All 28 classes have exactly one canonical exemplar in
 `visualizer/catalog/core28_exemplars.json` and the compact CSV companion.
 `hand` is the pose-bearing tracking fraction used by the class-aware score;
-`geometry/mesh` reports TASK-008 pose/tracking/kinematics availability and mesh
-availability.
+`geometry` reports TASK-008 pose/tracking/kinematics availability. The
+corrected catalog separately reports embedded MANO vertices, tracked
+21-landmarks, and surface topology.
 
-| character | SignID | sample_id | signer | length | hand | bend | spread | IMU | geometry / mesh | score | reason |
+| character | SignID | sample_id | signer | length | hand | bend | spread | IMU | geometry | score | reason |
 | :---: | :---: | --- | :---: | ---: | ---: | ---: | ---: | ---: | :---: | ---: | --- |
-| ا | 0032 | `karsl_core28_s03_sign0032_train_rep019` | 03 | 25 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ب | 0033 | `karsl_core28_s01_sign0033_train_rep022` | 01 | 26 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 0.9772727273 | quality rank #1 |
-| ت | 0034 | `karsl_core28_s01_sign0034_train_rep010` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ث | 0035 | `karsl_core28_s01_sign0035_train_rep019` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ج | 0036 | `karsl_core28_s01_sign0036_test_rep007` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ح | 0037 | `karsl_core28_s01_sign0037_train_rep026` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| خ | 0038 | `karsl_core28_s03_sign0038_train_rep042` | 03 | 22 | 1.0 | 1.0 | 0.9659090909 | 1.0 | true / false | 0.9837752525 | quality rank #1 |
-| د | 0039 | `karsl_core28_s03_sign0039_test_rep001` | 03 | 21 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9569444444 | quality rank #1 |
-| ذ | 0040 | `karsl_core28_s03_sign0040_train_rep004` | 03 | 19 | 1.0 | 1.0 | 0.9934210526 | 1.0 | true / false | 0.9990131579 | quality rank #1 |
-| ر | 0041 | `karsl_core28_s01_sign0041_test_rep006` | 01 | 19 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9625 | quality rank #1 |
-| ز | 0042 | `karsl_core28_s01_sign0042_test_rep003` | 01 | 21 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| س | 0043 | `karsl_core28_s01_sign0043_test_rep003` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ش | 0044 | `karsl_core28_s01_sign0044_train_rep007` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ص | 0045 | `karsl_core28_s03_sign0045_train_rep014` | 03 | 23 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 0.9828571429 | quality rank #1 |
-| ض | 0046 | `karsl_core28_s01_sign0046_train_rep041` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9625 | quality rank #1 |
-| ط | 0047 | `karsl_core28_s03_sign0047_train_rep016` | 03 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 0.995 | quality rank #1 |
-| ظ | 0048 | `karsl_core28_s01_sign0048_test_rep004` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9625 | quality rank #1 |
-| ع | 0049 | `karsl_core28_s01_sign0049_train_rep013` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| غ | 0050 | `karsl_core28_s01_sign0050_train_rep003` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9625 | quality rank #1 |
-| ف | 0051 | `karsl_core28_s03_sign0051_test_rep006` | 03 | 24 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 0.9833333333 | quality rank #1 |
-| ق | 0052 | `karsl_core28_s03_sign0052_train_rep002` | 03 | 19 | 1.0 | 1.0 | 0.8618421053 | 1.0 | true / false | 0.9741481107 | quality rank #1 |
-| ك | 0053 | `karsl_core28_s01_sign0053_test_rep001` | 01 | 21 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ل | 0054 | `karsl_core28_s01_sign0054_train_rep005` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| م | 0055 | `karsl_core28_s01_sign0055_train_rep010` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ن | 0056 | `karsl_core28_s01_sign0056_train_rep026` | 01 | 19 | 1.0 | 1.0 | 0.9605263158 | 1.0 | true / false | 0.9890789474 | quality rank #1 |
-| ه | 0057 | `karsl_core28_s01_sign0057_train_rep003` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| و | 0058 | `karsl_core28_s01_sign0058_test_rep002` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true / false | 1.0 | quality rank #1 |
-| ي | 0059 | `karsl_core28_s01_sign0059_test_rep008` | 01 | 21 | 1.0 | 1.0 | 0.75 | 1.0 | true / false | 0.9625 | quality rank #1 |
+| ا | 0032 | `karsl_core28_s03_sign0032_train_rep019` | 03 | 25 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ب | 0033 | `karsl_core28_s01_sign0033_train_rep022` | 01 | 26 | 1.0 | 1.0 | 1.0 | 1.0 | true | 0.9772727273 | quality rank #1 |
+| ت | 0034 | `karsl_core28_s01_sign0034_train_rep010` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ث | 0035 | `karsl_core28_s01_sign0035_train_rep019` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ج | 0036 | `karsl_core28_s01_sign0036_test_rep007` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ح | 0037 | `karsl_core28_s01_sign0037_train_rep026` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| خ | 0038 | `karsl_core28_s03_sign0038_train_rep042` | 03 | 22 | 1.0 | 1.0 | 0.9659090909 | 1.0 | true | 0.9837752525 | quality rank #1 |
+| د | 0039 | `karsl_core28_s03_sign0039_test_rep001` | 03 | 21 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9569444444 | quality rank #1 |
+| ذ | 0040 | `karsl_core28_s03_sign0040_train_rep004` | 03 | 19 | 1.0 | 1.0 | 0.9934210526 | 1.0 | true | 0.9990131579 | quality rank #1 |
+| ر | 0041 | `karsl_core28_s01_sign0041_test_rep006` | 01 | 19 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9625 | quality rank #1 |
+| ز | 0042 | `karsl_core28_s01_sign0042_test_rep003` | 01 | 21 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| س | 0043 | `karsl_core28_s01_sign0043_test_rep003` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ش | 0044 | `karsl_core28_s01_sign0044_train_rep007` | 01 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ص | 0045 | `karsl_core28_s03_sign0045_train_rep014` | 03 | 23 | 1.0 | 1.0 | 1.0 | 1.0 | true | 0.9828571429 | quality rank #1 |
+| ض | 0046 | `karsl_core28_s01_sign0046_train_rep041` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9625 | quality rank #1 |
+| ط | 0047 | `karsl_core28_s03_sign0047_train_rep016` | 03 | 19 | 1.0 | 1.0 | 1.0 | 1.0 | true | 0.995 | quality rank #1 |
+| ظ | 0048 | `karsl_core28_s01_sign0048_test_rep004` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9625 | quality rank #1 |
+| ع | 0049 | `karsl_core28_s01_sign0049_train_rep013` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| غ | 0050 | `karsl_core28_s01_sign0050_train_rep003` | 01 | 20 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9625 | quality rank #1 |
+| ف | 0051 | `karsl_core28_s03_sign0051_test_rep006` | 03 | 24 | 1.0 | 1.0 | 1.0 | 1.0 | true | 0.9833333333 | quality rank #1 |
+| ق | 0052 | `karsl_core28_s03_sign0052_train_rep002` | 03 | 19 | 1.0 | 1.0 | 0.8618421053 | 1.0 | true | 0.9741481107 | quality rank #1 |
+| ك | 0053 | `karsl_core28_s01_sign0053_test_rep001` | 01 | 21 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ل | 0054 | `karsl_core28_s01_sign0054_train_rep005` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| م | 0055 | `karsl_core28_s01_sign0055_train_rep010` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ن | 0056 | `karsl_core28_s01_sign0056_train_rep026` | 01 | 19 | 1.0 | 1.0 | 0.9605263158 | 1.0 | true | 0.9890789474 | quality rank #1 |
+| ه | 0057 | `karsl_core28_s01_sign0057_train_rep003` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| و | 0058 | `karsl_core28_s01_sign0058_test_rep002` | 01 | 20 | 1.0 | 1.0 | 1.0 | 1.0 | true | 1.0 | quality rank #1 |
+| ي | 0059 | `karsl_core28_s01_sign0059_test_rep008` | 01 | 21 | 1.0 | 1.0 | 0.75 | 1.0 | true | 0.9625 | quality rank #1 |
 
 ## Queue Semantics
 
@@ -373,11 +385,13 @@ explicit seed. All 28 classes have one and only one canonical entry.
 
 TASK-008 optional ADC data has 50 one-count float32-boundary differences when
 recomputed from the serialized normalized array; the catalog records this
-transparent audit detail and accepts the source-angle-consistent values. No
-mesh artifacts are available in the TASK-008 run, so the descriptor exposes
-pose/tracking/kinematics paths rather than a mesh path. Queue playback remains
-isolated-sign playback, not continuous co-articulation. GUI rendering, mesh
-loading, recognizer inference, and confidence display remain future work.
+transparent audit detail and accepts the source-angle-consistent values. The
+run has embedded MANO vertex clouds and tracked landmarks, but no
+standalone surface mesh file or triangle topology; the descriptor therefore
+exposes the pose/tracking/kinematics paths and the renderer loads the embedded
+vertices from the pose artifact. Queue playback remains isolated-sign
+playback, not continuous co-articulation. GUI rendering, recognizer
+inference, and confidence display remain future work.
 
 ## Performance
 

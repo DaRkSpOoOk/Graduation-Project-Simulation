@@ -63387,7 +63387,7 @@
       }
     ]
   },
-  "catalog_version": "task007b_core28_exemplars_v1",
+  "catalog_version": "task007b_core28_exemplars_v2",
   "class_profiles": {
     "0032": {
       "candidate_count": 150,
@@ -63777,11 +63777,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -63796,9 +63798,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -63882,11 +63886,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -63901,9 +63907,11 @@
         "duration_proximity": 0.5454545454545454,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -63987,11 +63995,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64006,9 +64016,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64092,11 +64104,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64111,9 +64125,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64197,11 +64213,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64216,9 +64234,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64302,11 +64322,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64321,9 +64343,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64407,11 +64431,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64426,9 +64452,11 @@
         "duration_proximity": 0.7777777777777778,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64512,11 +64540,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64531,9 +64561,11 @@
         "duration_proximity": 0.8888888888888888,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64617,11 +64649,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64636,9 +64670,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64722,11 +64758,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64741,9 +64779,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64827,11 +64867,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64846,9 +64888,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -64932,11 +64976,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -64951,9 +64997,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65037,11 +65085,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65056,9 +65106,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65142,11 +65194,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65161,9 +65215,11 @@
         "duration_proximity": 0.6571428571428571,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65247,11 +65303,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65266,9 +65324,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65352,11 +65412,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65371,9 +65433,11 @@
         "duration_proximity": 0.9,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65457,11 +65521,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65476,9 +65542,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65562,11 +65630,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65581,9 +65651,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65667,11 +65739,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65686,9 +65760,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65772,11 +65848,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65791,9 +65869,11 @@
         "duration_proximity": 0.6666666666666667,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65877,11 +65957,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -65896,9 +65978,11 @@
         "duration_proximity": 0.8974358974358975,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -65982,11 +66066,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66001,9 +66087,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66087,11 +66175,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66106,9 +66196,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66192,11 +66284,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66211,9 +66305,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66297,11 +66393,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66316,9 +66414,11 @@
         "duration_proximity": 0.9,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66402,11 +66502,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66421,9 +66523,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66507,11 +66611,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66526,9 +66632,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66612,11 +66720,13 @@
         },
         "artifact_completeness": 1.0,
         "artifact_flags": {
+          "embedded_mano_vertices_available": true,
           "kinematics": true,
-          "mesh": false,
           "metadata": true,
           "pose": true,
           "sensor_layout": true,
+          "surface_triangle_topology_available": false,
+          "tracked_landmarks_3d_available": true,
           "tracking": true,
           "virtual_glove": true
         },
@@ -66631,9 +66741,11 @@
         "duration_proximity": 1.0,
         "geometry_available": true,
         "geometry_components": {
+          "embedded_mano_vertices": true,
           "kinematics": true,
-          "mesh": false,
           "pose": true,
+          "surface_triangle_topology": false,
+          "tracked_landmarks_3d": true,
           "tracking": true
         },
         "hand_availability_fraction": {
@@ -66704,6 +66816,7 @@
       "strict frame/timestamp order and fixed deg/180 normalized relation",
       "per-channel invalid values remain NaN and valid values remain finite",
       "machine-readable 15 bend + 4 spread + 1 palm IMU layout with H/IMU markers",
+      "geometry terminology distinguishes embedded MANO vertices, tracked 21-joint landmarks, and surface topology",
       "valid orientation matrices/quaternions and optional ADC transfer agreement"
     ],
     "hand_policy": "If a class is predominantly two-hand, use the BOTH-frame fraction. Otherwise use the best active-hand fraction, so a legitimate one-hand sign is not penalized for the absent physical hand.",
@@ -66743,11 +66856,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -66762,9 +66877,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -66848,11 +66965,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -66867,9 +66986,11 @@
           "duration_proximity": 0.5454545454545454,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -66953,11 +67074,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -66972,9 +67095,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67058,11 +67183,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67077,9 +67204,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67163,11 +67292,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67182,9 +67313,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67268,11 +67401,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67287,9 +67422,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67373,11 +67510,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67392,9 +67531,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67478,11 +67619,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67497,9 +67640,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67583,11 +67728,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67602,9 +67749,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67688,11 +67837,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67707,9 +67858,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67793,11 +67946,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67812,9 +67967,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -67898,11 +68055,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -67917,9 +68076,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68003,11 +68164,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68022,9 +68185,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68108,11 +68273,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68127,9 +68294,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68213,11 +68382,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68232,9 +68403,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68318,11 +68491,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68337,9 +68512,11 @@
           "duration_proximity": 0.8,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68423,11 +68600,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68442,9 +68621,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68528,11 +68709,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68547,9 +68730,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68633,11 +68818,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68652,9 +68839,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68738,11 +68927,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68757,9 +68948,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68843,11 +69036,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68862,9 +69057,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -68948,11 +69145,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -68967,9 +69166,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69053,11 +69254,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69072,9 +69275,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69158,11 +69363,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69177,9 +69384,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69263,11 +69472,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69282,9 +69493,11 @@
           "duration_proximity": 0.9,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69368,11 +69581,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69387,9 +69602,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69473,11 +69690,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69492,9 +69711,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69578,11 +69799,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69597,9 +69820,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69685,11 +69910,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69704,9 +69931,11 @@
           "duration_proximity": 0.4285714285714286,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69790,11 +70019,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69809,9 +70040,11 @@
           "duration_proximity": 0.36363636363636365,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -69895,11 +70128,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -69914,9 +70149,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70000,11 +70237,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70019,9 +70258,11 @@
           "duration_proximity": 0.8888888888888888,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70105,11 +70346,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70124,9 +70367,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70210,11 +70455,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70229,9 +70476,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70315,11 +70564,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70334,9 +70585,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70420,11 +70673,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70439,9 +70694,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70525,11 +70782,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70544,9 +70803,11 @@
           "duration_proximity": 0.4285714285714286,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70630,11 +70891,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70649,9 +70912,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70735,11 +71000,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70754,9 +71021,11 @@
           "duration_proximity": 0.7948717948717949,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70840,11 +71109,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70859,9 +71130,11 @@
           "duration_proximity": 0.7714285714285715,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -70945,11 +71218,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -70964,9 +71239,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71050,11 +71327,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71069,9 +71348,11 @@
           "duration_proximity": 0.4285714285714286,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71155,11 +71436,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71174,9 +71457,11 @@
           "duration_proximity": 0.8888888888888888,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71260,11 +71545,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71279,9 +71566,11 @@
           "duration_proximity": 0.7,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71365,11 +71654,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71384,9 +71675,11 @@
           "duration_proximity": 0.5714285714285714,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71470,11 +71763,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71489,9 +71784,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71575,11 +71872,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71594,9 +71893,11 @@
           "duration_proximity": 0.8571428571428572,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71680,11 +71981,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71699,9 +72002,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71785,11 +72090,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71804,9 +72111,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71890,11 +72199,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -71909,9 +72220,11 @@
           "duration_proximity": 0.5348837209302326,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -71995,11 +72308,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72014,9 +72329,11 @@
           "duration_proximity": 0.6,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72100,11 +72417,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72119,9 +72438,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72205,11 +72526,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72224,9 +72547,11 @@
           "duration_proximity": 0.30000000000000004,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72310,11 +72635,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72329,9 +72656,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72415,11 +72744,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72434,9 +72765,11 @@
           "duration_proximity": 0.625,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72520,11 +72853,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72539,9 +72874,11 @@
           "duration_proximity": 0.45945945945945943,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72627,11 +72964,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72646,9 +72985,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72732,11 +73073,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72751,9 +73094,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72837,11 +73182,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72856,9 +73203,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -72942,11 +73291,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -72961,9 +73312,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73047,11 +73400,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73066,9 +73421,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73152,11 +73509,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73171,9 +73530,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73257,11 +73618,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73276,9 +73639,11 @@
           "duration_proximity": 0.7777777777777778,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73362,11 +73727,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73381,9 +73748,11 @@
           "duration_proximity": 0.8888888888888888,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73467,11 +73836,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73486,9 +73857,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73572,11 +73945,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73591,9 +73966,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73677,11 +74054,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73696,9 +74075,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73782,11 +74163,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73801,9 +74184,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73887,11 +74272,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -73906,9 +74293,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -73992,11 +74381,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74011,9 +74402,11 @@
           "duration_proximity": 0.6571428571428571,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74097,11 +74490,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74116,9 +74511,11 @@
           "duration_proximity": 0.8888888888888888,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74202,11 +74599,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74221,9 +74620,11 @@
           "duration_proximity": 0.9,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74307,11 +74708,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74326,9 +74729,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74412,11 +74817,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74431,9 +74838,11 @@
           "duration_proximity": 0.7142857142857143,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74517,11 +74926,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74536,9 +74947,11 @@
           "duration_proximity": 0.8571428571428572,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74622,11 +75035,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74641,9 +75056,11 @@
           "duration_proximity": 0.6666666666666667,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74727,11 +75144,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74746,9 +75165,11 @@
           "duration_proximity": 0.8974358974358975,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74832,11 +75253,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74851,9 +75274,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -74937,11 +75362,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -74956,9 +75383,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -75042,11 +75471,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -75061,9 +75492,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -75147,11 +75580,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -75166,9 +75601,11 @@
           "duration_proximity": 0.9,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -75252,11 +75689,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -75271,9 +75710,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -75357,11 +75798,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -75376,9 +75819,11 @@
           "duration_proximity": 0.75,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {
@@ -75462,11 +75907,13 @@
           },
           "artifact_completeness": 1.0,
           "artifact_flags": {
+            "embedded_mano_vertices_available": true,
             "kinematics": true,
-            "mesh": false,
             "metadata": true,
             "pose": true,
             "sensor_layout": true,
+            "surface_triangle_topology_available": false,
+            "tracked_landmarks_3d_available": true,
             "tracking": true,
             "virtual_glove": true
           },
@@ -75481,9 +75928,11 @@
           "duration_proximity": 1.0,
           "geometry_available": true,
           "geometry_components": {
+            "embedded_mano_vertices": true,
             "kinematics": true,
-            "mesh": false,
             "pose": true,
+            "surface_triangle_topology": false,
+            "tracked_landmarks_3d": true,
             "tracking": true
           },
           "hand_availability_fraction": {

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 
@@ -28,6 +28,10 @@ class MatplotlibGloveViewer:
         *,
         initial_position: int = 0,
         speed: float = 1.0,
+        figure: Any | None = None,
+        on_sequence_finished: Callable[[], None] | None = None,
+        defer_initial_draw: bool = False,
+        use_idle_draw: bool = True,
     ) -> None:
         try:
             import matplotlib.pyplot as plt
@@ -40,12 +44,15 @@ class MatplotlibGloveViewer:
 
         self._plt = plt
         self.sequence = sequence
+        self._on_sequence_finished = on_sequence_finished
+        self._defer_initial_draw = bool(defer_initial_draw)
+        self._use_idle_draw = bool(use_idle_draw)
         self.controller = PlaybackController(sequence.timestamps, sequence.frame_indices, speed=speed)
         self.controller.seek(initial_position)
         self._ignore_slider = False
         self._bounds = sequence_bounds(sequence)
 
-        self.fig = plt.figure(figsize=(16, 9), num=f"TASK-007A — {sequence.sample_id}")
+        self.fig = figure if figure is not None else plt.figure(figsize=(16, 9), num=f"TASK-007A — {sequence.sample_id}")
         grid = GridSpec(1, 2, figure=self.fig, width_ratios=(1.08, 0.92))
         self.ax_3d = self.fig.add_subplot(grid[0, 0], projection="3d")
         self.ax_dashboard = self.fig.add_subplot(grid[0, 1])
@@ -61,6 +68,10 @@ class MatplotlibGloveViewer:
             valstep=1,
             valfmt="%0.0f",
         )
+        if not self._use_idle_draw:
+            # Slider.set_val otherwise queues a second idle draw every time
+            # the playback timer moves the exact-frame position.
+            self.slider.drawon = False
         self.slider.on_changed(self._on_slider)
 
         self._buttons: list[Any] = []
@@ -97,6 +108,8 @@ class MatplotlibGloveViewer:
         self.update(position)
         if not self.controller.playing:
             self._timer.stop()
+            if self.controller.at_end and self._on_sequence_finished is not None:
+                self._on_sequence_finished()
 
     def _set_slider(self, position: int) -> None:
         if int(round(self.slider.val)) == position:
@@ -137,12 +150,17 @@ class MatplotlibGloveViewer:
         self.ax_dashboard.clear()
         self.ax_dashboard.set_axis_off()
         label = self.sequence.label_ar or "(not supplied)"
+        if self.sequence.metadata.get("mesh", {}).get("embedded_mano_vertices_available"):
+            geometry_label = "embedded MANO vertex cloud + tracked 21-joint landmarks"
+        else:
+            geometry_label = "tracked 21-joint landmarks"
         header = (
             f"sample: {self.sequence.sample_id}\n"
             f"label: {label}    signer: {self.sequence.signer_id or '(unknown)'}\n"
             f"stored frame: {frame.frame_index}   position: {position + 1}/{len(self.sequence)}\n"
             f"timestamp: {frame.timestamp_seconds:.6f} s\n"
-            f"geometry: {self.sequence.geometry_source}\n"
+            f"geometry: {geometry_label}\n"
+            "surface topology: NOT STORED\n"
             "H = Hall/magnetic angular package   IMU = palm orientation package"
         )
         self.ax_dashboard.text(0.0, 0.995, header, va="top", ha="left", family="monospace", fontsize=7.5)
@@ -254,7 +272,16 @@ class MatplotlibGloveViewer:
         self._set_slider(position)
         self._draw_3d(position)
         self._draw_dashboard(position)
-        self.fig.canvas.draw_idle()
+        if self._defer_initial_draw:
+            # Embedded Tk canvases need to be allocated before their first
+            # synchronous draw. The host draws once after construction;
+            # subsequent updates follow the configured draw mode.
+            self._defer_initial_draw = False
+            return
+        if self._use_idle_draw:
+            self.fig.canvas.draw_idle()
+        else:
+            self.fig.canvas.draw()
 
     def save(self, path: str | Path) -> Path:
         destination = Path(path)

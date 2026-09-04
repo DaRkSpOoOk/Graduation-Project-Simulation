@@ -213,7 +213,6 @@ def _layout_audit(path: Path) -> tuple[bool, dict[str, Any]]:
         "sensor_count": len(sensors),
         "hall_count": len(bend) + len(spread),
         "imu_count": len(imu),
-        "mesh_available": False,
     }
     return not problems, result
 
@@ -464,7 +463,23 @@ def _artifact_flags(run_root: Path, sample_id: str, layout_path: Path, metadata_
         for suffix in (".obj", ".ply", ".glb", ".gltf"):
             mesh_candidates.extend(sample_root.glob(f"*{suffix}"))
     flags = {name: path.is_file() for name, path in paths.items()}
-    flags["mesh"] = bool(mesh_candidates)
+    flags["surface_triangle_topology_available"] = bool(mesh_candidates)
+    flags["embedded_mano_vertices_available"] = False
+    if flags["pose"]:
+        try:
+            with np.load(paths["pose"], allow_pickle=False) as data:
+                flags["embedded_mano_vertices_available"] = (
+                    "vertices" in data.files and "vertices_keys" in data.files
+                )
+        except (OSError, ValueError, EOFError):
+            flags["embedded_mano_vertices_available"] = False
+    flags["tracked_landmarks_3d_available"] = False
+    if flags["tracking"]:
+        try:
+            with np.load(paths["tracking"], allow_pickle=False) as data:
+                flags["tracked_landmarks_3d_available"] = "landmarks_3d" in data.files
+        except (OSError, ValueError, EOFError):
+            flags["tracked_landmarks_3d_available"] = False
     return flags
 
 
@@ -501,7 +516,9 @@ def _audit_candidate(row: Mapping[str, str], run_root: Path) -> tuple[_Candidate
         "pose": flags["pose"],
         "tracking": flags["tracking"],
         "kinematics": flags["kinematics"],
-        "mesh": flags["mesh"],
+        "embedded_mano_vertices": flags["embedded_mano_vertices_available"],
+        "tracked_landmarks_3d": flags["tracked_landmarks_3d_available"],
+        "surface_triangle_topology": flags["surface_triangle_topology_available"],
     }
     metrics["geometry_available"] = all(flags[name] for name in ("pose", "tracking", "kinematics"))
     if metadata_path.is_file():
@@ -770,6 +787,7 @@ def build_catalog_payload(
             "strict frame/timestamp order and fixed deg/180 normalized relation",
             "per-channel invalid values remain NaN and valid values remain finite",
             "machine-readable 15 bend + 4 spread + 1 palm IMU layout with H/IMU markers",
+            "geometry terminology distinguishes embedded MANO vertices, tracked 21-joint landmarks, and surface topology",
             "valid orientation matrices/quaternions and optional ADC transfer agreement",
         ],
         "weights": {

@@ -319,6 +319,12 @@ def load_sequence(
         "virtual_glove": glove_meta,
         "mesh": {
             "stored_vertices_arrays": raw_has_mesh_arrays,
+            "embedded_mano_vertices_available": bool(raw_has_mesh_arrays and mesh_by_key),
+            "tracked_landmarks_3d_available": True,
+            # TASK-008 stores MANO vertices but not a trusted triangle index
+            # buffer.  Keep this explicit so callers do not mistake a vertex
+            # cloud for a renderable surface mesh.
+            "surface_triangle_topology_available": False,
             "mesh_rows_mapped_to_track": mesh_rows,
             "vertex_count": int(next(iter(mesh_by_key.values())).shape[0]) if mesh_by_key else None,
             "vertices_key_format": "frame_index:raw_detection_index",
