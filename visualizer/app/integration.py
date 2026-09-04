@@ -4,12 +4,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from visualizer.contract import PlaybackSequence
 from visualizer.loader import ArtifactValidationError, load_sequence
 from visualizer.mapping import Core28Resolver
 from visualizer.queue import PlaybackQueue, PlaybackQueueItem, QueueState
+
+if TYPE_CHECKING:
+    from visualizer.recognition import RecognizerAdapter
 
 
 class VisualizerIntegrationError(ValueError):
@@ -73,6 +76,18 @@ class HeadlessPlaybackResult:
     played: tuple[dict[str, Any], ...]
     completed_indices: tuple[int, ...]
     queue_complete: bool
+
+
+@dataclass(frozen=True, slots=True)
+class HeadlessRecognitionPlaybackResult:
+    """Queue traversal plus demo-only sequence-level recognizer results."""
+
+    requested_text: str
+    played: tuple[dict[str, Any], ...]
+    completed_indices: tuple[int, ...]
+    queue_complete: bool
+    recognition_enabled: bool
+    checkpoint_metadata: dict[str, Any] | None
 
 
 class QueuePlaybackSession:
@@ -226,4 +241,78 @@ def run_headless_queue(
         played=tuple(played),
         completed_indices=tuple(completed_indices),
         queue_complete=session.queue.is_complete,
+    )
+
+
+def run_headless_recognizer_queue(
+    text: str,
+    *,
+    run_root: str | Path,
+    recognition_adapter: RecognizerAdapter | None = None,
+    recognition_error: str | None = None,
+    resolver: Core28Resolver | None = None,
+    manifest_path: str | Path | None = None,
+    mode: str = "canonical",
+    rng_seed: int | None = None,
+) -> HeadlessRecognitionPlaybackResult:
+    """Traverse a queue and attach one cached sequence-level prediction per sign.
+
+    This is an engineering/demo path.  It deliberately reports predictions
+    without calculating accuracy or changing the queue's expected labels.
+    Neutral gaps are recorded but never sent to the recognizer.
+    """
+
+    # Keep the existing visualization-only module importable in environments
+    # without the optional TASK-009B/PyTorch dependency.
+    from visualizer.recognition import RecognitionController
+
+    session = QueuePlaybackSession(
+        run_root=run_root,
+        resolver=resolver,
+        manifest_path=manifest_path,
+    )
+    controller = RecognitionController(
+        recognition_adapter,
+        disabled_reason=recognition_error,
+    )
+    items = session.enqueue_text(text, mode=mode, rng_seed=rng_seed)
+    if session.queue.last_unsupported:
+        raise VisualizerIntegrationError(
+            "headless queue input contains unsupported characters: "
+            + "; ".join(issue.character for issue in session.queue.last_unsupported)
+        )
+
+    played: list[dict[str, Any]] = []
+    completed_indices: list[int] = []
+    session.start()
+    while session.queue.current is not None:
+        item = session.queue.current
+        index = _item_index(items, item)
+        sequence = session.current_sequence
+        recognition = controller.result_for(item)
+        played.append(
+            {
+                "index": index,
+                "item_type": item.item_type,
+                "character": item.character,
+                "sign_id": item.sign_id,
+                "sample_id": item.sample_id,
+                "sequence_length": len(sequence) if sequence is not None else None,
+                "has_geometry": (
+                    any(hand.present for frame in sequence.frames for hand in frame.hands)
+                    if sequence is not None
+                    else False
+                ),
+                "recognition": recognition.to_dict() if recognition is not None else None,
+            }
+        )
+        session.complete_current()
+        completed_indices.append(index)
+    return HeadlessRecognitionPlaybackResult(
+        requested_text=text,
+        played=tuple(played),
+        completed_indices=tuple(completed_indices),
+        queue_complete=session.queue.is_complete,
+        recognition_enabled=controller.enabled,
+        checkpoint_metadata=(controller.metadata.to_dict() if controller.metadata is not None else None),
     )

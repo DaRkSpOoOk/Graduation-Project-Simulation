@@ -1,8 +1,8 @@
-"""Tk/Matplotlib desktop application for the TASK-007C queue integration.
+"""Tk/Matplotlib desktop application for the TASK-007C/007D integration.
 
 The window owns presentation state only.  Character mapping, exemplar
-selection, queue state, artifact loading, and frame playback remain in their
-respective TASK-007A/TASK-007B-facing objects.
+selection, queue state, artifact loading, frame playback, and sequence-level
+recognition remain in their respective facing objects.
 """
 
 from __future__ import annotations
@@ -42,6 +42,9 @@ class Core28VisualizerApplication:
         mode: str = "canonical",
         rng_seed: int | None = None,
         speed: float = 1.0,
+        recognition_adapter: Any | None = None,
+        recognition_error: str | None = None,
+        show_recognition: bool = False,
         root: tk.Tk | None = None,
     ) -> None:
         if mode not in set(MODE_LABELS.values()):
@@ -76,6 +79,11 @@ class Core28VisualizerApplication:
         self._completion_scheduled = False
         self._closed = False
         self._speed = float(speed)
+        self._recognition_adapter = recognition_adapter
+        self._recognition_error = recognition_error
+        self._show_recognition = bool(show_recognition)
+        self._recognition_cache: dict[str, Any] = {}
+        self._active_recognition: Any | None = None
 
         self.text_var = tk.StringVar(value=initial_text)
         self.mode_var = tk.StringVar(value=self._mode_to_label(mode))
@@ -83,6 +91,12 @@ class Core28VisualizerApplication:
         self.speed_var = tk.StringVar(value=f"{speed:g}×")
         self.status_var = tk.StringVar(value="Ready. Type text or press a Core-28 key.")
         self.current_var = tk.StringVar(value="No active sequence")
+        self.recognition_status_var = tk.StringVar(value="Recognition disabled")
+        self.recognition_expected_var = tk.StringVar(value="—")
+        self.recognition_predicted_var = tk.StringVar(value="—")
+        self.recognition_confidence_var = tk.StringVar(value="—")
+        self.recognition_model_var = tk.StringVar(value="Visualization-only mode")
+        self.recognition_top_var = tk.StringVar(value="—")
         self._build_ui()
         self._poll_playback()
 
@@ -208,6 +222,35 @@ class Core28VisualizerApplication:
         queue_scroll.pack(side="right", fill="y")
         self.queue_list.configure(yscrollcommand=queue_scroll.set)
 
+        if self._show_recognition:
+            recognition_frame = ttk.LabelFrame(queue_panel, text="Recognition (demo only)")
+            recognition_frame.pack(fill="x", pady=(8, 0))
+            recognition_rows = (
+                ("Status", self.recognition_status_var),
+                ("Expected", self.recognition_expected_var),
+                ("Predicted", self.recognition_predicted_var),
+                ("Confidence", self.recognition_confidence_var),
+                ("Model", self.recognition_model_var),
+                ("Top 3", self.recognition_top_var),
+            )
+            for row_index, (label, variable) in enumerate(recognition_rows):
+                ttk.Label(recognition_frame, text=f"{label}:").grid(
+                    row=row_index, column=0, sticky="nw", padx=(5, 5), pady=2
+                )
+                value_label = ttk.Label(
+                    recognition_frame,
+                    textvariable=variable,
+                    justify="left",
+                    wraplength=300,
+                )
+                value_label.grid(row=row_index, column=1, sticky="nw", padx=(0, 5), pady=2)
+                if label == "Predicted":
+                    # The actual prediction is never altered to match the
+                    # expectation; color only makes disagreement obvious.
+                    self._recognition_prediction_label = value_label
+        else:
+            self._recognition_prediction_label = None
+
         controls = ttk.Frame(queue_panel)
         controls.pack(fill="x", pady=(8, 0))
         for label, callback in (
@@ -280,6 +323,81 @@ class Core28VisualizerApplication:
                 self.queue_list.itemconfig(index, foreground="#166534")
             elif item.state in {QueueState.FAILED, QueueState.UNAVAILABLE}:
                 self.queue_list.itemconfig(index, foreground="#b91c1c")
+
+    def _set_recognition_inactive(self, *, reason: str, expected: str = "—") -> None:
+        """Set presentation state without fabricating a prediction."""
+
+        self._active_recognition = None
+        self.recognition_status_var.set(reason)
+        self.recognition_expected_var.set(expected)
+        self.recognition_predicted_var.set("—")
+        self.recognition_confidence_var.set("—")
+        self.recognition_top_var.set("—")
+        if self._recognition_adapter is not None:
+            metadata = self._recognition_adapter.metadata
+            self.recognition_model_var.set(metadata.warning)
+        elif self._recognition_error:
+            self.recognition_model_var.set("Checkpoint unavailable")
+        else:
+            self.recognition_model_var.set("Visualization-only mode")
+        if self._recognition_prediction_label is not None:
+            self._recognition_prediction_label.configure(foreground="#111827")
+
+    def _update_recognition(self, item: Any) -> None:
+        """Compute/display one cached sequence prediction for the active sign."""
+
+        if item.item_type == "gap":
+            self._set_recognition_inactive(reason="Skipped for neutral gap", expected="(gap)")
+            return
+        expected = str(item.character or "—")
+        if self._recognition_adapter is None:
+            reason = self._recognition_error or "No checkpoint selected"
+            self._set_recognition_inactive(reason="Recognition unavailable", expected=expected)
+            self.recognition_top_var.set(reason)
+            return
+
+        sample_id = str(item.sample_id or "")
+        try:
+            if sample_id in self._recognition_cache:
+                result = self._recognition_cache[sample_id]
+            else:
+                result = self._recognition_adapter.predict_queue_item(item)
+                self._recognition_cache[sample_id] = result
+            if result is None:
+                self._set_recognition_inactive(reason="Skipped for neutral gap", expected="(gap)")
+                return
+            self._active_recognition = result
+            self.recognition_expected_var.set(expected)
+            metadata = result.checkpoint_metadata
+            self.recognition_model_var.set(metadata.warning if metadata is not None else "Demo checkpoint")
+            if not result.available:
+                self.recognition_status_var.set("Recognition unavailable")
+                self.recognition_predicted_var.set("—")
+                self.recognition_confidence_var.set("—")
+                self.recognition_top_var.set(result.error or "model error")
+                if self._recognition_prediction_label is not None:
+                    self._recognition_prediction_label.configure(foreground="#b91c1c")
+                return
+            self.recognition_status_var.set("Sequence prediction ready (demo only)")
+            predicted = result.predicted_character or "—"
+            if result.predicted_sign_id:
+                predicted = f"{predicted} / SignID {result.predicted_sign_id}"
+            self.recognition_predicted_var.set(predicted)
+            self.recognition_confidence_var.set(
+                f"{float(result.confidence):.1%} (max softmax probability)"
+            )
+            self.recognition_top_var.set(
+                " | ".join(
+                    f"{entry['character']} {float(entry['probability']):.1%}"
+                    for entry in result.top_k
+                )
+            )
+            if self._recognition_prediction_label is not None:
+                color = "#166534" if result.predicted_character == item.character else "#b91c1c"
+                self._recognition_prediction_label.configure(foreground=color)
+        except Exception as exc:  # noqa: BLE001 - inference must not corrupt queue playback
+            self._set_recognition_inactive(reason="Recognition unavailable", expected=expected)
+            self.recognition_top_var.set(f"{type(exc).__name__}: {exc}")
 
     def _destroy_viewer(self) -> None:
         if self._viewer is not None:
@@ -394,6 +512,7 @@ class Core28VisualizerApplication:
         if item is None:
             self._refresh_queue()
             self.status_var.set("Queue complete.")
+            self._set_recognition_inactive(reason="Queue complete")
             return
         try:
             if self.session.current_item is not item:
@@ -401,17 +520,24 @@ class Core28VisualizerApplication:
             sequence = self.session.current_sequence
             if item.item_type == "gap":
                 self._show_gap(item, autoplay=autoplay)
+                self._update_recognition(item)
                 self.status_var.set("Neutral gap: presentation pause; no sample was loaded.")
             elif sequence is None:
                 raise VisualizerIntegrationError("sign item loaded without a PlaybackSequence")
             else:
                 self._show_sequence(sequence, autoplay=autoplay)
+                self._update_recognition(item)
                 self.status_var.set(f"Playing {item.character} / SignID {item.sign_id} / {item.sample_id}")
         except (VisualizerIntegrationError, OSError, ValueError) as exc:
             failed = self.session.queue.fail(str(exc), unavailable=True)
             if failed is not None:
                 self.session.current_item = failed
                 self.session.current_sequence = None
+                self._set_recognition_inactive(
+                    reason="Recognition unavailable",
+                    expected=str(failed.character or "—"),
+                )
+                self.recognition_top_var.set(f"sequence unavailable: {exc}")
             self._refresh_queue()
             self.status_var.set(f"Unavailable: {exc}")
             if self.session.queue.current is not None:
@@ -511,6 +637,7 @@ class Core28VisualizerApplication:
             child.destroy()
         self._refresh_queue()
         self.current_var.set("No active sequence")
+        self._set_recognition_inactive(reason="Recognition idle")
         self.status_var.set("Queue cleared.")
 
     def _poll_playback(self) -> None:
