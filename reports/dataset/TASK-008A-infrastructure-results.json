@@ -1,0 +1,63 @@
+{
+  "task": "TASK-008A",
+  "branch": "luna/task-008a-karsl-core28-dataset",
+  "base_commit": "8cafff48c53522bd9e458f56b47507d3a025930d",
+  "branch_commit": "recorded by final git handoff; intentionally not self-referential",
+  "core28": {
+    "mapping_version": "karsl-core28-v1",
+    "class_count": 28,
+    "sign_ids": [
+      "0032", "0033", "0034", "0035", "0036", "0037", "0038", "0039",
+      "0040", "0041", "0042", "0043", "0044", "0045", "0046", "0047",
+      "0048", "0049", "0050", "0051", "0052", "0053", "0054", "0055",
+      "0056", "0057", "0058", "0059"
+    ],
+    "label_source_status": "official URL recorded; disabled at development retrieval; verification required",
+    "extended_letter_candidates": ["0060", "0061", "0062", "0063", "0064", "0065", "0066", "0067", "0068", "0069", "0070"]
+  },
+  "source": {
+    "rgb_status": "official folder URLs recorded; current links inaccessible",
+    "skeleton_status": "advertised by official project description; usable files/specification unavailable at retrieval",
+    "retrieval_date": "2026-09-02",
+    "downloaded_official_files": 0,
+    "source_hashes": []
+  },
+  "manifest": {
+    "path": "datasets/manifests/karsl_core28.csv",
+    "status": "schema-only; populate after official discovery",
+    "sample_count": 0,
+    "duplicate_sample_count": 0,
+    "duplicate_source_count": 0,
+    "portable_paths": true
+  },
+  "loso": {
+    "status": "implemented; schema-only templates",
+    "folds": {"S01": 0, "S02": 0, "S03": 0},
+    "signer_leakage": 0,
+    "duplicate_assignment": 0,
+    "unassigned_samples": 0
+  },
+  "infrastructure": {
+    "downloader": "READY",
+    "manifest_tooling": "READY",
+    "split_tooling": "READY",
+    "deterministic_sharding": "READY",
+    "resume_and_provenance": "READY",
+    "progress_and_status": "READY",
+    "slurm_scripts": "READY",
+    "output_index": "READY",
+    "git_exclusion_guard": "TESTED"
+  },
+  "production": {
+    "full_run_status": "PENDING",
+    "hpc_smoke_status": "PENDING",
+    "qa_status": "PENDING"
+  },
+  "tests": {
+    "command": "python -m unittest discover -s tests -p 'test_*.py'",
+    "status": "PASS",
+    "passed": 397,
+    "compileall": "PASS"
+  },
+  "verdict": "TASK-008A IBEX EXTRACTION INFRASTRUCTURE READY — FULL DATASET RUN PENDING"
+}

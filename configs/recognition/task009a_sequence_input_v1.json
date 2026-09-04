@@ -1,0 +1,300 @@
+{
+  "config_defaults": {
+    "channels_per_hand": 23,
+    "contract_version": "task009a_sequence_input_v1",
+    "feature_dim": 46,
+    "feature_set": "full",
+    "include_hand_present": true,
+    "include_tracking_state": true,
+    "invalid_fill_value": 0.0,
+    "normalization": "task008_physical",
+    "padding_fill_value": 0.0,
+    "quaternion_policy": "absolute"
+  },
+  "contract_version": "task009a_sequence_input_v1",
+  "feature_order": {
+    "chain_joint_order": [
+      "proximal",
+      "middle",
+      "distal"
+    ],
+    "finger_order": [
+      "thumb",
+      "index",
+      "middle",
+      "ring",
+      "pinky"
+    ],
+    "layout": "hand-major, then family (bend, spread, quaternion), then the orders above",
+    "quaternion_order": [
+      "w",
+      "x",
+      "y",
+      "z"
+    ],
+    "spread_pairs": [
+      [
+        "thumb",
+        "index"
+      ],
+      [
+        "index",
+        "middle"
+      ],
+      [
+        "middle",
+        "ring"
+      ],
+      [
+        "ring",
+        "pinky"
+      ]
+    ]
+  },
+  "feature_sets": {
+    "bend_only": {
+      "channel_names": [
+        "LEFT/bend/thumb/proximal",
+        "LEFT/bend/thumb/middle",
+        "LEFT/bend/thumb/distal",
+        "LEFT/bend/index/proximal",
+        "LEFT/bend/index/middle",
+        "LEFT/bend/index/distal",
+        "LEFT/bend/middle/proximal",
+        "LEFT/bend/middle/middle",
+        "LEFT/bend/middle/distal",
+        "LEFT/bend/ring/proximal",
+        "LEFT/bend/ring/middle",
+        "LEFT/bend/ring/distal",
+        "LEFT/bend/pinky/proximal",
+        "LEFT/bend/pinky/middle",
+        "LEFT/bend/pinky/distal",
+        "RIGHT/bend/thumb/proximal",
+        "RIGHT/bend/thumb/middle",
+        "RIGHT/bend/thumb/distal",
+        "RIGHT/bend/index/proximal",
+        "RIGHT/bend/index/middle",
+        "RIGHT/bend/index/distal",
+        "RIGHT/bend/middle/proximal",
+        "RIGHT/bend/middle/middle",
+        "RIGHT/bend/middle/distal",
+        "RIGHT/bend/ring/proximal",
+        "RIGHT/bend/ring/middle",
+        "RIGHT/bend/ring/distal",
+        "RIGHT/bend/pinky/proximal",
+        "RIGHT/bend/pinky/middle",
+        "RIGHT/bend/pinky/distal"
+      ],
+      "channels_per_hand": 15,
+      "families": [
+        "bend"
+      ],
+      "feature_dim": 30
+    },
+    "bend_spread": {
+      "channel_names": [
+        "LEFT/bend/thumb/proximal",
+        "LEFT/bend/thumb/middle",
+        "LEFT/bend/thumb/distal",
+        "LEFT/bend/index/proximal",
+        "LEFT/bend/index/middle",
+        "LEFT/bend/index/distal",
+        "LEFT/bend/middle/proximal",
+        "LEFT/bend/middle/middle",
+        "LEFT/bend/middle/distal",
+        "LEFT/bend/ring/proximal",
+        "LEFT/bend/ring/middle",
+        "LEFT/bend/ring/distal",
+        "LEFT/bend/pinky/proximal",
+        "LEFT/bend/pinky/middle",
+        "LEFT/bend/pinky/distal",
+        "LEFT/spread/thumb-index",
+        "LEFT/spread/index-middle",
+        "LEFT/spread/middle-ring",
+        "LEFT/spread/ring-pinky",
+        "RIGHT/bend/thumb/proximal",
+        "RIGHT/bend/thumb/middle",
+        "RIGHT/bend/thumb/distal",
+        "RIGHT/bend/index/proximal",
+        "RIGHT/bend/index/middle",
+        "RIGHT/bend/index/distal",
+        "RIGHT/bend/middle/proximal",
+        "RIGHT/bend/middle/middle",
+        "RIGHT/bend/middle/distal",
+        "RIGHT/bend/ring/proximal",
+        "RIGHT/bend/ring/middle",
+        "RIGHT/bend/ring/distal",
+        "RIGHT/bend/pinky/proximal",
+        "RIGHT/bend/pinky/middle",
+        "RIGHT/bend/pinky/distal",
+        "RIGHT/spread/thumb-index",
+        "RIGHT/spread/index-middle",
+        "RIGHT/spread/middle-ring",
+        "RIGHT/spread/ring-pinky"
+      ],
+      "channels_per_hand": 19,
+      "families": [
+        "bend",
+        "spread"
+      ],
+      "feature_dim": 38
+    },
+    "full": {
+      "channel_names": [
+        "LEFT/bend/thumb/proximal",
+        "LEFT/bend/thumb/middle",
+        "LEFT/bend/thumb/distal",
+        "LEFT/bend/index/proximal",
+        "LEFT/bend/index/middle",
+        "LEFT/bend/index/distal",
+        "LEFT/bend/middle/proximal",
+        "LEFT/bend/middle/middle",
+        "LEFT/bend/middle/distal",
+        "LEFT/bend/ring/proximal",
+        "LEFT/bend/ring/middle",
+        "LEFT/bend/ring/distal",
+        "LEFT/bend/pinky/proximal",
+        "LEFT/bend/pinky/middle",
+        "LEFT/bend/pinky/distal",
+        "LEFT/spread/thumb-index",
+        "LEFT/spread/index-middle",
+        "LEFT/spread/middle-ring",
+        "LEFT/spread/ring-pinky",
+        "LEFT/palm_quaternion/w",
+        "LEFT/palm_quaternion/x",
+        "LEFT/palm_quaternion/y",
+        "LEFT/palm_quaternion/z",
+        "RIGHT/bend/thumb/proximal",
+        "RIGHT/bend/thumb/middle",
+        "RIGHT/bend/thumb/distal",
+        "RIGHT/bend/index/proximal",
+        "RIGHT/bend/index/middle",
+        "RIGHT/bend/index/distal",
+        "RIGHT/bend/middle/proximal",
+        "RIGHT/bend/middle/middle",
+        "RIGHT/bend/middle/distal",
+        "RIGHT/bend/ring/proximal",
+        "RIGHT/bend/ring/middle",
+        "RIGHT/bend/ring/distal",
+        "RIGHT/bend/pinky/proximal",
+        "RIGHT/bend/pinky/middle",
+        "RIGHT/bend/pinky/distal",
+        "RIGHT/spread/thumb-index",
+        "RIGHT/spread/index-middle",
+        "RIGHT/spread/middle-ring",
+        "RIGHT/spread/ring-pinky",
+        "RIGHT/palm_quaternion/w",
+        "RIGHT/palm_quaternion/x",
+        "RIGHT/palm_quaternion/y",
+        "RIGHT/palm_quaternion/z"
+      ],
+      "channels_per_hand": 23,
+      "families": [
+        "bend",
+        "spread",
+        "quaternion"
+      ],
+      "feature_dim": 46
+    }
+  },
+  "hand_order": [
+    "LEFT",
+    "RIGHT"
+  ],
+  "labels": {
+    "index_range": [
+      0,
+      27
+    ],
+    "num_classes": 28,
+    "source": "label_index column of the frozen index (never directory ordering)"
+  },
+  "masks": {
+    "feature_valid": {
+      "dtype": "bool",
+      "meaning": "this exact channel carries a real measurement at this timestep",
+      "shape": "[B, T_max, D]"
+    },
+    "frame_valid": {
+      "dtype": "bool",
+      "meaning": "a real source frame, not batch padding",
+      "note": "~frame_valid is the transformer-style key_padding_mask",
+      "shape": "[B, T_max]"
+    },
+    "hand_present": {
+      "dtype": "bool",
+      "hand_order": [
+        "LEFT",
+        "RIGHT"
+      ],
+      "meaning": "the physical hand was reconstructed (pose-bearing tracking state)",
+      "shape": "[B, T_max, 2]"
+    },
+    "polarity": "True means present/valid/real for every mask in this contract"
+  },
+  "normalization": {
+    "bend": "TASK-008 bend_normalized = bend_angle_deg / 180.0 (fixed divisor)",
+    "fitted_statistics": "none; nothing is fitted, therefore nothing can leak",
+    "policy": "task008_physical",
+    "quaternion": "already unit-norm and dimensionless",
+    "spread": "TASK-008 spread_normalized = spread_angle_deg / 180.0 (fixed divisor)"
+  },
+  "purpose": "freeze the transformation from the finalized TASK-008 virtual-glove dataset to variable-length, explicitly masked, signer-independent PyTorch batches",
+  "quaternion_policies": {
+    "absolute": "verbatim TASK-008 palm quaternion, WXYZ, camera frame, w >= 0",
+    "default": "absolute",
+    "relative_first_valid": "conjugate(q_ref) * q(t) with q_ref the FIRST VALID palm quaternion of that physical hand in that sequence; strictly causal; re-canonicalized to w >= 0"
+  },
+  "source": {
+    "index": "datasets/manifests/karsl_core28_virtual_glove.csv",
+    "npz_schema_version": "virtual_glove_v1",
+    "sensor_layout_version": "ideal_virtual_glove_v1",
+    "splits": "datasets/splits/karsl_core28_loso_s{01,02,03}.csv",
+    "upstream_contracts": [
+      "TASK-005-final-v2",
+      "TASK-006-ideal-virtual-glove-v1"
+    ]
+  },
+  "splits": {
+    "held_out_signers": [
+      "01",
+      "02",
+      "03"
+    ],
+    "roles": [
+      "train",
+      "validation",
+      "test"
+    ],
+    "source": "frozen TASK-008B LOSO files"
+  },
+  "task": "TASK-009A",
+  "temporal": {
+    "batching": "right-padded dense tensors plus lengths and frame_valid",
+    "observed_length_range": [
+      9,
+      70
+    ],
+    "pack_padded_sequence": "supported; lengths are int64 on CPU and need not be sorted",
+    "policy": "original length preserved; no cropping, resampling or fixed windows"
+  },
+  "three_distinct_states": {
+    "batch_padding": "frame_valid=False (and feature_valid False throughout)",
+    "invalid_or_missing_sensor": "feature_valid=False, frame_valid=True",
+    "real_observation": "feature_valid=True, frame_valid=True (value may legitimately be 0.0)"
+  },
+  "tracking_state": {
+    "codes": {
+      "0": "MISSING",
+      "1": "OBSERVED",
+      "2": "AMBIGUOUS",
+      "3": "REJECTED_QUALITY",
+      "4": "LIKELY_OCCLUDED"
+    },
+    "decision": "hand presence as a 2-channel mask; raw state codes as metadata only",
+    "pose_bearing_codes": [
+      1,
+      2
+    ]
+  }
+}

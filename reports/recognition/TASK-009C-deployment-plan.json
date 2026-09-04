@@ -1,0 +1,238 @@
+{
+  "config_agreement": {
+    "model": {
+      "agrees": true,
+      "problems": []
+    },
+    "training": {
+      "agrees": true,
+      "problems": []
+    }
+  },
+  "configuration": {
+    "bidirectional": false,
+    "dropout": 0.3,
+    "feature_set": "full",
+    "hidden_size": 192,
+    "input_policy": "values_and_feature_valid",
+    "input_projection": null,
+    "model_input_dimension": 92,
+    "num_classes": 28,
+    "num_layers": 2,
+    "pooling": "masked_mean",
+    "quaternion_policy": "absolute",
+    "selected_by": "TASK-009B LOSO evidence; TASK-009C performs no model selection"
+  },
+  "contract_version": "task009a_sequence_input_v1",
+  "dataset_audit": {
+    "classes": 28,
+    "contract_version": "task009a_sequence_input_v1",
+    "data_run_root": "/home/hatim/graduation-project-runs/task008-core28-full",
+    "duplicate_sample_ids": [],
+    "expected_samples": 4222,
+    "feature_dimension": 46,
+    "index": "/home/hatim/Graduation-Project-Simulation-task009c/datasets/manifests/karsl_core28_virtual_glove.csv",
+    "indexed_samples": 4222,
+    "loaded_samples": 4222,
+    "model_input_dimension": 92,
+    "passed": true,
+    "problems": [],
+    "rejected_samples": 0,
+    "rejections": [],
+    "samples_per_class": {
+      "0": 150,
+      "1": 152,
+      "10": 150,
+      "11": 150,
+      "12": 150,
+      "13": 150,
+      "14": 150,
+      "15": 151,
+      "16": 150,
+      "17": 150,
+      "18": 150,
+      "19": 150,
+      "2": 150,
+      "20": 150,
+      "21": 150,
+      "22": 151,
+      "23": 151,
+      "24": 150,
+      "25": 150,
+      "26": 150,
+      "27": 160,
+      "3": 150,
+      "4": 158,
+      "5": 149,
+      "6": 150,
+      "7": 150,
+      "8": 150,
+      "9": 150
+    },
+    "sequences_verified_by_loading": true,
+    "signers": {
+      "01": 1402,
+      "02": 1401,
+      "03": 1419
+    }
+  },
+  "deployment_fold_tag": "all",
+  "epoch_budget": {
+    "deployment_epochs": 27,
+    "policy": "median_primary_loso_best_epoch",
+    "raw_median": 27.0,
+    "rounding_rule": "odd count: exact middle; even count: mean of middles, floor(x + 0.5)",
+    "sorted_best_epochs": [
+      20,
+      27,
+      28
+    ],
+    "source_best_epochs": {
+      "01": 28,
+      "02": 20,
+      "03": 27
+    }
+  },
+  "epoch_budget_caveat": "The LOSO best epochs were measured on ~2367 training sequences per fold; deployment trains on 4222 (1.78x more), so an epoch here is that much larger in gradient steps. The frozen rule is a median of EPOCHS, not of steps, and is applied as specified; a step-matched budget would be smaller. This is disclosed rather than silently adjusted.",
+  "epoch_budget_rationale": "An all-data model has no held-out validation split, so early stopping is impossible without either withholding scarce data or peeking at a pseudo-test set. The three TASK-009B primary folds each chose a best epoch on legitimate validation data before any test evaluation, so their median is a stopping point derived entirely from already-spent evidence.",
+  "loso_reference": {
+    "mean_test_accuracy": 0.6762980883774551,
+    "mean_test_macro_f1": 0.6606785355233907,
+    "note": "This is the TASK-009B held-out-signer result for this configuration. It is the ONLY generalization evidence for the deployment model, which by construction has no held-out signer of its own.",
+    "per_fold": {
+      "01": {
+        "accuracy": 0.5677603423680456,
+        "macro_f1": 0.5440637782984072
+      },
+      "02": {
+        "accuracy": 0.7416131334760885,
+        "macro_f1": 0.7306537363564772
+      },
+      "03": {
+        "accuracy": 0.7195207892882312,
+        "macro_f1": 0.7073180919152876
+      }
+    }
+  },
+  "primary_loso_folds": {
+    "01": {
+      "best_epoch": 28,
+      "best_validation_macro_f1": 0.9840664711632454,
+      "epochs_completed": 40,
+      "model_config": {
+        "bidirectional": false,
+        "contract_version": "task009a_sequence_input_v1",
+        "dropout": 0.3,
+        "feature_set": "full",
+        "hidden_size": 192,
+        "input_policy": "values_and_feature_valid",
+        "input_projection": null,
+        "num_classes": 28,
+        "num_layers": 2,
+        "pooling": "masked_mean"
+      },
+      "result_path": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold01/seed1337/result.json",
+      "stopped_early": true,
+      "test_accuracy": 0.5677603423680456,
+      "test_macro_f1": 0.5440637782984072,
+      "train_samples": 2372,
+      "training_config": {
+        "batch_size": 32,
+        "early_stopping_patience": 12,
+        "epochs": 60,
+        "grad_clip_norm": 5.0,
+        "learning_rate": 0.001,
+        "loss": "cross_entropy",
+        "num_workers": 0,
+        "optimizer": "adamw",
+        "selection_metric": "validation_macro_f1",
+        "weight_decay": 0.0001
+      }
+    },
+    "02": {
+      "best_epoch": 20,
+      "best_validation_macro_f1": 0.9820057495943869,
+      "epochs_completed": 32,
+      "model_config": {
+        "bidirectional": false,
+        "contract_version": "task009a_sequence_input_v1",
+        "dropout": 0.3,
+        "feature_set": "full",
+        "hidden_size": 192,
+        "input_policy": "values_and_feature_valid",
+        "input_projection": null,
+        "num_classes": 28,
+        "num_layers": 2,
+        "pooling": "masked_mean"
+      },
+      "result_path": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold02/seed1337/result.json",
+      "stopped_early": true,
+      "test_accuracy": 0.7416131334760885,
+      "test_macro_f1": 0.7306537363564772,
+      "train_samples": 2373,
+      "training_config": {
+        "batch_size": 32,
+        "early_stopping_patience": 12,
+        "epochs": 60,
+        "grad_clip_norm": 5.0,
+        "learning_rate": 0.001,
+        "loss": "cross_entropy",
+        "num_workers": 0,
+        "optimizer": "adamw",
+        "selection_metric": "validation_macro_f1",
+        "weight_decay": 0.0001
+      }
+    },
+    "03": {
+      "best_epoch": 27,
+      "best_validation_macro_f1": 0.9910495576529732,
+      "epochs_completed": 39,
+      "model_config": {
+        "bidirectional": false,
+        "contract_version": "task009a_sequence_input_v1",
+        "dropout": 0.3,
+        "feature_set": "full",
+        "hidden_size": 192,
+        "input_policy": "values_and_feature_valid",
+        "input_projection": null,
+        "num_classes": 28,
+        "num_layers": 2,
+        "pooling": "masked_mean"
+      },
+      "result_path": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold03/seed1337/result.json",
+      "stopped_early": true,
+      "test_accuracy": 0.7195207892882312,
+      "test_macro_f1": 0.7073180919152876,
+      "train_samples": 2355,
+      "training_config": {
+        "batch_size": 32,
+        "early_stopping_patience": 12,
+        "epochs": 60,
+        "grad_clip_norm": 5.0,
+        "learning_rate": 0.001,
+        "loss": "cross_entropy",
+        "num_workers": 0,
+        "optimizer": "adamw",
+        "selection_metric": "validation_macro_f1",
+        "weight_decay": 0.0001
+      }
+    }
+  },
+  "purpose": "all-signers deployment training of the TASK-009B primary configuration",
+  "schema_version": "task009c_deployment_plan_v1",
+  "scientific_status": "POST-EVALUATION DEPLOYMENT TRAINING. This model is fitted on every available sequence and therefore has NO held-out data. Its training accuracy is not a performance estimate, and it must never be described as independently tested. The recognition result for this project remains the TASK-009B LOSO evidence.",
+  "source_task009b_analysis_commit": "0ddf0e6fed31a08753b0d7a20ece7b5a5cdc953b",
+  "task": "TASK-009C",
+  "training_config": {
+    "batch_size": 32,
+    "epochs": 27,
+    "grad_clip_norm": 5.0,
+    "learning_rate": 0.001,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "seed": 1337,
+    "weight_decay": 0.0001
+  },
+  "training_role": "deployment_all_signers",
+  "training_scope": "all_core28_sequences"
+}

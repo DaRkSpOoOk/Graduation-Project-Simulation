@@ -15,9 +15,18 @@ dependencies = [
     "opencv-contrib-python==5.0.0.93",
 ]
 
+[project.optional-dependencies]
+# TASK-009B recognition training. torch is already required by the TASK-008
+# WiLoR extraction stack and is installed from the CUDA wheel index rather than
+# pinned here; scikit-learn supplies the standard classification metrics and the
+# classical length-only duration control.
+recognition = [
+    "scikit-learn>=1.5",
+]
+
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*"]
+include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*", "recognition*"]

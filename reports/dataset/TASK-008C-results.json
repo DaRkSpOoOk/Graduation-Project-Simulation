@@ -1,0 +1,339 @@
+{
+  "artifacts": {
+    "bulk_output_committed": false,
+    "index": "datasets/manifests/karsl_core28_virtual_glove.csv",
+    "report": "reports/dataset/TASK-008C-core28-full-extraction.md",
+    "statistics": "reports/dataset/TASK-008C-final-qa.json"
+  },
+  "final_qa": {
+    "contract_intact": true,
+    "coverage_all_accounted": true,
+    "elapsed_seconds": 105.26185306599655,
+    "fabricated_values": 0,
+    "frame_alignment_pass": true,
+    "labels_intact": true,
+    "length_mismatches": 0,
+    "loso_intact": true,
+    "on_disk_extra_or_missing": 0,
+    "padding_truncation_resampling_interpolation": false,
+    "per_sample_qa": {
+      "failed": 0,
+      "passed": 4222,
+      "requested": 4222
+    },
+    "quaternion": {
+      "max_unit_norm_error": 4.715822465861663e-08,
+      "negative_w_count": 0,
+      "ordering": "WXYZ",
+      "sign_convention": "w >= 0"
+    },
+    "sensor_layout": {
+      "channel_order_identical_across_samples": true,
+      "distinct_layouts": 1,
+      "per_hand_counts": {
+        "bend_hall_sensors": 15,
+        "hall_sensors_total": 19,
+        "imu_packages": 1,
+        "logical_sensing_packages": 20,
+        "spread_hall_sensors": 4
+      },
+      "two_hand_hall_channels": 38,
+      "two_hand_imu_packages": 2
+    },
+    "stages_revalidated": {
+      "kinematics": {
+        "failed": 0,
+        "success": 4222
+      },
+      "pose": {
+        "failed": 0,
+        "success": 4222
+      },
+      "tracking": {
+        "failed": 0,
+        "success": 4222
+      },
+      "virtual_glove": {
+        "failed": 0,
+        "success": 4222
+      }
+    },
+    "temporal": {
+      "frame_index_strictly_increasing": true,
+      "non_contiguous_count": 0,
+      "timestamp_strictly_increasing": true
+    },
+    "value_ranges": {
+      "bend_angle_deg_max": 118.07036590576172,
+      "bend_angle_deg_min": 0.01594357378780842,
+      "declared_ceiling_deg": 180.0,
+      "normalization": "bend_normalized = bend_angle_deg / 180.0 (fixed divisor, no dataset min/max)",
+      "spread_angle_deg_max": 137.74978637695312,
+      "spread_angle_deg_min": 0.00015932998212520033
+    }
+  },
+  "hand_availability": {
+    "both_available": 80842,
+    "both_fraction": 0.9663275917713575,
+    "frames": 83659,
+    "left_available": 81574,
+    "left_fraction": 0.975077397530451,
+    "neither_available": 0,
+    "note": "availability counts frames whose tracking state carries a real reconstructed pose (OBSERVED or AMBIGUOUS). An absent hand is never inferred as a straight or neutral hand.",
+    "right_available": 82927,
+    "right_fraction": 0.9912501942409065
+  },
+  "loso": {
+    "01": {
+      "classes_per_role": {
+        "test": 28,
+        "train": 28,
+        "validation": 28
+      },
+      "counts": {
+        "test": 1402,
+        "train": 2372,
+        "validation": 448
+      },
+      "leakage": false,
+      "test_signers": [
+        "01"
+      ],
+      "validator": "PASS"
+    },
+    "02": {
+      "classes_per_role": {
+        "test": 28,
+        "train": 28,
+        "validation": 28
+      },
+      "counts": {
+        "test": 1401,
+        "train": 2373,
+        "validation": 448
+      },
+      "leakage": false,
+      "test_signers": [
+        "02"
+      ],
+      "validator": "PASS"
+    },
+    "03": {
+      "classes_per_role": {
+        "test": 28,
+        "train": 28,
+        "validation": 28
+      },
+      "counts": {
+        "test": 1419,
+        "train": 2355,
+        "validation": 448
+      },
+      "leakage": false,
+      "test_signers": [
+        "03"
+      ],
+      "validator": "PASS"
+    }
+  },
+  "not_done": [
+    "LSTM training",
+    "TASK-009",
+    "extended letters (0060-0070)",
+    "numbers (0001-0031)"
+  ],
+  "preflight": {
+    "absolute_paths": 0,
+    "all_checks": "18/18 PASS",
+    "checkpoint_present": true,
+    "classes": 28,
+    "dataset_root": "/home/hatim/datasets/KArSL-502",
+    "duplicate_sample_ids": 0,
+    "duplicate_source_paths": 0,
+    "frame_stats": {
+      "max": 70,
+      "mean": 19.8,
+      "median": 20,
+      "min": 9,
+      "p95": 29
+    },
+    "free_disk_gib": 868.5,
+    "git_commit": "642a560",
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "manifest_rows": 4222,
+    "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+    "source_bytes": 1794280889,
+    "source_files_present": "4222/4222",
+    "total_frames": 83659,
+    "vram_gib": 4.0,
+    "workbook_sha256": "c13717c549b8cb8cfa465237a3f7dfed73f84149ca5c448b2b253fd96321b14e",
+    "worktree": "clean"
+  },
+  "production_run": {
+    "failed": 0,
+    "frames": 83659,
+    "frames_per_second": 2.7077208756489677,
+    "git_commit": "5c47de98771154d88ffa1896b96ae8933431ff42",
+    "gpu_workers": 1,
+    "launched_by": "user, overnight, unattended",
+    "manifest_sha256": "365961b3d5b3ca765334570aae80ba2e846ec9227874966b5d345029d9c3eff1",
+    "model_loads": 1,
+    "peak_vram_bytes": 2813499392,
+    "precision": "full FP32; fast/FP16 disabled",
+    "requested": 4222,
+    "run_root": "/home/hatim/graduation-project-runs/task008-core28-full",
+    "seconds_per_video": 7.317968686514213,
+    "successful": 4222,
+    "unaccounted": 0,
+    "wall_seconds_agreement": 0.025,
+    "worker_wall_seconds": 30896.46379446301,
+    "worker_wall_seconds_independently_derived": 30896.438532
+  },
+  "production_sanity_check": {
+    "bend_valid_fraction": 1.0,
+    "failures": 0,
+    "frames": 612,
+    "gpu_temp_c": 81,
+    "imu_valid_fraction": 1.0,
+    "note": "these 24 samples are durable and will be SKIPPED by --resume",
+    "output_equals_manifest_frames": true,
+    "peak_vram_observed_mib": 3090,
+    "per_sample_qa": "24/24 PASS",
+    "rolling_fps": 3.68,
+    "samples_processed": 24,
+    "spread_valid_fraction": 0.7843,
+    "tracking_states": {
+      "OBSERVED": 1224
+    }
+  },
+  "qa_defect_found_and_fixed": {
+    "defect": "compared raw pose frame_index rows directly to per-frame stages",
+    "file": "evaluation/dataset/qa.py",
+    "fix": "compare distinct pose frame indices and per-frame timestamps",
+    "impact": "raw pose stores one row per detected hand, so all 4222 samples would have failed QA",
+    "verified": "24/24 production samples pass; 8/8 sampled two-hand videos would have failed before"
+  },
+  "resume_fixes_verified_present": {
+    "corrupt_artifact_recompute": "orchestrator.py:~345",
+    "distinct_frame_indices": "orchestrator.py:287"
+  },
+  "sequence_length_statistics": {
+    "by_signer": {
+      "01": {
+        "count": 1402,
+        "max": 70,
+        "mean": 21.360199714693294,
+        "median": 21.0,
+        "min": 14,
+        "p25": 19.0,
+        "p5": 17.0,
+        "p75": 23.0,
+        "p95": 29.0,
+        "sum": 29947
+      },
+      "02": {
+        "count": 1401,
+        "max": 45,
+        "mean": 13.73661670235546,
+        "median": 13.0,
+        "min": 10,
+        "p25": 13.0,
+        "p5": 11.0,
+        "p75": 15.0,
+        "p95": 17.0,
+        "sum": 19245
+      },
+      "03": {
+        "count": 1419,
+        "max": 67,
+        "mean": 24.289640591966172,
+        "median": 24.0,
+        "min": 9,
+        "p25": 22.0,
+        "p5": 18.0,
+        "p75": 26.0,
+        "p95": 30.0,
+        "sum": 34467
+      }
+    },
+    "overall": {
+      "count": 4222,
+      "max": 70,
+      "mean": 19.81501657981999,
+      "median": 20.0,
+      "min": 9,
+      "p25": 15.0,
+      "p5": 12.0,
+      "p75": 24.0,
+      "p95": 29.0,
+      "sum": 83659
+    }
+  },
+  "stacked_history": [
+    "PR #22 TASK-008A a7d41b1e",
+    "PR #23 TASK-008B 642a560",
+    "TASK-008C"
+  ],
+  "status": "PREPARED — full extraction handed to the user",
+  "storage": {
+    "by_stage_bytes": {
+      "kinematics": 58765164,
+      "pose": 1879676450,
+      "provenance": 1892,
+      "state": 936893,
+      "tracking": 175724711,
+      "virtual_glove": 140210394
+    },
+    "run_root_bytes": 2255316539,
+    "source_video_bytes": 1794280889
+  },
+  "task": "TASK-008C",
+  "tests": {
+    "compileall": "0 errors",
+    "new_tests_this_task": 21,
+    "suite": "495 passed, 0 failed"
+  },
+  "tracking_states": {
+    "combined": {
+      "MISSING": 2817,
+      "OBSERVED": 164501
+    },
+    "combined_fractions": {
+      "MISSING": 0.016836204114321233,
+      "OBSERVED": 0.9831637958856788
+    },
+    "hand_instances": 167318,
+    "per_track": {
+      "LEFT": {
+        "MISSING": 2085,
+        "OBSERVED": 81574
+      },
+      "RIGHT": {
+        "MISSING": 732,
+        "OBSERVED": 82927
+      }
+    }
+  },
+  "validity": {
+    "bend": {
+      "fraction": 0.9831637958856788,
+      "fraction_given_pose_bearing_hand": 1.0,
+      "total": 2509770,
+      "valid": 2467515
+    },
+    "imu": {
+      "fraction": 0.9831637958856788,
+      "fraction_given_pose_bearing_hand": 1.0,
+      "total": 167318,
+      "valid": 164501
+    },
+    "note": "bend and IMU invalidity is exactly the set of MISSING hands; spread carries an additional 20.8% loss from the frozen TASK-005 15-degree palm-plane conditioning rule, which is a priori and not dataset-fitted",
+    "spread": {
+      "fraction": 0.7784189387872196,
+      "fraction_given_pose_bearing_hand": 0.7917489863283506,
+      "total": 669272,
+      "valid": 520974
+    }
+  },
+  "verdict": "TASK-008 CORE-28 SENSOR DATASET COMPLETE — READY FOR TASK-009"
+}

@@ -26,3 +26,19 @@ datasets/raw/karsl_milestone1_pilot/<signer>/test/<sign_id>/<source_filename>.mp
 
 Do not commit videos, partial archives, model files, raw pose arrays, or
 overlays.
+
+## KArSL Core-28 production preparation
+
+`manifests/karsl_core28_labels.csv` records the deterministic Core-28 mapping
+candidate (SignIDs `0032`--`0059`); `manifests/karsl_core28.csv` and the three
+`splits/karsl_core28_loso_s*.csv` files are schema-only until the official
+KArSL label workbook and RGB assets have been verified.  Use
+`scripts/download_karsl_core28.py --labels-only` before discovery.  The
+official source URLs are documented in
+`research/datasets/karsl_core28.md`; the development retrieval found the
+current SharePoint links disabled, so no mirror is substituted.
+
+Production data belongs outside the repository, for example
+`/ibex/user/$USER/graduation-project-data/karsl/`.  TASK-008A's extraction
+runner and Ibex job-array documentation are in `slurm/` and
+`reports/dataset/TASK-008A-karsl-core28-dataset.md`.
