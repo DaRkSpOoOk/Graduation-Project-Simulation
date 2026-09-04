@@ -50,6 +50,17 @@ class CheckpointMetadata:
     num_classes: int
     device: str
     demo_only: bool = True
+    # TASK-009C stores deployment provenance in the checkpoint's ``extra``
+    # mapping. These fields are presentation metadata only; they do not
+    # affect tensorization, model construction, or prediction.
+    training_role: str = "unknown"
+    training_scope: str | None = None
+    training_samples: int | None = None
+    signers: tuple[str, ...] = ()
+    held_out_data: str | None = None
+    scientific_reference_accuracy: float | None = None
+    scientific_reference_macro_f1: float | None = None
+    scientific_reference_note: str | None = None
 
     @property
     def held_out_signer(self) -> str | None:
@@ -58,14 +69,70 @@ class CheckpointMetadata:
         return None
 
     @property
+    def provenance_kind(self) -> str:
+        """Classify provenance from recorded metadata, never from a filename."""
+
+        if self.training_role == "deployment_all_signers":
+            return "deployment"
+        if self.fold in {"01", "02", "03"}:
+            return "research_loso"
+        return "unknown"
+
+    @property
+    def is_deployment(self) -> bool:
+        return self.provenance_kind == "deployment"
+
+    @property
+    def is_research_loso(self) -> bool:
+        return self.provenance_kind == "research_loso"
+
+    @property
+    def role_display(self) -> str:
+        if self.is_deployment:
+            return "DEPLOYMENT MODEL"
+        if self.is_research_loso:
+            return "DEMO / RESEARCH CHECKPOINT"
+        return "CHECKPOINT PROVENANCE UNKNOWN"
+
+    @property
+    def training_scope_display(self) -> str:
+        if self.is_deployment:
+            sample_text = (
+                f"{self.training_samples:,} training sequences"
+                if self.training_samples is not None
+                else "all available training sequences"
+            )
+            return f"All Core-28 signers / {sample_text}"
+        if self.is_research_loso and self.held_out_signer is not None:
+            return f"LOSO fold {self.fold} / held-out signer {self.held_out_signer}"
+        return self.training_scope or "Training scope unavailable"
+
+    @property
+    def scientific_reference_display(self) -> str:
+        if (
+            self.scientific_reference_accuracy is not None
+            and self.scientific_reference_macro_f1 is not None
+        ):
+            return (
+                "LOSO reference only (not deployment accuracy): "
+                f"{self.scientific_reference_accuracy:.2%} accuracy / "
+                f"{self.scientific_reference_macro_f1:.4f} macro F1"
+            )
+        return self.scientific_reference_note or "Not embedded in checkpoint"
+
+    @property
     def display_name(self) -> str:
         fold = f"fold{self.fold}" if self.fold else "fold?"
         return f"{self.feature_set} / {self.quaternion_policy} / {self.pooling} / {fold} / seed{self.seed}"
 
     @property
     def warning(self) -> str:
+        if self.is_deployment:
+            return f"{self.role_display} ({self.display_name}) — {self.training_scope_display}"
+        if not self.is_research_loso:
+            return f"{self.role_display} ({self.display_name})"
         held_out = f" — held-out signer {self.held_out_signer}" if self.held_out_signer else ""
-        return f"DEMO / RESEARCH CHECKPOINT ({self.display_name}){held_out}"
+        return f"{self.role_display} ({self.display_name}){held_out}"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -85,7 +152,19 @@ class CheckpointMetadata:
             "num_classes": self.num_classes,
             "device": self.device,
             "demo_only": self.demo_only,
+            "training_role": self.training_role,
+            "training_scope": self.training_scope,
+            "training_samples": self.training_samples,
+            "signers": list(self.signers),
+            "provenance_kind": self.provenance_kind,
+            "held_out_data": self.held_out_data,
+            "scientific_reference_accuracy": self.scientific_reference_accuracy,
+            "scientific_reference_macro_f1": self.scientific_reference_macro_f1,
+            "scientific_reference_note": self.scientific_reference_note,
             "held_out_signer": self.held_out_signer,
+            "role_display": self.role_display,
+            "training_scope_display": self.training_scope_display,
+            "scientific_reference_display": self.scientific_reference_display,
             "warning": self.warning,
         }
 
@@ -169,6 +248,101 @@ def _as_optional_int(value: Any) -> int | None:
 
 def _as_optional_float(value: Any) -> float | None:
     return None if value is None else float(value)
+
+
+def _provenance_metadata(
+    payload: Mapping[str, Any],
+    experiment: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate and normalize TASK-009C provenance metadata.
+
+    Deployment provenance is intentionally strict. A checkpoint with
+    ``fold=all`` but without the explicit deployment role is classified as
+    unknown rather than being guessed to be a deployment model. This keeps an
+    accidentally copied or renamed research checkpoint from receiving the
+    all-signers label in the UI.
+    """
+
+    extra = payload.get("extra", {})
+    if extra is None:
+        extra = {}
+    if not isinstance(extra, Mapping):
+        raise CheckpointCompatibilityError("checkpoint extra metadata must be a mapping")
+
+    role_value = extra.get("training_role", "unknown")
+    if role_value is None:
+        role_value = "unknown"
+    if not isinstance(role_value, str) or not role_value.strip():
+        raise CheckpointCompatibilityError("checkpoint training_role must be a non-empty string")
+    training_role = role_value.strip()
+
+    training_scope = extra.get("training_scope")
+    if training_scope is not None and not isinstance(training_scope, str):
+        raise CheckpointCompatibilityError("checkpoint training_scope must be a string when present")
+
+    training_samples = extra.get("training_samples")
+    if training_samples is not None:
+        if isinstance(training_samples, bool) or not isinstance(training_samples, int):
+            raise CheckpointCompatibilityError("checkpoint training_samples must be an integer when present")
+        training_samples = int(training_samples)
+
+    signers_value = extra.get("signers", ())
+    if signers_value is None:
+        signers_value = ()
+    if not isinstance(signers_value, (list, tuple)) or not all(
+        isinstance(value, str) and value for value in signers_value
+    ):
+        raise CheckpointCompatibilityError("checkpoint signers must be a sequence of non-empty strings")
+    signers = tuple(sorted(signers_value))
+    if len(set(signers)) != len(signers):
+        raise CheckpointCompatibilityError("checkpoint signers contain duplicates")
+
+    if training_role == "deployment_all_signers":
+        if str(experiment.get("fold", "")) != "all":
+            raise CheckpointCompatibilityError(
+                "deployment checkpoint must record experiment fold='all'"
+            )
+        if training_scope != "all_core28_sequences":
+            raise CheckpointCompatibilityError(
+                "deployment checkpoint must record training_scope='all_core28_sequences'"
+            )
+        if training_samples != 4222:
+            raise CheckpointCompatibilityError(
+                "deployment checkpoint must record training_samples=4222"
+            )
+        if signers != ("01", "02", "03"):
+            raise CheckpointCompatibilityError(
+                "deployment checkpoint must record signers ['01', '02', '03']"
+            )
+        if extra.get("classes") != NUM_CLASSES:
+            raise CheckpointCompatibilityError(
+                f"deployment checkpoint must record classes={NUM_CLASSES}"
+            )
+
+    held_out_data = extra.get("held_out_data")
+    if held_out_data is not None and not isinstance(held_out_data, str):
+        raise CheckpointCompatibilityError("checkpoint held_out_data must be a string when present")
+
+    scientific_reference = extra.get("loso_reference")
+    if scientific_reference is not None and not isinstance(scientific_reference, Mapping):
+        raise CheckpointCompatibilityError("checkpoint loso_reference must be a mapping when present")
+    scientific_reference = scientific_reference or {}
+    accuracy = _as_optional_float(scientific_reference.get("mean_test_accuracy"))
+    macro_f1 = _as_optional_float(scientific_reference.get("mean_test_macro_f1"))
+    note = scientific_reference.get("note")
+    if note is not None and not isinstance(note, str):
+        raise CheckpointCompatibilityError("checkpoint LOSO reference note must be a string when present")
+
+    return {
+        "training_role": training_role,
+        "training_scope": training_scope,
+        "training_samples": training_samples,
+        "signers": signers,
+        "held_out_data": held_out_data,
+        "scientific_reference_accuracy": accuracy,
+        "scientific_reference_macro_f1": macro_f1,
+        "scientific_reference_note": note,
+    }
 
 
 class RecognizerAdapter:
@@ -257,6 +431,7 @@ class RecognizerAdapter:
                 )
         if not isinstance(payload.get("model_state"), Mapping):
             raise CheckpointCompatibilityError("checkpoint has no model state")
+        provenance = _provenance_metadata(payload, experiment)
 
         try:
             recognizer = SequenceRecognizer.from_checkpoint(
@@ -287,6 +462,7 @@ class RecognizerAdapter:
             input_dim=input_dim,
             num_classes=int(payload["num_classes"]),
             device=str(device),
+            **provenance,
         )
         return cls(recognizer, metadata, labels, run_root=run_root)
 

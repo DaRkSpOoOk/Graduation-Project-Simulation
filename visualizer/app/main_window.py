@@ -96,6 +96,9 @@ class Core28VisualizerApplication:
         self.recognition_predicted_var = tk.StringVar(value="—")
         self.recognition_confidence_var = tk.StringVar(value="—")
         self.recognition_model_var = tk.StringVar(value="Visualization-only mode")
+        self.recognition_scope_var = tk.StringVar(value="—")
+        self.recognition_reference_var = tk.StringVar(value="—")
+        self.recognition_checkpoint_var = tk.StringVar(value="—")
         self.recognition_top_var = tk.StringVar(value="—")
         self._build_ui()
         self._poll_playback()
@@ -230,7 +233,10 @@ class Core28VisualizerApplication:
                 ("Expected", self.recognition_expected_var),
                 ("Predicted", self.recognition_predicted_var),
                 ("Confidence", self.recognition_confidence_var),
-                ("Model", self.recognition_model_var),
+                ("Model role", self.recognition_model_var),
+                ("Training scope", self.recognition_scope_var),
+                ("Scientific reference", self.recognition_reference_var),
+                ("Checkpoint", self.recognition_checkpoint_var),
                 ("Top 3", self.recognition_top_var),
             )
             for row_index, (label, variable) in enumerate(recognition_rows):
@@ -324,6 +330,25 @@ class Core28VisualizerApplication:
             elif item.state in {QueueState.FAILED, QueueState.UNAVAILABLE}:
                 self.queue_list.itemconfig(index, foreground="#b91c1c")
 
+    def _set_checkpoint_display(self, metadata: Any | None) -> None:
+        """Render checkpoint provenance without inferring it from its path."""
+
+        if metadata is None:
+            self.recognition_model_var.set("Visualization-only mode")
+            self.recognition_scope_var.set("—")
+            self.recognition_reference_var.set("—")
+            self.recognition_checkpoint_var.set("—")
+            return
+        self.recognition_model_var.set(
+            str(getattr(metadata, "role_display", getattr(metadata, "warning", "Checkpoint")))
+        )
+        self.recognition_scope_var.set(str(getattr(metadata, "training_scope_display", "—")))
+        self.recognition_reference_var.set(
+            str(getattr(metadata, "scientific_reference_display", "Not embedded in checkpoint"))
+        )
+        path = getattr(metadata, "path", None)
+        self.recognition_checkpoint_var.set(Path(str(path)).name if path else "—")
+
     def _set_recognition_inactive(self, *, reason: str, expected: str = "—") -> None:
         """Set presentation state without fabricating a prediction."""
 
@@ -334,12 +359,12 @@ class Core28VisualizerApplication:
         self.recognition_confidence_var.set("—")
         self.recognition_top_var.set("—")
         if self._recognition_adapter is not None:
-            metadata = self._recognition_adapter.metadata
-            self.recognition_model_var.set(metadata.warning)
+            self._set_checkpoint_display(self._recognition_adapter.metadata)
         elif self._recognition_error:
+            self._set_checkpoint_display(None)
             self.recognition_model_var.set("Checkpoint unavailable")
         else:
-            self.recognition_model_var.set("Visualization-only mode")
+            self._set_checkpoint_display(None)
         if self._recognition_prediction_label is not None:
             self._recognition_prediction_label.configure(foreground="#111827")
 
@@ -369,7 +394,7 @@ class Core28VisualizerApplication:
             self._active_recognition = result
             self.recognition_expected_var.set(expected)
             metadata = result.checkpoint_metadata
-            self.recognition_model_var.set(metadata.warning if metadata is not None else "Demo checkpoint")
+            self._set_checkpoint_display(metadata)
             if not result.available:
                 self.recognition_status_var.set("Recognition unavailable")
                 self.recognition_predicted_var.set("—")
