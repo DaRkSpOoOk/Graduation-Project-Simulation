@@ -16,6 +16,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+visualizer = ["matplotlib>=3.8"]
 # TASK-009B recognition training. torch is already required by the TASK-008
 # WiLoR extraction stack and is installed from the CUDA wheel index rather than
 # pinned here; scikit-learn supplies the standard classification metrics and the
@@ -29,4 +30,4 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*", "recognition*"]
+include = ["pose*", "video_io*", "evaluation*", "visualization*", "tracking*", "visualizer*", "recognition*"]
