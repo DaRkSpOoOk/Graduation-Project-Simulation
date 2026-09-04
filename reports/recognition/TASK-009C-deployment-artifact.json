@@ -1,0 +1,204 @@
+{
+  "artifact_sha256": {
+    "deployment.pt": "e3df0f007c542d15a6ff4a7ad090d6a8af58b583357ca1905c4cdcb20c82ad1e",
+    "deployment_plan.json": "e19dfef292d48da844311413a73a7ac456eb21e03871bccf971a33e28666ebc8",
+    "history.json": "2b30412a4b8c0a7662bea8119404254268d97109cd70b42e46e2463595a97d15",
+    "training_summary.json": "6161a545f90915051c028a59afa51bd657b5a018b829e2ea4100cd8753cde37c"
+  },
+  "checkpoint_filename": "deployment.pt",
+  "checkpoint_path": "/home/hatim/graduation-project-runs/task009c-core28-deployment/deployment.pt",
+  "checkpoint_sha256": "e3df0f007c542d15a6ff4a7ad090d6a8af58b583357ca1905c4cdcb20c82ad1e",
+  "checkpoint_size_bytes": 6273578,
+  "classes": 28,
+  "configuration": {
+    "bidirectional": false,
+    "dropout": 0.3,
+    "feature_set": "full",
+    "hidden_size": 192,
+    "input_policy": "values_and_feature_valid",
+    "input_projection": null,
+    "model_input_dimension": 92,
+    "num_classes": 28,
+    "num_layers": 2,
+    "pooling": "masked_mean",
+    "quaternion_policy": "absolute",
+    "selected_by": "TASK-009B LOSO evidence; TASK-009C performs no model selection"
+  },
+  "contract_version": "task009a_sequence_input_v1",
+  "epoch": 27,
+  "epoch_policy": "median_primary_loso_best_epoch",
+  "epochs_planned": 27,
+  "in_sample_training": {
+    "final_train_accuracy": 0.9770251065845571,
+    "final_train_loss": 0.07032868253355665,
+    "initial_train_accuracy": 0.09971577451444813,
+    "initial_train_loss": 2.938017609106992,
+    "warning": "IN-SAMPLE values on the data the model was fitted to. NOT a performance estimate and never to be quoted as deployment accuracy."
+  },
+  "input_dim": 92,
+  "parameter_count": 521500,
+  "runtime": {
+    "environment": {
+      "device": "cuda",
+      "git_commit": "0519578e441ce38b1f9707a444098f57e5ed6854",
+      "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+      "python": "3.14.4",
+      "torch": "2.13.0+cu130"
+    },
+    "peak_gpu_mib": 85.7939453125,
+    "seconds_per_epoch": 6.98101125285245,
+    "wall_seconds": 188.48730382701615
+  },
+  "samples": 4222,
+  "schema_version": "task009c_deployment_artifact_v1",
+  "scientific_loso_reference": {
+    "mean_test_accuracy": 0.6762980883774551,
+    "mean_test_macro_f1": 0.6606785355233907,
+    "note": "This is the TASK-009B held-out-signer result for this configuration. It is the ONLY generalization evidence for the deployment model, which by construction has no held-out signer of its own.",
+    "per_fold": {
+      "01": {
+        "accuracy": 0.5677603423680456,
+        "macro_f1": 0.5440637782984072
+      },
+      "02": {
+        "accuracy": 0.7416131334760885,
+        "macro_f1": 0.7306537363564772
+      },
+      "03": {
+        "accuracy": 0.7195207892882312,
+        "macro_f1": 0.7073180919152876
+      }
+    }
+  },
+  "scientific_status": "POST-EVALUATION DEPLOYMENT TRAINING. This model is fitted on every available sequence and therefore has NO held-out data. Its training accuracy is not a performance estimate, and it must never be described as independently tested. The recognition result for this project remains the TASK-009B LOSO evidence.",
+  "seed": 1337,
+  "signers": [
+    "01",
+    "02",
+    "03"
+  ],
+  "source_primary_best_epochs": {
+    "01": 28,
+    "02": 20,
+    "03": 27
+  },
+  "source_task009b_commit": "0ddf0e6fed31a08753b0d7a20ece7b5a5cdc953b",
+  "source_task009c_commit": "0519578e441ce38b1f9707a444098f57e5ed6854",
+  "task": "TASK-009C",
+  "training_config": {
+    "batch_size": 32,
+    "epochs": 27,
+    "grad_clip_norm": 5.0,
+    "learning_rate": 0.001,
+    "loss": "cross_entropy",
+    "optimizer": "adamw",
+    "seed": 1337,
+    "weight_decay": 0.0001
+  },
+  "verification": {
+    "all_passed": true,
+    "checks": {
+      "checkpoint_metadata": true,
+      "files": true,
+      "history": true,
+      "plan": true,
+      "status": true
+    },
+    "compatibility": {
+      "deployment": {
+        "checkpoint": "/home/hatim/graduation-project-runs/task009c-core28-deployment/deployment.pt",
+        "confidence": 0.9996347427368164,
+        "feature_set": "full",
+        "label_mapping_consistent": true,
+        "loaded": true,
+        "logits_length": 28,
+        "matches_probe_ground_truth": true,
+        "predicted_label_ar": "ا",
+        "predicted_label_index": 0,
+        "predicted_sign_id": "0032",
+        "probabilities_sum": 0.9999998217369184,
+        "quaternion_policy": "absolute"
+      },
+      "probe_relationship": {
+        "deployment": "IN-SAMPLE (this sequence was in the deployment training set)",
+        "task009b_research": "HELD OUT (signer 01 was the fold-01 test signer) -- but a single sequence, not a performance estimate"
+      },
+      "probe_sample_id": "karsl_core28_s01_sign0032_test_rep001",
+      "probe_selection": "row 0 of the frozen index, chosen before any prediction was seen",
+      "probe_sequence_length": 29,
+      "probe_signer_id": "01",
+      "probe_true_label_ar": "ا",
+      "probe_true_label_index": 0,
+      "probe_true_sign_id": "0032",
+      "task009b_research": {
+        "checkpoint": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold01/seed1337/best.pt",
+        "confidence": 0.9982201457023621,
+        "feature_set": "full",
+        "label_mapping_consistent": true,
+        "loaded": true,
+        "logits_length": 28,
+        "matches_probe_ground_truth": false,
+        "predicted_label_ar": "خ",
+        "predicted_label_index": 6,
+        "predicted_sign_id": "0038",
+        "probabilities_sum": 1.0000000726461167,
+        "quaternion_policy": "absolute"
+      }
+    },
+    "files": {
+      "deployment.pt": {
+        "bytes": 6273578,
+        "present": true
+      },
+      "deployment_plan.json": {
+        "bytes": 7975,
+        "present": true
+      },
+      "history.json": {
+        "bytes": 3913,
+        "present": true
+      },
+      "last.pt": {
+        "bytes": 6286458,
+        "present": true
+      },
+      "status.json": {
+        "bytes": 333,
+        "present": true
+      },
+      "training_summary.json": {
+        "bytes": 6493,
+        "present": true
+      }
+    },
+    "history": {
+      "entries": 27,
+      "epochs_with_loss_increase": 8,
+      "final_train_accuracy": 0.9770251065845571,
+      "final_train_loss": 0.07032868253355665,
+      "initial_train_accuracy": 0.09971577451444813,
+      "initial_train_loss": 2.938017609106992,
+      "maximum_train_accuracy": 0.9770251065845571,
+      "maximum_train_accuracy_epoch": 27,
+      "minimum_train_loss": 0.07032868253355665,
+      "minimum_train_loss_epoch": 27,
+      "passed": true,
+      "selection_note": "these values describe the run; they did not select anything. The deployment checkpoint is epoch 27 because the budget was frozen beforehand.",
+      "total_epoch_seconds": 188.02097724803025
+    },
+    "plan_matches_committed_copy": true,
+    "problems": [],
+    "status": {
+      "completed_utc": "2026-09-04T12:41:23Z",
+      "deployment_checkpoint": "/home/hatim/graduation-project-runs/task009c-core28-deployment/deployment.pt",
+      "epochs_completed": 27,
+      "epochs_planned": 27,
+      "passed": true,
+      "smoke_mode": false,
+      "status": "COMPLETE",
+      "training_role": "deployment_all_signers",
+      "wall_seconds": 188.48730382701615
+    }
+  },
+  "verification_commit": "0519578e441ce38b1f9707a444098f57e5ed6854"
+}

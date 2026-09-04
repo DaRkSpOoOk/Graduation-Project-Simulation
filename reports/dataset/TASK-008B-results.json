@@ -1,0 +1,1213 @@
+{
+  "base_dependency": {
+    "branch": "luna/task-008a-karsl-core28-dataset",
+    "commit": "a7d41b1e0c5ebef6a690c0a17e6ce8a991c52e70",
+    "note": "stacked: this branch is based on the unmerged TASK-008A branch",
+    "pr": "#22"
+  },
+  "benchmark": {
+    "compute_fps": 3.524578693646813,
+    "compute_seconds": 167.96333731095365,
+    "e2e_fps_excl_load": 3.521826968526177,
+    "e2e_fps_incl_load": 2.7504609489372416,
+    "frames": 592,
+    "model_load_seconds": 47.14207690900366,
+    "model_loads": 1,
+    "peak_vram_bytes": 2813499392,
+    "per_video_pose_fps": {
+      "max": 6.0945838333426074,
+      "median": 3.963558961404046,
+      "min": 1.9422321958269873
+    },
+    "pose_fps": 3.7124609501246653,
+    "sample_seconds_sum": 168.09135593402607,
+    "samples": 24,
+    "stage_seconds": {
+      "KINEMATICS": 0.9850394029781455,
+      "POSE": 159.46295676998852,
+      "TRACKING": 7.296074391022557,
+      "VIRTUAL_GLOVE": 0.21926674696442205
+    },
+    "worker_wall_seconds": 215.23664978001034
+  },
+  "category_breakdown": {
+    "core28_letter": {
+      "class_count": 28,
+      "entries": [
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ا",
+          "label_en": "alif",
+          "sign_id": 32
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ب",
+          "label_en": "baa",
+          "sign_id": 33
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ت",
+          "label_en": "ta",
+          "sign_id": 34
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ث",
+          "label_en": "tha",
+          "sign_id": 35
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ج",
+          "label_en": "Jiim",
+          "sign_id": 36
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ح",
+          "label_en": "Haa",
+          "sign_id": 37
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "خ",
+          "label_en": "kha",
+          "sign_id": 38
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "د",
+          "label_en": "daal",
+          "sign_id": 39
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ذ",
+          "label_en": "thal",
+          "sign_id": 40
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ر",
+          "label_en": "raa",
+          "sign_id": 41
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ز",
+          "label_en": "zay",
+          "sign_id": 42
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "س",
+          "label_en": "siin",
+          "sign_id": 43
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ش",
+          "label_en": "shiin",
+          "sign_id": 44
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ص",
+          "label_en": "Saad",
+          "sign_id": 45
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ض",
+          "label_en": "Daad",
+          "sign_id": 46
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ط",
+          "label_en": "Taa",
+          "sign_id": 47
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ظ",
+          "label_en": "Zaa",
+          "sign_id": 48
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ع",
+          "label_en": "Ayn",
+          "sign_id": 49
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "غ",
+          "label_en": "ghayn",
+          "sign_id": 50
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ف",
+          "label_en": "faa",
+          "sign_id": 51
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ق",
+          "label_en": "qaaf",
+          "sign_id": 52
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ك",
+          "label_en": "kaaf",
+          "sign_id": 53
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ل",
+          "label_en": "laam",
+          "sign_id": 54
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "م",
+          "label_en": "miim",
+          "sign_id": 55
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ن",
+          "label_en": "noon",
+          "sign_id": 56
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ه",
+          "label_en": "haa",
+          "sign_id": 57
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "و",
+          "label_en": "waaw",
+          "sign_id": 58
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ي",
+          "label_en": "yaa",
+          "sign_id": 59
+        }
+      ],
+      "sign_ids": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ]
+    },
+    "extended_letter": {
+      "class_count": 11,
+      "entries": [
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ة",
+          "label_en": "taa marbuuTa",
+          "sign_id": 60
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "أ",
+          "label_en": "alif with hamza above",
+          "sign_id": 61
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ؤ",
+          "label_en": "Waaw with hamza",
+          "sign_id": 62
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ئ",
+          "label_en": "Alif maqsoura with hamza",
+          "sign_id": 63
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ئـ",
+          "label_en": "hamza on line",
+          "sign_id": 64
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ء",
+          "label_en": "hamza",
+          "sign_id": 65
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "إ",
+          "label_en": "alif with hamza below",
+          "sign_id": 66
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "آ",
+          "label_en": "ALif with maad",
+          "sign_id": 67
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ى",
+          "label_en": "Alif maqsoura",
+          "sign_id": 68
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "لا",
+          "label_en": "laam Alif",
+          "sign_id": 69
+        },
+        {
+          "arabic_cell_type": "str",
+          "label_ar": "ال",
+          "label_en": "Al",
+          "sign_id": 70
+        }
+      ],
+      "sign_ids": [
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ]
+    },
+    "number": {
+      "class_count": 31,
+      "entries": [
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "0",
+          "label_en": "0",
+          "sign_id": 1
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "1",
+          "label_en": "1",
+          "sign_id": 2
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "2",
+          "label_en": "2",
+          "sign_id": 3
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "3",
+          "label_en": "3",
+          "sign_id": 4
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "4",
+          "label_en": "4",
+          "sign_id": 5
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "5",
+          "label_en": "5",
+          "sign_id": 6
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "6",
+          "label_en": "6",
+          "sign_id": 7
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "7",
+          "label_en": "7",
+          "sign_id": 8
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "8",
+          "label_en": "8",
+          "sign_id": 9
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "9",
+          "label_en": "9",
+          "sign_id": 10
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "10",
+          "label_en": "10",
+          "sign_id": 11
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "20",
+          "label_en": "20",
+          "sign_id": 12
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "30",
+          "label_en": "30",
+          "sign_id": 13
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "40",
+          "label_en": "40",
+          "sign_id": 14
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "50",
+          "label_en": "50",
+          "sign_id": 15
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "60",
+          "label_en": "60",
+          "sign_id": 16
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "70",
+          "label_en": "70",
+          "sign_id": 17
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "80",
+          "label_en": "80",
+          "sign_id": 18
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "90",
+          "label_en": "90",
+          "sign_id": 19
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "100",
+          "label_en": "100",
+          "sign_id": 20
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "200",
+          "label_en": "200",
+          "sign_id": 21
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "300",
+          "label_en": "300",
+          "sign_id": 22
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "400",
+          "label_en": "400",
+          "sign_id": 23
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "500",
+          "label_en": "500",
+          "sign_id": 24
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "600",
+          "label_en": "600",
+          "sign_id": 25
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "700",
+          "label_en": "700",
+          "sign_id": 26
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "800",
+          "label_en": "800",
+          "sign_id": 27
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "900",
+          "label_en": "900",
+          "sign_id": 28
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "1000",
+          "label_en": "1000",
+          "sign_id": 29
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "1000000",
+          "label_en": "1000000",
+          "sign_id": 30
+        },
+        {
+          "arabic_cell_type": "int",
+          "label_ar": "10000000",
+          "label_en": "10000000",
+          "sign_id": 31
+        }
+      ],
+      "sign_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ]
+    }
+  },
+  "core28_verification": {
+    "candidate_sign_ids": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "class_count": 28,
+    "expected_sign_ids": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "label_mismatches": [],
+    "missing_from_workbook": [],
+    "passed": true,
+    "sign_ids_match": true
+  },
+  "dataset_root": "/home/hatim/datasets/KArSL-502",
+  "environment": {
+    "checkpoint": "wilor_final.ckpt",
+    "cpu_cores": 16,
+    "cuda": "13.0",
+    "driver": "610.62",
+    "gpu": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "precision": "FP32 (fast_mode=False)",
+    "torch": "2.13.0+cu130",
+    "vram_gib": 4.0
+  },
+  "extended_verification": {
+    "candidate_sign_ids": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "class_count": 11,
+    "expected_sign_ids": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70
+    ],
+    "label_mismatches": [],
+    "missing_from_workbook": [],
+    "passed": true,
+    "sign_ids_match": true
+  },
+  "integrity": {
+    "duplicate_content_groups": 50,
+    "duplicate_example": [
+      "01/test/videos/0027/01_01_0027_(17_11_16_17_16_02)_c.mp4",
+      "01/train/videos/0028/01_01_0028_(17_11_16_17_16_02)_c.mp4"
+    ],
+    "duplicate_files_involved": 100,
+    "duplicate_groups_touching_core28": 0,
+    "filename_signid_mismatch_count": 33,
+    "filename_signid_mismatch_sign_ids": [
+      7
+    ],
+    "probe_failure_detail": [],
+    "probe_failures": 0,
+    "videos_discovered": 10584
+  },
+  "loso": {
+    "S01": {
+      "classes_test": 28,
+      "classes_train": 28,
+      "classes_validation": 28,
+      "duplicate_assignment": 0,
+      "held_out_leakage": 0,
+      "signers_test": [
+        "01"
+      ],
+      "signers_train": [
+        "02",
+        "03"
+      ],
+      "signers_validation": [
+        "02",
+        "03"
+      ],
+      "test": 1402,
+      "train": 2372,
+      "unassigned": 0,
+      "validation": 448
+    },
+    "S02": {
+      "classes_test": 28,
+      "classes_train": 28,
+      "classes_validation": 28,
+      "duplicate_assignment": 0,
+      "held_out_leakage": 0,
+      "signers_test": [
+        "02"
+      ],
+      "signers_train": [
+        "01",
+        "03"
+      ],
+      "signers_validation": [
+        "01",
+        "03"
+      ],
+      "test": 1401,
+      "train": 2373,
+      "unassigned": 0,
+      "validation": 448
+    },
+    "S03": {
+      "classes_test": 28,
+      "classes_train": 28,
+      "classes_validation": 28,
+      "duplicate_assignment": 0,
+      "held_out_leakage": 0,
+      "signers_test": [
+        "03"
+      ],
+      "signers_train": [
+        "01",
+        "02"
+      ],
+      "signers_validation": [
+        "01",
+        "02"
+      ],
+      "test": 1419,
+      "train": 2355,
+      "unassigned": 0,
+      "validation": 448
+    }
+  },
+  "manifest": {
+    "absolute_paths": 0,
+    "classes": 28,
+    "duplicate_sample_ids": 0,
+    "duplicate_source_paths": 0,
+    "invalid_partitions": 0,
+    "invalid_signers": 0,
+    "missing_files": 0,
+    "path": "datasets/manifests/karsl_core28.csv",
+    "portable_paths": true,
+    "rows": 4222,
+    "rows_without_frame_count": 0,
+    "signers": [
+      "01",
+      "02",
+      "03"
+    ],
+    "unknown_labels": 0
+  },
+  "mapping_version": "karsl-core28-v2-official",
+  "not_done": [
+    "full Core-28 extraction",
+    "LSTM training",
+    "TASK-009 tensorization",
+    "temporal padding/truncation/resampling",
+    "cloud workflow",
+    "dataset archiving"
+  ],
+  "runtime_estimate": {
+    "best_h": 6.520103563458749,
+    "cons_h": 8.150129454323435,
+    "core28_frames": 83659,
+    "core28_videos": 4222,
+    "fixed_s": -0.3391117142955425,
+    "naive_h": 6.592513790386131,
+    "per_frame_s": 0.29768587344107955,
+    "r2": 0.9060952464858091
+  },
+  "sign_id_0031": {
+    "arabic_cell_type": "int",
+    "category": "number",
+    "label_ar": "10000000",
+    "label_en": "10000000",
+    "sign_id": 31
+  },
+  "sizes": {
+    "core28": {
+      "bytes": 1794280889,
+      "classes": 28,
+      "duration_hours": 0.7746203730555555,
+      "duration_seconds": 2788.633343,
+      "frame_stats": {
+        "count": 4222,
+        "max": 70,
+        "mean": 19.81501657981999,
+        "median": 20.0,
+        "min": 9,
+        "p95": 29.0,
+        "sum": 83659
+      },
+      "frames": 83659,
+      "gib": 1.6710542971268296,
+      "mib": 1711.1596002578735,
+      "name": "Core-28",
+      "sign_id_high": 59,
+      "sign_id_low": 32,
+      "videos": 4222
+    },
+    "core28_by_class": {
+      "0032": {
+        "bytes": 73407712,
+        "frames": 3381,
+        "videos": 150
+      },
+      "0033": {
+        "bytes": 67047794,
+        "frames": 3112,
+        "videos": 152
+      },
+      "0034": {
+        "bytes": 58087261,
+        "frames": 2858,
+        "videos": 150
+      },
+      "0035": {
+        "bytes": 59452176,
+        "frames": 2831,
+        "videos": 150
+      },
+      "0036": {
+        "bytes": 68442771,
+        "frames": 3197,
+        "videos": 158
+      },
+      "0037": {
+        "bytes": 64086948,
+        "frames": 2971,
+        "videos": 149
+      },
+      "0038": {
+        "bytes": 64577663,
+        "frames": 2952,
+        "videos": 150
+      },
+      "0039": {
+        "bytes": 62771377,
+        "frames": 2910,
+        "videos": 150
+      },
+      "0040": {
+        "bytes": 56459169,
+        "frames": 2815,
+        "videos": 150
+      },
+      "0041": {
+        "bytes": 61925899,
+        "frames": 2896,
+        "videos": 150
+      },
+      "0042": {
+        "bytes": 63756729,
+        "frames": 3037,
+        "videos": 150
+      },
+      "0043": {
+        "bytes": 62815535,
+        "frames": 2904,
+        "videos": 150
+      },
+      "0044": {
+        "bytes": 60769315,
+        "frames": 2883,
+        "videos": 150
+      },
+      "0045": {
+        "bytes": 62523084,
+        "frames": 2974,
+        "videos": 150
+      },
+      "0046": {
+        "bytes": 59175028,
+        "frames": 2885,
+        "videos": 150
+      },
+      "0047": {
+        "bytes": 64773676,
+        "frames": 2986,
+        "videos": 151
+      },
+      "0048": {
+        "bytes": 61212731,
+        "frames": 2872,
+        "videos": 150
+      },
+      "0049": {
+        "bytes": 61735361,
+        "frames": 2908,
+        "videos": 150
+      },
+      "0050": {
+        "bytes": 61787651,
+        "frames": 2942,
+        "videos": 150
+      },
+      "0051": {
+        "bytes": 67280205,
+        "frames": 3024,
+        "videos": 150
+      },
+      "0052": {
+        "bytes": 66468986,
+        "frames": 2995,
+        "videos": 150
+      },
+      "0053": {
+        "bytes": 65479673,
+        "frames": 3064,
+        "videos": 150
+      },
+      "0054": {
+        "bytes": 64989834,
+        "frames": 3063,
+        "videos": 151
+      },
+      "0055": {
+        "bytes": 66366129,
+        "frames": 3066,
+        "videos": 151
+      },
+      "0056": {
+        "bytes": 64220458,
+        "frames": 3018,
+        "videos": 150
+      },
+      "0057": {
+        "bytes": 68682287,
+        "frames": 3029,
+        "videos": 150
+      },
+      "0058": {
+        "bytes": 62856157,
+        "frames": 2924,
+        "videos": 150
+      },
+      "0059": {
+        "bytes": 73129280,
+        "frames": 3162,
+        "videos": 160
+      }
+    },
+    "core28_by_partition": {
+      "test": {
+        "bytes": 289869938,
+        "frames": 13427,
+        "videos": 672
+      },
+      "train": {
+        "bytes": 1504410951,
+        "frames": 70232,
+        "videos": 3550
+      }
+    },
+    "core28_by_signer": {
+      "01": {
+        "bytes": 711268111,
+        "frame_stats": {
+          "count": 1402,
+          "max": 70,
+          "mean": 21.360199714693294,
+          "median": 21.0,
+          "min": 14,
+          "p95": 29.0,
+          "sum": 29947
+        },
+        "frames": 29947,
+        "videos": 1402
+      },
+      "02": {
+        "bytes": 203185675,
+        "frame_stats": {
+          "count": 1401,
+          "max": 45,
+          "mean": 13.73661670235546,
+          "median": 13.0,
+          "min": 10,
+          "p95": 17.0,
+          "sum": 19245
+        },
+        "frames": 19245,
+        "videos": 1401
+      },
+      "03": {
+        "bytes": 879827103,
+        "frame_stats": {
+          "count": 1419,
+          "max": 67,
+          "mean": 24.289640591966172,
+          "median": 24.0,
+          "min": 9,
+          "p95": 30.0,
+          "sum": 34467
+        },
+        "frames": 34467,
+        "videos": 1419
+      }
+    },
+    "extended_letters": {
+      "bytes": 833970150,
+      "classes": 11,
+      "duration_hours": 0.3698888841666667,
+      "duration_seconds": 1331.599983,
+      "frame_stats": {
+        "count": 1654,
+        "max": 60,
+        "mean": 24.15235792019347,
+        "median": 24.0,
+        "min": 11,
+        "p95": 40.0,
+        "sum": 39948
+      },
+      "frames": 39948,
+      "gib": 0.7766952272504568,
+      "mib": 795.3359127044678,
+      "name": "Extended letters",
+      "sign_id_high": 70,
+      "sign_id_low": 60,
+      "videos": 1654
+    },
+    "letters_all": {
+      "bytes": 2628251039,
+      "classes": 39,
+      "duration_hours": 1.1445092572222222,
+      "duration_seconds": 4120.233326,
+      "frame_stats": {
+        "count": 5876,
+        "max": 70,
+        "mean": 21.035908781484004,
+        "median": 21.0,
+        "min": 9,
+        "p95": 33.0,
+        "sum": 123607
+      },
+      "frames": 123607,
+      "gib": 2.4477495243772864,
+      "mib": 2506.4955129623413,
+      "name": "All letter forms",
+      "sign_id_high": 70,
+      "sign_id_low": 32,
+      "videos": 5876
+    },
+    "local_subset_all": {
+      "bytes": 5429976694,
+      "classes": 70,
+      "duration_hours": 2.294129631388889,
+      "duration_seconds": 8258.866673,
+      "frame_stats": {
+        "count": 10584,
+        "max": 74,
+        "mean": 23.409486016628875,
+        "median": 22.0,
+        "min": 5,
+        "p95": 41.0,
+        "sum": 247766
+      },
+      "frames": 247766,
+      "gib": 5.057059874758124,
+      "mib": 5178.429311752319,
+      "name": "Entire local 0001-0070",
+      "sign_id_high": 70,
+      "sign_id_low": 1,
+      "videos": 10584
+    },
+    "numbers": {
+      "bytes": 2801725655,
+      "classes": 31,
+      "duration_hours": 1.1496203741666666,
+      "duration_seconds": 4138.633347,
+      "frame_stats": {
+        "count": 4708,
+        "max": 74,
+        "mean": 26.371920135938826,
+        "median": 25.0,
+        "min": 5,
+        "p95": 46.0,
+        "sum": 124159
+      },
+      "frames": 124159,
+      "gib": 2.609310350380838,
+      "mib": 2671.933798789978,
+      "name": "Numbers/digits",
+      "sign_id_high": 31,
+      "sign_id_low": 1,
+      "videos": 4708
+    }
+  },
+  "smoke": {
+    "class_count": 12,
+    "classes": [
+      "0032",
+      "0033",
+      "0035",
+      "0036",
+      "0037",
+      "0038",
+      "0039",
+      "0040",
+      "0042",
+      "0045",
+      "0053",
+      "0058"
+    ],
+    "frame_max": 70,
+    "frame_median": 21.0,
+    "frame_min": 9,
+    "frames_total": 592,
+    "partitions": [
+      "test",
+      "train"
+    ],
+    "path": "datasets/manifests/karsl_core28_smoke.csv",
+    "rows": 24,
+    "sample_ids": [
+      "karsl_core28_s01_sign0038_test_rep006",
+      "karsl_core28_s01_sign0039_test_rep007",
+      "karsl_core28_s01_sign0042_test_rep003",
+      "karsl_core28_s01_sign0045_test_rep001",
+      "karsl_core28_s01_sign0035_train_rep002",
+      "karsl_core28_s01_sign0036_train_rep038",
+      "karsl_core28_s01_sign0037_train_rep004",
+      "karsl_core28_s01_sign0042_train_rep024",
+      "karsl_core28_s02_sign0032_test_rep005",
+      "karsl_core28_s02_sign0033_test_rep001",
+      "karsl_core28_s02_sign0033_test_rep002",
+      "karsl_core28_s02_sign0053_test_rep003",
+      "karsl_core28_s02_sign0032_train_rep013",
+      "karsl_core28_s02_sign0058_train_rep008",
+      "karsl_core28_s02_sign0058_train_rep019",
+      "karsl_core28_s02_sign0040_train_rep001",
+      "karsl_core28_s03_sign0033_test_rep003",
+      "karsl_core28_s03_sign0032_test_rep005",
+      "karsl_core28_s03_sign0037_test_rep004",
+      "karsl_core28_s03_sign0032_test_rep003",
+      "karsl_core28_s03_sign0032_train_rep001",
+      "karsl_core28_s03_sign0058_train_rep017",
+      "karsl_core28_s03_sign0058_train_rep019",
+      "karsl_core28_s03_sign0038_train_rep001"
+    ],
+    "signers": [
+      "01",
+      "02",
+      "03"
+    ]
+  },
+  "storage_estimate": {
+    "kinematics": {
+      "bytes_per_frame": 601.6638513513514,
+      "core28_gib": 0.04687774566952391,
+      "smoke_bytes": 356185
+    },
+    "pose": {
+      "bytes_per_frame": 21891.180743243243,
+      "core28_gib": 1.7056188451116778,
+      "smoke_bytes": 12959579
+    },
+    "provenance": {
+      "bytes_per_frame": 3.2128378378378377,
+      "core28_gib": 0.00025032348993762925,
+      "smoke_bytes": 1902
+    },
+    "state": {
+      "bytes_per_frame": 9.454391891891891,
+      "core28_gib": 0.0007366249070351791,
+      "smoke_bytes": 5597
+    },
+    "summary": {
+      "min_safe_gib": 4.794590281338173,
+      "recommended_gib": 7.376292740520266,
+      "run_gib": 2.0170920731333033,
+      "source_gib": 1.6710542971268296,
+      "total_gib": 3.688146370260133
+    },
+    "tracking": {
+      "bytes_per_frame": 1963.474662162162,
+      "core28_gib": 0.15298121307215123,
+      "smoke_bytes": 1162377
+    },
+    "virtual_glove": {
+      "bytes_per_frame": 1419.8733108108108,
+      "core28_gib": 0.11062732088297757,
+      "smoke_bytes": 840565
+    }
+  },
+  "task": "TASK-008B",
+  "workbook": {
+    "data_rows": 502,
+    "file_name": "KARSL-502_Labels.xlsx",
+    "header": [
+      "SignID",
+      "Sign-Arabic",
+      "Sign-English"
+    ],
+    "issues": [],
+    "sha256": "c13717c549b8cb8cfa465237a3f7dfed73f84149ca5c448b2b253fd96321b14e",
+    "sheet_names": [
+      "Sheet1"
+    ],
+    "sheet_used": "Sheet1",
+    "sign_id_max": 502,
+    "sign_id_min": 1,
+    "size_bytes": 27141,
+    "total_rows": 503
+  }
+}

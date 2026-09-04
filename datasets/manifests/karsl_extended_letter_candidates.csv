@@ -1,0 +1,12 @@
+sign_id,label_ar,label_en_if_available,label_index,chapter_category,is_core28,is_extended_letter,source_label_row
+0060,ة,taa marbuuTa,,Letters / extended-letter candidate,False,True,61
+0061,أ,alif with hamza above,,Letters / extended-letter candidate,False,True,62
+0062,ؤ,Waaw with hamza,,Letters / extended-letter candidate,False,True,63
+0063,ئ,Alif maqsoura with hamza,,Letters / extended-letter candidate,False,True,64
+0064,ئـ,hamza on line,,Letters / extended-letter candidate,False,True,65
+0065,ء,hamza,,Letters / extended-letter candidate,False,True,66
+0066,إ,alif with hamza below,,Letters / extended-letter candidate,False,True,67
+0067,آ,ALif with maad,,Letters / extended-letter candidate,False,True,68
+0068,ى,Alif maqsoura,,Letters / extended-letter candidate,False,True,69
+0069,لا,laam Alif,,Letters / extended-letter candidate,False,True,70
+0070,ال,Al,,Letters / extended-letter candidate,False,True,71
