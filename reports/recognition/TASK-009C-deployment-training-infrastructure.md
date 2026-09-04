@@ -1,9 +1,13 @@
 # TASK-009C — All-Signers Core-28 Deployment Model: Training Infrastructure
 
-> **Status: pre-training.** The deployment plan is frozen and the infrastructure is
-> validated by smoke runs only. **The full all-data training has not been run** —
-> the user runs it. This report contains **no deployment accuracy**, and by
-> construction never will: the deployment model has no held-out data.
+> **Status: superseded by the completed run.** This report documents the
+> infrastructure and the epoch-policy rationale, written before training. The
+> training has since been performed and verified — see
+> **[`TASK-009C-deployment-model.md`](TASK-009C-deployment-model.md)** for the
+> final artifact, its SHA-256 and the verification results.
+>
+> This report contains **no deployment accuracy**, and by construction never will:
+> the deployment model has no held-out data.
 
 ## Purpose
 
