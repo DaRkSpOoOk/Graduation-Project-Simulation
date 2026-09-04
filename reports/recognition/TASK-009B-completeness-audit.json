@@ -1,0 +1,493 @@
+{
+  "all_complete": true,
+  "complete_experiments": 15,
+  "contract_version": "task009a_sequence_input_v1",
+  "duration_control_a_present": true,
+  "expected_experiments": 15,
+  "experiments": [
+    {
+      "best.pt_bytes": 5983680,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_only",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_only/q-na/masked_mean/fold01/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "01",
+      "last.pt_bytes": 5994938,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 5984896,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_only",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_only/q-na/masked_mean/fold02/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "02",
+      "last.pt_bytes": 5995386,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 5982976,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_only",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_only/q-na/masked_mean/fold03/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "03",
+      "last.pt_bytes": 5994362,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6132352,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_spread",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_spread/q-na/masked_mean/fold01/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "01",
+      "last.pt_bytes": 6142842,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6129408,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_spread",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_spread/q-na/masked_mean/fold02/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "02",
+      "last.pt_bytes": 6140858,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6129728,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "bend_spread",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/bend_spread/q-na/masked_mean/fold03/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "03",
+      "last.pt_bytes": 6141178,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": false,
+      "quaternion_policy_recorded": "absolute",
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6276800,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold01/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "01",
+      "last.pt_bytes": 6288058,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6275776,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold02/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "02",
+      "last.pt_bytes": 6287162,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6276416,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/masked_mean/fold03/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "03",
+      "last.pt_bytes": 6287930,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6277824,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_relative_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-relative_first_valid/masked_mean/fold01/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "01",
+      "last.pt_bytes": 6289082,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6279168,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_relative_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-relative_first_valid/masked_mean/fold02/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "02",
+      "last.pt_bytes": 6290362,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6280192,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_relative_masked_mean",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-relative_first_valid/masked_mean/fold03/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "03",
+      "last.pt_bytes": 6290362,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6278016,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_final_hidden",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/final_hidden/fold01/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "01",
+      "last.pt_bytes": 6289530,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6275840,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_final_hidden",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/final_hidden/fold02/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "02",
+      "last.pt_bytes": 6286906,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    },
+    {
+      "best.pt_bytes": 6278912,
+      "checkpoints_present": {
+        "best.pt": true,
+        "last.pt": true
+      },
+      "complete": true,
+      "config": "full_absolute_final_hidden",
+      "directory": "/home/hatim/graduation-project-runs/task009b-core28-lstm/full/q-absolute/final_hidden/fold03/seed1337",
+      "files_present": {
+        "history.json": true,
+        "predictions.json": true,
+        "result.json": true,
+        "status.json": true
+      },
+      "fold": "03",
+      "last.pt_bytes": 6290298,
+      "metadata_checks": {
+        "contract_version": true,
+        "experiment_contract_version": true,
+        "feature_set": true,
+        "fold": true,
+        "input_policy": true,
+        "num_classes": true,
+        "pooling": true,
+        "quaternion_policy": true,
+        "seed": true
+      },
+      "quaternion_policy_applicable": true,
+      "seed": 1337,
+      "status": "COMPLETE"
+    }
+  ],
+  "problem_count": 0,
+  "problems": [],
+  "run_root": "/home/hatim/graduation-project-runs/task009b-core28-lstm",
+  "seed": 1337
+}

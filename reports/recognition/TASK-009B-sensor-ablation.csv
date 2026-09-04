@@ -1,0 +1,16 @@
+treatment,baseline,fold,accuracy_delta_pp,macro_f1_delta_points,contrast
+bend_spread,bend_only,01,10.627674750356631,11.312609785762213,spread channels added
+bend_spread,bend_only,02,-2.4268379728765166,-1.1561057448690404,spread channels added
+bend_spread,bend_only,03,-11.839323467230445,-12.008130045346622,spread channels added
+full_absolute_masked_mean,bend_spread,01,-3.2810271041369465,-2.662375354336133,palm orientation added
+full_absolute_masked_mean,bend_spread,02,3.9257673090649536,2.4263753016930734,palm orientation added
+full_absolute_masked_mean,bend_spread,03,17.618040873854824,18.48699841916345,palm orientation added
+full_absolute_masked_mean,bend_only,01,7.346647646219684,8.65023443142608,full glove vs bend only
+full_absolute_masked_mean,bend_only,02,1.498929336188437,1.270269556824033,full glove vs bend only
+full_absolute_masked_mean,bend_only,03,5.778717406624379,6.478868373816827,full glove vs bend only
+full_relative_masked_mean,full_absolute_masked_mean,01,1.4265335235378096,2.0969130334446917,relative vs absolute quaternion
+full_relative_masked_mean,full_absolute_masked_mean,02,-3.426124197002134,-2.545828845373288,relative vs absolute quaternion
+full_relative_masked_mean,full_absolute_masked_mean,03,-12.75546159267089,-13.599719591357395,relative vs absolute quaternion
+full_absolute_final_hidden,full_absolute_masked_mean,01,6.490727532097007,5.356329287159422,final_hidden vs masked_mean
+full_absolute_final_hidden,full_absolute_masked_mean,02,-18.415417558886503,-18.41793569996344,final_hidden vs masked_mean
+full_absolute_final_hidden,full_absolute_masked_mean,03,5.003523608174776,4.730659785136215,final_hidden vs masked_mean

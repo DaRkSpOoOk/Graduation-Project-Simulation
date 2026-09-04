@@ -1,0 +1,141 @@
+label_index,label_ar,treatment,baseline,baseline_mean_f1,treatment_mean_f1,mean_f1_delta,contrast
+21,ك,bend_spread,bend_only,0.4985188808718221,0.6645073648591397,0.16598848398731764,spread channels added
+11,س,bend_spread,bend_only,0.48520349586447664,0.6503056345699934,0.1651021387055167,spread channels added
+0,ا,bend_spread,bend_only,0.477356004673478,0.6372475533581559,0.15989154868467786,spread channels added
+20,ق,bend_spread,bend_only,0.5294066390945388,0.6785043416622365,0.14909770256769772,spread channels added
+25,ه,bend_spread,bend_only,0.5408322903629537,0.6553138948530094,0.11448160449005573,spread channels added
+5,ح,bend_spread,bend_only,0.6358024691358025,0.7219157351344565,0.08611326599865399,spread channels added
+27,ي,bend_spread,bend_only,0.7604387203011056,0.841966966966967,0.08152824666586145,spread channels added
+12,ش,bend_spread,bend_only,0.5863095238095238,0.6587430787143136,0.07243355490478975,spread channels added
+22,ل,bend_spread,bend_only,0.5511938078309759,0.6230414746543779,0.07184766682340193,spread channels added
+10,ز,bend_spread,bend_only,0.14035087719298245,0.20028216273926636,0.05993128554628391,spread channels added
+19,ف,bend_spread,bend_only,0.51692362218678,0.555777220448903,0.03885359826212298,spread channels added
+14,ض,bend_spread,bend_only,0.48788649612906304,0.511640371151978,0.023753875022914983,spread channels added
+23,م,bend_spread,bend_only,0.9022933739914872,0.9148454592002979,0.012552085208810682,spread channels added
+9,ر,bend_spread,bend_only,0.7935686751876648,0.7812818624674295,-0.012286812720235352,spread channels added
+8,ذ,bend_spread,bend_only,0.6303082685105157,0.6116356107660456,-0.018672657744470134,spread channels added
+1,ب,bend_spread,bend_only,0.7227661227661227,0.7035468069950829,-0.019219315771039858,spread channels added
+24,ن,bend_spread,bend_only,0.5020413352221132,0.47467532467532464,-0.02736601054678861,spread channels added
+18,غ,bend_spread,bend_only,0.7706464244747374,0.7379775659330199,-0.03266885854171753,spread channels added
+7,د,bend_spread,bend_only,0.47336238640586464,0.4378336670003337,-0.03552871940553093,spread channels added
+26,و,bend_spread,bend_only,0.6807419318230933,0.6443098897686694,-0.03643204205442385,spread channels added
+6,خ,bend_spread,bend_only,0.7929421768707483,0.7254135875949258,-0.0675285892758225,spread channels added
+13,ص,bend_spread,bend_only,0.7357641879605703,0.6548593706488443,-0.08090481731172605,spread channels added
+15,ط,bend_spread,bend_only,0.34653860556604893,0.25617623265365386,-0.09036237291239507,spread channels added
+4,ج,bend_spread,bend_only,0.6841064711932575,0.5913793103448276,-0.09272716084842991,spread channels added
+2,ت,bend_spread,bend_only,0.6871094901267316,0.5394224733207784,-0.1476870168059532,spread channels added
+17,ع,bend_spread,bend_only,0.5445450836393309,0.39323126510878326,-0.1513138185305476,spread channels added
+3,ث,bend_spread,bend_only,0.7913220636167256,0.5347049727255017,-0.256617090891224,spread channels added
+16,ظ,bend_spread,bend_only,0.7001114827201783,0.39503328213005634,-0.305078200590122,spread channels added
+17,ع,full_absolute_masked_mean,bend_spread,0.39323126510878326,0.7724608130495731,0.3792295479407899,palm orientation added
+4,ج,full_absolute_masked_mean,bend_spread,0.5913793103448276,0.8605585834670735,0.2691792731222459,palm orientation added
+7,د,full_absolute_masked_mean,bend_spread,0.4378336670003337,0.6355147735102045,0.19768110650987075,palm orientation added
+10,ز,full_absolute_masked_mean,bend_spread,0.20028216273926636,0.38444330308737085,0.1841611403481045,palm orientation added
+16,ظ,full_absolute_masked_mean,bend_spread,0.39503328213005634,0.5707996583218345,0.1757663761917782,palm orientation added
+25,ه,full_absolute_masked_mean,bend_spread,0.6553138948530094,0.8208616780045351,0.16554778315152574,palm orientation added
+3,ث,full_absolute_masked_mean,bend_spread,0.5347049727255017,0.6972315900904887,0.16252661736498708,palm orientation added
+15,ط,full_absolute_masked_mean,bend_spread,0.25617623265365386,0.37178339106192454,0.11560715840827068,palm orientation added
+26,و,full_absolute_masked_mean,bend_spread,0.6443098897686694,0.7419354838709676,0.09762559410229821,palm orientation added
+24,ن,full_absolute_masked_mean,bend_spread,0.47467532467532464,0.5703592889775401,0.09568396430221543,palm orientation added
+2,ت,full_absolute_masked_mean,bend_spread,0.5394224733207784,0.6247870622331364,0.08536458891235799,palm orientation added
+8,ذ,full_absolute_masked_mean,bend_spread,0.6116356107660456,0.684357881923311,0.07272227115726548,palm orientation added
+23,م,full_absolute_masked_mean,bend_spread,0.9148454592002979,0.9811320754716982,0.06628661627140031,palm orientation added
+11,س,full_absolute_masked_mean,bend_spread,0.6503056345699934,0.7135961726483236,0.0632905380783303,palm orientation added
+18,غ,full_absolute_masked_mean,bend_spread,0.7379775659330199,0.7902813299232737,0.052303763990253826,palm orientation added
+13,ص,full_absolute_masked_mean,bend_spread,0.6548593706488443,0.7060769507371449,0.051217580088300685,palm orientation added
+12,ش,full_absolute_masked_mean,bend_spread,0.6587430787143136,0.7065016824052969,0.04775860369098328,palm orientation added
+27,ي,full_absolute_masked_mean,bend_spread,0.841966966966967,0.8748721262047058,0.032905159237738735,palm orientation added
+19,ف,full_absolute_masked_mean,bend_spread,0.555777220448903,0.5665991026301448,0.010821882181241804,palm orientation added
+6,خ,full_absolute_masked_mean,bend_spread,0.7254135875949258,0.716893001926509,-0.008520585668416847,palm orientation added
+5,ح,full_absolute_masked_mean,bend_spread,0.7219157351344565,0.7041801821613797,-0.01773555297307683,palm orientation added
+22,ل,full_absolute_masked_mean,bend_spread,0.6230414746543779,0.5910079950511964,-0.03203347960318148,palm orientation added
+14,ض,full_absolute_masked_mean,bend_spread,0.511640371151978,0.4748967522384115,-0.036743618913566534,palm orientation added
+21,ك,full_absolute_masked_mean,bend_spread,0.6645073648591397,0.6021885521885522,-0.06231881267058759,palm orientation added
+20,ق,full_absolute_masked_mean,bend_spread,0.6785043416622365,0.5815241052432704,-0.09698023641896614,palm orientation added
+0,ا,full_absolute_masked_mean,bend_spread,0.6372475533581559,0.5306013659836748,-0.10664618737448106,palm orientation added
+9,ر,full_absolute_masked_mean,bend_spread,0.7812818624674295,0.663253791943097,-0.1180280705243325,palm orientation added
+1,ب,full_absolute_masked_mean,bend_spread,0.7035468069950829,0.5603003003003003,-0.14324650669478256,palm orientation added
+25,ه,full_absolute_masked_mean,bend_only,0.5408322903629537,0.8208616780045351,0.2800293876415815,full glove vs bend only
+10,ز,full_absolute_masked_mean,bend_only,0.14035087719298245,0.38444330308737085,0.2440924258943884,full glove vs bend only
+11,س,full_absolute_masked_mean,bend_only,0.48520349586447664,0.7135961726483236,0.228392676783847,full glove vs bend only
+17,ع,full_absolute_masked_mean,bend_only,0.5445450836393309,0.7724608130495731,0.2279157294102423,full glove vs bend only
+4,ج,full_absolute_masked_mean,bend_only,0.6841064711932575,0.8605585834670735,0.17645211227381596,full glove vs bend only
+7,د,full_absolute_masked_mean,bend_only,0.47336238640586464,0.6355147735102045,0.16215238710433982,full glove vs bend only
+12,ش,full_absolute_masked_mean,bend_only,0.5863095238095238,0.7065016824052969,0.12019215859577304,full glove vs bend only
+27,ي,full_absolute_masked_mean,bend_only,0.7604387203011056,0.8748721262047058,0.11443340590360018,full glove vs bend only
+21,ك,full_absolute_masked_mean,bend_only,0.4985188808718221,0.6021885521885522,0.10366967131673005,full glove vs bend only
+23,م,full_absolute_masked_mean,bend_only,0.9022933739914872,0.9811320754716982,0.078838701480211,full glove vs bend only
+5,ح,full_absolute_masked_mean,bend_only,0.6358024691358025,0.7041801821613797,0.06837771302557716,full glove vs bend only
+24,ن,full_absolute_masked_mean,bend_only,0.5020413352221132,0.5703592889775401,0.06831795375542682,full glove vs bend only
+26,و,full_absolute_masked_mean,bend_only,0.6807419318230933,0.7419354838709676,0.061193552047874356,full glove vs bend only
+8,ذ,full_absolute_masked_mean,bend_only,0.6303082685105157,0.684357881923311,0.05404961341279535,full glove vs bend only
+0,ا,full_absolute_masked_mean,bend_only,0.477356004673478,0.5306013659836748,0.053245361310196804,full glove vs bend only
+20,ق,full_absolute_masked_mean,bend_only,0.5294066390945388,0.5815241052432704,0.052117466148731584,full glove vs bend only
+19,ف,full_absolute_masked_mean,bend_only,0.51692362218678,0.5665991026301448,0.04967548044336478,full glove vs bend only
+22,ل,full_absolute_masked_mean,bend_only,0.5511938078309759,0.5910079950511964,0.039814187220220454,full glove vs bend only
+15,ط,full_absolute_masked_mean,bend_only,0.34653860556604893,0.37178339106192454,0.02524478549587561,full glove vs bend only
+18,غ,full_absolute_masked_mean,bend_only,0.7706464244747374,0.7902813299232737,0.0196349054485363,full glove vs bend only
+14,ض,full_absolute_masked_mean,bend_only,0.48788649612906304,0.4748967522384115,-0.01298974389065155,full glove vs bend only
+13,ص,full_absolute_masked_mean,bend_only,0.7357641879605703,0.7060769507371449,-0.029687237223425367,full glove vs bend only
+2,ت,full_absolute_masked_mean,bend_only,0.6871094901267316,0.6247870622331364,-0.06232242789359521,full glove vs bend only
+6,خ,full_absolute_masked_mean,bend_only,0.7929421768707483,0.716893001926509,-0.07604917494423935,full glove vs bend only
+3,ث,full_absolute_masked_mean,bend_only,0.7913220636167256,0.6972315900904887,-0.0940904735262369,full glove vs bend only
+16,ظ,full_absolute_masked_mean,bend_only,0.7001114827201783,0.5707996583218345,-0.12931182439834377,full glove vs bend only
+9,ر,full_absolute_masked_mean,bend_only,0.7935686751876648,0.663253791943097,-0.13031488324456786,full glove vs bend only
+1,ب,full_absolute_masked_mean,bend_only,0.7227661227661227,0.5603003003003003,-0.16246582246582242,full glove vs bend only
+21,ك,full_relative_masked_mean,full_absolute_masked_mean,0.6021885521885522,0.7853052420216599,0.1831166898331077,relative vs absolute quaternion
+18,غ,full_relative_masked_mean,full_absolute_masked_mean,0.7902813299232737,0.9090842490842491,0.1188029191609754,relative vs absolute quaternion
+0,ا,full_relative_masked_mean,full_absolute_masked_mean,0.5306013659836748,0.6342878433042368,0.10368647732056202,relative vs absolute quaternion
+6,خ,full_relative_masked_mean,full_absolute_masked_mean,0.716893001926509,0.8199855699855699,0.10309256805906097,relative vs absolute quaternion
+3,ث,full_relative_masked_mean,full_absolute_masked_mean,0.6972315900904887,0.7839627674420094,0.0867311773515207,relative vs absolute quaternion
+16,ظ,full_relative_masked_mean,full_absolute_masked_mean,0.5707996583218345,0.6481849277281254,0.07738526940629087,relative vs absolute quaternion
+20,ق,full_relative_masked_mean,full_absolute_masked_mean,0.5815241052432704,0.649526168967844,0.06800206372457362,relative vs absolute quaternion
+12,ش,full_relative_masked_mean,full_absolute_masked_mean,0.7065016824052969,0.7483908819519939,0.04188919954669701,relative vs absolute quaternion
+22,ل,full_relative_masked_mean,full_absolute_masked_mean,0.5910079950511964,0.631099567099567,0.04009157204837066,relative vs absolute quaternion
+9,ر,full_relative_masked_mean,full_absolute_masked_mean,0.663253791943097,0.6949140776630257,0.03166028571992874,relative vs absolute quaternion
+14,ض,full_relative_masked_mean,full_absolute_masked_mean,0.4748967522384115,0.48257168246757004,0.00767493022915855,relative vs absolute quaternion
+19,ف,full_relative_masked_mean,full_absolute_masked_mean,0.5665991026301448,0.5177377952849048,-0.04886130734523997,relative vs absolute quaternion
+27,ي,full_relative_masked_mean,full_absolute_masked_mean,0.8748721262047058,0.8161993769470405,-0.0586727492576653,relative vs absolute quaternion
+15,ط,full_relative_masked_mean,full_absolute_masked_mean,0.37178339106192454,0.3120189469862973,-0.059764444075627254,relative vs absolute quaternion
+1,ب,full_relative_masked_mean,full_absolute_masked_mean,0.5603003003003003,0.49821618163953024,-0.06208411866077007,relative vs absolute quaternion
+10,ز,full_relative_masked_mean,full_absolute_masked_mean,0.38444330308737085,0.3116217116217116,-0.07282159146565925,relative vs absolute quaternion
+26,و,full_relative_masked_mean,full_absolute_masked_mean,0.7419354838709676,0.661757430548872,-0.0801780533220956,relative vs absolute quaternion
+13,ص,full_relative_masked_mean,full_absolute_masked_mean,0.7060769507371449,0.6205316183792292,-0.08554533235791573,relative vs absolute quaternion
+11,س,full_relative_masked_mean,full_absolute_masked_mean,0.7135961726483236,0.6233016983016983,-0.0902944743466253,relative vs absolute quaternion
+24,ن,full_relative_masked_mean,full_absolute_masked_mean,0.5703592889775401,0.47542735042735046,-0.09493193855018961,relative vs absolute quaternion
+8,ذ,full_relative_masked_mean,full_absolute_masked_mean,0.684357881923311,0.5634571265532381,-0.12090075537007294,relative vs absolute quaternion
+25,ه,full_relative_masked_mean,full_absolute_masked_mean,0.8208616780045351,0.6897066637351362,-0.1311550142693989,relative vs absolute quaternion
+5,ح,full_relative_masked_mean,full_absolute_masked_mean,0.7041801821613797,0.5705937580937581,-0.13358642406762156,relative vs absolute quaternion
+2,ت,full_relative_masked_mean,full_absolute_masked_mean,0.6247870622331364,0.4409469318560228,-0.1838401303771136,relative vs absolute quaternion
+4,ج,full_relative_masked_mean,full_absolute_masked_mean,0.8605585834670735,0.665456685791614,-0.1951018976754595,relative vs absolute quaternion
+23,م,full_relative_masked_mean,full_absolute_masked_mean,0.9811320754716982,0.7829377394309359,-0.1981943360407623,relative vs absolute quaternion
+7,د,full_relative_masked_mean,full_absolute_masked_mean,0.6355147735102045,0.39796659404502543,-0.23754817946517903,relative vs absolute quaternion
+17,ع,full_relative_masked_mean,full_absolute_masked_mean,0.7724608130495731,0.45260243632336655,-0.3198583767262066,relative vs absolute quaternion
+0,ا,full_absolute_final_hidden,full_absolute_masked_mean,0.5306013659836748,0.729333993122962,0.1987326271392872,final_hidden vs masked_mean
+14,ض,full_absolute_final_hidden,full_absolute_masked_mean,0.4748967522384115,0.5469945010818471,0.07209774884343562,final_hidden vs masked_mean
+1,ب,full_absolute_final_hidden,full_absolute_masked_mean,0.5603003003003003,0.6058000909994226,0.045499790699122244,final_hidden vs masked_mean
+11,س,full_absolute_final_hidden,full_absolute_masked_mean,0.7135961726483236,0.746935088398503,0.03333891575017933,final_hidden vs masked_mean
+26,و,full_absolute_final_hidden,full_absolute_masked_mean,0.7419354838709676,0.7681606782730378,0.026225194402070162,final_hidden vs masked_mean
+10,ز,full_absolute_final_hidden,full_absolute_masked_mean,0.38444330308737085,0.4096682698236527,0.02522496673628183,final_hidden vs masked_mean
+3,ث,full_absolute_final_hidden,full_absolute_masked_mean,0.6972315900904887,0.7216502795450164,0.02441868945452763,final_hidden vs masked_mean
+2,ت,full_absolute_final_hidden,full_absolute_masked_mean,0.6247870622331364,0.6461470440073787,0.021359981774242254,final_hidden vs masked_mean
+6,خ,full_absolute_final_hidden,full_absolute_masked_mean,0.716893001926509,0.7374847374847375,0.020591735558228574,final_hidden vs masked_mean
+22,ل,full_absolute_final_hidden,full_absolute_masked_mean,0.5910079950511964,0.611301088187921,0.02029309313672456,final_hidden vs masked_mean
+27,ي,full_absolute_final_hidden,full_absolute_masked_mean,0.8748721262047058,0.892483660130719,0.017611533926013223,final_hidden vs masked_mean
+9,ر,full_absolute_final_hidden,full_absolute_masked_mean,0.663253791943097,0.6630274163045308,-0.0002263756385662008,final_hidden vs masked_mean
+20,ق,full_absolute_final_hidden,full_absolute_masked_mean,0.5815241052432704,0.5674683666570076,-0.014055738586262745,final_hidden vs masked_mean
+4,ج,full_absolute_final_hidden,full_absolute_masked_mean,0.8605585834670735,0.843853523775936,-0.016705059691137447,final_hidden vs masked_mean
+18,غ,full_absolute_final_hidden,full_absolute_masked_mean,0.7902813299232737,0.7701744451450274,-0.020106884778246292,final_hidden vs masked_mean
+23,م,full_absolute_final_hidden,full_absolute_masked_mean,0.9811320754716982,0.9579357577705027,-0.023196317701195568,final_hidden vs masked_mean
+13,ص,full_absolute_final_hidden,full_absolute_masked_mean,0.7060769507371449,0.6789535070785071,-0.027123443658637836,final_hidden vs masked_mean
+7,د,full_absolute_final_hidden,full_absolute_masked_mean,0.6355147735102045,0.5862486137715496,-0.04926615973865489,final_hidden vs masked_mean
+5,ح,full_absolute_final_hidden,full_absolute_masked_mean,0.7041801821613797,0.6500961140715867,-0.054084068089792936,final_hidden vs masked_mean
+12,ش,full_absolute_final_hidden,full_absolute_masked_mean,0.7065016824052969,0.6136457447939679,-0.09285593761132893,final_hidden vs masked_mean
+17,ع,full_absolute_final_hidden,full_absolute_masked_mean,0.7724608130495731,0.6790134827436232,-0.09344733030594998,final_hidden vs masked_mean
+16,ظ,full_absolute_final_hidden,full_absolute_masked_mean,0.5707996583218345,0.464364724807881,-0.10643493351395356,final_hidden vs masked_mean
+15,ط,full_absolute_final_hidden,full_absolute_masked_mean,0.37178339106192454,0.26335908100613986,-0.10842431005578468,final_hidden vs masked_mean
+25,ه,full_absolute_final_hidden,full_absolute_masked_mean,0.8208616780045351,0.7097191697191697,-0.11114250828536543,final_hidden vs masked_mean
+21,ك,full_absolute_final_hidden,full_absolute_masked_mean,0.6021885521885522,0.4871794871794872,-0.11500906500906494,final_hidden vs masked_mean
+19,ف,full_absolute_final_hidden,full_absolute_masked_mean,0.5665991026301448,0.43471099131476487,-0.13188811131537992,final_hidden vs masked_mean
+8,ذ,full_absolute_final_hidden,full_absolute_masked_mean,0.684357881923311,0.5343108979039497,-0.15004698401936134,final_hidden vs masked_mean
+24,ن,full_absolute_final_hidden,full_absolute_masked_mean,0.5703592889775401,0.40142322097378275,-0.16893606800375732,final_hidden vs masked_mean
