@@ -11,7 +11,10 @@ from visualizer.keyboard import Core28Keyboard
 from visualizer.mapping import Core28Resolver
 from visualizer.queue import PlaybackQueue, QueueState, UnsupportedTextError
 
-from smart_glove_app.rendering.hand_mesh_state import PersistentRenderScene, PresentationFrame
+from smart_glove_app.rendering.hand_mesh_state import (
+    PersistentRenderScene,
+    PresentationFrame,
+)
 from smart_glove_app.rendering.mano_topology import ManoTopology
 from smart_glove_app.rendering.qt_geometry import QtHandGeometry
 from smart_glove_app.rendering.glb_index import GlbIndexError, build_scene_index
@@ -22,14 +25,31 @@ from smart_glove_app.rendering.presentation_rig import (
 )
 from smart_glove_app.rendering.sensor_markers import SensorMarkerModel
 
-from .hand_pose_solver import HandPoseSolver
-from .playback_controller import PersistentPlaybackController, PlaybackDisplayState
+from .hand_pose_solver import HandPose, HandPoseSolver
+from .motion_quality import (
+    PresentationTransition,
+    TransitionConfig,
+    copy_pose_map,
+)
+from .playback_controller import (
+    PersistentPlaybackController,
+    PlaybackBoundaryTrace,
+    PlaybackDisplayState,
+)
 from .recognition_bridge import RecognitionBridge
 from .qt_workers import CheckpointLoadTask, RecognitionTask, SequenceLoadTask
 
 
 try:
-    from PySide6.QtCore import QUrl, QObject, Property, QThreadPool, QTimer, Signal, Slot
+    from PySide6.QtCore import (
+        QUrl,
+        QObject,
+        Property,
+        QThreadPool,
+        QTimer,
+        Signal,
+        Slot,
+    )
 
     QT_CONTROLLER_AVAILABLE = True
 except ImportError:  # pragma: no cover - the entry point reports this clearly
@@ -97,6 +117,9 @@ if QT_CONTROLLER_AVAILABLE:
             rng_seed: int | None = None,
             speed: float = 1.0,
             smooth_rendering: bool = True,
+            boundary_hold_ms: float = 80.0,
+            transition_min_ms: float = 150.0,
+            transition_max_ms: float = 350.0,
             rig_profile: PresentationRig | None = None,
             rig_asset_path: str | Path | None = None,
             debug_mano_points: bool = False,
@@ -110,8 +133,12 @@ if QT_CONTROLLER_AVAILABLE:
             if float(speed) not in SPEEDS:
                 raise ValueError(f"speed must be one of {SPEEDS}")
             self._run_root = Path(run_root).expanduser().resolve()
-            self._manifest_path = Path(manifest_path).expanduser().resolve() if manifest_path else None
-            self._labels_path = Path(labels_path).expanduser().resolve() if labels_path else None
+            self._manifest_path = (
+                Path(manifest_path).expanduser().resolve() if manifest_path else None
+            )
+            self._labels_path = (
+                Path(labels_path).expanduser().resolve() if labels_path else None
+            )
             self._resolver = resolver
             self._keyboard = Core28Keyboard(resolver.mapping)
             self._queue = PlaybackQueue(resolver)
@@ -119,11 +146,22 @@ if QT_CONTROLLER_AVAILABLE:
             self._mode = mode
             self._rng_seed = rng_seed
             self._speed = float(speed)
+            self._transition_config = TransitionConfig(
+                boundary_hold_ms=float(boundary_hold_ms),
+                minimum_duration_ms=float(transition_min_ms),
+                maximum_duration_ms=float(transition_max_ms),
+            )
             self._requested_text = ""
             self._active_item: Any | None = None
             self._sequence: Any | None = None
             self._playback: PersistentPlaybackController | None = None
             self._gap_deadline: float | None = None
+            self._transition: PresentationTransition | None = None
+            self._transition_source: dict[str, HandPose] | None = None
+            self._transition_anchor_time: float | None = None
+            self._transition_phase = "IDLE"
+            self._transition_distance_deg = 0.0
+            self._transition_duration_ms = 0.0
             self._active_token = 0
             self._closed = False
             self._smooth_rendering = bool(smooth_rendering)
@@ -132,6 +170,11 @@ if QT_CONTROLLER_AVAILABLE:
             self._rig_profile = rig_profile or load_presentation_rig()
             self._solver = HandPoseSolver(self._rig_profile)
             self._hand_pose = self._solver.neutral_qml_pose()
+            self._last_hand_poses: dict[str, HandPose] = {
+                side: self._solver.neutral_pose(side) for side in ("LEFT", "RIGHT")
+            }
+            self._active_trace: PlaybackBoundaryTrace | None = None
+            self._motion_traces: list[dict[str, Any]] = []
             # Presentation state. Deliberately separate from anything recorded:
             # playing a sign can change bones, never the view or the layout.
             self._view_mode = str(view_mode).upper()
@@ -142,7 +185,9 @@ if QT_CONTROLLER_AVAILABLE:
                 raise ValueError(f"unsupported appearance: {material_mode!r}")
             # One GLB per hand: see the rig profile's one_file_per_hand note.
             self._rig_asset_dir = (
-                Path(rig_asset_path).expanduser().resolve() if rig_asset_path is not None else None
+                Path(rig_asset_path).expanduser().resolve()
+                if rig_asset_path is not None
+                else None
             )
             self._hand_assets: dict[str, Path] = {}
             self._scene_index: dict[str, Any] = {}
@@ -152,7 +197,9 @@ if QT_CONTROLLER_AVAILABLE:
                 for side, filename in self._rig_profile.glb_filenames.items():
                     candidate = self._rig_asset_dir / filename
                     if not candidate.is_file():
-                        self._scene_index_error = f"missing hand asset: {candidate.name}"
+                        self._scene_index_error = (
+                            f"missing hand asset: {candidate.name}"
+                        )
                         break
                     try:
                         index = build_scene_index(
@@ -170,13 +217,20 @@ if QT_CONTROLLER_AVAILABLE:
             elif self._rig_asset_dir is None:
                 self._scene_index_error = "no hand asset directory was supplied"
             else:
-                self._scene_index_error = f"hand asset directory not found: {self._rig_asset_dir}"
+                self._scene_index_error = (
+                    f"hand asset directory not found: {self._rig_asset_dir}"
+                )
 
-            self._rig_asset_available = bool(self._scene_index) and not self._scene_index_error
+            self._rig_asset_available = (
+                bool(self._scene_index) and not self._scene_index_error
+            )
             self._rig_asset_status = (
                 "Hand assets ready"
                 if self._rig_asset_available
-                else (self._scene_index_error or "Hand assets unavailable — use --rig-asset")
+                else (
+                    self._scene_index_error
+                    or "Hand assets unavailable — use --rig-asset"
+                )
             )
 
             # These are the two persistent GPU geometry providers.  They are
@@ -189,7 +243,9 @@ if QT_CONTROLLER_AVAILABLE:
             self._upload_presentation(self.scene.clear_sequence())
 
             self._recognition = RecognitionBridge()
-            self._checkpoint_path = str(Path(checkpoint).expanduser().resolve()) if checkpoint else ""
+            self._checkpoint_path = (
+                str(Path(checkpoint).expanduser().resolve()) if checkpoint else ""
+            )
             self._recognition_status = "Recognition disabled"
             self._recognition_role = "Visualization-only mode"
             self._recognition_scope = EM_DASH
@@ -293,7 +349,10 @@ if QT_CONTROLLER_AVAILABLE:
 
         @Property(bool, notify=playbackPlayingChanged)
         def playbackPlaying(self) -> bool:  # noqa: N802
-            return bool(self._playback is not None and self._playback.playing)
+            return bool(
+                self._transition is not None
+                or (self._playback is not None and self._playback.playing)
+            )
 
         @Property(bool, notify=smoothRenderingChanged)
         def smoothRendering(self) -> bool:  # noqa: N802
@@ -310,6 +369,24 @@ if QT_CONTROLLER_AVAILABLE:
         @Property(int, notify=renderMetricsChanged)
         def rigPoseUpdateCount(self) -> int:  # noqa: N802
             return self._hand_pose_update_count
+
+        @Property(str, notify=renderMetricsChanged)
+        def transitionPhase(self) -> str:  # noqa: N802
+            return self._transition_phase
+
+        @Property(float, notify=renderMetricsChanged)
+        def transitionDistanceDeg(self) -> float:  # noqa: N802
+            return self._transition_distance_deg
+
+        @Property(float, notify=renderMetricsChanged)
+        def transitionDurationMs(self) -> float:  # noqa: N802
+            return self._transition_duration_ms
+
+        @Property("QVariantList", notify=renderMetricsChanged)
+        def motionTrace(self) -> list[dict[str, Any]]:  # noqa: N802
+            """Completed source/queue boundary traces for diagnostics and reports."""
+
+            return list(self._motion_traces)
 
         @Property(bool, notify=diagnosticsVisibleChanged)
         def diagnosticsVisible(self) -> bool:  # noqa: N802
@@ -422,7 +499,9 @@ if QT_CONTROLLER_AVAILABLE:
             rows: list[list[str]] = []
             start = 0
             for size in (10, 9, 9):
-                rows.append([key.character for key in self._keyboard.keys[start : start + size]])
+                rows.append(
+                    [key.character for key in self._keyboard.keys[start : start + size]]
+                )
                 start += size
             return rows
 
@@ -456,15 +535,38 @@ if QT_CONTROLLER_AVAILABLE:
                 self._active_label = "No active sign"
                 self._expected_character = EM_DASH
             else:
-                self._active_label = str(item.character) if item.item_type == "sign" else "Neutral gap"
-                self._expected_character = str(item.character) if item.item_type == "sign" else EM_DASH
+                self._active_label = (
+                    str(item.character) if item.item_type == "sign" else "Neutral gap"
+                )
+                self._expected_character = (
+                    str(item.character) if item.item_type == "sign" else EM_DASH
+                )
             self.activeLabelChanged.emit()
             self.recognitionStateChanged.emit()
+
+        def _set_transition_state(
+            self,
+            phase: str,
+            *,
+            distance_deg: float | None = None,
+            duration_ms: float | None = None,
+        ) -> None:
+            self._transition_phase = str(phase)
+            if distance_deg is not None:
+                self._transition_distance_deg = float(distance_deg)
+            if duration_ms is not None:
+                self._transition_duration_ms = float(duration_ms)
+            self.renderMetricsChanged.emit()
+            self.playbackPlayingChanged.emit()
 
         def _reset_render_state(self, *, keep_pose: bool = False) -> None:
             self._sequence = None
             self._playback = None
             self._gap_deadline = None
+            self._transition = None
+            self._transition_source = None
+            self._transition_anchor_time = None
+            self._set_transition_state("IDLE", distance_deg=0.0, duration_ms=0.0)
             self._frame_index = -1
             self._frame_position = -1
             self._frame_count = 0
@@ -472,6 +574,9 @@ if QT_CONTROLLER_AVAILABLE:
             self._current_sample_id = EM_DASH
             self._solver.reset()
             if not keep_pose:
+                self._last_hand_poses = {
+                    side: self._solver.neutral_pose(side) for side in ("LEFT", "RIGHT")
+                }
                 self._hand_pose = self._solver.neutral_qml_pose()
                 self.handPoseChanged.emit()
             self._upload_presentation(self.scene.clear_sequence())
@@ -482,8 +587,12 @@ if QT_CONTROLLER_AVAILABLE:
         def _upload_presentation(self, frame: PresentationFrame) -> None:
             self.left_geometry.set_payload(frame.left)
             self.right_geometry.set_payload(frame.right)
-            self.left_markers.update_markers(frame.left.marker_positions, frame.left.marker_valid)
-            self.right_markers.update_markers(frame.right.marker_positions, frame.right.marker_valid)
+            self.left_markers.update_markers(
+                frame.left.marker_positions, frame.left.marker_valid
+            )
+            self.right_markers.update_markers(
+                frame.right.marker_positions, frame.right.marker_valid
+            )
 
         def _set_requested_text(self, text: str) -> None:
             self._requested_text = str(text)
@@ -494,7 +603,12 @@ if QT_CONTROLLER_AVAILABLE:
                 raise ValueError("random exemplar mode requires an explicit seed")
             return self._rng_seed
 
-        def _begin_current(self) -> None:
+        def _begin_current(
+            self,
+            *,
+            transition_source: dict[str, HandPose] | None = None,
+            transition_anchor_time: float | None = None,
+        ) -> None:
             if self._closed:
                 return
             item = self._queue.current
@@ -513,12 +627,24 @@ if QT_CONTROLLER_AVAILABLE:
             token = self._active_token
             if item.item_type == "gap":
                 self._reset_render_state()
-                self._gap_deadline = time.monotonic() + max(0, int(item.gap_after_ms or 0)) / 1000.0
+                self._gap_deadline = (
+                    time.monotonic() + max(0, int(item.gap_after_ms or 0)) / 1000.0
+                )
                 self._set_status("Neutral gap — hands remain visible")
                 self._emit_queue_state()
                 return
 
-            self._reset_render_state()
+            # Preserve the completed sign while the next stored sequence loads;
+            # the presentation-only transition is built once its first source
+            # frame has been solved below.
+            self._reset_render_state(keep_pose=transition_source is not None)
+            if transition_source is not None:
+                self._transition_source = copy_pose_map(transition_source)
+                self._transition_anchor_time = (
+                    time.monotonic()
+                    if transition_anchor_time is None
+                    else float(transition_anchor_time)
+                )
             self._current_sample_id = str(item.sample_id or EM_DASH)
             self.currentSampleIdChanged.emit()
             self._set_status(f"Loading stored sequence for {item.character}…")
@@ -550,12 +676,16 @@ if QT_CONTROLLER_AVAILABLE:
                 if value.isspace():
                     self._queue.enqueue_gap(value)
                 else:
-                    self._queue.enqueue_character(value, mode=self._mode, rng_seed=self._selected_seed())
+                    self._queue.enqueue_character(
+                        value, mode=self._mode, rng_seed=self._selected_seed()
+                    )
             except (ValueError, OSError) as exc:
                 self._set_status(f"Could not queue {value}: {exc}")
                 return
             self._set_requested_text(self._requested_text + value)
-            self._set_status(f"Queued {value}. Repeated characters remain separate events.")
+            self._set_status(
+                f"Queued {value}. Repeated characters remain separate events."
+            )
             if was_idle:
                 self._begin_current()
             else:
@@ -567,7 +697,9 @@ if QT_CONTROLLER_AVAILABLE:
                 validation = self._keyboard.validate_text(value)
                 if not validation.is_valid:
                     issue = validation.unsupported[0]
-                    raise ValueError(f"unsupported character at position {issue.position}: {issue.character}")
+                    raise ValueError(
+                        f"unsupported character at position {issue.position}: {issue.character}"
+                    )
                 self._selected_seed()
                 self._queue.clear()
                 self._active_token += 1
@@ -648,13 +780,30 @@ if QT_CONTROLLER_AVAILABLE:
                 self._queue.reset()
                 self._begin_current()
                 return
-            if self._playback is not None:
+            if self._transition is not None and self._playback is not None:
+                # An explicit restart is a user action, so it cancels the
+                # presentation-only boundary and starts the current stored
+                # sequence at its exact first source frame.
+                self._transition = None
+                self._transition_source = None
+                self._transition_anchor_time = None
+                self._solver.reset()
+                self._set_transition_state("IDLE", distance_deg=0.0, duration_ms=0.0)
                 self._playback.restart()
-                self._update_from_playback(self._playback.tick())
+                self._update_from_playback(self._playback.play())
+                self._set_status("Current sequence restarted.")
+                return
+            if self._playback is not None:
+                self._solver.reset()
+                self._playback.restart()
+                self._update_from_playback(self._playback.play(time.monotonic()))
                 self._set_status("Current sequence restarted.")
 
         @Slot()
         def playPause(self) -> None:  # noqa: N802
+            if self._transition is not None:
+                self._set_status("Transition in progress; playback remains continuous.")
+                return
             if self._playback is None:
                 if self._queue.current is not None:
                     self._set_status("Waiting for the stored sequence to load…")
@@ -682,7 +831,11 @@ if QT_CONTROLLER_AVAILABLE:
         def setSmoothRendering(self, enabled: bool) -> None:  # noqa: N802
             self._smooth_rendering = bool(enabled)
             self.smoothRenderingChanged.emit()
-            self._set_status("Smooth rendering on." if self._smooth_rendering else "Exact stored frames on.")
+            self._set_status(
+                "Smooth rendering on."
+                if self._smooth_rendering
+                else "Exact stored frames on."
+            )
 
         @Slot(str)
         def setExemplarMode(self, mode: str) -> None:  # noqa: N802
@@ -778,7 +931,9 @@ if QT_CONTROLLER_AVAILABLE:
 
         def _start_checkpoint_load(self) -> None:
             if not self._checkpoint_path or self._labels_path is None:
-                self._recognition_status = "Recognition disabled — labels path unavailable"
+                self._recognition_status = (
+                    "Recognition disabled — labels path unavailable"
+                )
                 self.recognitionStateChanged.emit()
                 return
             token = self._active_token
@@ -803,7 +958,9 @@ if QT_CONTROLLER_AVAILABLE:
             self._recognition_role = str(metadata.role_display)
             self._recognition_scope = str(metadata.training_scope_display)
             reference = str(metadata.scientific_reference_display)
-            if metadata.is_deployment and ("67.63%" not in reference or "0.6607" not in reference):
+            if metadata.is_deployment and (
+                "67.63%" not in reference or "0.6607" not in reference
+            ):
                 reference = "LOSO reference only (not deployment accuracy): 67.63% accuracy / 0.6607 macro F1"
             self._recognition_reference = reference
             self._recognition_checkpoint = Path(metadata.path).name
@@ -823,7 +980,9 @@ if QT_CONTROLLER_AVAILABLE:
             self._recognition_reference = EM_DASH
             self._recognition_checkpoint = EM_DASH
             self._recognition_error = str(error)
-            self._set_status(f"Checkpoint unavailable; visualizer-only mode continues. {error}")
+            self._set_status(
+                f"Checkpoint unavailable; visualizer-only mode continues. {error}"
+            )
             self.recognitionStateChanged.emit()
 
         def _start_recognition(self, item: Any, token: int) -> None:
@@ -840,9 +999,13 @@ if QT_CONTROLLER_AVAILABLE:
                 return
             if bool(getattr(result, "available", False)):
                 self._recognition_status = "Prediction ready"
-                self._predicted_character = str(getattr(result, "predicted_character", None) or EM_DASH)
+                self._predicted_character = str(
+                    getattr(result, "predicted_character", None) or EM_DASH
+                )
                 confidence = getattr(result, "confidence", None)
-                self._confidence_text = EM_DASH if confidence is None else f"{float(confidence):.1%}"
+                self._confidence_text = (
+                    EM_DASH if confidence is None else f"{float(confidence):.1%}"
+                )
             else:
                 self._recognition_status = "Prediction unavailable"
                 self._predicted_character = EM_DASH
@@ -859,12 +1022,23 @@ if QT_CONTROLLER_AVAILABLE:
             self._recognition_error = str(error)
             self.recognitionStateChanged.emit()
 
+        def _preview_first_pose(self, sequence: Any) -> dict[str, HandPose]:
+            """Solve a target endpoint without carrying state into playback."""
+
+            self._solver.reset()
+            target = self._solver.frame_pose(sequence.frame_at(0))
+            snapshot = copy_pose_map(target)
+            self._solver.reset()
+            return snapshot
+
         @Slot(int, object)
         def _sequence_loaded(self, token: int, sequence: Any) -> None:
             if self._closed or token != self._active_token or self._active_item is None:
                 return
             if sequence is None:
-                self._sequence_failed(token, "sequence loader returned no sign sequence")
+                self._sequence_failed(
+                    token, "sequence loader returned no sign sequence"
+                )
                 return
             try:
                 self.scene.attach_sequence(sequence)
@@ -877,9 +1051,58 @@ if QT_CONTROLLER_AVAILABLE:
                 )
                 self._frame_count = len(sequence)
                 duration = float(sequence.timestamps[-1] - sequence.timestamps[0])
-                self._source_fps = (len(sequence) - 1) / duration if duration > 0 else 0.0
-                self._set_status(f"Playing {self._active_item.character} from stored TASK-008 frames.")
-                self._update_from_playback(self._playback.play())
+                self._source_fps = (
+                    (len(sequence) - 1) / duration if duration > 0 else 0.0
+                )
+                self._active_trace = PlaybackBoundaryTrace.for_sequence(
+                    str(sequence.sample_id),
+                    str(self._active_item.character),
+                    sequence.frame_indices,
+                )
+                if self._transition_source is not None:
+                    source = copy_pose_map(self._transition_source)
+                    anchor = self._transition_anchor_time
+                    if anchor is None:
+                        anchor = time.monotonic()
+                    loaded_at = time.monotonic()
+                    # The target endpoint is only known after the worker has
+                    # loaded its stored sequence.  If that takes longer than
+                    # the configured hold, start the blend at load time
+                    # rather than silently consuming the whole transition
+                    # while the previous pose is being held.  A fast load
+                    # retains the original final-pose hold exactly.
+                    hold_seconds = self._transition_config.boundary_hold_ms / 1000.0
+                    transition_started_at = max(
+                        float(anchor), loaded_at - hold_seconds
+                    )
+                    target = self._preview_first_pose(sequence)
+                    self._transition = PresentationTransition(
+                        source,
+                        target,
+                        started_at=transition_started_at,
+                        rig=self._rig_profile,
+                        config=self._transition_config,
+                    )
+                    self._active_trace.set_transition_plan(
+                        distance_degrees=self._transition.plan.distance_degrees,
+                        duration_ms=self._transition.plan.duration_ms,
+                        hold_ms=self._transition.plan.hold_ms,
+                    )
+                    self._transition_source = None
+                    self._transition_anchor_time = None
+                    self._set_transition_state(
+                        "BOUNDARY_HOLD",
+                        distance_deg=self._transition.plan.distance_degrees,
+                        duration_ms=self._transition.plan.duration_ms,
+                    )
+                    self._set_status(
+                        f"Transitioning to {self._active_item.character}; stored frames start after the boundary."
+                    )
+                else:
+                    self._set_status(
+                        f"Playing {self._active_item.character} from stored TASK-008 frames."
+                    )
+                    self._update_from_playback(self._playback.play(time.monotonic()))
                 self._emit_queue_state()
             except Exception as exc:  # noqa: BLE001 - explicit unavailable item state
                 self._sequence_failed(token, f"{type(exc).__name__}: {exc}")
@@ -899,6 +1122,14 @@ if QT_CONTROLLER_AVAILABLE:
 
         # ---- presentation clock --------------------------------------------
 
+        def _publish_hand_poses(self, poses: dict[str, HandPose]) -> None:
+            """Publish a new absolute pose map to the persistent QML rig."""
+
+            self._last_hand_poses = copy_pose_map(poses)
+            self._hand_pose = HandPoseSolver.qml_pose(poses)
+            self._hand_pose_update_count += 1
+            self.handPoseChanged.emit()
+
         def _update_from_playback(self, state: PlaybackDisplayState) -> None:
             if self._sequence is None:
                 return
@@ -917,9 +1148,9 @@ if QT_CONTROLLER_AVAILABLE:
                 interpolation_alpha=state.interpolation_alpha,
                 smooth=self._smooth_rendering,
             )
-            self._hand_pose = HandPoseSolver.qml_pose(poses)
-            self._hand_pose_update_count += 1
-            self.handPoseChanged.emit()
+            self._publish_hand_poses(poses)
+            if self._active_trace is not None:
+                self._active_trace.record(state.position)
             frame = self.scene.update_sequence_frame(
                 state.position,
                 interpolation_alpha=state.interpolation_alpha,
@@ -932,15 +1163,90 @@ if QT_CONTROLLER_AVAILABLE:
             self.frameStateChanged.emit()
             self.playbackPlayingChanged.emit()
 
-        def _finish_current_if_needed(self) -> None:
-            if self._playback is None or self._playback.playing or self._queue.current is None:
+        def _finish_current_if_needed(self, now: float) -> None:
+            if (
+                self._playback is None
+                or self._playback.playing
+                or self._queue.current is None
+            ):
                 return
             if not self._playback.at_end:
                 return
+            if self._active_trace is not None:
+                # The queue must not advance until the terminal source anchor
+                # has been published.  The normal path reaches this through
+                # the final PlaybackDisplayState; the guard also makes a
+                # dropped-event/race visible in the trace instead of hiding it.
+                if not self._active_trace.last_frame_presented:
+                    return
+                self._active_trace.mark_queue_advance()
+                self._motion_traces.append(self._active_trace.to_dict())
+                self._active_trace = None
             previous = self._queue.current
+            final_pose = copy_pose_map(self._last_hand_poses)
             self._queue.advance()
-            self._set_status(f"Completed {previous.character}; moving to the next queue event.")
-            self._begin_current()
+            self._set_status(
+                f"Completed {previous.character}; moving to the next queue event."
+            )
+            self._begin_current(
+                transition_source=(
+                    final_pose if self._queue.current is not None else None
+                ),
+                transition_anchor_time=now,
+            )
+
+        def _tick_transition(self, now: float) -> None:
+            transition = self._transition
+            if transition is None:
+                return
+            sample = transition.sample(now)
+            self._set_transition_state(
+                sample.phase,
+                distance_deg=transition.plan.distance_degrees,
+                duration_ms=transition.plan.duration_ms,
+            )
+            self._publish_hand_poses(dict(sample.poses))
+            if not sample.done:
+                return
+            self._transition = None
+            self._set_transition_state("PLAYING", distance_deg=0.0, duration_ms=0.0)
+            if self._playback is not None and self._sequence is not None:
+                self._set_status(
+                    f"Playing {self._active_item.character} from stored TASK-008 frames."
+                )
+                self._update_from_playback(self._playback.play(now))
+                self._emit_queue_state()
+
+        def _exact_source_state(
+            self, position: int, *, playing: bool
+        ) -> PlaybackDisplayState:
+            """Build an exact anchor state for a source position catch-up."""
+
+            frame = self._sequence.frame_at(position)
+            return PlaybackDisplayState(
+                position=int(position),
+                frame_index=int(frame.frame_index),
+                timestamp_seconds=float(frame.timestamp_seconds),
+                interpolation_alpha=0.0,
+                playing=bool(playing),
+            )
+
+        def _tick_source_playback(self, now: float) -> None:
+            if self._playback is None or self._sequence is None:
+                return
+            state = self._playback.tick(now)
+            previous_position = self._frame_position
+            # If a GUI callback arrives late, publish each crossed source
+            # anchor in order before the clock's current interpolated state.
+            # This preserves source-frame visitation and solver state without
+            # changing timestamps, arrays, masks, or recognizer input.
+            if 0 <= previous_position < state.position - 1:
+                for position in range(previous_position + 1, state.position):
+                    self._update_from_playback(
+                        self._exact_source_state(position, playing=True)
+                    )
+            self._update_from_playback(state)
+            self._finish_current_if_needed(now)
 
         def _tick(self) -> None:
             if self._closed:
@@ -951,10 +1257,10 @@ if QT_CONTROLLER_AVAILABLE:
                 if self._queue.current is not None:
                     self._queue.advance()
                 self._begin_current()
+            elif self._transition is not None:
+                self._tick_transition(now)
             elif self._playback is not None:
-                state = self._playback.tick(now)
-                self._update_from_playback(state)
-                self._finish_current_if_needed()
+                self._tick_source_playback(now)
 
 else:
 
@@ -965,4 +1271,8 @@ else:
             raise RuntimeError("PySide6 is required for the Core-28 application")
 
 
-__all__ = ["Core28ApplicationController", "DEFAULT_SENSOR_LAYOUT", "QT_CONTROLLER_AVAILABLE"]
+__all__ = [
+    "Core28ApplicationController",
+    "DEFAULT_SENSOR_LAYOUT",
+    "QT_CONTROLLER_AVAILABLE",
+]

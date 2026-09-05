@@ -15,8 +15,14 @@ from visualizer.app.integration import (
 )
 from visualizer.mapping import Core28Resolver
 
-from smart_glove_app.rendering.mano_topology import ManoTopologyError, load_mano_topology
-from smart_glove_app.rendering.presentation_rig import PresentationRigError, load_presentation_rig
+from smart_glove_app.rendering.mano_topology import (
+    ManoTopologyError,
+    load_mano_topology,
+)
+from smart_glove_app.rendering.presentation_rig import (
+    PresentationRigError,
+    load_presentation_rig,
+)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -83,22 +89,49 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="open the technical diagnostics drawer at startup",
     )
-    parser.add_argument("--device", default="auto", help="recognition device: auto, cpu, or cuda")
+    parser.add_argument(
+        "--device", default="auto", help="recognition device: auto, cpu, or cuda"
+    )
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--labels", type=Path, default=DEFAULT_LABELS)
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
-    parser.add_argument("--text", default="", help="optional Arabic text to queue on startup")
+    parser.add_argument(
+        "--text", default="", help="optional Arabic text to queue on startup"
+    )
     parser.add_argument(
         "--mode",
         choices=("canonical", "signer01", "signer02", "signer03", "random"),
         default="canonical",
     )
-    parser.add_argument("--seed", type=int, default=None, help="explicit seed required for random exemplars")
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=None,
+        help="explicit seed required for random exemplars",
+    )
     parser.add_argument("--speed", type=float, choices=(0.5, 1.0, 2.0), default=1.0)
     parser.add_argument(
         "--no-smooth-rendering",
         action="store_true",
         help="display exact stored source frames without visual interpolation",
+    )
+    parser.add_argument(
+        "--boundary-hold-ms",
+        type=float,
+        default=80.0,
+        help="presentation-only hold of the completed pose before a sign transition",
+    )
+    parser.add_argument(
+        "--transition-min-ms",
+        type=float,
+        default=150.0,
+        help="minimum presentation-only sign transition duration",
+    )
+    parser.add_argument(
+        "--transition-max-ms",
+        type=float,
+        default=350.0,
+        help="maximum presentation-only sign transition duration",
     )
     parser.add_argument(
         "--headless",
@@ -147,7 +180,9 @@ def _resolver(args: argparse.Namespace) -> Core28Resolver:
     return Core28Resolver(labels_path=args.labels, catalog_path=args.catalog)
 
 
-def _load_headless_recognizer(args: argparse.Namespace) -> tuple[object | None, str | None]:
+def _load_headless_recognizer(
+    args: argparse.Namespace,
+) -> tuple[object | None, str | None]:
     if args.checkpoint is None:
         return None, None
     try:
@@ -170,7 +205,9 @@ def _load_headless_recognizer(args: argparse.Namespace) -> tuple[object | None, 
             ),
             None,
         )
-    except Exception as exc:  # noqa: BLE001 - mirror the legacy optional-checkpoint behavior
+    except (
+        Exception
+    ) as exc:  # noqa: BLE001 - mirror the legacy optional-checkpoint behavior
         return None, f"{type(exc).__name__}: {exc}"
 
 
@@ -231,6 +268,7 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         from PySide6.QtGui import QGuiApplication, QSurfaceFormat
         from PySide6.QtQml import QQmlApplicationEngine
         from PySide6.QtQuick import QQuickWindow
+
         try:
             from PySide6.QtQuickControls2 import QQuickStyle
         except ImportError:  # pragma: no cover - bundled in standard PySide6 wheels
@@ -270,7 +308,11 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         }
 
         def _handler(mode, context, message):  # pragma: no cover - console plumbing
-            print(f"[qt {_levels.get(mode, 'MSG')}] {message}", file=sys.stderr, flush=True)
+            print(
+                f"[qt {_levels.get(mode, 'MSG')}] {message}",
+                file=sys.stderr,
+                flush=True,
+            )
 
         qInstallMessageHandler(_handler)
     except ImportError:  # pragma: no cover
@@ -303,6 +345,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         rng_seed=args.seed,
         speed=args.speed,
         smooth_rendering=not args.no_smooth_rendering,
+        boundary_hold_ms=args.boundary_hold_ms,
+        transition_min_ms=args.transition_min_ms,
+        transition_max_ms=args.transition_max_ms,
         rig_profile=rig_profile,
         rig_asset_path=args.rig_asset,
         debug_mano_points=args.debug_mano_points,
@@ -362,7 +407,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 print("screenshot: grabWindow returned a null image", file=sys.stderr)
 
         for index in range(count):
-            delay = max(0.0, args.screenshot_delay) + index * max(0.0, args.screenshot_interval)
+            delay = max(0.0, args.screenshot_delay) + index * max(
+                0.0, args.screenshot_interval
+            )
             QTimer.singleShot(int(delay * 1000), lambda i=index: _capture(i))
     if args.smoke_seconds is not None:
         if args.smoke_seconds < 0:
@@ -397,6 +444,10 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 "left_geometry_update_count": controller.left_geometry.update_count,
                 "right_geometry_update_count": controller.right_geometry.update_count,
                 "rig_pose_update_count": controller.rigPoseUpdateCount,
+                "transition_phase": controller.transitionPhase,
+                "transition_distance_deg": controller.transitionDistanceDeg,
+                "transition_duration_ms": controller.transitionDurationMs,
+                "motion_trace": controller.motionTrace,
             }
         )
     return int(exit_code)
