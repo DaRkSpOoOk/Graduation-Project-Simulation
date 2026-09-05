@@ -1,0 +1,37 @@
+{
+  "schema_version": "task007j.sensor-presentation.v1",
+  "layout_id": "core28_virtual_glove_v1",
+  "scientific_source": "TASK-006 ideal_virtual_glove_v1 / TASK-008 PlaybackSequence",
+  "description": "Presentation-only physical anchors for the frozen 20-package virtual-glove contract.",
+  "hand_applicability": ["LEFT", "RIGHT"],
+  "coordinate_space": {
+    "asset": "TASK-007G canonical GLB local space",
+    "finger_direction": "+Y",
+    "palm_direction": "+Z",
+    "dorsal_offset": "positive local Z",
+    "note": "The exported bone frames point local +Z toward the dorsal surface; offsets locate badges there while values remain source-frame TASK-008 readings."
+  },
+  "invalid_policy": "Keep the final displayed rig anchor; dim the marker and show the source validity as NO.",
+  "sensors": [
+    {"sensor_id": "H_THUMB_PROXIMAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Thumb · Base", "short_id": "H1", "array": "bend_angle_deg", "array_index": [0, 0], "anchor": {"kind": "bone", "bone": "thumb_1", "local_offset": [0.0, 0.050, 0.020], "palm_blend": 0.0}},
+    {"sensor_id": "H_THUMB_MIDDLE", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Thumb · Middle", "short_id": "H2", "array": "bend_angle_deg", "array_index": [0, 1], "anchor": {"kind": "bone", "bone": "thumb_2", "local_offset": [0.0, 0.045, 0.017], "palm_blend": 0.0}},
+    {"sensor_id": "H_THUMB_DISTAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Thumb · Tip joint", "short_id": "H3", "array": "bend_angle_deg", "array_index": [0, 2], "anchor": {"kind": "bone", "bone": "thumb_3", "local_offset": [0.0, 0.065, 0.014], "palm_blend": 0.0}},
+    {"sensor_id": "H_INDEX_PROXIMAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Index · MCP", "short_id": "H4", "array": "bend_angle_deg", "array_index": [1, 0], "anchor": {"kind": "bone", "bone": "index_1", "local_offset": [0.0, 0.064, 0.020], "palm_blend": 0.0}},
+    {"sensor_id": "H_INDEX_MIDDLE", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Index · PIP", "short_id": "H5", "array": "bend_angle_deg", "array_index": [1, 1], "anchor": {"kind": "bone", "bone": "index_2", "local_offset": [0.0, 0.063, 0.017], "palm_blend": 0.0}},
+    {"sensor_id": "H_INDEX_DISTAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Index · DIP", "short_id": "H6", "array": "bend_angle_deg", "array_index": [1, 2], "anchor": {"kind": "bone", "bone": "index_3", "local_offset": [0.0, 0.050, 0.014], "palm_blend": 0.0}},
+    {"sensor_id": "H_MIDDLE_PROXIMAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Middle · MCP", "short_id": "H7", "array": "bend_angle_deg", "array_index": [2, 0], "anchor": {"kind": "bone", "bone": "middle_1", "local_offset": [0.0, 0.070, 0.020], "palm_blend": 0.0}},
+    {"sensor_id": "H_MIDDLE_MIDDLE", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Middle · PIP", "short_id": "H8", "array": "bend_angle_deg", "array_index": [2, 1], "anchor": {"kind": "bone", "bone": "middle_2", "local_offset": [0.0, 0.072, 0.017], "palm_blend": 0.0}},
+    {"sensor_id": "H_MIDDLE_DISTAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Middle · DIP", "short_id": "H9", "array": "bend_angle_deg", "array_index": [2, 2], "anchor": {"kind": "bone", "bone": "middle_3", "local_offset": [0.0, 0.055, 0.014], "palm_blend": 0.0}},
+    {"sensor_id": "H_RING_PROXIMAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Ring · MCP", "short_id": "H10", "array": "bend_angle_deg", "array_index": [3, 0], "anchor": {"kind": "bone", "bone": "ring_1", "local_offset": [0.0, 0.066, 0.020], "palm_blend": 0.0}},
+    {"sensor_id": "H_RING_MIDDLE", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Ring · PIP", "short_id": "H11", "array": "bend_angle_deg", "array_index": [3, 1], "anchor": {"kind": "bone", "bone": "ring_2", "local_offset": [0.0, 0.066, 0.017], "palm_blend": 0.0}},
+    {"sensor_id": "H_RING_DISTAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Ring · DIP", "short_id": "H12", "array": "bend_angle_deg", "array_index": [3, 2], "anchor": {"kind": "bone", "bone": "ring_3", "local_offset": [0.0, 0.052, 0.014], "palm_blend": 0.0}},
+    {"sensor_id": "H_PINKY_PROXIMAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Pinky · MCP", "short_id": "H13", "array": "bend_angle_deg", "array_index": [4, 0], "anchor": {"kind": "bone", "bone": "pinky_1", "local_offset": [0.0, 0.058, 0.019], "palm_blend": 0.0}},
+    {"sensor_id": "H_PINKY_MIDDLE", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Pinky · PIP", "short_id": "H14", "array": "bend_angle_deg", "array_index": [4, 1], "anchor": {"kind": "bone", "bone": "pinky_2", "local_offset": [0.0, 0.062, 0.016], "palm_blend": 0.0}},
+    {"sensor_id": "H_PINKY_DISTAL", "sensor_type": "hall_bend_angular", "marker": "H", "group": "BEND", "display_name": "Pinky · DIP", "short_id": "H15", "array": "bend_angle_deg", "array_index": [4, 2], "anchor": {"kind": "bone", "bone": "pinky_3", "local_offset": [0.0, 0.040, 0.013], "palm_blend": 0.0}},
+    {"sensor_id": "H_SPREAD_THUMB_INDEX", "sensor_type": "hall_spread_angular", "marker": "H", "group": "SPREAD", "display_name": "Thumb–Index · Web", "short_id": "H16", "array": "spread_angle_deg", "array_index": [0], "anchor": {"kind": "spread_midpoint", "bones": ["thumb_meta", "index_meta"], "local_offset": [0.0, 0.0, 0.024], "palm_blend": 0.20}},
+    {"sensor_id": "H_SPREAD_INDEX_MIDDLE", "sensor_type": "hall_spread_angular", "marker": "H", "group": "SPREAD", "display_name": "Index–Middle · Web", "short_id": "H17", "array": "spread_angle_deg", "array_index": [1], "anchor": {"kind": "spread_midpoint", "bones": ["index_meta", "middle_meta"], "local_offset": [0.0, 0.0, 0.024], "palm_blend": 0.20}},
+    {"sensor_id": "H_SPREAD_MIDDLE_RING", "sensor_type": "hall_spread_angular", "marker": "H", "group": "SPREAD", "display_name": "Middle–Ring · Web", "short_id": "H18", "array": "spread_angle_deg", "array_index": [2], "anchor": {"kind": "spread_midpoint", "bones": ["middle_meta", "ring_meta"], "local_offset": [0.0, 0.0, 0.024], "palm_blend": 0.20}},
+    {"sensor_id": "H_SPREAD_RING_PINKY", "sensor_type": "hall_spread_angular", "marker": "H", "group": "SPREAD", "display_name": "Ring–Pinky · Web", "short_id": "H19", "array": "spread_angle_deg", "array_index": [3], "anchor": {"kind": "spread_midpoint", "bones": ["ring_meta", "pinky_meta"], "local_offset": [0.0, 0.0, 0.024], "palm_blend": 0.20}},
+    {"sensor_id": "IMU_PALM", "sensor_type": "imu_package", "marker": "IMU", "group": "IMU", "display_name": "Palm IMU", "short_id": "IMU", "array": "imu_quaternion_wxyz", "array_index": [], "anchor": {"kind": "bone", "bone": "palm", "local_offset": [0.0, -0.160, 0.030], "palm_blend": 0.0}}
+  ]
+}

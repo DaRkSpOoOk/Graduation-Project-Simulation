@@ -75,3 +75,58 @@ python -m pip install --upgrade pip
 python -m pip install -e .
 python -m unittest discover -s tests -p "test_*.py"
 ```
+
+## Primary Core-28 application
+
+TASK-007J is the current native desktop surface under `smart_glove_app/`:
+PySide6, QML and Qt Quick 3D keep one persistent LEFT and RIGHT rigged hand
+alive for the whole application lifetime. The legacy Tk/Matplotlib entry point
+remains available for historical/debug reproduction only. The optional sensor
+overlay keeps 20 virtual-glove packages per hand attached to the rendered rig;
+the collapsible SENSORS drawer shows frozen TASK-008 source values.
+
+Install the optional GUI dependency and launch it. Only `--run-root` is
+required; the application starts with two natural-skin hands facing the viewer
+and an empty queue, and `--checkpoint` adds recognition:
+
+```powershell
+python -m pip install -e ".[gui,recognition]"
+python -m smart_glove_app `
+  --run-root "..\graduation-project-runs\task008-core28-full" `
+  --checkpoint "..\graduation-project-runs\task009c-core28-deployment\deployment.pt"
+```
+
+`--text` is optional and only exists for smoke/demo runs; the expected flow is
+launch, then click the Arabic Core-28 keyboard.
+
+### Presentation layer
+
+- `--rig-asset` points at the directory holding the two per-hand GLBs and
+  defaults to the ignored local path `assets-local/blendswap_hands_v1/`. One
+  file per hand is deliberate: Qt Quick 3D mis-binds a glTF that carries two
+  skins and deforms the second mesh with the first skeleton.
+- `--rig-profile` is the tracked, project-owned presentation profile at
+  `smart_glove_app/assets/rig_profiles/task007g_hands.json`.
+- `--view palm|back` chooses the starting composition; the in-app button
+  toggles between the two deterministically. There is no free orbit in normal
+  operation - the camera is solved from the layout and the viewport aspect, so
+  the framing is identical at every window size.
+- `--appearance skin|glove|wireframe` chooses the starting material; the
+  default is a natural light-skin PBR material.
+- `--diagnostics` opens the technical drawer (FPS, frame, sample, recognition,
+  appearance/speed/smoothing controls) at startup. It is closed by default.
+- `--screenshot`, `--screenshot-series` and `--screenshot-interval` capture the
+  rendered window, which is how the TASK-007G visual acceptance evidence was
+  produced.
+- `--debug-mano-points` still shows the legacy 778-point representation as an
+  explicit diagnostics overlay. It is never part of normal playback.
+- `--sensors` enables the small H/IMU marker overlay at startup. The SENSORS
+  drawer also provides an ON/OFF toggle and LEFT/RIGHT source-value tabs.
+- `--sensor-visibility overlay|physical` selects readable projected badges or
+  depth-tested dorsal 3D markers. `--sensor-panel` opens the drawer at startup.
+
+The Blender working copy, the exported GLBs and MANO files are local assets
+under the ignored `assets-local/` path. The untouched source snapshot is kept
+alongside them as `blendswap_hands_v1_ORIGINAL_PRESERVED.blend`. See
+`reports/visualizer/TASK-007G-visual-acceptance.md` for the asset derivation,
+source license and the visual acceptance evidence.
