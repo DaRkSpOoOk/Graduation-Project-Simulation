@@ -1,4 +1,4 @@
-"""TASK-007G presentation pose solver.
+"""TASK-007G/007I presentation pose solver.
 
 This turns one frozen TASK-008 frame into local bone rotations for the
 canonical presentation rig.  It is strictly one-way: nothing computed here is
@@ -14,21 +14,34 @@ Two things separate it from the TASK-007F retargeter it replaces:
   applied at the wrist joint and hard-clamped; screen placement, base
   orientation and the palm/back view live on the presentation root and are
   never touched by recorded data.
+* For the shipped skinned GLB, stored TASK-008 landmark directions provide the
+  signed segment orientation that unsigned TASK-005 spread cannot encode.  A
+  shortest-arc swing is solved from immutable rest pose to each direction,
+  preserving the authored axial roll and avoiding accumulated transforms.
 """
 
 from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Mapping
 
 import numpy as np
+
+from kinematics.hand_frame import build_palm_frame
+from kinematics.layout import FINGER_CHAINS
 
 from smart_glove_app.rendering.presentation_rig import (
     FINGERS,
     SIDES,
     SPREAD_PAIRS,
     PresentationRig,
+)
+from smart_glove_app.rendering.rig_pose_calibration import (
+    GlbPoseCalibration,
+    matrix_to_quaternion_wxyz,
+    quaternion_to_matrix_wxyz,
 )
 
 _TRACK_INDEX = {"LEFT": 0, "RIGHT": 1}
@@ -44,6 +57,31 @@ _AXIS_VECTOR = {
 CONTRACT_DEGREE_SCALE = 180.0
 
 IDLE_STATES = frozenset({"MISSING", "LIKELY_OCCLUDED", "REJECTED_QUALITY"})
+
+# TASK-005's palm frame is [lateral | palmar normal | distal].  The shipped
+# Qt/GLB presentation frame is [screen-left/right | distal | palmar normal].
+# The lateral axis is negated because the canonical GLB is mirrored so the
+# viewer sees both palms as hands rather than two copies of one side.  This is
+# a proper rotation (determinant +1), not a reflection of the hand geometry.
+_DEFAULT_SOURCE_TO_PRESENTATION = np.asarray(
+    (
+        (-1.0, 0.0, 0.0),
+        (0.0, 0.0, 1.0),
+        (0.0, 1.0, 0.0),
+    ),
+    dtype=np.float64,
+)
+_SOURCE_CHAIN_NAMES = {
+    finger: tuple(int(index) for index in chain)
+    for finger, chain in FINGER_CHAINS.items()
+}
+_BASE_SPREAD_VALIDITY: Mapping[str, tuple[str, ...]] = {
+    "thumb": ("thumb-index",),
+    "index": ("thumb-index", "index-middle"),
+    "middle": ("index-middle", "middle-ring"),
+    "ring": ("middle-ring", "ring-pinky"),
+    "pinky": ("ring-pinky",),
+}
 
 
 def identity_quaternion() -> np.ndarray:
@@ -158,13 +196,76 @@ class HandPose:
 
 
 class HandPoseSolver:
-    """Solve presentation bone rotations for both hands, frame by frame."""
+    """Solve presentation bone rotations for both hands, frame by frame.
 
-    def __init__(self, rig: PresentationRig) -> None:
+    The TASK-005 channels remain the primary input and remain untouched.  When
+    the normal TASK-007G GLB is available, the solver additionally uses the
+    already stored TASK-008 3D landmarks to recover the *direction* of every
+    source bone.  This is necessary for sign fidelity because TASK-005 spread
+    is intentionally an unsigned pairwise measurement: it cannot say whether
+    a particular finger is on the thumb side or the pinky side of the palm.
+
+    Landmark guidance is presentation-only.  It is never written to a source
+    sequence and is never passed to TASK-009A or the recognizer.  If an asset,
+    landmark frame, or required validity channel is unavailable, the original
+    TASK-007G channel solver remains the safe fallback.
+    """
+
+    def __init__(
+        self,
+        rig: PresentationRig,
+        *,
+        rig_asset_paths: Mapping[str, str | Path] | None = None,
+    ) -> None:
         self.rig = rig
         self._wrist_reference: dict[str, np.ndarray | None] = {side: None for side in SIDES}
         self._last_wrist: dict[str, np.ndarray] = {side: identity_quaternion() for side in SIDES}
         self._last_bones: dict[str, dict[str, np.ndarray]] = {side: {} for side in SIDES}
+        self._landmark_calibration: dict[str, GlbPoseCalibration | None] = {
+            side: None for side in SIDES
+        }
+        self._landmark_calibration_errors: dict[str, str] = {}
+        self._source_to_presentation = self._load_source_frame_mapping()
+        for side in SIDES:
+            path = (rig_asset_paths or {}).get(side)
+            if path is None:
+                continue
+            try:
+                self._landmark_calibration[side] = GlbPoseCalibration.from_glb(
+                    path, self.rig.required_bones
+                )
+            except (OSError, ValueError) as exc:
+                # A broken optional calibration must not prevent visualization
+                # in a valid channel-only/diagnostic setup.
+                self._landmark_calibration_errors[side] = f"{type(exc).__name__}: {exc}"
+
+    @property
+    def landmark_guidance_available(self) -> bool:
+        """Whether both persistent hand GLBs have immutable rest calibration."""
+
+        return all(self._landmark_calibration[side] is not None for side in SIDES)
+
+    @property
+    def landmark_calibration_errors(self) -> Mapping[str, str]:
+        """Read-only diagnostics for optional landmark-guidance calibration."""
+
+        return dict(self._landmark_calibration_errors)
+
+    def _load_source_frame_mapping(self) -> np.ndarray:
+        raw = self.rig.raw.get("landmark_retargeting", {})
+        candidate = raw.get("source_to_presentation_matrix") if isinstance(raw, Mapping) else None
+        matrix = (
+            np.asarray(candidate, dtype=np.float64)
+            if candidate is not None
+            else _DEFAULT_SOURCE_TO_PRESENTATION.copy()
+        )
+        if matrix.shape != (3, 3) or not np.isfinite(matrix).all():
+            return _DEFAULT_SOURCE_TO_PRESENTATION.copy()
+        if not np.allclose(matrix.T @ matrix, np.eye(3), atol=1e-5):
+            return _DEFAULT_SOURCE_TO_PRESENTATION.copy()
+        if float(np.linalg.det(matrix)) < 0.0:
+            return _DEFAULT_SOURCE_TO_PRESENTATION.copy()
+        return matrix
 
     def reset(self) -> None:
         """Forget per-sequence state.
@@ -229,6 +330,232 @@ class HandPoseSolver:
             self._last_wrist[side] = clamped.copy()
         return clamped, True
 
+    # ---- landmark-guided presentation retargeting -------------------------
+
+    def _landmark_targets(
+        self,
+        landmarks: Any,
+        side: str,
+        calibration: GlbPoseCalibration,
+    ) -> dict[str, np.ndarray] | None:
+        """Build absolute source-bone frames in the GLB presentation frame.
+
+        TASK-005 deliberately stores bend magnitudes and unsigned spread
+        magnitudes.  The stored TASK-008 landmarks retain the missing signed
+        direction and the thumb-opposition information.  Each source chain has
+        four segments and each presentation chain has one metacarpal plus
+        three phalanges, so the mapping is one-to-one.
+        """
+
+        points = np.asarray(landmarks, dtype=np.float64)
+        if points.shape != (21, 3) or not np.isfinite(points).all():
+            return None
+        palm_frame, _ = build_palm_frame(points, side.lower())
+        if palm_frame is None:
+            return None
+
+        local_points = (points - points[0]) @ palm_frame.rotation
+        source_to_presentation = self._source_to_presentation
+        palm_normal = source_to_presentation @ np.asarray((0.0, 1.0, 0.0))
+        targets: dict[str, np.ndarray] = {}
+
+        for finger in FINGERS:
+            source_chain = _SOURCE_CHAIN_NAMES[finger]
+            chain = self.rig.chains[finger]
+            bone_names = (chain.metacarpal, *chain.joints)
+            for segment_index, bone in enumerate(bone_names):
+                vector = source_to_presentation @ (
+                    local_points[source_chain[segment_index + 1]]
+                    - local_points[source_chain[segment_index]]
+                )
+                length = float(np.linalg.norm(vector))
+                if not math.isfinite(length) or length <= 1e-8:
+                    return None
+                direction = vector / length
+
+                # Use the source palm normal to choose a stable roll while the
+                # segment direction determines the actual bone articulation.
+                # At the rare pole where a segment is parallel to the normal,
+                # the immutable GLB rest Z axis supplies the least surprising
+                # roll; no synthetic position or scientific channel is made.
+                z_axis = palm_normal - float(np.dot(palm_normal, direction)) * direction
+                if float(np.linalg.norm(z_axis)) <= 1e-7:
+                    rest_z = calibration.world_rotations[bone][:, 2]
+                    z_axis = rest_z - float(np.dot(rest_z, direction)) * direction
+                if float(np.linalg.norm(z_axis)) <= 1e-7:
+                    lateral = source_to_presentation @ np.asarray((1.0, 0.0, 0.0))
+                    z_axis = lateral - float(np.dot(lateral, direction)) * direction
+                z_norm = float(np.linalg.norm(z_axis))
+                if z_norm <= 1e-8:
+                    return None
+                z_axis = z_axis / z_norm
+                x_axis = np.cross(direction, z_axis)
+                x_norm = float(np.linalg.norm(x_axis))
+                if x_norm <= 1e-8:
+                    return None
+                x_axis = x_axis / x_norm
+                z_axis = np.cross(x_axis, direction)
+                z_axis = z_axis / float(np.linalg.norm(z_axis))
+                targets[bone] = np.column_stack((x_axis, direction, z_axis))
+
+        return targets
+
+    @staticmethod
+    def _spread_valid_for_base(frame: Any, track: int, finger: str) -> bool:
+        spread_mask = np.asarray(frame.spread_valid)
+        if spread_mask.ndim != 2 or spread_mask.shape[0] <= track:
+            return False
+        for pair in _BASE_SPREAD_VALIDITY[finger]:
+            pair_index = _PAIR_INDEX[pair]
+            if not bool(spread_mask[track, pair_index]):
+                return False
+        return True
+
+    @staticmethod
+    def _swing_to_direction(
+        current_direction: np.ndarray,
+        target_direction: np.ndarray,
+        reference_axis: np.ndarray,
+    ) -> np.ndarray:
+        """Return the shortest world-space swing between two bone directions.
+
+        The stored landmarks determine where a segment points, but they do not
+        provide a reliable surface normal for the segment's axial roll.  A
+        full frame fit therefore lets tracker noise twist the skinned mesh
+        around a finger.  Keeping the shortest swing preserves the authored
+        rest roll while still reproducing the measured signed flexion,
+        abduction and thumb opposition.
+        """
+
+        source = np.asarray(current_direction, dtype=np.float64)
+        target = np.asarray(target_direction, dtype=np.float64)
+        source_norm = float(np.linalg.norm(source))
+        target_norm = float(np.linalg.norm(target))
+        if source_norm <= 1e-8 or target_norm <= 1e-8:
+            raise ValueError("bone direction cannot be zero")
+        source = source / source_norm
+        target = target / target_norm
+        cross = np.cross(source, target)
+        cross_norm = float(np.linalg.norm(cross))
+        dot = float(np.clip(np.dot(source, target), -1.0, 1.0))
+        if cross_norm <= 1e-8:
+            if dot >= 0.0:
+                return np.eye(3, dtype=np.float64)
+            axis = np.asarray(reference_axis, dtype=np.float64)
+            axis = axis - float(np.dot(axis, source)) * source
+            axis_norm = float(np.linalg.norm(axis))
+            if axis_norm <= 1e-8:
+                # The calibrated rest frame is orthonormal, so this is only a
+                # defensive fallback for malformed caller input.
+                axis = np.cross(source, np.asarray((1.0, 0.0, 0.0)))
+                axis_norm = float(np.linalg.norm(axis))
+                if axis_norm <= 1e-8:
+                    axis = np.cross(source, np.asarray((0.0, 1.0, 0.0)))
+                    axis_norm = float(np.linalg.norm(axis))
+            axis = axis / axis_norm
+            angle = math.pi
+        else:
+            axis = cross / cross_norm
+            angle = math.atan2(cross_norm, dot)
+
+        x, y, z = axis
+        skew = np.asarray(
+            ((0.0, -z, y), (z, 0.0, -x), (-y, x, 0.0)),
+            dtype=np.float64,
+        )
+        return np.eye(3, dtype=np.float64) + math.sin(angle) * skew + (
+            1.0 - math.cos(angle)
+        ) * (skew @ skew)
+
+    def _landmark_bones(
+        self,
+        frame: Any,
+        side: str,
+        wrist: np.ndarray,
+        fallback_bones: Mapping[str, np.ndarray],
+    ) -> dict[str, np.ndarray] | None:
+        """Solve absolute rest-relative deltas from one stored landmark frame.
+
+        Only the source segment direction is used from each target frame.  A
+        landmark-derived full frame was tested and rejected because tracker
+        noise in its axial roll produced visible skinned twisting.  The
+        shortest swing below keeps the neutral GLB roll authored by TASK-007G.
+        """
+
+        calibration = self._landmark_calibration.get(side)
+        if calibration is None:
+            return None
+        hand = frame.hand(side)
+        landmarks = getattr(hand, "landmarks_3d", None)
+        result = self._landmark_targets(landmarks, side, calibration)
+        if result is None:
+            return None
+        targets = result
+
+        track = _TRACK_INDEX[side]
+        bend_mask = np.asarray(frame.bend_valid)
+        actual_world: dict[str, np.ndarray] = {
+            self.rig.wrist_bone: calibration.world_rotations[self.rig.wrist_bone]
+            @ quaternion_to_matrix_wxyz(wrist),
+        }
+        output = {bone: normalize_quaternion(value) for bone, value in fallback_bones.items()}
+        output[self.rig.wrist_bone] = normalize_quaternion(wrist)
+
+        # The target shape is expressed before the recorded wrist delta; the
+        # same local wrist transform is then applied to every target frame.
+        palm_world = calibration.world_rotations[self.rig.wrist_bone]
+        shape_world = palm_world @ quaternion_to_matrix_wxyz(wrist) @ palm_world.T
+
+        for finger in FINGERS:
+            chain = self.rig.chains[finger]
+            parent = self.rig.wrist_bone
+            finger_index = _FINGER_INDEX[finger]
+            bone_names = (chain.metacarpal, *chain.joints)
+            for joint_index, bone in enumerate(bone_names):
+                geometry_valid = (
+                    self._spread_valid_for_base(frame, track, finger)
+                    if joint_index == 0
+                    else bool(
+                    bend_mask.ndim == 3
+                        and bend_mask.shape[0] > track
+                        and bool(bend_mask[track, finger_index, joint_index - 1])
+                    )
+                )
+                if geometry_valid:
+                    target_world = shape_world @ targets[bone]
+                    current_world = (
+                        actual_world[parent] @ calibration.local_rotations[bone]
+                    )
+                    swing = self._swing_to_direction(
+                        current_world[:, 1],
+                        target_world[:, 1],
+                        current_world[:, 0],
+                    )
+                    desired_world = swing @ current_world
+                    local_delta = (
+                        calibration.local_rotations[bone].T
+                        @ actual_world[parent].T
+                        @ desired_world
+                    )
+                    try:
+                        delta = matrix_to_quaternion_wxyz(local_delta)
+                    except (OSError, ValueError):
+                        geometry_valid = False
+                    else:
+                        output[bone] = delta
+                        actual_world[bone] = desired_world
+
+                if not geometry_valid:
+                    delta = normalize_quaternion(fallback_bones[bone])
+                    output[bone] = delta
+                    actual_world[bone] = (
+                        actual_world[parent]
+                        @ calibration.local_rotations[bone]
+                        @ quaternion_to_matrix_wxyz(delta)
+                    )
+                parent = bone
+        return output
+
     def pose_for_frame(self, frame: Any, side: str, *, update_state: bool = True) -> HandPose:
         normalized = str(side).upper()
         if normalized not in SIDES:
@@ -277,6 +604,23 @@ class HandPoseSolver:
 
         wrist, wrist_valid = self._wrist_quaternion(frame, normalized, update_state=update_state)
         bones[self.rig.wrist_bone] = wrist
+
+        # The channel solver above is still the complete fallback path.  With
+        # the shipped one-hand GLB and a valid stored TASK-008 landmark pose,
+        # replace only the presentation deltas with absolute source-bone
+        # orientations.  This removes the ambiguity of unsigned spread and
+        # avoids clipping valid source flexion at the conservative fallback
+        # limits.  Scientific arrays and masks are read-only inputs here.
+        guided = self._landmark_bones(frame, normalized, wrist, bones)
+        if guided is not None:
+            bones = guided
+
+        # Missing/invalid presentation channels hold the last *displayed*
+        # transform.  Update this cache after landmark guidance so a later
+        # missing frame cannot jump back to the channel-only fallback pose.
+        if update_state:
+            for bone, value in bones.items():
+                held[bone] = normalize_quaternion(value).copy()
 
         return HandPose(
             side=normalized,

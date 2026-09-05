@@ -88,6 +88,41 @@
     "invalid_policy": "hold_last_valid_presentation_delta",
     "rationale": "Recorded wrist motion is applied at the wrist joint and hard-clamped, so it can articulate the hand but can never rotate, translate or unframe the presentation composition."
   },
+  "landmark_retargeting": {
+    "schema": "task007i.landmark-presentation.v1",
+    "enabled": true,
+    "source_basis": [
+      "lateral",
+      "palmar_normal",
+      "distal"
+    ],
+    "presentation_basis": [
+      "-lateral",
+      "distal",
+      "palmar_normal"
+    ],
+    "source_to_presentation_matrix": [
+      [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0
+      ]
+    ],
+    "source_chain": "kinematics.layout.FINGER_CHAINS",
+    "purpose": "Recover signed segment direction and thumb opposition for presentation only while preserving authored bone axial roll.",
+    "invalid_policy": "hold_last_displayed_bone_transform_or_use_channel_fallback",
+    "scientific_isolation": "TASK-005 bends/spreads, TASK-008 arrays, TASK-009A tensors, and recognition input are not modified."
+  },
   "articulation": {
     "bend_axis": "X",
     "bend_sign": -1,

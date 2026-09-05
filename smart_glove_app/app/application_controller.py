@@ -168,11 +168,6 @@ if QT_CONTROLLER_AVAILABLE:
             self._diagnostics_visible = bool(diagnostics_visible)
             self._debug_mano_points = bool(debug_mano_points)
             self._rig_profile = rig_profile or load_presentation_rig()
-            self._solver = HandPoseSolver(self._rig_profile)
-            self._hand_pose = self._solver.neutral_qml_pose()
-            self._last_hand_poses: dict[str, HandPose] = {
-                side: self._solver.neutral_pose(side) for side in ("LEFT", "RIGHT")
-            }
             self._active_trace: PlaybackBoundaryTrace | None = None
             self._motion_traces: list[dict[str, Any]] = []
             # Presentation state. Deliberately separate from anything recorded:
@@ -232,6 +227,18 @@ if QT_CONTROLLER_AVAILABLE:
                     or "Hand assets unavailable — use --rig-asset"
                 )
             )
+
+            # Use the same immutable GLB rest rotations that the QML
+            # RuntimeLoaders snapshot.  Landmark guidance is presentation
+            # only; scientific TASK-005/TASK-008 arrays remain unchanged.
+            self._solver = HandPoseSolver(
+                self._rig_profile,
+                rig_asset_paths=self._hand_assets,
+            )
+            self._hand_pose = self._solver.neutral_qml_pose()
+            self._last_hand_poses: dict[str, HandPose] = {
+                side: self._solver.neutral_pose(side) for side in ("LEFT", "RIGHT")
+            }
 
             # These are the two persistent GPU geometry providers.  They are
             # intentionally constructed before any queue item is loaded.
