@@ -14,10 +14,15 @@ from visualizer.queue import PlaybackQueue, QueueState, UnsupportedTextError
 from smart_glove_app.rendering.hand_mesh_state import PersistentRenderScene, PresentationFrame
 from smart_glove_app.rendering.mano_topology import ManoTopology
 from smart_glove_app.rendering.qt_geometry import QtHandGeometry
-from smart_glove_app.rendering.rig_profile import RigProfile, load_rig_profile
+from smart_glove_app.rendering.glb_index import GlbIndexError, build_scene_index
+from smart_glove_app.rendering.presentation_rig import (
+    VIEW_MODES,
+    PresentationRig,
+    load_presentation_rig,
+)
 from smart_glove_app.rendering.sensor_markers import SensorMarkerModel
 
-from .hand_rig_retargeter import HandRigRetargeter
+from .hand_pose_solver import HandPoseSolver
 from .playback_controller import PersistentPlaybackController, PlaybackDisplayState
 from .recognition_bridge import RecognitionBridge
 from .qt_workers import CheckpointLoadTask, RecognitionTask, SequenceLoadTask
@@ -48,6 +53,7 @@ def _default_sensor_layout() -> tuple[Any, ...]:
 DEFAULT_SENSOR_LAYOUT = _default_sensor_layout()
 EXEMPLAR_MODES = ("canonical", "signer01", "signer02", "signer03", "random")
 SPEEDS = (0.5, 1.0, 2.0)
+MATERIAL_MODES = ("SKIN", "GLOVE", "WIREFRAME")
 EM_DASH = "—"
 
 
@@ -70,8 +76,11 @@ if QT_CONTROLLER_AVAILABLE:
         diagnosticsVisibleChanged = Signal()
         modeChanged = Signal()
         resetViewRequested = Signal()
-        rigPoseChanged = Signal()
+        handPoseChanged = Signal()
         rigAssetStateChanged = Signal()
+        viewModeChanged = Signal()
+        materialModeChanged = Signal()
+        speedChanged = Signal()
 
         def __init__(
             self,
@@ -88,9 +97,12 @@ if QT_CONTROLLER_AVAILABLE:
             rng_seed: int | None = None,
             speed: float = 1.0,
             smooth_rendering: bool = True,
-            rig_profile: RigProfile | None = None,
+            rig_profile: PresentationRig | None = None,
             rig_asset_path: str | Path | None = None,
             debug_mano_points: bool = False,
+            diagnostics_visible: bool = False,
+            view_mode: str = "PALM",
+            material_mode: str = "SKIN",
         ) -> None:
             super().__init__()
             if mode not in EXEMPLAR_MODES:
@@ -115,19 +127,56 @@ if QT_CONTROLLER_AVAILABLE:
             self._active_token = 0
             self._closed = False
             self._smooth_rendering = bool(smooth_rendering)
-            self._diagnostics_visible = False
+            self._diagnostics_visible = bool(diagnostics_visible)
             self._debug_mano_points = bool(debug_mano_points)
-            self._rig_profile = rig_profile or load_rig_profile()
-            self._rig_retargeter = HandRigRetargeter(self._rig_profile)
-            self._rig_pose = self._rig_retargeter.neutral_qml_pose()
-            self._rig_asset_path = (
+            self._rig_profile = rig_profile or load_presentation_rig()
+            self._solver = HandPoseSolver(self._rig_profile)
+            self._hand_pose = self._solver.neutral_qml_pose()
+            # Presentation state. Deliberately separate from anything recorded:
+            # playing a sign can change bones, never the view or the layout.
+            self._view_mode = str(view_mode).upper()
+            if self._view_mode not in VIEW_MODES:
+                raise ValueError(f"unsupported view mode: {view_mode!r}")
+            self._material_mode = str(material_mode).upper()
+            if self._material_mode not in MATERIAL_MODES:
+                raise ValueError(f"unsupported appearance: {material_mode!r}")
+            # One GLB per hand: see the rig profile's one_file_per_hand note.
+            self._rig_asset_dir = (
                 Path(rig_asset_path).expanduser().resolve() if rig_asset_path is not None else None
             )
-            self._rig_asset_available = bool(self._rig_asset_path and self._rig_asset_path.is_file())
+            self._hand_assets: dict[str, Path] = {}
+            self._scene_index: dict[str, Any] = {}
+            self._scene_index_error = ""
+            if self._rig_asset_dir is not None and self._rig_asset_dir.is_dir():
+                sides: dict[str, Any] = {}
+                for side, filename in self._rig_profile.glb_filenames.items():
+                    candidate = self._rig_asset_dir / filename
+                    if not candidate.is_file():
+                        self._scene_index_error = f"missing hand asset: {candidate.name}"
+                        break
+                    try:
+                        index = build_scene_index(
+                            candidate,
+                            roots={side: self._rig_profile.roots[side]},
+                            bones=self._rig_profile.required_bones,
+                        )
+                    except GlbIndexError as exc:
+                        self._scene_index_error = str(exc)
+                        break
+                    self._hand_assets[side] = candidate
+                    sides[side] = index["sides"][side]
+                else:
+                    self._scene_index = {"sides": sides}
+            elif self._rig_asset_dir is None:
+                self._scene_index_error = "no hand asset directory was supplied"
+            else:
+                self._scene_index_error = f"hand asset directory not found: {self._rig_asset_dir}"
+
+            self._rig_asset_available = bool(self._scene_index) and not self._scene_index_error
             self._rig_asset_status = (
-                "Rigged GLB ready"
+                "Hand assets ready"
                 if self._rig_asset_available
-                else "Rigged hand GLB unavailable — use --rig-asset"
+                else (self._scene_index_error or "Hand assets unavailable — use --rig-asset")
             )
 
             # These are the two persistent GPU geometry providers.  They are
@@ -162,7 +211,7 @@ if QT_CONTROLLER_AVAILABLE:
             self._render_frame_count = 0
             self._render_window_start = time.monotonic()
             self._graphics_api = "Qt Quick 3D / RHI"
-            self._rig_pose_update_count = 0
+            self._hand_pose_update_count = 0
 
             self._load_pool = QThreadPool(self)
             self._load_pool.setMaxThreadCount(2)
@@ -260,7 +309,7 @@ if QT_CONTROLLER_AVAILABLE:
 
         @Property(int, notify=renderMetricsChanged)
         def rigPoseUpdateCount(self) -> int:  # noqa: N802
-            return self._rig_pose_update_count
+            return self._hand_pose_update_count
 
         @Property(bool, notify=diagnosticsVisibleChanged)
         def diagnosticsVisible(self) -> bool:  # noqa: N802
@@ -274,15 +323,33 @@ if QT_CONTROLLER_AVAILABLE:
         def surfaceMode(self) -> bool:  # noqa: N802
             return self.scene.topology_available
 
-        @Property("QVariantMap", notify=rigPoseChanged)
-        def rigPose(self) -> dict[str, Any]:  # noqa: N802
-            """Render-only local quaternion deltas for both persistent rigs."""
+        @Property(float, notify=speedChanged)
+        def speed(self) -> float:  # noqa: N802
+            return self._speed
 
-            return self._rig_pose
+        @Property(str, notify=viewModeChanged)
+        def viewMode(self) -> str:  # noqa: N802
+            return self._view_mode
+
+        @Property(str, notify=materialModeChanged)
+        def materialMode(self) -> str:  # noqa: N802
+            return self._material_mode
+
+        @Property("QVariantMap", notify=handPoseChanged)
+        def handPose(self) -> dict[str, Any]:  # noqa: N802
+            """Render-only local bone rotations for both persistent hands."""
+
+            return self._hand_pose
 
         @Property("QVariantMap", constant=True)
         def rigProfile(self) -> dict[str, Any]:  # noqa: N802
-            return self._rig_profile.qml_metadata()
+            payload = self._rig_profile.as_qml()
+            payload["sceneIndex"] = self._scene_index
+            payload["assetUrls"] = {
+                side: QUrl.fromLocalFile(str(path)).toString()
+                for side, path in self._hand_assets.items()
+            }
+            return payload
 
         @Property(bool, notify=rigAssetStateChanged)
         def rigAssetAvailable(self) -> bool:  # noqa: N802
@@ -290,13 +357,21 @@ if QT_CONTROLLER_AVAILABLE:
 
         @Property(str, notify=rigAssetStateChanged)
         def rigAssetPath(self) -> str:  # noqa: N802
-            return str(self._rig_asset_path) if self._rig_asset_path is not None else ""
+            return str(self._rig_asset_dir) if self._rig_asset_dir is not None else ""
 
         @Property(str, notify=rigAssetStateChanged)
-        def rigAssetUrl(self) -> str:  # noqa: N802
-            """QML-friendly file URL for RuntimeLoader.source."""
+        def leftAssetUrl(self) -> str:  # noqa: N802
+            """QML-friendly file URL for the LEFT hand's RuntimeLoader."""
 
-            return QUrl.fromLocalFile(str(self._rig_asset_path)).toString() if self._rig_asset_path is not None else ""
+            path = self._hand_assets.get("LEFT")
+            return QUrl.fromLocalFile(str(path)).toString() if path is not None else ""
+
+        @Property(str, notify=rigAssetStateChanged)
+        def rightAssetUrl(self) -> str:  # noqa: N802
+            """QML-friendly file URL for the RIGHT hand's RuntimeLoader."""
+
+            path = self._hand_assets.get("RIGHT")
+            return QUrl.fromLocalFile(str(path)).toString() if path is not None else ""
 
         @Property(str, notify=rigAssetStateChanged)
         def rigAssetStatus(self) -> str:  # noqa: N802
@@ -386,7 +461,7 @@ if QT_CONTROLLER_AVAILABLE:
             self.activeLabelChanged.emit()
             self.recognitionStateChanged.emit()
 
-        def _reset_render_state(self) -> None:
+        def _reset_render_state(self, *, keep_pose: bool = False) -> None:
             self._sequence = None
             self._playback = None
             self._gap_deadline = None
@@ -395,9 +470,10 @@ if QT_CONTROLLER_AVAILABLE:
             self._frame_count = 0
             self._source_fps = 0.0
             self._current_sample_id = EM_DASH
-            self._rig_retargeter.reset()
-            self._rig_pose = self._rig_retargeter.neutral_qml_pose()
-            self.rigPoseChanged.emit()
+            self._solver.reset()
+            if not keep_pose:
+                self._hand_pose = self._solver.neutral_qml_pose()
+                self.handPoseChanged.emit()
             self._upload_presentation(self.scene.clear_sequence())
             self.frameStateChanged.emit()
             self.currentSampleIdChanged.emit()
@@ -424,8 +500,10 @@ if QT_CONTROLLER_AVAILABLE:
             item = self._queue.current
             if item is None:
                 self._set_active_item(None)
-                self._reset_render_state()
-                self._set_status("Queue complete. Both neutral hands remain visible.")
+                # Hold the last rendered pose rather than snapping the hands
+                # open: the final shape of a sign is the part worth reading.
+                self._reset_render_state(keep_pose=True)
+                self._set_status("Queue complete. The final sign pose is held.")
                 self._emit_queue_state()
                 return
             if item.state == QueueState.PENDING:
@@ -597,6 +675,7 @@ if QT_CONTROLLER_AVAILABLE:
             if self._playback is not None:
                 self._playback.set_speed(value)
             self._speed = value
+            self.speedChanged.emit()
             self._set_status(f"Playback speed {value:g}×.")
 
         @Slot(bool)
@@ -616,7 +695,34 @@ if QT_CONTROLLER_AVAILABLE:
 
         @Slot()
         def resetView(self) -> None:  # noqa: N802
+            self._view_mode = "PALM"
+            self.viewModeChanged.emit()
             self.resetViewRequested.emit()
+
+        @Slot(str)
+        def setViewMode(self, mode: str) -> None:  # noqa: N802
+            value = str(mode).upper()
+            if value not in VIEW_MODES:
+                self._set_status(f"Unknown view: {mode}")
+                return
+            if value == self._view_mode:
+                return
+            self._view_mode = value
+            self.viewModeChanged.emit()
+            self._set_status("Palm view" if value == "PALM" else "Back-of-hand view")
+
+        @Slot()
+        def toggleViewMode(self) -> None:  # noqa: N802
+            self.setViewMode("BACK" if self._view_mode == "PALM" else "PALM")
+
+        @Slot(str)
+        def setMaterialMode(self, mode: str) -> None:  # noqa: N802
+            value = str(mode).upper()
+            if value not in MATERIAL_MODES:
+                self._set_status(f"Unknown appearance: {mode}")
+                return
+            self._material_mode = value
+            self.materialModeChanged.emit()
 
         @Slot()
         def toggleDiagnostics(self) -> None:  # noqa: N802
@@ -762,7 +868,7 @@ if QT_CONTROLLER_AVAILABLE:
                 return
             try:
                 self.scene.attach_sequence(sequence)
-                self._rig_retargeter.reset()
+                self._solver.reset()
                 self._sequence = sequence
                 self._playback = PersistentPlaybackController(
                     sequence.timestamps,
@@ -805,15 +911,15 @@ if QT_CONTROLLER_AVAILABLE:
             # This is a presentation-only skeleton update.  Recognition still
             # receives the queue item through RecognitionTask and never sees
             # these render-time interpolated quaternions.
-            rig_poses = self._rig_retargeter.frame_pose(
+            poses = self._solver.frame_pose(
                 source_frame,
                 next_frame=next_frame,
                 interpolation_alpha=state.interpolation_alpha,
                 smooth=self._smooth_rendering,
             )
-            self._rig_pose = {side: pose.as_qml() for side, pose in rig_poses.items()}
-            self._rig_pose_update_count += 1
-            self.rigPoseChanged.emit()
+            self._hand_pose = HandPoseSolver.qml_pose(poses)
+            self._hand_pose_update_count += 1
+            self.handPoseChanged.emit()
             frame = self.scene.update_sequence_frame(
                 state.position,
                 interpolation_alpha=state.interpolation_alpha,

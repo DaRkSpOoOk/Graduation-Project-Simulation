@@ -78,38 +78,49 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ## Primary Core-28 application
 
-TASK-007F adds the primary native desktop surface under `smart_glove_app/`:
-PySide6, QML, and Qt Quick 3D keep the LEFT and RIGHT scene objects alive for
-the full application lifetime. The legacy Tk/Matplotlib entry point remains
-available for historical/debug reproduction only.
+TASK-007G is the current native desktop surface under `smart_glove_app/`:
+PySide6, QML and Qt Quick 3D keep one persistent LEFT and RIGHT rigged hand
+alive for the whole application lifetime. The legacy Tk/Matplotlib entry point
+remains available for historical/debug reproduction only.
 
-Install the optional GUI dependency and launch with explicit external data
-paths (PowerShell). Add the `recognition` extra when a checkpoint is supplied:
+Install the optional GUI dependency and launch it. Only `--run-root` is
+required; the application starts with two natural-skin hands facing the viewer
+and an empty queue, and `--checkpoint` adds recognition:
 
 ```powershell
 python -m pip install -e ".[gui,recognition]"
 python -m smart_glove_app `
   --run-root "..\graduation-project-runs\task008-core28-full" `
-  --checkpoint "..\graduation-project-runs\task009c-core28-deployment\deployment.pt" `
-  --rig-asset ".\assets-local\blendswap_hands_v1\application_hands.glb" `
-  --rig-profile ".\smart_glove_app\assets\rig_profiles\blendswap_hands_v1.json" `
-  --mano-model ".\assets-local\mano\MANO_RIGHT.pkl"
+  --checkpoint "..\graduation-project-runs\task009c-core28-deployment\deployment.pt"
 ```
 
-`--checkpoint` is optional. Without `--mano-model`, the application clearly
-reports that the optional MANO diagnostic surface is unavailable. The rigged
-GLB remains the normal user-facing presentation. The
-`SURFACE TOPOLOGY UNAVAILABLE — POINT-CLOUD FALLBACK` path is shown only when
-the explicit `--debug-mano-points` diagnostics flag is selected. MANO files
-are locally licensed assets and belong under the ignored `assets-local/` path;
-see the TASK-007F report for acquisition and topology hash details.
+`--text` is optional and only exists for smoke/demo runs; the expected flow is
+launch, then click the Arabic Core-28 keyboard.
 
-The rigged GLB is the normal user-facing presentation and defaults to the
-ignored local path `assets-local/blendswap_hands_v1/application_hands.glb`.
-The calibrated project-owned profile is tracked at
-`smart_glove_app/assets/rig_profiles/blendswap_hands_v1.json`. If the GLB is
-unavailable, the old 778-point representation is available only through the
-explicit `--debug-mano-points` diagnostics flag; it is not the normal fallback.
-The BlendSwap working `.blend` and exported `.glb`, like MANO files, remain
-local assets under `assets-local/`. See the TASK-007F report for the source
-license, topology, and asset-attribution details.
+### Presentation layer
+
+- `--rig-asset` points at the directory holding the two per-hand GLBs and
+  defaults to the ignored local path `assets-local/blendswap_hands_v1/`. One
+  file per hand is deliberate: Qt Quick 3D mis-binds a glTF that carries two
+  skins and deforms the second mesh with the first skeleton.
+- `--rig-profile` is the tracked, project-owned presentation profile at
+  `smart_glove_app/assets/rig_profiles/task007g_hands.json`.
+- `--view palm|back` chooses the starting composition; the in-app button
+  toggles between the two deterministically. There is no free orbit in normal
+  operation - the camera is solved from the layout and the viewport aspect, so
+  the framing is identical at every window size.
+- `--appearance skin|glove|wireframe` chooses the starting material; the
+  default is a natural light-skin PBR material.
+- `--diagnostics` opens the technical drawer (FPS, frame, sample, recognition,
+  appearance/speed/smoothing controls) at startup. It is closed by default.
+- `--screenshot`, `--screenshot-series` and `--screenshot-interval` capture the
+  rendered window, which is how the TASK-007G visual acceptance evidence was
+  produced.
+- `--debug-mano-points` still shows the legacy 778-point representation as an
+  explicit diagnostics overlay. It is never part of normal playback.
+
+The Blender working copy, the exported GLBs and MANO files are local assets
+under the ignored `assets-local/` path. The untouched source snapshot is kept
+alongside them as `blendswap_hands_v1_ORIGINAL_PRESERVED.blend`. See
+`reports/visualizer/TASK-007G-visual-acceptance.md` for the asset derivation,
+source license and the visual acceptance evidence.

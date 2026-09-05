@@ -16,15 +16,17 @@ from visualizer.app.integration import (
 from visualizer.mapping import Core28Resolver
 
 from smart_glove_app.rendering.mano_topology import ManoTopologyError, load_mano_topology
-from smart_glove_app.rendering.rig_profile import RigProfileError, load_rig_profile
+from smart_glove_app.rendering.presentation_rig import PresentationRigError, load_presentation_rig
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MANIFEST = PROJECT_ROOT / "datasets" / "manifests" / "karsl_core28.csv"
 DEFAULT_LABELS = PROJECT_ROOT / "datasets" / "manifests" / "karsl_core28_labels.csv"
 DEFAULT_CATALOG = PROJECT_ROOT / "visualizer" / "catalog" / "core28_exemplars.json"
-DEFAULT_RIG_ASSET = PROJECT_ROOT / "assets-local" / "blendswap_hands_v1" / "application_hands.glb"
-DEFAULT_RIG_PROFILE = PROJECT_ROOT / "smart_glove_app" / "assets" / "rig_profiles" / "blendswap_hands_v1.json"
+DEFAULT_RIG_ASSET = PROJECT_ROOT / "assets-local" / "blendswap_hands_v1"
+DEFAULT_RIG_PROFILE = (
+    PROJECT_ROOT / "smart_glove_app" / "assets" / "rig_profiles" / "task007g_hands.json"
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -51,7 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--rig-asset",
         type=Path,
         default=DEFAULT_RIG_ASSET,
-        help="local application-ready rigged hand GLB exported from the protected Blender working copy",
+        help="directory holding the application-ready per-hand GLBs exported from the Blender working copy",
     )
     parser.add_argument(
         "--rig-profile",
@@ -63,6 +65,23 @@ def build_parser() -> argparse.ArgumentParser:
         "--debug-mano-points",
         action="store_true",
         help="show the legacy MANO point representation only as an explicit diagnostics overlay",
+    )
+    parser.add_argument(
+        "--view",
+        choices=("palm", "back"),
+        default="palm",
+        help="initial camera composition: palms toward the viewer, or the backs of the hands",
+    )
+    parser.add_argument(
+        "--appearance",
+        choices=("skin", "glove", "wireframe"),
+        default="skin",
+        help="initial hand appearance; the default is a natural skin material",
+    )
+    parser.add_argument(
+        "--diagnostics",
+        action="store_true",
+        help="open the technical diagnostics drawer at startup",
     )
     parser.add_argument("--device", default="auto", help="recognition device: auto, cpu, or cuda")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
@@ -91,6 +110,30 @@ def build_parser() -> argparse.ArgumentParser:
         type=float,
         default=None,
         help="close automatically after this many seconds (useful for native GUI smoke tests)",
+    )
+    parser.add_argument(
+        "--screenshot",
+        type=Path,
+        default=None,
+        help="capture the rendered window to this PNG (visual acceptance harness)",
+    )
+    parser.add_argument(
+        "--screenshot-delay",
+        type=float,
+        default=2.5,
+        help="seconds to wait before the first --screenshot capture",
+    )
+    parser.add_argument(
+        "--screenshot-series",
+        type=int,
+        default=1,
+        help="capture this many screenshots in sequence (a playback filmstrip)",
+    )
+    parser.add_argument(
+        "--screenshot-interval",
+        type=float,
+        default=0.35,
+        help="seconds between --screenshot-series captures",
     )
     parser.add_argument(
         "--print-metrics",
@@ -207,10 +250,31 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         print(f"TASK-007F MANO topology error: {exc}", file=sys.stderr)
         return 2
     try:
-        rig_profile = load_rig_profile(args.rig_profile)
-    except RigProfileError as exc:
-        print(f"TASK-007F rig profile error: {exc}", file=sys.stderr)
+        rig_profile = load_presentation_rig(args.rig_profile)
+    except PresentationRigError as exc:
+        print(f"TASK-007G rig profile error: {exc}", file=sys.stderr)
         return 2
+
+    # Surface QML/Qt Quick 3D diagnostics on the console. Without this the
+    # engine swallows scene-graph and JS errors, which makes a visual fault
+    # look like a silent rendering problem.
+    try:
+        from PySide6.QtCore import QtMsgType, qInstallMessageHandler
+
+        _levels = {
+            QtMsgType.QtDebugMsg: "DEBUG",
+            QtMsgType.QtInfoMsg: "INFO",
+            QtMsgType.QtWarningMsg: "WARNING",
+            QtMsgType.QtCriticalMsg: "CRITICAL",
+            QtMsgType.QtFatalMsg: "FATAL",
+        }
+
+        def _handler(mode, context, message):  # pragma: no cover - console plumbing
+            print(f"[qt {_levels.get(mode, 'MSG')}] {message}", file=sys.stderr, flush=True)
+
+        qInstallMessageHandler(_handler)
+    except ImportError:  # pragma: no cover
+        pass
 
     surface_format = QSurfaceFormat()
     surface_format.setDepthBufferSize(24)
@@ -242,6 +306,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         rig_profile=rig_profile,
         rig_asset_path=args.rig_asset,
         debug_mano_points=args.debug_mano_points,
+        diagnostics_visible=args.diagnostics,
+        view_mode=args.view.upper(),
+        material_mode=args.appearance.upper(),
     )
     engine = QQmlApplicationEngine()
     engine.setInitialProperties(
@@ -249,9 +316,8 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
             "appState": controller,
             "leftGeometryObject": controller.left_geometry,
             "rightGeometryObject": controller.right_geometry,
-            "leftMarkerModel": controller.left_markers,
-            "rightMarkerModel": controller.right_markers,
-            "rigAssetUrl": controller.rigAssetUrl,
+            "leftAssetUrl": controller.leftAssetUrl,
+            "rightAssetUrl": controller.rightAssetUrl,
             "rigProfile": controller.rigProfile,
             "debugManoPoints": controller.debugManoPoints,
         }
@@ -275,6 +341,29 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
     api = QQuickWindow.graphicsApi()
     api_name = getattr(api, "name", str(api).split(".")[-1])
     controller.setGraphicsApi(f"Qt Quick RHI · {api_name}")
+    if args.screenshot is not None:
+        window = engine.rootObjects()[0]
+        target = Path(args.screenshot).expanduser().resolve()
+        target.parent.mkdir(parents=True, exist_ok=True)
+
+        count = max(1, int(args.screenshot_series))
+
+        def _capture(index: int) -> None:
+            path = (
+                target
+                if count == 1
+                else target.with_name(f"{target.stem}_{index:02d}{target.suffix}")
+            )
+            image = window.grabWindow()
+            if image is not None and not image.isNull():
+                image.save(str(path))
+                print(f"screenshot: {path}", file=sys.stderr)
+            else:
+                print("screenshot: grabWindow returned a null image", file=sys.stderr)
+
+        for index in range(count):
+            delay = max(0.0, args.screenshot_delay) + index * max(0.0, args.screenshot_interval)
+            QTimer.singleShot(int(delay * 1000), lambda i=index: _capture(i))
     if args.smoke_seconds is not None:
         if args.smoke_seconds < 0:
             print("--smoke-seconds must be non-negative", file=sys.stderr)
@@ -295,6 +384,8 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 "rig_asset_path": controller.rigAssetPath,
                 "rig_asset_status": controller.rigAssetStatus,
                 "rig_profile": controller.rigProfile.get("profile_id", ""),
+                "view_mode": controller.viewMode,
+                "material_mode": controller.materialMode,
                 "recognition_status": controller.recognitionStatus,
                 "recognition_role": controller.recognitionRole,
                 "recognition_reference": controller.recognitionReference,
