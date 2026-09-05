@@ -70,3 +70,6 @@ outputs/
 logs/
 /checkpoints/
 /models/generated/
+
+# User-provided licensed MANO assets. Never commit MANO_RIGHT.pkl or MANO_LEFT.pkl.
+/assets-local/

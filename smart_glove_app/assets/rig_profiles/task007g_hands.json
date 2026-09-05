@@ -1,0 +1,247 @@
+{
+  "schema_version": "task007g.presentation-rig.v1",
+  "profile_id": "task007g_hands",
+  "calibration_version": "task007g-canonical-frame-2026-09-05",
+  "asset": {
+    "working_blend": "task007g_presentation_hands.blend",
+    "preserved_original": "blendswap_hands_v1_ORIGINAL_PRESERVED.blend",
+    "source_url": "https://www.blendswap.com/blend/22269",
+    "source_title": "Hands Rigged",
+    "creator": "SparrowHawk",
+    "license": "CC0",
+    "derivation": "One source hand was taken as the single canonical hand: its multires sculpt was baked to real geometry (1102 -> 69825 vertices), non-deform IK/control bones and all pose constraints were removed, bones were renamed anatomically, and the opposite hand was produced as an exact X-mirror so both hands are the same person's hands.",
+    "license_boundary": "The CC0 source .blend stays local under assets-local/. This profile contains only project-authored names, calibration and layout metadata.",
+    "glb_filenames": {
+      "LEFT": "task007g_hand_left.glb",
+      "RIGHT": "task007g_hand_right.glb"
+    },
+    "one_file_per_hand": "Qt Quick 3D's RuntimeLoader mis-binds a glTF containing two skins: the second skinned mesh is deformed by the first skeleton, so the right hand renders mangled on top of the left. Shipping one hand per file avoids that and lets the application own placement in QML."
+  },
+  "canonical_frame": {
+    "space": "glTF Y-up, as loaded by Qt Quick 3D",
+    "finger_axis": "+Y",
+    "palm_normal": "+Z",
+    "note": "Each hand is exported centred on its own presentation root with fingers up and the palm facing the default camera, so the default view needs no corrective rotation.",
+    "hand_size_xyz": [
+      0.44,
+      1.188,
+      0.344
+    ]
+  },
+  "presentation": {
+    "left_position": [
+      -0.55,
+      0.0,
+      0.0
+    ],
+    "right_position": [
+      0.55,
+      0.0,
+      0.0
+    ],
+    "scale": 1.0,
+    "content_half_width": 0.9,
+    "content_half_height": 0.68,
+    "camera_field_of_view_deg": 35.0,
+    "camera_look_at": [
+      0.0,
+      0.02,
+      0.0
+    ],
+    "views": {
+      "PALM": {
+        "root_euler_deg": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "label": "Palm view"
+      },
+      "BACK": {
+        "root_euler_deg": [
+          0.0,
+          180.0,
+          0.0
+        ],
+        "label": "Back view"
+      }
+    }
+  },
+  "roots": {
+    "LEFT": "LEFT_PRESENTATION_ROOT",
+    "RIGHT": "RIGHT_PRESENTATION_ROOT"
+  },
+  "armatures": {
+    "LEFT": "RIG_LEFT",
+    "RIGHT": "RIG_RIGHT"
+  },
+  "meshes": {
+    "LEFT": "HAND_LEFT",
+    "RIGHT": "HAND_RIGHT"
+  },
+  "wrist": {
+    "bone": "palm",
+    "input_array": "palm_quaternion_wxyz",
+    "input_order": "WXYZ",
+    "mode": "relative_to_first_valid_sequence_frame",
+    "max_angle_deg": 25.0,
+    "invalid_policy": "hold_last_valid_presentation_delta",
+    "rationale": "Recorded wrist motion is applied at the wrist joint and hard-clamped, so it can articulate the hand but can never rotate, translate or unframe the presentation composition."
+  },
+  "articulation": {
+    "bend_axis": "X",
+    "bend_sign": -1,
+    "spread_axis": "Z",
+    "axis_note": "Every finger bone shares one convention: a negative rotation about the bone's local X flexes it toward the palm, and a rotation about local Z abducts it. The left rig is an exact matrix mirror of the right, so both hands use identical signs.",
+    "chains": {
+      "thumb": {
+        "metacarpal": "thumb_meta",
+        "joints": [
+          "thumb_1",
+          "thumb_2",
+          "thumb_3"
+        ],
+        "joint_limits_deg": [
+          55.0,
+          60.0,
+          75.0
+        ]
+      },
+      "index": {
+        "metacarpal": "index_meta",
+        "joints": [
+          "index_1",
+          "index_2",
+          "index_3"
+        ],
+        "joint_limits_deg": [
+          90.0,
+          110.0,
+          70.0
+        ]
+      },
+      "middle": {
+        "metacarpal": "middle_meta",
+        "joints": [
+          "middle_1",
+          "middle_2",
+          "middle_3"
+        ],
+        "joint_limits_deg": [
+          90.0,
+          110.0,
+          70.0
+        ]
+      },
+      "ring": {
+        "metacarpal": "ring_meta",
+        "joints": [
+          "ring_1",
+          "ring_2",
+          "ring_3"
+        ],
+        "joint_limits_deg": [
+          90.0,
+          110.0,
+          70.0
+        ]
+      },
+      "pinky": {
+        "metacarpal": "pinky_meta",
+        "joints": [
+          "pinky_1",
+          "pinky_2",
+          "pinky_3"
+        ],
+        "joint_limits_deg": [
+          90.0,
+          110.0,
+          70.0
+        ]
+      }
+    },
+    "spread": {
+      "reference_finger": "middle",
+      "neutral_deg": {
+        "thumb-index": 45.0,
+        "index-middle": 10.0,
+        "middle-ring": 12.0,
+        "ring-pinky": 12.0
+      },
+      "clamp_deg": [
+        -14.0,
+        18.0
+      ],
+      "rig_rest_deg": {
+        "thumb-index": 31.6,
+        "index-middle": 2.1,
+        "middle-ring": 1.6,
+        "ring-pinky": 4.2
+      },
+      "targets": {
+        "thumb_meta": {
+          "sign": -1,
+          "sum_of": [
+            "index-middle",
+            "thumb-index"
+          ]
+        },
+        "index_meta": {
+          "sign": -1,
+          "sum_of": [
+            "index-middle"
+          ]
+        },
+        "ring_meta": {
+          "sign": 1,
+          "sum_of": [
+            "middle-ring"
+          ]
+        },
+        "pinky_meta": {
+          "sign": 1,
+          "sum_of": [
+            "middle-ring",
+            "ring-pinky"
+          ]
+        }
+      },
+      "rationale": "Abduction is measured outward from the middle finger, applied on single-purpose metacarpal bones so no bone ever receives two competing channels, and clamped so spread can never splay the hand implausibly."
+    }
+  },
+  "required_bones": [
+    "wrist_root",
+    "palm",
+    "thumb_meta",
+    "thumb_1",
+    "thumb_2",
+    "thumb_3",
+    "index_meta",
+    "index_1",
+    "index_2",
+    "index_3",
+    "middle_meta",
+    "middle_1",
+    "middle_2",
+    "middle_3",
+    "ring_meta",
+    "ring_1",
+    "ring_2",
+    "ring_3",
+    "pinky_meta",
+    "pinky_1",
+    "pinky_2",
+    "pinky_3"
+  ],
+  "calibration_evidence": {
+    "flexion_probe": "Rotating each proximal phalanx by -40 deg about local X moved that fingertip toward the palm (-Y in Blender / +Z in glTF) on both hands, with the LEFT displacement an exact X-mirror of the RIGHT.",
+    "mirror_check": "Every left bone matrix equals M @ right_matrix @ M with M = diag(-1,1,1); max error 0 over 22 bones.",
+    "geometry_check": "Both exported hands have identical vertex counts (69825) and identical bounding-box sizes (0.44 x 1.188 x 0.344).",
+    "rest_spread_measured_deg": {
+      "thumb-index": 31.6,
+      "index-middle": 2.1,
+      "middle-ring": 1.6,
+      "ring-pinky": 4.2
+    }
+  }
+}
