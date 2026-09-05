@@ -91,11 +91,25 @@ python -m pip install -e ".[gui,recognition]"
 python -m smart_glove_app `
   --run-root "..\graduation-project-runs\task008-core28-full" `
   --checkpoint "..\graduation-project-runs\task009c-core28-deployment\deployment.pt" `
+  --rig-asset ".\assets-local\blendswap_hands_v1\application_hands.glb" `
+  --rig-profile ".\smart_glove_app\assets\rig_profiles\blendswap_hands_v1.json" `
   --mano-model ".\assets-local\mano\MANO_RIGHT.pkl"
 ```
 
 `--checkpoint` is optional. Without `--mano-model`, the application clearly
-uses the `SURFACE TOPOLOGY UNAVAILABLE — POINT-CLOUD FALLBACK` presentation
-mode, so omit that argument until a licensed asset is present. MANO files are
-locally licensed assets and belong under the ignored `assets-local/` path; see
-the TASK-007F report for acquisition and topology hash details.
+reports that the optional MANO diagnostic surface is unavailable. The rigged
+GLB remains the normal user-facing presentation. The
+`SURFACE TOPOLOGY UNAVAILABLE — POINT-CLOUD FALLBACK` path is shown only when
+the explicit `--debug-mano-points` diagnostics flag is selected. MANO files
+are locally licensed assets and belong under the ignored `assets-local/` path;
+see the TASK-007F report for acquisition and topology hash details.
+
+The rigged GLB is the normal user-facing presentation and defaults to the
+ignored local path `assets-local/blendswap_hands_v1/application_hands.glb`.
+The calibrated project-owned profile is tracked at
+`smart_glove_app/assets/rig_profiles/blendswap_hands_v1.json`. If the GLB is
+unavailable, the old 778-point representation is available only through the
+explicit `--debug-mano-points` diagnostics flag; it is not the normal fallback.
+The BlendSwap working `.blend` and exported `.glb`, like MANO files, remain
+local assets under `assets-local/`. See the TASK-007F report for the source
+license, topology, and asset-attribution details.

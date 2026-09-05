@@ -17,6 +17,7 @@ from visualizer.keyboard import Core28Keyboard
 from visualizer.mapping import Core28Resolver
 from visualizer.queue import PlaybackQueue
 
+from smart_glove_app.app.hand_rig_retargeter import HandRigRetargeter, quaternion_slerp
 from smart_glove_app.app.recognition_bridge import RecognitionBridge
 from smart_glove_app.rendering.hand_mesh_state import PersistentRenderScene, compute_vertex_normals
 from smart_glove_app.rendering.mano_topology import (
@@ -28,6 +29,7 @@ from smart_glove_app.rendering.mano_topology import (
     validate_mano_faces,
 )
 from smart_glove_app.rendering.qt_geometry import QT_QUICK3D_AVAILABLE, QtHandGeometry
+from smart_glove_app.rendering.rig_profile import load_rig_profile
 from smart_glove_app.rendering.sensor_markers import SensorMarkerModel
 
 
@@ -95,6 +97,106 @@ def _sequence() -> PlaybackSequence:
         geometry_source="synthetic-test-only",
         metadata={},
     )
+
+
+def _rig_frame(position: int = 0) -> FrameData:
+    frame = _frame(position)
+    value = 0.02
+    for finger_index in range(5):
+        for joint_index in range(3):
+            frame.bend_normalized[:, finger_index, joint_index] = value
+            value += 0.02
+    for spread_index in range(4):
+        frame.spread_normalized[:, spread_index] = 0.03 + spread_index * 0.02
+    frame.palm_quaternion_wxyz[0] = np.asarray((1.0, 0.0, 0.0, 0.0), dtype=np.float32)
+    frame.palm_quaternion_wxyz[1] = np.asarray((0.9659258, 0.0, 0.258819, 0.0), dtype=np.float32)
+    return frame
+
+
+class Task007FRigRetargetingTests(unittest.TestCase):
+    def test_profile_contains_exact_channels_and_runtime_paths(self) -> None:
+        profile = load_rig_profile()
+        self.assertEqual(len(profile.bends), 15)
+        self.assertEqual(len(profile.spreads), 4)
+        self.assertEqual(len(profile.required_deform_bones), 22)
+        self.assertEqual(profile.direct_mode["mute_constraint_types"], ["COPY_ROTATION", "IK"])
+        self.assertFalse(profile.direct_mode["delete_constraints"])
+        self.assertEqual(
+            set(profile.qml_metadata()["runtime_node_paths"]),
+            {"LEFT", "RIGHT"},
+        )
+        self.assertEqual(
+            {calibration.bone for sides in profile.bends.values() for calibration in sides.values()},
+            {
+                "Bone.017", "Bone.018", "Bone.019", "Bone", "Bone.001", "Bone.002",
+                "Bone.003", "Bone.004", "Bone.005", "Bone.006", "Bone.007", "Bone.008",
+                "Bone.009", "Bone.010", "Bone.011",
+            },
+        )
+
+    def test_all_fifteen_bends_and_four_spreads_produce_independent_render_quaternions(self) -> None:
+        profile = load_rig_profile()
+        retargeter = HandRigRetargeter(profile)
+        frame = _rig_frame()
+        pose = retargeter.pose_for_frame(frame, "LEFT")
+        identity = np.asarray((1.0, 0.0, 0.0, 0.0))
+        bend_bones = [profile.bends[channel]["LEFT"].bone for channel in profile.bends]
+        self.assertEqual(len(set(bend_bones)), 15)
+        self.assertTrue(
+            all(not np.allclose(pose.bone_deltas_wxyz[bone], identity) for bone in bend_bones)
+        )
+        spread_bones = [profile.spreads[channel]["LEFT"].bone for channel in profile.spreads]
+        self.assertEqual(len(set(spread_bones)), 4)
+        self.assertTrue(
+            all(not np.allclose(pose.bone_deltas_wxyz[bone], identity) for bone in spread_bones)
+        )
+        self.assertEqual(set(pose.bend_valid), set(profile.bends))
+        self.assertEqual(set(pose.spread_valid), set(profile.spreads))
+
+    def test_invalid_values_hold_presentation_state_without_mutating_source_arrays(self) -> None:
+        profile = load_rig_profile()
+        retargeter = HandRigRetargeter(profile)
+        valid_frame = _rig_frame()
+        bends_before = valid_frame.bend_normalized.copy()
+        spreads_before = valid_frame.spread_normalized.copy()
+        first = retargeter.pose_for_frame(valid_frame, "LEFT")
+        missing_frame = _rig_frame(1)
+        missing_frame.bend_valid[0, 1, 1] = False
+        missing_frame.bend_normalized[0, 1, 1] = np.nan
+        missing_frame.spread_valid[0, 2] = False
+        missing_frame.spread_normalized[0, 2] = np.nan
+        missing_frame.palm_imu_valid[0] = False
+        second = retargeter.pose_for_frame(missing_frame, "LEFT")
+        index_middle = profile.bends["index[1]"]["LEFT"].bone
+        middle_ring = profile.spreads["middle-ring"]["LEFT"].bone
+        self.assertFalse(second.bend_valid["index[1]"])
+        self.assertFalse(second.spread_valid["middle-ring"])
+        np.testing.assert_allclose(second.bone_deltas_wxyz[index_middle], first.bone_deltas_wxyz[index_middle])
+        np.testing.assert_allclose(second.bone_deltas_wxyz[middle_ring], first.bone_deltas_wxyz[middle_ring])
+        np.testing.assert_array_equal(valid_frame.bend_normalized, bends_before)
+        np.testing.assert_array_equal(valid_frame.spread_normalized, spreads_before)
+
+    def test_smoothing_uses_quaternion_slerp_and_never_changes_contract_arrays(self) -> None:
+        profile = load_rig_profile()
+        current = _rig_frame()
+        upcoming = _rig_frame(1)
+        upcoming.bend_normalized[:, 0, 0] = 0.6
+        original_current = current.bend_normalized.copy()
+        original_upcoming = upcoming.bend_normalized.copy()
+        expected_retargeter = HandRigRetargeter(profile)
+        current_pose = expected_retargeter.pose_for_frame(current, "LEFT")
+        upcoming_pose = expected_retargeter.pose_for_frame(upcoming, "LEFT", update_state=False, fallback=current_pose)
+        retargeter = HandRigRetargeter(profile)
+        poses = retargeter.frame_pose(current, next_frame=upcoming, interpolation_alpha=0.5, smooth=True)
+        target_bone = profile.bends["thumb[0]"]["LEFT"].bone
+        expected = quaternion_slerp(
+            current_pose.bone_deltas_wxyz[target_bone],
+            upcoming_pose.bone_deltas_wxyz[target_bone],
+            0.5,
+        )
+        np.testing.assert_allclose(poses["LEFT"].bone_deltas_wxyz[target_bone], expected, atol=1e-7)
+        np.testing.assert_array_equal(current.bend_normalized, original_current)
+        np.testing.assert_array_equal(upcoming.bend_normalized, original_upcoming)
 
 
 class Task007FTopologyTests(unittest.TestCase):
@@ -246,6 +348,9 @@ class Task007FContractTests(unittest.TestCase):
             for path in (ROOT / "smart_glove_app").rglob("*.py")
         )
         self.assertEqual(viewport_qml.count("View3D {"), 1)
+        self.assertEqual(viewport_qml.count("RuntimeLoader {"), 1)
+        self.assertIn("--debug-mano-points", (ROOT / "smart_glove_app" / "app" / "main.py").read_text(encoding="utf-8"))
+        self.assertIn("visible: root.debugManoPoints && !root.rigAssetReady", viewport_qml)
         self.assertIn("FrameAnimation", main_qml)
         self.assertIn("leftGeometry", viewport_qml)
         self.assertIn("rightGeometry", viewport_qml)

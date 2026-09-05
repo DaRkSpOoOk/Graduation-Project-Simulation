@@ -36,14 +36,23 @@ Python's timer advances the timestamp-authoritative source playback. Sequence
 loading, checkpoint loading, and inference use `QRunnable` jobs and only
 publish results back to the GUI thread.
 
-The renderer has two explicit modes:
+The normal user-facing presentation loads the locally supplied, rigged
+`application_hands.glb` through one persistent Qt Quick 3D `RuntimeLoader`.
+The profile indexes the exported skeleton by structural runtime paths because
+Qt 6.11 does not expose the glTF node names through `RuntimeLoader`. Existing
+bone nodes receive local quaternion deltas; the loader, armatures, meshes, and
+materials remain alive for the application lifetime.
 
-- Surface mode uses stored TASK-008 778-vertex rows, authoritative MANO faces,
-  area-weighted vertex normals, depth testing, MSAA, directional/point lights,
-  and a rough Principled/PBR glove material.
-- If no local MANO topology is supplied, both persistent geometry objects stay
-  visible as the existing 778-point presentation fallback and the UI shows
-  `SURFACE TOPOLOGY UNAVAILABLE — POINT-CLOUD FALLBACK`.
+The renderer has three explicit presentation paths:
+
+- Rigged-GLB mode is the normal application path: skinned triangle hand meshes,
+  persistent left/right skeletons, depth testing, MSAA, directional/point
+  lights, and the graphite Principled material.
+- MANO surface diagnostics use stored TASK-008 778-vertex rows,
+  authoritative MANO faces, area-weighted vertex normals, and persistent
+  custom geometry when a locally licensed MANO topology is supplied.
+- The old 778-point representation is available only with the explicit
+  `--debug-mano-points` diagnostics flag. It is not the normal fallback.
 
 Idle hands are presentation-only neutral templates. A missing/invalid stored
 observation keeps the corresponding hand visible as a dimmed last-visible pose
@@ -67,8 +76,12 @@ TASK-009A/TASK-009B adapter path and never receives a `PresentationFrame`.
   [PrincipledMaterial](https://doc.qt.io/qt-6/qml-qtquick3d-principledmaterial.html),
   and [Material culling](https://doc.qt.io/qt-6/qml-qtquick3d-material.html).
 - Render-synchronized diagnostics: [Qt Quick FrameAnimation](https://doc.qt.io/qt-6/qml-qtquick-frameanimation.html).
+- Rigged asset loading: [Qt Quick 3D RuntimeLoader](https://doc.qt.io/qt-6/qml-qtquick3d-assetutils-runtimeloader.html)
+  and the [Qt Quick 3D skinning example](https://doc.qt.io/qt-6/qtquick3d-skinning-example.html).
 - MANO acquisition and license boundary: [official MANO project](https://mano.is.tue.mpg.de/).
   The established loader path is [official vchoutas/smplx](https://github.com/vchoutas/smplx).
+- Source hand asset: [BlendSwap Hands Rigged](https://www.blendswap.com/blend/22269),
+  creator SparrowHawk, marked CC0 on the source page.
 
 # Files Changed
 
@@ -78,15 +91,18 @@ TASK-009A/TASK-009B adapter path and never receives a `PresentationFrame`.
 - `README.md` — documents native PowerShell installation and launch paths.
 - `smart_glove_app/` — primary Python controller, worker, playback,
   recognition bridge, MANO topology, presentation mesh state, Qt geometry,
-  marker model, and QML application/components.
+  marker model, rig profile/retargeter, and QML application/components.
+- `smart_glove_app/assets/rig_profiles/blendswap_hands_v1.json` — project-owned
+  calibrated channel map and Qt RuntimeLoader node paths.
 - `scripts/run_core28_application.py` — script wrapper for the same primary
   entry point.
 - `tests/test_task007f_application_v2.py` — topology, surface/fallback,
   persistent-scene, interpolation isolation, keyboard, and Qt-buffer tests.
 - `reports/visualizer/TASK-007F-application-v2.md` — this report.
 
-No MANO pickle, checkpoint, dataset, video, or generated runtime output is
-tracked.
+No MANO pickle, checkpoint, dataset, video, Blender working copy, or generated
+runtime output is tracked. The local working asset is intentionally under the
+ignored `assets-local/` boundary.
 
 # How to Run
 
@@ -99,6 +115,16 @@ python -m smart_glove_app `
   --run-root "..\graduation-project-runs\task008-core28-full"
 ```
 
+With the prepared rigged asset (the normal application path):
+
+```powershell
+python -m smart_glove_app `
+  --run-root "..\graduation-project-runs\task008-core28-full" `
+  --rig-asset ".\assets-local\blendswap_hands_v1\application_hands.glb" `
+  --rig-profile ".\smart_glove_app\assets\rig_profiles\blendswap_hands_v1.json" `
+  --text "محمد"
+```
+
 For the deployment checkpoint, install the existing recognition extra as well
 (`torch` remains an external CUDA/runtime dependency in this repository):
 
@@ -107,14 +133,25 @@ python -m pip install -e ".[gui,recognition]"
 python -m smart_glove_app `
   --run-root "..\graduation-project-runs\task008-core28-full" `
   --checkpoint "..\graduation-project-runs\task009c-core28-deployment\deployment.pt" `
+  --rig-asset ".\assets-local\blendswap_hands_v1\application_hands.glb" `
+  --rig-profile ".\smart_glove_app\assets\rig_profiles\blendswap_hands_v1.json" `
   --mano-model ".\assets-local\mano\MANO_RIGHT.pkl"
 ```
 
-`--mano-model` is optional. Omit it to use the explicit point-cloud warning
-mode. If a licensed asset is available, place it at
+`--mano-model` is optional and affects only the MANO surface-diagnostics path.
+The rigged GLB is the normal user-facing path. If a licensed MANO asset is
+available, place it at
 `assets-local/mano/MANO_RIGHT.pkl` (or pass any explicit local path). The
 official MANO site requires the user to obtain and accept the asset terms;
 the application does not download, redistribute, or reserialize it.
+
+To intentionally inspect the old point representation:
+
+```powershell
+python -m smart_glove_app `
+  --run-root "..\graduation-project-runs\task008-core28-full" `
+  --debug-mano-points
+```
 
 For a terminal queue smoke without opening Qt:
 
@@ -137,17 +174,18 @@ python -m smart_glove_app `
 # Evaluation
 
 The following were run in the provided native Windows Python 3.12.4
-environment with PySide6 6.11.2. The real external TASK-008 run root and
-TASK-009C checkpoint were used where noted. A licensed MANO file was not
-present in the Windows workspace, so real-asset topology loading was tested
+environment with PySide6 6.11.2 and Blender 4.4.0. The real external TASK-008
+run root and TASK-009C checkpoint were used where noted. A licensed MANO file
+was not present in the Windows workspace, so MANO topology loading was tested
 with a temporary synthetic 778/1538 pickle having the same file fields; that
-temporary file was deleted and was never committed.
+temporary file was deleted and was never committed. The prepared local
+BlendSwap working copy and exported GLB were tested directly.
 
 Focused TASK-007F tests:
 
 ```text
 python -m unittest tests.test_task007f_application_v2 -v
-Ran 13 tests — OK
+Ran 17 tests — OK
 ```
 
 Compilation:
@@ -159,25 +197,28 @@ python -m compileall -q smart_glove_app scripts/run_core28_application.py
 
 Native GUI/QML smoke commands completed with exit code 0:
 
-- point fallback, idle, Direct3D11, 3 seconds;
-- point fallback with real TASK-008 playback of `محمد`, 4 seconds;
-- surface-mode temporary 778/1538 MANO-shaped asset, 2 seconds;
-- point fallback plus external deployment checkpoint, `محمد`, 6 seconds.
+- rigged GLB idle/startup, Direct3D11, persistent skeleton loaded;
+- rigged GLB with real TASK-008 playback of `محمد`, 2 seconds;
+- explicit point diagnostics with a missing GLB, 1 second;
+- MANO surface-mode temporary 778/1538 topology, 2 seconds;
+- rigged GLB plus the external deployment checkpoint, 8 seconds;
+- headless real-sequence deployment inference for `م`.
 
 The offscreen QML smoke also loaded the QML tree, but Qt correctly reports
 that Qt Quick 3D is not functional under a non-RHI offscreen renderer. It is
 not used as evidence for 3D output; the native Direct3D11 smoke is the GUI
 runtime evidence.
 
-The existing repository discovery found 745 tests after adding the 13 new
+The existing repository discovery found 749 tests after adding the 17 new
 TASK-007F tests (the pre-existing baseline is 732). The new tests all pass.
-The full native-Windows discovery remains affected by pre-existing platform
-assumptions outside this change: openpyxl/NPZ handles remain locked during
-temporary-directory cleanup on Windows, and one legacy production test
-compares the catalog's recorded POSIX `/home/hatim` run-root string against a
-Windows-normalized path. Those failures were reproduced before/independently
-of the new application and no frozen scientific module was changed to hide
-them.
+The full native-Windows discovery completed with 1 failure, 18 errors, and 29
+skips. The failures are outside this change: one legacy CLI test needs UTF-8
+console configuration when launched under the default CP1252 console, one
+legacy renderer test expects an unavailable external production sample, and
+the official workbook/NPZ tests leave Windows file handles open during
+temporary-directory cleanup. Running with `PYTHONUTF8=1` removes the console
+encoding failure but leaves the external-sample failure and handle-cleanup
+errors. No frozen scientific module was changed to hide these baseline issues.
 
 # Results
 
@@ -189,11 +230,88 @@ them.
   `geometry_creation_count == 1` across frame uploads.
 - Qt buffer tests confirm stable object identity and stable index-buffer size;
   only the interleaved position/normal vertex data is updated.
-- Surface mode reports `MANO SURFACE · 778 VERTICES`, configures 1538 indexed
-  triangles, computes normals, and renders through two persistent Qt Quick 3D
-  `Model` items.
-- No-topology mode reports the exact required warning and retains two visible
-  778-point idle hands.
+- The prepared GLB contains two skinned triangle meshes, two 22-joint skins,
+  the two presentation roots, and one graphite material. Each source mesh has
+  1102 base vertices; the GLB exporter triangulates the 1090 source polygons
+  to 2178 triangles. It contains no camera, light, or animation.
+- MANO surface diagnostics report `MANO SURFACE · 778 VERTICES`, configure
+  1538 indexed triangles, compute normals, and render through two persistent
+  Qt Quick 3D `Model` items when topology is supplied.
+- With no rigged asset, the point representation is hidden by default. It is
+  shown only when `--debug-mano-points` is explicitly selected, with the clear
+  `SURFACE TOPOLOGY UNAVAILABLE — POINT-CLOUD FALLBACK` diagnostics message.
+
+## Blender working asset and direct retargeting
+
+The original downloaded BlendSwap file was not modified. The protected working
+copy is:
+
+`assets-local/blendswap_hands_v1/blendswap_hands_v1_working.blend`
+
+The application export is:
+
+`assets-local/blendswap_hands_v1/application_hands.glb`
+
+The source page identifies the asset as *Hands Rigged*, creator SparrowHawk,
+and marks it CC0: [BlendSwap source page](https://www.blendswap.com/blend/22269).
+The working copy and export remain local and ignored; the project commits only
+the project-owned profile. The profile records this attribution boundary and
+the Qt runtime node paths.
+
+Both meshes use the shared `TASK007F_Graphite_Glove` Principled material:
+dark graphite base `(0.018, 0.028, 0.045)`, roughness `0.72`, metallic `0.04`,
+IOR `1.45`, specular IOR level `0.32`, and a restrained clear-coat value
+`0.08`. The material is embedded once in the GLB and survives the Blender
+round-trip import check.
+
+The scene contains `LEFT_PRESENTATION_ROOT` and `RIGHT_PRESENTATION_ROOT`.
+Their saved display transforms are respectively `(-3.07, -0.09, 0)` and
+`(3.95, -0.50, 0)`, identity rotation, and uniform scale `1.8`. The armatures
+remain children of those roots, so root transforms control placement while
+`Bone.016` receives recorded palm orientation. The final world bounds have a
+horizontal gap of approximately `2.0446` Blender units; the hands do not touch
+and are not staged as a praying pose.
+
+The source armatures remain editable. Each has 22 deform bones, its original
+12 `COPY_ROTATION` and 5 `IK` constraints, and all 17 are muted for direct
+runtime mode rather than deleted. The original mesh vertex groups and
+armature modifiers remain intact. Blender controlled probes were restored to
+neutral after each test. Rest-pose sweeps over `0..120°` for every phalange and
+`0..60°` for every spread base established the signs below: every one of the
+15 phalange channels and all 4 base spread drivers produced a finite,
+monotonic deformation on both hands.
+
+The final calibrated project mapping is:
+
+| PROJECT_CHANNEL | LEFT_BONE | RIGHT_BONE | ROTATION_AXIS / SIGN | NOTES |
+| --- | --- | --- | --- | --- |
+| `thumb[0]` | `Bone.017` | `Bone.017` | `Z +` / `Z -` | thumb proximal |
+| `thumb[1]` | `Bone.018` | `Bone.018` | `X -` / `X -` | thumb middle |
+| `thumb[2]` | `Bone.019` | `Bone.019` | `X -` / `X -` | thumb distal |
+| `index[0]` | `Bone` | `Bone` | `Z +` / `Z -` | index proximal |
+| `index[1]` | `Bone.001` | `Bone.001` | `X -` / `X -` | index middle |
+| `index[2]` | `Bone.002` | `Bone.002` | `Z +` / `Z -` | index distal |
+| `middle[0]` | `Bone.003` | `Bone.003` | `X -` / `X -` | middle proximal |
+| `middle[1]` | `Bone.004` | `Bone.004` | `X -` / `X -` | middle middle |
+| `middle[2]` | `Bone.005` | `Bone.005` | `X -` / `X -` | middle distal |
+| `ring[0]` | `Bone.006` | `Bone.006` | `Z -` / `Z +` | ring proximal |
+| `ring[1]` | `Bone.007` | `Bone.007` | `X -` / `X -` | ring middle |
+| `ring[2]` | `Bone.008` | `Bone.008` | `X -` / `X -` | ring distal |
+| `pinky[0]` | `Bone.009` | `Bone.009` | `Z -` / `Z +` | pinky proximal |
+| `pinky[1]` | `Bone.010` | `Bone.010` | `X -` / `X -` | pinky middle |
+| `pinky[2]` | `Bone.011` | `Bone.011` | `Z -` / `Z +` | pinky distal |
+| `thumb-index` | `Bone.021` (ref `Bone.012`) | `Bone.021` (ref `Bone.012`) | `Z -` / `Z +` | thumb base spread |
+| `index-middle` | `Bone.013` (ref `Bone.012`) | `Bone.013` (ref `Bone.012`) | `Z +` / `Z -` | index base spread |
+| `middle-ring` | `Bone.014` (ref `Bone.013`) | `Bone.014` (ref `Bone.013`) | `Z +` / `Z -` | middle base spread |
+| `ring-pinky` | `Bone.015` (ref `Bone.014`) | `Bone.015` (ref `Bone.014`) | `Z +` / `Z -` | ring base spread |
+
+All rotations are local pose-space deltas after rest, with neutral offset `0°`,
+bend clamp `0..120°`, and spread clamp `0..60°`. `Bone.020` is the deform root
+and `Bone.016` is the palm/wrist bridge. The palm WXYZ input is converted to a
+delta relative to the first valid sequence frame, then applied to `Bone.016`.
+The direct-deform strategy was selected because the four authored controller
+bones cannot provide three independent bends per finger. Presentation roots
+are intentionally separate from this recorded palm orientation.
 
 ## MANO topology and winding
 
@@ -219,6 +337,11 @@ viewport: it uses a dimmed last-visible pose or neutral presentation template,
 while the scientific frame/mask remains untouched. Display interpolation is
 kept in `PresentationFrame` and only blends adjacent valid 778-vertex rows;
 source arrays, masks, timestamps, and recognizer inputs remain unchanged.
+For rigged playback, `HandRigRetargeter` applies the same policy to local bone
+quaternions: invalid bends/spreads hold their last presentation transform and
+invalid palm data holds its last valid palm delta. Adjacent poses use
+quaternion SLERP, never Euler-angle interpolation. The retargeter output is a
+separate `HandRigPose` and is never passed to TASK-009A or the recognizer.
 
 ## Keyboard, queue, and text
 
@@ -246,17 +369,30 @@ Without `--checkpoint`, the UI remains fully usable and reports
 headless and native paths loaded the existing recognition adapter and reported
 `DEPLOYMENT MODEL`, `All Core-28 signers / 4,222 training sequences`, and
 `LOSO reference only (not deployment accuracy): 67.63% accuracy / 0.6607 macro F1`.
-The native GUI smoke reached `Prediction ready`; no `97.70%` deployment
-accuracy label is used.
+The native GLB smoke reached `Recognition ready`; the real headless TASK-008
+sequence for `م` predicted `م` with confidence `0.9995227`. No `97.70%`
+deployment accuracy label is used.
 
 # Failures / Limitations
 
 - The Windows workspace does not contain a user-supplied licensed MANO asset.
-  The application is ready for the asset, and surface mode was verified with
-  the validated temporary topology path, but the exact licensed MANO surface
-  was not visually inspected on this machine.
-- The default no-asset presentation is the required 778-point fallback, not a
-  shaded mesh. This is clearly labeled in the header/diagnostics.
+  The rigged GLB path is fully exercised; MANO surface diagnostics were
+  verified with the validated temporary topology path, but the exact licensed
+  MANO surface was not visually inspected on this machine.
+- The local GLB is ignored because the source asset is kept outside the Git
+  artifact boundary. A clean checkout must receive the working GLB and use the
+  supplied rig profile; without it the UI clearly reports the missing asset.
+  The 778-point representation is diagnostics-only (`--debug-mano-points`).
+- The exported hand mesh is the CC0 donor rig surface, not a regenerated MANO
+  surface. TASK-008 vertices remain the authoritative source for MANO surface
+  diagnostics; the retargeted GLB is a presentation asset driven by frozen
+  TASK-005 channels.
+- Qt glTF export is limited to four normalized influences per vertex because
+  Qt Quick 3D skinning accepts the top four influences. The exporter was
+  configured accordingly and the Blender source retains its original groups.
+- The RuntimeLoader profile stores structural child paths for this exact GLB;
+  if the export hierarchy changes, the profile must be recalibrated rather
+  than relying on guessed node names.
 - The optional diagnostics do not measure process CPU, GPU utilization, or
   VRAM; those require a profiler or vendor tool and were intentionally not
   added to the application.
@@ -270,17 +406,13 @@ accuracy label is used.
 # Performance
 
 The native window reported `Direct3D11` through Qt Quick RHI and a measured
-Qt Quick `FrameAnimation` presentation rate of approximately 180 FPS on the
-provided desktop. This was observed both in point-fallback and temporary
-surface-mode smoke runs. Real TASK-008 source sequences are timestamped at
-approximately 30 source frames per second; the display clock preserves those
-timestamps and optionally interpolates between them.
-
-The 4-second native `محمد` playback smoke produced 162 LEFT and 162 RIGHT
-geometry uploads with one creation per track. The 2-second surface smoke
-produced 31 uploads per track with one creation per track. These are engineering
-observations, not a benchmark claim; CPU utilization, GPU utilization, and
-peak VRAM were not measured.
+Qt Quick `FrameAnimation` presentation rate of approximately `180..181 FPS` on
+the provided desktop. The real TASK-008 `محمد` rigged-GLB smoke reported
+`active_sequence_fps = 30.0`, 113 LEFT and 113 RIGHT persistent geometry
+uploads, 108 persistent rig-pose updates, and one geometry creation per track. The
+deployment GLB smoke also reported one creation per track and approximately
+180 FPS. These are engineering observations, not a benchmark claim; process
+CPU utilization, GPU utilization, and peak VRAM were not measured.
 
 # Comparison
 
@@ -294,9 +426,9 @@ pipeline is reused rather than reimplemented.
 # Recommendation
 
 KEEP — the V2 application foundation satisfies the persistent-scene,
-dual-track, queue, fallback, topology-validation, native Windows, and
-recognition-provenance requirements. Supply the locally licensed MANO asset on
-the graduation machine before presenting the final shaded surface mode.
+dual-track, rigged surface, queue, topology-validation, native Windows, and
+recognition-provenance requirements. Supply the locally licensed MANO asset
+only when the MANO diagnostic surface is needed.
 
 # Reproducibility
 
@@ -305,6 +437,12 @@ Environment:
 - OS/runtime target: native Windows, Python 3.12.4, CPython 64-bit.
 - PySide6 / PySide6-Essentials / PySide6-Addons: 6.11.2.
 - GPU/API observed: NVIDIA RTX 2060 Super target, Qt Quick RHI Direct3D11.
+- Blender asset preparation: Blender 4.4.0; working-copy and GLB paths are
+  under ignored `assets-local/blendswap_hands_v1/`.
+- Current local working-copy SHA-256:
+  `9e6a4c191054dec1b59c0a153bf7ac3680f7ad03802c09ee355298c82c00ac97`.
+- Current local application-GLB SHA-256:
+  `5f8fc6815d710d549804b0b0082d15b9e6062feb852e7a56068d9af356a2f4e2`.
 - Scientific run root: external TASK-008 `task008-core28-full`.
 - Deployment checkpoint: external `deployment.pt`, SHA-256
   `e3df0f007c542d15a6ff4a7ad090d6a8af58b583357ca1905c4cdcb20c82ad1e`.

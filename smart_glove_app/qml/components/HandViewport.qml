@@ -1,5 +1,6 @@
 import QtQuick 6.8
 import QtQuick3D 6.8
+import QtQuick3D.AssetUtils 6.8
 
 Item {
     id: root
@@ -9,10 +10,22 @@ Item {
     property var leftMarkers
     property var rightMarkers
     property bool surfaceMode: false
+    property bool debugManoPoints: false
     property bool leftDimmed: false
     property bool rightDimmed: false
     property string leftState: "IDLE"
     property string rightState: "IDLE"
+    property url rigAssetUrl
+    property var rigProfile: ({})
+    property var rigPose: ({})
+    property bool rigAssetAvailable: false
+    property bool rigAssetReady: false
+    property bool rigAssetFailed: false
+    property string rigAssetError: ""
+    property var _boneNodes: ({})
+    property var _baseRotations: ({})
+    property var _presentationNodes: ({})
+    property int _cacheAttempts: 0
     property real cameraDistance: 8.0
     property real cameraYaw: 0.0
     property real cameraPitch: -4.0
@@ -21,6 +34,131 @@ Item {
         cameraDistance = 8.0
         cameraYaw = 0.0
         cameraPitch = -4.0
+    }
+
+    function findNode(node, wantedName) {
+        if (!node)
+            return null
+        if (node.objectName === wantedName || node.name === wantedName)
+            return node
+        var children = node.children
+        if (!children)
+            return null
+        for (var index = 0; index < children.length; ++index) {
+            var found = findNode(children[index], wantedName)
+            if (found)
+                return found
+        }
+        return null
+    }
+
+    function nodeAtPath(node, path) {
+        if (!node || !path || path.length === 0)
+            return null
+        var current = node
+        for (var index = 0; index < path.length; ++index) {
+            var children = current.children || ([])
+            var childIndex = Number(path[index])
+            if (childIndex < 0 || childIndex >= children.length)
+                return null
+            current = children[childIndex]
+        }
+        return current
+    }
+
+    function cacheRigNodes() {
+        if (!root.rigAssetAvailable || rigLoader.status !== RuntimeLoader.Success)
+            return
+
+        var roots = root.rigProfile.presentation_roots || ({})
+        var armatures = root.rigProfile.armatures || ({})
+        var runtimePaths = root.rigProfile.runtime_node_paths || ({})
+        var required = root.rigProfile.required_deform_bones || ([])
+        var nodes = ({})
+        var bases = ({})
+        var presentations = ({})
+        var missing = ([])
+
+        for (var sideIndex = 0; sideIndex < 2; ++sideIndex) {
+            var side = sideIndex === 0 ? "LEFT" : "RIGHT"
+            var sidePaths = runtimePaths[side] || ({})
+            var presentation = nodeAtPath(rigLoader, sidePaths.presentation_root)
+            if (!presentation)
+                presentation = findNode(rigLoader, roots[side])
+            var armature = nodeAtPath(rigLoader, sidePaths.armature)
+            if (!armature)
+                armature = findNode(presentation || rigLoader, armatures[side])
+            presentations[side] = presentation
+            nodes[side] = ({})
+            bases[side] = ({})
+            if (!presentation)
+                missing.push(roots[side])
+            if (!armature)
+                missing.push(armatures[side])
+            for (var boneIndex = 0; boneIndex < required.length; ++boneIndex) {
+                var boneName = required[boneIndex]
+                var bonePaths = sidePaths.bones || ({})
+                var boneNode = nodeAtPath(rigLoader, bonePaths[boneName])
+                if (!boneNode && armature)
+                    boneNode = findNode(armature, boneName)
+                if (!boneNode) {
+                    missing.push(side + "/" + boneName)
+                } else {
+                    nodes[side][boneName] = boneNode
+                    bases[side][boneName] = boneNode.rotation
+                }
+            }
+        }
+
+        if (missing.length > 0) {
+            root._cacheAttempts += 1
+            if (root._cacheAttempts < 20) {
+                rigCacheTimer.restart()
+                return
+            }
+            root.rigAssetFailed = true
+            root.rigAssetError = "Rig profile nodes missing: " + missing.slice(0, 4).join(", ")
+            root.rigAssetReady = false
+            if (appState)
+                appState.setRigAssetStatus("Rigged GLB rejected — " + root.rigAssetError)
+            return
+        }
+
+        root._boneNodes = nodes
+        root._baseRotations = bases
+        root._presentationNodes = presentations
+        root.rigAssetFailed = false
+        root.rigAssetReady = true
+        root.rigAssetError = ""
+        if (appState)
+            appState.setRigAssetStatus("Rigged GLB loaded — persistent skeleton ready")
+        root.applyRigPose(root.rigPose)
+    }
+
+    function applyRigPose(pose) {
+        if (!root.rigAssetReady || !pose)
+            return
+        for (var sideIndex = 0; sideIndex < 2; ++sideIndex) {
+            var side = sideIndex === 0 ? "LEFT" : "RIGHT"
+            var sidePose = pose[side]
+            if (!sidePose)
+                continue
+            var sideNodes = root._boneNodes[side] || ({})
+            var sideBases = root._baseRotations[side] || ({})
+            var boneDeltas = sidePose.bones || ({})
+            for (var boneName in boneDeltas) {
+                var node = sideNodes[boneName]
+                var baseRotation = sideBases[boneName]
+                var values = boneDeltas[boneName]
+                if (!node || !baseRotation || !values || values.length !== 4)
+                    continue
+                var delta = Qt.quaternion(Number(values[0]), Number(values[1]), Number(values[2]), Number(values[3]))
+                node.rotation = baseRotation.times(delta)
+            }
+            var presentation = root._presentationNodes[side]
+            if (presentation)
+                presentation.opacity = sidePose.dimmed ? 0.43 : 1.0
+        }
     }
 
     Rectangle {
@@ -77,9 +215,29 @@ Item {
         Node {
             id: handStage
 
+            RuntimeLoader {
+                id: rigLoader
+                source: root.rigAssetAvailable ? root.rigAssetUrl : ""
+                visible: root.rigAssetReady
+                onStatusChanged: {
+                    if (status === RuntimeLoader.Success) {
+                        if (appState)
+                            appState.setRigAssetStatus("Rigged GLB parsed - indexing persistent skeleton")
+                        root._cacheAttempts = 0
+                        rigCacheTimer.restart()
+                    } else if (status === RuntimeLoader.Error) {
+                        root.rigAssetFailed = true
+                        root.rigAssetReady = false
+                        root.rigAssetError = errorString
+                        if (appState)
+                            appState.setRigAssetStatus("Rigged GLB load failed — " + errorString)
+                    }
+                }
+            }
+
             Model {
                 id: leftSurface
-                visible: root.surfaceMode
+                visible: !root.rigAssetReady && root.surfaceMode
                 geometry: root.leftGeometry
                 position: Qt.vector3d(-1.85, 0, 0)
                 opacity: root.leftDimmed ? 0.52 : 1.0
@@ -96,7 +254,7 @@ Item {
 
             Model {
                 id: rightSurface
-                visible: root.surfaceMode
+                visible: !root.rigAssetReady && root.surfaceMode
                 geometry: root.rightGeometry
                 position: Qt.vector3d(1.85, 0, 0)
                 opacity: root.rightDimmed ? 0.52 : 1.0
@@ -111,9 +269,11 @@ Item {
                 ]
             }
 
+            // The old point representation is an explicit diagnostic view.
+            // It is never enabled by normal asset playback.
             Model {
                 id: leftPointCloud
-                visible: !root.surfaceMode
+                visible: root.debugManoPoints && !root.rigAssetReady
                 geometry: root.leftGeometry
                 position: Qt.vector3d(-1.85, 0, 0)
                 opacity: root.leftDimmed ? 0.46 : 0.86
@@ -127,7 +287,7 @@ Item {
 
             Model {
                 id: rightPointCloud
-                visible: !root.surfaceMode
+                visible: root.debugManoPoints && !root.rigAssetReady
                 geometry: root.rightGeometry
                 position: Qt.vector3d(1.85, 0, 0)
                 opacity: root.rightDimmed ? 0.46 : 0.86
@@ -144,7 +304,9 @@ Item {
                 model: root.leftMarkers
                 delegate: Model {
                     source: "#Sphere"
-                    position: Qt.vector3d(model.position.x - 1.85, model.position.y, model.position.z)
+                    position: root.rigAssetReady
+                        ? Qt.vector3d(model.position.x * 0.60 - 1.60, model.position.y * 0.60, model.position.z * 0.60)
+                        : Qt.vector3d(model.position.x - 1.85, model.position.y, model.position.z)
                     scale: Qt.vector3d(0.045, 0.045, 0.045)
                     visible: model.active
                     materials: [
@@ -163,7 +325,9 @@ Item {
                 model: root.rightMarkers
                 delegate: Model {
                     source: "#Sphere"
-                    position: Qt.vector3d(model.position.x + 1.85, model.position.y, model.position.z)
+                    position: root.rigAssetReady
+                        ? Qt.vector3d(model.position.x * 0.60 + 1.60, model.position.y * 0.60, model.position.z * 0.60)
+                        : Qt.vector3d(model.position.x + 1.85, model.position.y, model.position.z)
                     scale: Qt.vector3d(0.045, 0.045, 0.045)
                     visible: model.active
                     materials: [
@@ -176,6 +340,43 @@ Item {
                     ]
                 }
             }
+        }
+    }
+
+    Timer {
+        id: rigCacheTimer
+        interval: 40
+        repeat: false
+        onTriggered: root.cacheRigNodes()
+    }
+
+    Rectangle {
+        visible: !root.rigAssetReady
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        width: Math.min(parent.width - 50, 520)
+        height: 64
+        radius: 8
+        color: "#182332"
+        border.color: root.rigAssetFailed ? "#f78166" : "#735f3b"
+        border.width: 1
+        opacity: 0.94
+        Text {
+            anchors.fill: parent
+            anchors.margins: 12
+            text: root.rigAssetFailed
+                ? "RIGGED HAND ASSET ERROR\n" + root.rigAssetError
+                : (root.rigAssetAvailable
+                    ? "Loading persistent rigged LEFT / RIGHT hands…"
+                    : (root.surfaceMode
+                        ? "Rigged GLB unavailable — MANO diagnostics surface active"
+                        : "Rigged hand GLB unavailable — pass --rig-asset"))
+            color: root.rigAssetFailed ? "#ffb4a5" : "#f6c78e"
+            font.pixelSize: 12
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.Wrap
+            elide: Text.ElideRight
         }
     }
 
@@ -262,6 +463,16 @@ Item {
 
     Connections {
         target: appState
+        function onRigPoseChanged() {
+            root.rigPose = appState.rigPose
+            root.applyRigPose(root.rigPose)
+        }
         function onResetViewRequested() { root.resetView() }
+    }
+
+    Component.onCompleted: {
+        if (root.rigAssetAvailable)
+            rigCacheTimer.restart()
+        root.applyRigPose(root.rigPose)
     }
 }

@@ -18,6 +18,9 @@ ApplicationWindow {
     property var rightGeometryObject
     property var leftMarkerModel
     property var rightMarkerModel
+    property string rigAssetUrl: ""
+    property var rigProfile: ({})
+    property bool debugManoPoints: false
 
     // FrameAnimation is synchronized with Qt Quick's rendered frames, so the
     // optional diagnostics value is a presentation FPS measurement rather
@@ -61,14 +64,14 @@ ApplicationWindow {
                 implicitWidth: topologyLabel.implicitWidth + 24
                 implicitHeight: 38
                 radius: 7
-                color: appState.surfaceMode ? "#20382f" : "#3b3025"
-                border.color: appState.surfaceMode ? "#356b57" : "#7b5b38"
+                color: appState.rigAssetAvailable || appState.surfaceMode ? "#20382f" : "#3b3025"
+                border.color: appState.rigAssetAvailable || appState.surfaceMode ? "#356b57" : "#7b5b38"
                 border.width: 1
                 Text {
                     id: topologyLabel
                     anchors.centerIn: parent
-                    text: appState.surfaceMode ? "MANO surface" : appState.topologyStatus
-                    color: appState.surfaceMode ? "#8bd1b2" : "#f6c78e"
+                    text: appState.rigAssetAvailable ? "Rigged GLB" : (appState.surfaceMode ? "MANO diagnostics" : appState.rigAssetStatus)
+                    color: appState.rigAssetAvailable ? "#8bd1b2" : "#f6c78e"
                     font.pixelSize: 11
                     font.bold: true
                     elide: Text.ElideRight
@@ -98,6 +101,11 @@ ApplicationWindow {
                 leftMarkers: leftMarkerModel
                 rightMarkers: rightMarkerModel
                 surfaceMode: appState.surfaceMode
+                rigAssetUrl: window.rigAssetUrl
+                rigProfile: window.rigProfile
+                rigPose: appState.rigPose
+                rigAssetAvailable: appState.rigAssetAvailable
+                debugManoPoints: window.debugManoPoints
                 leftDimmed: appState.leftDimmed
                 rightDimmed: appState.rightDimmed
                 leftState: appState.leftState
@@ -253,7 +261,7 @@ ApplicationWindow {
                 Text { text: "Active source: " + appState.activeSequenceFps.toFixed(1) + " FPS"; color: "#c9d1d9"; font.pixelSize: 11 }
                 Text { text: "Frame: " + appState.frameIndex + " / " + appState.frameCount; color: "#c9d1d9"; font.pixelSize: 11 }
                 Text { text: "API: " + appState.graphicsApi; color: "#c9d1d9"; font.pixelSize: 11; Layout.fillWidth: true }
-                Text { text: appState.topologyStatus; color: "#f6c78e"; font.pixelSize: 10 }
+                Text { text: "MANO: " + appState.topologyStatus; color: "#f6c78e"; font.pixelSize: 10 }
             }
         }
     }

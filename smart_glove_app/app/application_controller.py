@@ -14,15 +14,17 @@ from visualizer.queue import PlaybackQueue, QueueState, UnsupportedTextError
 from smart_glove_app.rendering.hand_mesh_state import PersistentRenderScene, PresentationFrame
 from smart_glove_app.rendering.mano_topology import ManoTopology
 from smart_glove_app.rendering.qt_geometry import QtHandGeometry
+from smart_glove_app.rendering.rig_profile import RigProfile, load_rig_profile
 from smart_glove_app.rendering.sensor_markers import SensorMarkerModel
 
+from .hand_rig_retargeter import HandRigRetargeter
 from .playback_controller import PersistentPlaybackController, PlaybackDisplayState
 from .recognition_bridge import RecognitionBridge
 from .qt_workers import CheckpointLoadTask, RecognitionTask, SequenceLoadTask
 
 
 try:
-    from PySide6.QtCore import QObject, Property, QThreadPool, QTimer, Signal, Slot
+    from PySide6.QtCore import QUrl, QObject, Property, QThreadPool, QTimer, Signal, Slot
 
     QT_CONTROLLER_AVAILABLE = True
 except ImportError:  # pragma: no cover - the entry point reports this clearly
@@ -68,6 +70,8 @@ if QT_CONTROLLER_AVAILABLE:
         diagnosticsVisibleChanged = Signal()
         modeChanged = Signal()
         resetViewRequested = Signal()
+        rigPoseChanged = Signal()
+        rigAssetStateChanged = Signal()
 
         def __init__(
             self,
@@ -84,6 +88,9 @@ if QT_CONTROLLER_AVAILABLE:
             rng_seed: int | None = None,
             speed: float = 1.0,
             smooth_rendering: bool = True,
+            rig_profile: RigProfile | None = None,
+            rig_asset_path: str | Path | None = None,
+            debug_mano_points: bool = False,
         ) -> None:
             super().__init__()
             if mode not in EXEMPLAR_MODES:
@@ -109,6 +116,19 @@ if QT_CONTROLLER_AVAILABLE:
             self._closed = False
             self._smooth_rendering = bool(smooth_rendering)
             self._diagnostics_visible = False
+            self._debug_mano_points = bool(debug_mano_points)
+            self._rig_profile = rig_profile or load_rig_profile()
+            self._rig_retargeter = HandRigRetargeter(self._rig_profile)
+            self._rig_pose = self._rig_retargeter.neutral_qml_pose()
+            self._rig_asset_path = (
+                Path(rig_asset_path).expanduser().resolve() if rig_asset_path is not None else None
+            )
+            self._rig_asset_available = bool(self._rig_asset_path and self._rig_asset_path.is_file())
+            self._rig_asset_status = (
+                "Rigged GLB ready"
+                if self._rig_asset_available
+                else "Rigged hand GLB unavailable — use --rig-asset"
+            )
 
             # These are the two persistent GPU geometry providers.  They are
             # intentionally constructed before any queue item is loaded.
@@ -142,6 +162,7 @@ if QT_CONTROLLER_AVAILABLE:
             self._render_frame_count = 0
             self._render_window_start = time.monotonic()
             self._graphics_api = "Qt Quick 3D / RHI"
+            self._rig_pose_update_count = 0
 
             self._load_pool = QThreadPool(self)
             self._load_pool.setMaxThreadCount(2)
@@ -237,6 +258,10 @@ if QT_CONTROLLER_AVAILABLE:
         def graphicsApi(self) -> str:  # noqa: N802
             return self._graphics_api
 
+        @Property(int, notify=renderMetricsChanged)
+        def rigPoseUpdateCount(self) -> int:  # noqa: N802
+            return self._rig_pose_update_count
+
         @Property(bool, notify=diagnosticsVisibleChanged)
         def diagnosticsVisible(self) -> bool:  # noqa: N802
             return self._diagnostics_visible
@@ -248,6 +273,38 @@ if QT_CONTROLLER_AVAILABLE:
         @Property(bool, notify=topologyStateChanged)
         def surfaceMode(self) -> bool:  # noqa: N802
             return self.scene.topology_available
+
+        @Property("QVariantMap", notify=rigPoseChanged)
+        def rigPose(self) -> dict[str, Any]:  # noqa: N802
+            """Render-only local quaternion deltas for both persistent rigs."""
+
+            return self._rig_pose
+
+        @Property("QVariantMap", constant=True)
+        def rigProfile(self) -> dict[str, Any]:  # noqa: N802
+            return self._rig_profile.qml_metadata()
+
+        @Property(bool, notify=rigAssetStateChanged)
+        def rigAssetAvailable(self) -> bool:  # noqa: N802
+            return self._rig_asset_available
+
+        @Property(str, notify=rigAssetStateChanged)
+        def rigAssetPath(self) -> str:  # noqa: N802
+            return str(self._rig_asset_path) if self._rig_asset_path is not None else ""
+
+        @Property(str, notify=rigAssetStateChanged)
+        def rigAssetUrl(self) -> str:  # noqa: N802
+            """QML-friendly file URL for RuntimeLoader.source."""
+
+            return QUrl.fromLocalFile(str(self._rig_asset_path)).toString() if self._rig_asset_path is not None else ""
+
+        @Property(str, notify=rigAssetStateChanged)
+        def rigAssetStatus(self) -> str:  # noqa: N802
+            return self._rig_asset_status
+
+        @Property(bool, constant=True)
+        def debugManoPoints(self) -> bool:  # noqa: N802
+            return self._debug_mano_points
 
         @Property(str, notify=recognitionStateChanged)
         def recognitionStatus(self) -> str:  # noqa: N802
@@ -338,6 +395,9 @@ if QT_CONTROLLER_AVAILABLE:
             self._frame_count = 0
             self._source_fps = 0.0
             self._current_sample_id = EM_DASH
+            self._rig_retargeter.reset()
+            self._rig_pose = self._rig_retargeter.neutral_qml_pose()
+            self.rigPoseChanged.emit()
             self._upload_presentation(self.scene.clear_sequence())
             self.frameStateChanged.emit()
             self.currentSampleIdChanged.emit()
@@ -598,6 +658,16 @@ if QT_CONTROLLER_AVAILABLE:
                 self._graphics_api = str(value)
                 self.renderMetricsChanged.emit()
 
+        @Slot(str)
+        def setRigAssetStatus(self, value: str) -> None:  # noqa: N802
+            """Receive the RuntimeLoader result without changing asset state."""
+
+            status = str(value).strip()
+            if not status or status == self._rig_asset_status:
+                return
+            self._rig_asset_status = status
+            self.rigAssetStateChanged.emit()
+
         # ---- background tasks -----------------------------------------------
 
         def _start_checkpoint_load(self) -> None:
@@ -692,6 +762,7 @@ if QT_CONTROLLER_AVAILABLE:
                 return
             try:
                 self.scene.attach_sequence(sequence)
+                self._rig_retargeter.reset()
                 self._sequence = sequence
                 self._playback = PersistentPlaybackController(
                     sequence.timestamps,
@@ -725,6 +796,24 @@ if QT_CONTROLLER_AVAILABLE:
         def _update_from_playback(self, state: PlaybackDisplayState) -> None:
             if self._sequence is None:
                 return
+            source_frame = self._sequence.frame_at(state.position)
+            next_frame = (
+                self._sequence.frames[state.position + 1]
+                if state.position + 1 < len(self._sequence.frames)
+                else None
+            )
+            # This is a presentation-only skeleton update.  Recognition still
+            # receives the queue item through RecognitionTask and never sees
+            # these render-time interpolated quaternions.
+            rig_poses = self._rig_retargeter.frame_pose(
+                source_frame,
+                next_frame=next_frame,
+                interpolation_alpha=state.interpolation_alpha,
+                smooth=self._smooth_rendering,
+            )
+            self._rig_pose = {side: pose.as_qml() for side, pose in rig_poses.items()}
+            self._rig_pose_update_count += 1
+            self.rigPoseChanged.emit()
             frame = self.scene.update_sequence_frame(
                 state.position,
                 interpolation_alpha=state.interpolation_alpha,

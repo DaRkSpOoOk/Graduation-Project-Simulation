@@ -16,12 +16,15 @@ from visualizer.app.integration import (
 from visualizer.mapping import Core28Resolver
 
 from smart_glove_app.rendering.mano_topology import ManoTopologyError, load_mano_topology
+from smart_glove_app.rendering.rig_profile import RigProfileError, load_rig_profile
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MANIFEST = PROJECT_ROOT / "datasets" / "manifests" / "karsl_core28.csv"
 DEFAULT_LABELS = PROJECT_ROOT / "datasets" / "manifests" / "karsl_core28_labels.csv"
 DEFAULT_CATALOG = PROJECT_ROOT / "visualizer" / "catalog" / "core28_exemplars.json"
+DEFAULT_RIG_ASSET = PROJECT_ROOT / "assets-local" / "blendswap_hands_v1" / "application_hands.glb"
+DEFAULT_RIG_PROFILE = PROJECT_ROOT / "smart_glove_app" / "assets" / "rig_profiles" / "blendswap_hands_v1.json"
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,6 +46,23 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="optional locally licensed MANO_RIGHT.pkl/MANO_LEFT.pkl for triangle topology",
+    )
+    parser.add_argument(
+        "--rig-asset",
+        type=Path,
+        default=DEFAULT_RIG_ASSET,
+        help="local application-ready rigged hand GLB exported from the protected Blender working copy",
+    )
+    parser.add_argument(
+        "--rig-profile",
+        type=Path,
+        default=DEFAULT_RIG_PROFILE,
+        help="project-owned calibrated Blender rig profile JSON",
+    )
+    parser.add_argument(
+        "--debug-mano-points",
+        action="store_true",
+        help="show the legacy MANO point representation only as an explicit diagnostics overlay",
     )
     parser.add_argument("--device", default="auto", help="recognition device: auto, cpu, or cuda")
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
@@ -157,6 +177,8 @@ def _qml_error_text(engine: object) -> str:
     warnings = getattr(engine, "warnings", None)
     if callable(warnings):
         return "\n".join(str(error) for error in warnings())
+    if warnings is not None:
+        return str(warnings)
     return "QQmlApplicationEngine created no root object"
 
 
@@ -183,6 +205,11 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         topology = load_mano_topology(args.mano_model)
     except ManoTopologyError as exc:
         print(f"TASK-007F MANO topology error: {exc}", file=sys.stderr)
+        return 2
+    try:
+        rig_profile = load_rig_profile(args.rig_profile)
+    except RigProfileError as exc:
+        print(f"TASK-007F rig profile error: {exc}", file=sys.stderr)
         return 2
 
     surface_format = QSurfaceFormat()
@@ -212,6 +239,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         rng_seed=args.seed,
         speed=args.speed,
         smooth_rendering=not args.no_smooth_rendering,
+        rig_profile=rig_profile,
+        rig_asset_path=args.rig_asset,
+        debug_mano_points=args.debug_mano_points,
     )
     engine = QQmlApplicationEngine()
     engine.setInitialProperties(
@@ -221,6 +251,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
             "rightGeometryObject": controller.right_geometry,
             "leftMarkerModel": controller.left_markers,
             "rightMarkerModel": controller.right_markers,
+            "rigAssetUrl": controller.rigAssetUrl,
+            "rigProfile": controller.rigProfile,
+            "debugManoPoints": controller.debugManoPoints,
         }
     )
     # Child QML components receive these objects through the engine context;
@@ -258,6 +291,10 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 "graphics_api": controller.graphicsApi,
                 "surface_mode": controller.surfaceMode,
                 "topology_status": controller.topologyStatus,
+                "rig_asset_available": controller.rigAssetAvailable,
+                "rig_asset_path": controller.rigAssetPath,
+                "rig_asset_status": controller.rigAssetStatus,
+                "rig_profile": controller.rigProfile.get("profile_id", ""),
                 "recognition_status": controller.recognitionStatus,
                 "recognition_role": controller.recognitionRole,
                 "recognition_reference": controller.recognitionReference,
@@ -268,6 +305,7 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 "right_geometry_creation_count": controller.right_geometry.geometry_creation_count,
                 "left_geometry_update_count": controller.left_geometry.update_count,
                 "right_geometry_update_count": controller.right_geometry.update_count,
+                "rig_pose_update_count": controller.rigPoseUpdateCount,
             }
         )
     return int(exit_code)
