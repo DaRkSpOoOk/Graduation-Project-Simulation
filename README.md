@@ -78,10 +78,12 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ## Primary Core-28 application
 
-TASK-007G is the current native desktop surface under `smart_glove_app/`:
+TASK-007J is the current native desktop surface under `smart_glove_app/`:
 PySide6, QML and Qt Quick 3D keep one persistent LEFT and RIGHT rigged hand
 alive for the whole application lifetime. The legacy Tk/Matplotlib entry point
-remains available for historical/debug reproduction only.
+remains available for historical/debug reproduction only. The optional sensor
+overlay keeps 20 virtual-glove packages per hand attached to the rendered rig;
+the collapsible SENSORS drawer shows frozen TASK-008 source values.
 
 Install the optional GUI dependency and launch it. Only `--run-root` is
 required; the application starts with two natural-skin hands facing the viewer
@@ -118,6 +120,10 @@ launch, then click the Arabic Core-28 keyboard.
   produced.
 - `--debug-mano-points` still shows the legacy 778-point representation as an
   explicit diagnostics overlay. It is never part of normal playback.
+- `--sensors` enables the small H/IMU marker overlay at startup. The SENSORS
+  drawer also provides an ON/OFF toggle and LEFT/RIGHT source-value tabs.
+- `--sensor-visibility overlay|physical` selects readable projected badges or
+  depth-tested dorsal 3D markers. `--sensor-panel` opens the drawer at startup.
 
 The Blender working copy, the exported GLBs and MANO files are local assets
 under the ignored `assets-local/` path. The untouched source snapshot is kept

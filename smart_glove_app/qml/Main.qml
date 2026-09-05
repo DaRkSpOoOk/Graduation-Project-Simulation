@@ -25,6 +25,9 @@ ApplicationWindow {
     property string rightAssetUrl: ""
     property var rigProfile: ({})
     property bool debugManoPoints: false
+    property var leftSensorModel
+    property var rightSensorModel
+    property var sensorLayout: []
 
     readonly property color accent: "#4f9cf0"
     readonly property color textPrimary: "#e8eef6"
@@ -135,6 +138,11 @@ ApplicationWindow {
                 active: appState.diagnosticsVisible
                 onActivated: appState.toggleDiagnostics()
             }
+            GhostButton {
+                label: appState.sensorPanelVisible ? "Close sensors" : "Sensors"
+                active: appState.sensorPanelVisible
+                onActivated: appState.toggleSensorPanel()
+            }
         }
 
         // ---- hero stage ----------------------------------------------------
@@ -154,6 +162,11 @@ ApplicationWindow {
             debugManoPoints: window.debugManoPoints
             leftGeometry: window.leftGeometryObject
             rightGeometry: window.rightGeometryObject
+            sensorLayout: window.sensorLayout
+            sensorValidity: appState.sensorValidity
+            sensorsEnabled: appState.sensorsEnabled
+            sensorVisibilityMode: appState.sensorVisibilityMode
+            selectedSensorId: appState.selectedSensorId
             leftState: appState.leftState
             rightState: appState.rightState
             leftDimmed: appState.leftDimmed
@@ -322,6 +335,21 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    SensorPanel {
+        id: sensorPanel
+        visible: Boolean(appState && appState.sensorPanelVisible)
+        anchors.top: parent.top
+        anchors.topMargin: 68
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 18
+        width: Math.min(370, Math.max(310, parent.width * 0.245))
+        z: 50
+        appState: window.appState
+        leftModel: window.leftSensorModel
+        rightModel: window.rightSensorModel
     }
 
     onClosing: appState.shutdown()

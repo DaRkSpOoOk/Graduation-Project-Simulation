@@ -30,7 +30,12 @@ recognition = [
 include-package-data = true
 
 [tool.setuptools.package-data]
-smart_glove_app = ["qml/*.qml", "qml/components/*.qml", "assets/rig_profiles/*.json"]
+smart_glove_app = [
+    "qml/*.qml",
+    "qml/components/*.qml",
+    "assets/rig_profiles/*.json",
+    "assets/sensor_layouts/*.json",
+]
 
 [tool.setuptools.packages.find]
 where = ["."]

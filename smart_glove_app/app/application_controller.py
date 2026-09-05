@@ -23,7 +23,10 @@ from smart_glove_app.rendering.presentation_rig import (
     PresentationRig,
     load_presentation_rig,
 )
-from smart_glove_app.rendering.sensor_markers import SensorMarkerModel
+from smart_glove_app.rendering.sensor_layout import (
+    load_sensor_presentation_layout,
+)
+from smart_glove_app.rendering.sensor_markers import SensorMarkerModel, SensorValueModel
 
 from .hand_pose_solver import HandPose, HandPoseSolver
 from .motion_quality import (
@@ -71,9 +74,11 @@ def _default_sensor_layout() -> tuple[Any, ...]:
 
 
 DEFAULT_SENSOR_LAYOUT = _default_sensor_layout()
+DEFAULT_SENSOR_PRESENTATION_LAYOUT = load_sensor_presentation_layout()
 EXEMPLAR_MODES = ("canonical", "signer01", "signer02", "signer03", "random")
 SPEEDS = (0.5, 1.0, 2.0)
 MATERIAL_MODES = ("SKIN", "GLOVE", "WIREFRAME")
+SENSOR_VISIBILITY_MODES = ("PHYSICAL", "OVERLAY")
 EM_DASH = "—"
 
 
@@ -101,6 +106,9 @@ if QT_CONTROLLER_AVAILABLE:
         viewModeChanged = Signal()
         materialModeChanged = Signal()
         speedChanged = Signal()
+        sensorSettingsChanged = Signal()
+        sensorValuesChanged = Signal()
+        sensorSelectionChanged = Signal()
 
         def __init__(
             self,
@@ -126,6 +134,9 @@ if QT_CONTROLLER_AVAILABLE:
             diagnostics_visible: bool = False,
             view_mode: str = "PALM",
             material_mode: str = "SKIN",
+            sensors_enabled: bool = False,
+            sensor_visibility_mode: str = "OVERLAY",
+            sensor_panel_visible: bool = False,
         ) -> None:
             super().__init__()
             if mode not in EXEMPLAR_MODES:
@@ -178,6 +189,21 @@ if QT_CONTROLLER_AVAILABLE:
             self._material_mode = str(material_mode).upper()
             if self._material_mode not in MATERIAL_MODES:
                 raise ValueError(f"unsupported appearance: {material_mode!r}")
+            self._sensor_enabled = bool(sensors_enabled)
+            self._sensor_visibility_mode = str(sensor_visibility_mode).upper()
+            if self._sensor_visibility_mode not in SENSOR_VISIBILITY_MODES:
+                raise ValueError(
+                    f"unsupported sensor visibility mode: {sensor_visibility_mode!r}"
+                )
+            self._sensor_panel_visible = bool(sensor_panel_visible)
+            self._sensor_hand = "LEFT"
+            self._selected_sensor_id = "H_INDEX_MIDDLE"
+            self._sensor_phase = "IDLE · No source sensor frame"
+            self._sensor_source_frame = -1
+            self._sensor_validity: dict[str, dict[str, bool]] = {
+                "LEFT": {},
+                "RIGHT": {},
+            }
             # One GLB per hand: see the rig profile's one_file_per_hand note.
             self._rig_asset_dir = (
                 Path(rig_asset_path).expanduser().resolve()
@@ -247,6 +273,14 @@ if QT_CONTROLLER_AVAILABLE:
             self.right_geometry = QtHandGeometry("RIGHT", topology)
             self.left_markers = SensorMarkerModel(DEFAULT_SENSOR_LAYOUT, self)
             self.right_markers = SensorMarkerModel(DEFAULT_SENSOR_LAYOUT, self)
+            self.left_sensor_values = SensorValueModel(
+                DEFAULT_SENSOR_PRESENTATION_LAYOUT, self
+            )
+            self.right_sensor_values = SensorValueModel(
+                DEFAULT_SENSOR_PRESENTATION_LAYOUT, self
+            )
+            self.left_sensor_values.set_selected(self._selected_sensor_id)
+            self.right_sensor_values.set_selected(self._selected_sensor_id)
             self._upload_presentation(self.scene.clear_sequence())
 
             self._recognition = RecognitionBridge()
@@ -419,6 +453,44 @@ if QT_CONTROLLER_AVAILABLE:
         def materialMode(self) -> str:  # noqa: N802
             return self._material_mode
 
+        @Property(bool, notify=sensorSettingsChanged)
+        def sensorsEnabled(self) -> bool:  # noqa: N802
+            return self._sensor_enabled
+
+        @Property(str, notify=sensorSettingsChanged)
+        def sensorVisibilityMode(self) -> str:  # noqa: N802
+            return self._sensor_visibility_mode
+
+        @Property(bool, notify=sensorSettingsChanged)
+        def sensorPanelVisible(self) -> bool:  # noqa: N802
+            return self._sensor_panel_visible
+
+        @Property(str, notify=sensorSettingsChanged)
+        def sensorHand(self) -> str:  # noqa: N802
+            return self._sensor_hand
+
+        @Property(str, notify=sensorValuesChanged)
+        def sensorStatus(self) -> str:  # noqa: N802
+            return self._sensor_phase
+
+        @Property(int, notify=sensorValuesChanged)
+        def sensorSourceFrame(self) -> int:  # noqa: N802
+            return self._sensor_source_frame
+
+        @Property("QVariantMap", notify=sensorValuesChanged)
+        def sensorValidity(self) -> dict[str, dict[str, bool]]:  # noqa: N802
+            return {
+                side: dict(values) for side, values in self._sensor_validity.items()
+            }
+
+        @Property(str, notify=sensorSelectionChanged)
+        def selectedSensorId(self) -> str:  # noqa: N802
+            return self._selected_sensor_id
+
+        @Property("QVariantList", constant=True)
+        def sensorLayout(self) -> list[dict[str, Any]]:  # noqa: N802
+            return [spec.as_qml() for spec in DEFAULT_SENSOR_PRESENTATION_LAYOUT]
+
         @Property("QVariantMap", notify=handPoseChanged)
         def handPose(self) -> dict[str, Any]:  # noqa: N802
             """Render-only local bone rotations for both persistent hands."""
@@ -531,10 +603,58 @@ if QT_CONTROLLER_AVAILABLE:
             self.queueStateChanged.emit()
             self.playbackPlayingChanged.emit()
             self.recognitionStateChanged.emit()
+            self.sensorSettingsChanged.emit()
+            self.sensorValuesChanged.emit()
+            self.sensorSelectionChanged.emit()
 
         def _set_status(self, message: str) -> None:
             self._status_message = str(message)
             self.statusMessageChanged.emit()
+
+        def _set_sensor_phase(self, phase: str, *, source_frame: int | None = None) -> None:
+            """Publish sensor provenance without changing marker transforms."""
+
+            self._sensor_phase = str(phase)
+            self._sensor_source_frame = -1 if source_frame is None else int(source_frame)
+            self.sensorValuesChanged.emit()
+
+        def _clear_sensor_values(self, phase: str = "IDLE · No source sensor frame") -> None:
+            """Clear panel readings while retaining its persistent row models."""
+
+            self.left_sensor_values.clear_values()
+            self.right_sensor_values.clear_values()
+            self._sensor_validity = {"LEFT": {}, "RIGHT": {}}
+            self._set_sensor_phase(phase)
+
+        def _update_source_sensor_values(self, frame: Any) -> None:
+            """Expose exactly one stored TASK-008 frame to the sensor panel."""
+
+            if self._sequence is None:
+                return
+            validity: dict[str, dict[str, bool]] = {}
+            for side, model in (
+                ("LEFT", self.left_sensor_values),
+                ("RIGHT", self.right_sensor_values),
+            ):
+                readings = self._sequence.sensor_readings(frame.position, side)
+                model.update_readings(readings)
+                validity[side] = {
+                    reading.sensor.sensor_id: bool(reading.valid)
+                    for reading in readings
+                }
+            self._sensor_validity = validity
+            self._set_sensor_phase(
+                f"SOURCE FRAME {int(frame.frame_index)} · Frozen TASK-008 values",
+                source_frame=int(frame.frame_index),
+            )
+
+        def _hold_sensor_values_for_transition(self) -> None:
+            """Mark a visual transition without inventing interpolated readings."""
+
+            self._set_sensor_phase(
+                "TRANSITION · Presentation-only motion · Holding last source sensor frame",
+                source_frame=self._sensor_source_frame if self._sensor_source_frame >= 0 else None,
+            )
 
         def _set_active_item(self, item: Any | None) -> None:
             self._active_item = item
@@ -566,7 +686,12 @@ if QT_CONTROLLER_AVAILABLE:
             self.renderMetricsChanged.emit()
             self.playbackPlayingChanged.emit()
 
-        def _reset_render_state(self, *, keep_pose: bool = False) -> None:
+        def _reset_render_state(
+            self,
+            *,
+            keep_pose: bool = False,
+            keep_sensor_values: bool = False,
+        ) -> None:
             self._sequence = None
             self._playback = None
             self._gap_deadline = None
@@ -586,6 +711,8 @@ if QT_CONTROLLER_AVAILABLE:
                 }
                 self._hand_pose = self._solver.neutral_qml_pose()
                 self.handPoseChanged.emit()
+            if not keep_sensor_values:
+                self._clear_sensor_values()
             self._upload_presentation(self.scene.clear_sequence())
             self.frameStateChanged.emit()
             self.currentSampleIdChanged.emit()
@@ -623,7 +750,11 @@ if QT_CONTROLLER_AVAILABLE:
                 self._set_active_item(None)
                 # Hold the last rendered pose rather than snapping the hands
                 # open: the final shape of a sign is the part worth reading.
-                self._reset_render_state(keep_pose=True)
+                self._reset_render_state(keep_pose=True, keep_sensor_values=True)
+                self._set_sensor_phase(
+                    "IDLE · Holding last source sensor frame",
+                    source_frame=self._sensor_source_frame if self._sensor_source_frame >= 0 else None,
+                )
                 self._set_status("Queue complete. The final sign pose is held.")
                 self._emit_queue_state()
                 return
@@ -644,7 +775,10 @@ if QT_CONTROLLER_AVAILABLE:
             # Preserve the completed sign while the next stored sequence loads;
             # the presentation-only transition is built once its first source
             # frame has been solved below.
-            self._reset_render_state(keep_pose=transition_source is not None)
+            self._reset_render_state(
+                keep_pose=transition_source is not None,
+                keep_sensor_values=transition_source is not None,
+            )
             if transition_source is not None:
                 self._transition_source = copy_pose_map(transition_source)
                 self._transition_anchor_time = (
@@ -652,6 +786,7 @@ if QT_CONTROLLER_AVAILABLE:
                     if transition_anchor_time is None
                     else float(transition_anchor_time)
                 )
+                self._hold_sensor_values_for_transition()
             self._current_sample_id = str(item.sample_id or EM_DASH)
             self.currentSampleIdChanged.emit()
             self._set_status(f"Loading stored sequence for {item.character}…")
@@ -883,6 +1018,63 @@ if QT_CONTROLLER_AVAILABLE:
                 return
             self._material_mode = value
             self.materialModeChanged.emit()
+
+        @Slot(bool)
+        def setSensorsEnabled(self, enabled: bool) -> None:  # noqa: N802
+            self._sensor_enabled = bool(enabled)
+            self.sensorSettingsChanged.emit()
+
+        @Slot()
+        def toggleSensors(self) -> None:  # noqa: N802
+            self.setSensorsEnabled(not self._sensor_enabled)
+
+        @Slot(str)
+        def setSensorVisibilityMode(self, mode: str) -> None:  # noqa: N802
+            value = str(mode).upper()
+            if value not in SENSOR_VISIBILITY_MODES:
+                self._set_status(f"Unknown sensor visibility mode: {mode}")
+                return
+            self._sensor_visibility_mode = value
+            self.sensorSettingsChanged.emit()
+
+        @Slot()
+        def toggleSensorVisibilityMode(self) -> None:  # noqa: N802
+            self.setSensorVisibilityMode(
+                "PHYSICAL" if self._sensor_visibility_mode == "OVERLAY" else "OVERLAY"
+            )
+
+        @Slot()
+        def toggleSensorPanel(self) -> None:  # noqa: N802
+            self._sensor_panel_visible = not self._sensor_panel_visible
+            self.sensorSettingsChanged.emit()
+
+        @Slot(bool)
+        def setSensorPanelVisible(self, visible: bool) -> None:  # noqa: N802
+            value = bool(visible)
+            if value == self._sensor_panel_visible:
+                return
+            self._sensor_panel_visible = value
+            self.sensorSettingsChanged.emit()
+
+        @Slot(str)
+        def setSensorHand(self, hand: str) -> None:  # noqa: N802
+            value = str(hand).upper()
+            if value not in {"LEFT", "RIGHT"}:
+                return
+            if value == self._sensor_hand:
+                return
+            self._sensor_hand = value
+            self.sensorSettingsChanged.emit()
+
+        @Slot(str)
+        def selectSensor(self, sensor_id: str) -> None:  # noqa: N802
+            value = str(sensor_id)
+            if value not in {spec.sensor_id for spec in DEFAULT_SENSOR_PRESENTATION_LAYOUT}:
+                return
+            self._selected_sensor_id = value
+            self.left_sensor_values.set_selected(value)
+            self.right_sensor_values.set_selected(value)
+            self.sensorSelectionChanged.emit()
 
         @Slot()
         def toggleDiagnostics(self) -> None:  # noqa: N802
@@ -1146,6 +1338,9 @@ if QT_CONTROLLER_AVAILABLE:
                 if state.position + 1 < len(self._sequence.frames)
                 else None
             )
+            # Values are intentionally taken from this real source anchor,
+            # never from render-time interpolation between anchors.
+            self._update_source_sensor_values(source_frame)
             # This is a presentation-only skeleton update.  Recognition still
             # receives the queue item through RecognitionTask and never sees
             # these render-time interpolated quaternions.

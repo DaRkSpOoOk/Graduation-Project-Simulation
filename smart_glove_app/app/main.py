@@ -1,4 +1,4 @@
-"""Primary PySide6/Qt Quick 3D entry point for TASK-007F."""
+"""Primary PySide6/Qt Quick 3D entry point for TASK-007J."""
 
 from __future__ import annotations
 
@@ -88,6 +88,22 @@ def build_parser() -> argparse.ArgumentParser:
         "--diagnostics",
         action="store_true",
         help="open the technical diagnostics drawer at startup",
+    )
+    parser.add_argument(
+        "--sensors",
+        action="store_true",
+        help="show the persistent virtual-glove markers at startup",
+    )
+    parser.add_argument(
+        "--sensor-visibility",
+        choices=("physical", "overlay"),
+        default="overlay",
+        help="sensor marker depth presentation; overlay keeps badges readable in PALM view",
+    )
+    parser.add_argument(
+        "--sensor-panel",
+        action="store_true",
+        help="open the right-side Sensors panel at startup",
     )
     parser.add_argument(
         "--device", default="auto", help="recognition device: auto, cpu, or cuda"
@@ -354,6 +370,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
         diagnostics_visible=args.diagnostics,
         view_mode=args.view.upper(),
         material_mode=args.appearance.upper(),
+        sensors_enabled=args.sensors,
+        sensor_visibility_mode=args.sensor_visibility.upper(),
+        sensor_panel_visible=args.sensor_panel,
     )
     engine = QQmlApplicationEngine()
     engine.setInitialProperties(
@@ -365,6 +384,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
             "rightAssetUrl": controller.rightAssetUrl,
             "rigProfile": controller.rigProfile,
             "debugManoPoints": controller.debugManoPoints,
+            "leftSensorModel": controller.left_sensor_values,
+            "rightSensorModel": controller.right_sensor_values,
+            "sensorLayout": controller.sensorLayout,
         }
     )
     # Child QML components receive these objects through the engine context;
@@ -376,6 +398,9 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
     context.setContextProperty("rightGeometryObject", controller.right_geometry)
     context.setContextProperty("leftMarkerModel", controller.left_markers)
     context.setContextProperty("rightMarkerModel", controller.right_markers)
+    context.setContextProperty("leftSensorModel", controller.left_sensor_values)
+    context.setContextProperty("rightSensorModel", controller.right_sensor_values)
+    context.setContextProperty("sensorLayout", controller.sensorLayout)
     qml_path = Path(__file__).resolve().parents[1] / "qml" / "Main.qml"
     engine.load(QUrl.fromLocalFile(str(qml_path)))
     if not engine.rootObjects():
@@ -447,6 +472,13 @@ def _run_gui(args: argparse.Namespace, resolver: Core28Resolver) -> int:
                 "transition_phase": controller.transitionPhase,
                 "transition_distance_deg": controller.transitionDistanceDeg,
                 "transition_duration_ms": controller.transitionDurationMs,
+                "sensors_enabled": controller.sensorsEnabled,
+                "sensor_visibility_mode": controller.sensorVisibilityMode,
+                "sensor_panel_visible": controller.sensorPanelVisible,
+                "sensor_source_frame": controller.sensorSourceFrame,
+                "sensor_status": controller.sensorStatus,
+                "left_sensor_model_updates": controller.left_sensor_values.update_count,
+                "right_sensor_model_updates": controller.right_sensor_values.update_count,
                 "motion_trace": controller.motionTrace,
             }
         )

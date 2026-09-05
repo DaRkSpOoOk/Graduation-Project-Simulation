@@ -33,6 +33,13 @@ Item {
     property var leftGeometry
     property var rightGeometry
 
+    property var sensorLayout: []
+    property var sensorValidity: ({})
+    property bool sensorsEnabled: false
+    property string sensorVisibilityMode: "OVERLAY"
+    property string selectedSensorId: ""
+    property int sensorRevision: 0
+
     property string leftState: "IDLE"
     property string rightState: "IDLE"
     property bool leftDimmed: false
@@ -92,6 +99,17 @@ Item {
         rightHand.applyPose(pose ? pose["RIGHT"] : null)
     }
 
+    function sensorDefinition(index) {
+        return index >= 0 && index < root.sensorLayout.length
+            ? root.sensorLayout[index] : ({})
+    }
+
+    function projectSensorScenePosition(scenePosition) {
+        if (!view3d.camera || view3d.width <= 0 || view3d.height <= 0)
+            return Qt.vector3d(-1000, -1000, -1)
+        return view3d.mapFrom3DScene(scenePosition)
+    }
+
     function reportStatus() {
         if (!appState)
             return
@@ -101,8 +119,22 @@ Item {
             appState.setRigAssetStatus("Hand asset error — " + root.rigError)
     }
 
-    onHandPoseChanged: applyPose(handPose)
-    onRigReadyChanged: reportStatus()
+    onHandPoseChanged: {
+        applyPose(handPose)
+        // SensorBadge3D positions are presentation bindings over dynamically
+        // resolved RuntimeLoader bones.  This revision makes every published
+        // absolute pose an explicit dependency without recreating any node.
+        root.sensorRevision += 1
+    }
+    onViewModeChanged: root.sensorRevision += 1
+    onRigReadyChanged: {
+        reportStatus()
+        // RuntimeLoader completion can occur after the initial pose-change
+        // notification.  One revision makes startup sensor projections live
+        // without creating any marker or scene objects.
+        if (root.rigReady)
+            root.sensorRevision += 1
+    }
     onRigFailedChanged: reportStatus()
 
     Rectangle {
@@ -130,7 +162,17 @@ Item {
         property var _bones: ({})
         property var _rest: ({})
         property var _models: ([])
+        property var _sensorNodes: ({})
         property int _attempts: 0
+
+        function registerSensorMarker(sensorId, marker) {
+            if (sensorId)
+                hand._sensorNodes[sensorId] = marker
+        }
+
+        function sensorMarker(sensorId) {
+            return hand._sensorNodes[sensorId] || null
+        }
 
         function nodeAtPath(container, path) {
             var current = container
@@ -244,6 +286,31 @@ Item {
 
         onMaterialChanged: applyMaterial()
 
+        // Twenty long-lived markers per hand.  The definitions come from the
+        // project-owned TASK-007J map; no bone names or offsets are duplicated
+        // here.  Static instances are intentional: the scene never rebuilds
+        // its sensor objects when a source frame or queue item changes.
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(0); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(1); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(2); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(3); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(4); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(5); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(6); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(7); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(8); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(9); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(10); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(11); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(12); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(13); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(14); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(15); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(16); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(17); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(18); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+        SensorBadge3D { handNode: hand; definition: root.sensorDefinition(19); validity: root.sensorValidity[hand.side] || ({}); sensorsEnabled: root.sensorsEnabled; visibilityMode: root.sensorVisibilityMode; selectedSensorId: root.selectedSensorId; revision: root.sensorRevision; hallMaterial: view3d.hallMarkerMaterial; imuMaterial: view3d.imuMarkerMaterial; selectedMaterial: view3d.selectedMarkerMaterial; invalidMaterial: view3d.invalidMarkerMaterial }
+
         RuntimeLoader {
             id: loader
             source: hand.assetUrl
@@ -268,10 +335,18 @@ Item {
         anchors.fill: parent
         anchors.margins: 1
         renderMode: View3D.Offscreen
+        camera: camera
 
         readonly property var activeMaterial: root.materialMode === "GLOVE" ? gloveMaterial
                                             : root.materialMode === "WIREFRAME" ? wireframeMaterial
                                             : skinMaterial
+        // Expose the shared marker materials through View3D properties.  QML
+        // ids are lexical rather than object properties, so nested inline
+        // components must receive explicit references.
+        readonly property var hallMarkerMaterial: hallMarkerMaterialObject
+        readonly property var imuMarkerMaterial: imuMarkerMaterialObject
+        readonly property var selectedMarkerMaterial: selectedMarkerMaterialObject
+        readonly property var invalidMarkerMaterial: invalidMarkerMaterialObject
 
         // A plain SceneEnvironment on purpose. Enabling ANY ExtendedSceneEnvironment
         // post-processing pass here (tonemap, SSAO or vignette, in any
@@ -358,6 +433,41 @@ Item {
             cullMode: PrincipledMaterial.NoCulling
         }
 
+        // Small, persistent sensor badges.  They are intentionally much
+        // smaller than the retired point/sphere diagnostic representation.
+        PrincipledMaterial {
+            id: hallMarkerMaterialObject
+            baseColor: "#30c9c2"
+            roughness: 0.35
+            metalness: 0.10
+            specularAmount: 0.65
+            cullMode: PrincipledMaterial.NoCulling
+        }
+        PrincipledMaterial {
+            id: imuMarkerMaterialObject
+            baseColor: "#f0b35b"
+            roughness: 0.32
+            metalness: 0.12
+            specularAmount: 0.72
+            cullMode: PrincipledMaterial.NoCulling
+        }
+        PrincipledMaterial {
+            id: selectedMarkerMaterialObject
+            baseColor: "#ffdf91"
+            roughness: 0.25
+            metalness: 0.18
+            specularAmount: 0.85
+            cullMode: PrincipledMaterial.NoCulling
+        }
+        PrincipledMaterial {
+            id: invalidMarkerMaterialObject
+            baseColor: "#586475"
+            roughness: 0.82
+            metalness: 0.0
+            specularAmount: 0.20
+            cullMode: PrincipledMaterial.NoCulling
+        }
+
         // ---- presentation nodes: owned here, never written by recorded data --
         Node {
             id: leftPresentation
@@ -409,6 +519,43 @@ Item {
             position: root.sidePosition("RIGHT")
             scale: Qt.vector3d(0.344, 0.344, 0.344)
             materials: [ DefaultMaterial { diffuseColor: "#78d0ff"; pointSize: 2.0 } ]
+        }
+    }
+
+    // In OVERLAY mode the same physical marker nodes are projected into a
+    // readable 2D badge.  The projected label is a presentation aid only; its
+    // position is sourced from the marker's current final-rig scenePosition.
+    Item {
+        id: sensorOverlay
+        anchors.fill: parent
+        visible: root.sensorsEnabled && root.sensorVisibilityMode === "OVERLAY"
+        z: 20
+
+        Repeater {
+            model: root.sensorLayout
+            delegate: SensorBadgeOverlay {
+                projector: root
+                markerNode: leftHand.sensorMarker(modelData.sensorId)
+                definition: modelData
+                handSide: "LEFT"
+                sensorsEnabled: root.sensorsEnabled
+                sourceValid: Boolean(root.sensorValidity["LEFT"] && root.sensorValidity["LEFT"][modelData.sensorId])
+                selected: root.selectedSensorId === modelData.sensorId
+                revision: root.sensorRevision
+            }
+        }
+        Repeater {
+            model: root.sensorLayout
+            delegate: SensorBadgeOverlay {
+                projector: root
+                markerNode: rightHand.sensorMarker(modelData.sensorId)
+                definition: modelData
+                handSide: "RIGHT"
+                sensorsEnabled: root.sensorsEnabled
+                sourceValid: Boolean(root.sensorValidity["RIGHT"] && root.sensorValidity["RIGHT"][modelData.sensorId])
+                selected: root.selectedSensorId === modelData.sensorId
+                revision: root.sensorRevision
+            }
         }
     }
 
